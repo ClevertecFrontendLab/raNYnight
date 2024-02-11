@@ -21,4 +21,13 @@ export default defineConfig({
             '@utils': path.resolve(__dirname, 'src/utils'),
         },
     },
+    css: {
+        preprocessorOptions: {
+            less: {
+                math: 'always',
+                relativeUrls: true,
+                javascriptEnabled: true,
+            },
+        },
+    },
 });
