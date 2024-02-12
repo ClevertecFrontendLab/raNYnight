@@ -1,4 +1,4 @@
-import { HeartFilled, IdcardOutlined, TrophyFilled } from '@ant-design/icons';
+import { HeartFilled, IdcardOutlined, MenuFoldOutlined, TrophyFilled } from '@ant-design/icons';
 import { Typography } from 'antd';
 import Sider from 'antd/lib/layout/Sider';
 import calendarOutlinedIcon from '/calendar-icon.svg';
@@ -33,6 +33,9 @@ const SidePanel = () => {
             <div className='side-panel-exit-button'>
                 <img src={exitIcon} alt='exitIcon' />
                 <Text>Выход</Text>
+            </div>
+            <div className='side-panel-fold-button'>
+                <MenuFoldOutlined className='side-panel-fold-icon' />
             </div>
         </Sider>
     );
