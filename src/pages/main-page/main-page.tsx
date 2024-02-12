@@ -8,7 +8,7 @@ const { Header, Footer, Content } = Layout;
 export const MainPage: React.FC = () => {
     return (
         <>
-            <Layout>
+            <Layout className='main-layout'>
                 <SidePanel />
                 <Layout>
                     <Header>Header</Header>
