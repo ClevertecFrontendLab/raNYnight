@@ -2,16 +2,17 @@ import { Layout } from 'antd';
 import React from 'react';
 import SidePanel from './layout/side-panel/side-panel';
 import './main-page.less';
+import Header from './layout/header/header';
 
-const { Header, Footer, Content } = Layout;
+const { Footer, Content } = Layout;
 
 export const MainPage: React.FC = () => {
     return (
         <>
-            <Layout className='main-layout'>
+            <Layout className='page-layout'>
                 <SidePanel />
                 <Layout>
-                    <Header>Header</Header>
+                    <Header />
                     <Content>Content</Content>
                     <Footer>Footer</Footer>
                 </Layout>

@@ -2,8 +2,11 @@
 
 .side-panel {
     background: @character-light-sider-background !important;
-    height: 100%;
+    height: 100% !important;
+    max-height: 1024px;
     min-width: 208px !important;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+    background: @character-light-primary-inverse;
 }
 
 .side-panel-logo {
@@ -38,7 +41,7 @@
 }
 
 .side-panel-exit-button {
-    padding: 0px 16px;
+    padding: 0 16px;
     width: 208px;
     height: 40px;
     box-shadow: inset 0 1px 0 0 @character-light-dividers;

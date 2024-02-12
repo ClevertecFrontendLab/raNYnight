@@ -29,6 +29,7 @@ const SidePanel = () => {
                     <IdcardOutlined style={{ color: '#003a8c' }} /> <Text>Профиль</Text>
                 </Link>
             </nav>
+
             <div className='side-panel-exit-button'>
                 <img src={exitIcon} alt='exitIcon' />
                 <Text>Выход</Text>
