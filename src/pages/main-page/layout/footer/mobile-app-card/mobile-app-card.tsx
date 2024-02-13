@@ -11,7 +11,7 @@ const MobileAppCard = () => {
             <Text className='mobile-app-card-title'>Скачать на телефон</Text>
             <Text className='mobile-app-card-description'>Доступно в PRO-тарифе</Text>
             <div className='mobile-app-card-links'>
-                <AndroidFilled className='mobile-app-card-icon adnroid' />
+                <AndroidFilled className='mobile-app-card-icon android' />
                 <Text className='mobile-app-card-link'>Android OS</Text>
                 <AppleFilled className='mobile-app-card-icon apple' />
                 <Text className='mobile-app-card-link'>Apple iOS</Text>

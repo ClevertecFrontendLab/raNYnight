@@ -7,7 +7,7 @@ const { Text } = Typography;
 
 interface NavLinkWithIconProps {
     linkTo: string;
-    icon: JSX.Element;
+    icon: JSX.Element | null;
     text: string;
     isCollapsed: boolean;
 }

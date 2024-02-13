@@ -1,5 +1,6 @@
 import Sider from 'antd/lib/layout/Sider';
 import { useState } from 'react';
+import { useWindowSize } from 'usehooks-ts';
 import headerLogo from '/cleverfit-logo.svg';
 import headerLogoCollaped from '/cleverfit-logo-collapsed.svg';
 
@@ -10,15 +11,16 @@ import NavPanel from './nav-panel/nav-panel';
 import './side-panel.less';
 
 const SidePanel = () => {
-    const [isCollapsed, setIsCollapsed] = useState(false);
+    const { width } = useWindowSize();
+    const [isCollapsed, setIsCollapsed] = useState(width < 520 ? true : false);
     const onCollapse = () => {
         setIsCollapsed(!isCollapsed);
     };
     return (
         <Sider
-            width={208}
+            width={width < 520 ? 106 : 208}
             collapsed={isCollapsed}
-            collapsedWidth={64}
+            collapsedWidth={width < 520 ? 0 : 64}
             collapsible
             trigger={null}
             breakpoint='xl'

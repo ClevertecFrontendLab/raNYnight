@@ -1,5 +1,6 @@
 import exitIcon from '/exit-icon.svg';
 import { Typography } from 'antd';
+import { useWindowSize } from 'usehooks-ts';
 
 import './exit-button.less';
 
@@ -11,6 +12,8 @@ interface ExitButtonProps {
 }
 
 const ExitButton = ({ onClick, isCollapsed }: ExitButtonProps) => {
+    const { width } = useWindowSize();
+
     return (
         <div
             className={`side-panel-exit-button ${
@@ -18,7 +21,7 @@ const ExitButton = ({ onClick, isCollapsed }: ExitButtonProps) => {
             }`}
             onClick={onClick}
         >
-            <img src={exitIcon} alt='exitIcon' />
+            {width < 520 ? null : <img src={exitIcon} alt='exitIcon' />}
             {isCollapsed ? null : <Text className='side-panel-exit-text'>Выход</Text>}
         </div>
     );

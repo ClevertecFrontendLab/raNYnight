@@ -22,6 +22,11 @@ const Header = () => {
             <div className='header-right-col'>
                 {width < 835 ? null : <SettingOutlined className='settings-icon' />}
                 {width < 769 ? null : <Text className='settings-text'>Настройки</Text>}
+                {width < 520 ? (
+                    <div className='circle'>
+                        <SettingOutlined />
+                    </div>
+                ) : null}
             </div>
         </AntdHeader>
     );
