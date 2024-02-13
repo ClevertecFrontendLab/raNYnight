@@ -34,7 +34,7 @@ const SidePanel = () => {
                 <img src={exitIcon} alt='exitIcon' />
                 <Text>Выход</Text>
             </div>
-            <div className='side-panel-fold-button'>
+            <div className='side-panel-fold-button' data-test-id='sider-switch'>
                 <MenuFoldOutlined className='side-panel-fold-icon' />
             </div>
         </Sider>
