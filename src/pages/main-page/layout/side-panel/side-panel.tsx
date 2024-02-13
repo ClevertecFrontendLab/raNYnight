@@ -24,11 +24,6 @@ const SidePanel = () => {
             breakpoint='xl'
             className={`side-panel ${isCollapsed ? 'side-panel-collapsed' : ''}`}
         >
-            {/* <img
-                src={isCollapsed ? headerLogoCollaped : headerLogo}
-                alt='logo'
-                className='side-panel-logo'
-            /> */}
             <div
                 className='side-panel-logo'
                 style={{ backgroundImage: `url(${isCollapsed ? headerLogoCollaped : headerLogo})` }}
