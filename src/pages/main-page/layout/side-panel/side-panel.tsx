@@ -1,22 +1,40 @@
 import Sider from 'antd/lib/layout/Sider';
-import headerLogo from '/cleverfit.svg';
+import { useState } from 'react';
+import headerLogo from '/cleverfit-logo.svg';
+import headerLogoCollaped from '/cleverfit-logo-collapsed.svg';
 
 import CollapseButton from './collapse-button/collapse-button';
-import NavPanel from './nav-panel/nav-panel';
 import ExitButton from './exit-button/exit-button';
+import NavPanel from './nav-panel/nav-panel';
 
 import './side-panel.less';
 
 const SidePanel = () => {
+    const [isCollapsed, setIsCollapsed] = useState(false);
     const onCollapse = () => {
-        console.log('onCollapse');
+        setIsCollapsed(!isCollapsed);
     };
     return (
-        <Sider className='side-panel'>
-            <img src={headerLogo} alt='logo' className='side-panel-logo' />
-            <NavPanel />
-            <ExitButton />
-            <CollapseButton onClick={onCollapse} />
+        <Sider
+            width={208}
+            collapsed={isCollapsed}
+            collapsedWidth={64}
+            collapsible
+            trigger={null}
+            className={`side-panel ${isCollapsed ? 'side-panel-collapsed' : ''}`}
+        >
+            {/* <img
+                src={isCollapsed ? headerLogoCollaped : headerLogo}
+                alt='logo'
+                className='side-panel-logo'
+            /> */}
+            <div
+                className='side-panel-logo'
+                style={{ backgroundImage: `url(${isCollapsed ? headerLogoCollaped : headerLogo})` }}
+            ></div>
+            <NavPanel isCollapsed={isCollapsed} />
+            <ExitButton isCollapsed={isCollapsed} />
+            <CollapseButton onClick={onCollapse} isCollapsed={isCollapsed} />
         </Sider>
     );
 };

@@ -7,13 +7,19 @@ const { Text } = Typography;
 
 interface ExitButtonProps {
     onClick?: () => void;
+    isCollapsed: boolean;
 }
 
-const ExitButton = ({ onClick }: ExitButtonProps) => {
+const ExitButton = ({ onClick, isCollapsed }: ExitButtonProps) => {
     return (
-        <div className='side-panel-exit-button' onClick={onClick}>
+        <div
+            className={`side-panel-exit-button ${
+                isCollapsed ? 'side-panel-exit-button-collapsed' : ''
+            }`}
+            onClick={onClick}
+        >
             <img src={exitIcon} alt='exitIcon' />
-            <Text>Выход</Text>
+            {isCollapsed ? null : <Text className='side-panel-exit-text'>Выход</Text>}
         </div>
     );
 };
