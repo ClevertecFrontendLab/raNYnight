@@ -100,3 +100,16 @@ header.ant-layout-header {
         max-width: 105px;
     }
 }
+
+@media (max-width: 768px) {
+    .header-right-col {
+        display: none;
+    }
+    .header-left-col {
+        max-width: 100%;
+        width: 100%;
+    }
+    header.ant-layout-header {
+        max-height: unset !important;
+    }
+}

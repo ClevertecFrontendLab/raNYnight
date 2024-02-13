@@ -2,8 +2,8 @@
 
 .page-layout {
     margin: 0 auto;
-    height: 100vh;
     flex-direction: row !important;
+    height: 1194px;
 }
 
 section .ant-layout {
@@ -15,9 +15,18 @@ section .ant-layout {
 }
 
 @media (max-width: 835px) {
+    .page-layout {
+        height: 1194px;
+    }
     section .ant-layout {
         max-height: 1194px;
         background-position: bottom 0px left -633px;
         background-size: cover;
+    }
+}
+
+@media (max-width: 768px) {
+    section .ant-layout {
+        max-height: unset;
     }
 }

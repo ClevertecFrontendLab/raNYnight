@@ -21,7 +21,7 @@ const Header = () => {
             </div>
             <div className='header-right-col'>
                 {width < 835 ? null : <SettingOutlined className='settings-icon' />}
-                <Text>Настройки</Text>
+                {width < 769 ? null : <Text className='settings-text'>Настройки</Text>}
             </div>
         </AntdHeader>
     );
