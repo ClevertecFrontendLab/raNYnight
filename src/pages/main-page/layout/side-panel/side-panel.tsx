@@ -21,6 +21,7 @@ const SidePanel = () => {
             collapsedWidth={64}
             collapsible
             trigger={null}
+            breakpoint='xl'
             className={`side-panel ${isCollapsed ? 'side-panel-collapsed' : ''}`}
         >
             {/* <img

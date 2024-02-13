@@ -53,9 +53,7 @@ header.ant-layout-header {
     margin-bottom: 0px !important;
     font-family: @font-family;
     font-weight: 700;
-    font-size: 38px;
-    line-height: 130%;
-    color: @character-light-title-85;
+    color: @character-light-title-85 !important;
     letter-spacing: 0.6px;
 }
 
@@ -65,7 +63,39 @@ header.ant-layout-header {
 }
 
 @media (max-width: 1300px) {
-    header {
+    h1 {
+        font-weight: 500 !important;
+        font-size: 2em !important;
+        font-weight: 500 !important;
+        line-height: 1.27;
+    }
+    header.ant-layout-header {
+        height: fit-content !important;
         max-height: 194px !important;
+    }
+}
+
+@media (max-width: 835px) {
+    header.ant-layout-header {
+        height: 100% !important;
+        max-height: 194px !important;
+    }
+    h1 {
+        font-weight: 500 !important;
+        font-size: 24px !important;
+        font-weight: 500 !important;
+        line-height: 1.27;
+    }
+    .header-title {
+        max-width: 100%;
+        letter-spacing: 1px;
+        line-height: 1.28;
+    }
+
+    .header-left-col {
+        max-width: 573px;
+    }
+    .header-right-col {
+        max-width: 105px;
     }
 }
