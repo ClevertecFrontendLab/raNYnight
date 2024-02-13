@@ -1,26 +1,29 @@
 @import '/src/style.less';
 
-.ant-layout-footer {
-    padding: 0px 24px;
+.footer {
+    .footer-link {
+        border-radius: 2px;
+        padding: 6px 15px;
+        margin-bottom: 38px;
+        width: 171px;
+        height: 40px;
+        align-self: flex-end;
+        font-family: @font-family;
+        font-weight: 400 !important;
+        font-size: 16px !important;
+        line-height: 130% !important;
+        text-align: center;
+        color: @primary-light-6 !important;
+        letter-spacing: 0.6px;
+    }
+}
+
+.footer.ant-layout-footer {
+    padding: 0 24px;
     width: 100%;
     max-width: 1376px;
     height: 283px;
     background: transparent;
     display: flex;
-}
-
-.footer-link {
-    border-radius: 2px;
-    padding: 6px 15px;
-    margin-bottom: 38px;
-    width: 171px;
-    height: 40px;
-    align-self: flex-end;
-    font-family: @font-family;
-    font-weight: 400 !important;
-    font-size: 16px !important;
-    line-height: 130% !important;
-    text-align: center;
-    color: @primary-light-6 !important;
-    letter-spacing: 0.6px;
+    justify-content: space-between;
 }
