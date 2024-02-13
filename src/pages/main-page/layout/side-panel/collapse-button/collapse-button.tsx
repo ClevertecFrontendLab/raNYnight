@@ -1,4 +1,5 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import { useWindowSize } from 'usehooks-ts';
 
 import './collapse-button.less';
 
@@ -8,12 +9,24 @@ interface CollapseButtonProps {
 }
 
 const CollapseButton = ({ onClick, isCollapsed }: CollapseButtonProps) => {
+    const { width } = useWindowSize();
+
     return (
-        <div className='side-panel-collapse-button' data-test-id='sider-switch' onClick={onClick}>
+        <div
+            className='side-panel-collapse-button'
+            onClick={onClick}
+            data-test-id={width < 520 ? 'sider-switch-mobile' : 'sider-switch'}
+        >
             {isCollapsed ? (
-                <MenuUnfoldOutlined className='side-panel-collapse-icon' />
+                <MenuUnfoldOutlined
+                    className='side-panel-collapse-icon'
+                    // data-test-id={width < 520 ? 'sider-switch-mobile' : 'sider-switch'}
+                />
             ) : (
-                <MenuFoldOutlined className='side-panel-collapse-icon' />
+                <MenuFoldOutlined
+                    className='side-panel-collapse-icon'
+                    // data-test-id={width < 520 ? 'sider-switch-mobile' : 'sider-switch'}
+                />
             )}
         </div>
     );
