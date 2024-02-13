@@ -4,8 +4,7 @@ import SidePanel from './layout/side-panel/side-panel';
 import './main-page.less';
 import Header from './layout/header/header';
 import MainContent from './layout/main-content/main-content';
-
-const { Content } = Layout;
+import Footer from './layout/footer/footer';
 
 export const MainPage: React.FC = () => {
     return (
@@ -15,6 +14,7 @@ export const MainPage: React.FC = () => {
                 <Layout>
                     <Header />
                     <MainContent />
+                    <Footer />
                 </Layout>
             </Layout>
         </>

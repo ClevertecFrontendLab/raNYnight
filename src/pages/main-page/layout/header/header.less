@@ -1,5 +1,14 @@
 @import '/src/style.less';
 
+header {
+    display: flex;
+    padding: 10px 24px !important;
+    max-width: 1232px !important;
+    height: 100% !important;
+    max-height: 168px !important;
+    background: @primary-light-1 !important;
+}
+
 .header-link {
     max-height: 30px;
     font-family: @font-family;
@@ -9,16 +18,10 @@
     color: @character-light-title-85;
 }
 
-header {
-    display: flex;
-    padding: 10px 24px !important;
-    width: 1232px !important;
-    height: 168px !important;
-    background: @primary-light-1 !important;
-}
-
 .header-right-col {
-    width: 129px;
+    min-width: 100px;
+    width: 100%;
+    max-width: 129px;
     height: 32px;
     font-family: @font-family;
     font-weight: 400;
@@ -36,12 +39,12 @@ header {
 
 .header-left-col {
     padding: 6px 0px;
-    width: 1055px;
-    height: 110px;
+    max-width: 1055px;
 }
 
 .header-title {
     margin-top: 16px;
+    margin-bottom: 0px !important;
     font-family: @font-family;
     font-weight: 700;
     font-size: 38px;
@@ -52,4 +55,11 @@ header {
 
 .settings-icon {
     color: @character-light-title-85 !important;
+    background: rgb(233, 222, 222) !important;
+}
+
+@media (max-width: 1300px) {
+    header {
+        max-height: 194px !important;
+    }
 }
