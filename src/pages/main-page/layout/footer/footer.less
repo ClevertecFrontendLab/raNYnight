@@ -1,0 +1,56 @@
+@import '/src/style.less';
+
+.footer {
+    .footer-link {
+        border-radius: 2px;
+        padding: 6px 15px;
+        margin-bottom: 38px;
+        width: 171px;
+        height: 40px;
+        align-self: flex-end;
+        font-family: @font-family;
+        font-weight: 400 !important;
+        font-size: 16px !important;
+        line-height: 130% !important;
+        text-align: center;
+        color: @primary-light-6 !important;
+        letter-spacing: 0.6px;
+    }
+}
+
+.footer.ant-layout-footer {
+    padding: 0 24px;
+    width: 100%;
+    max-width: 1376px;
+    height: 283px;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+    .footer.ant-layout-footer {
+        flex-direction: column-reverse;
+        margin: 0 auto;
+        height: 100%;
+        max-height: 190px;
+    }
+
+    .footer {
+        .footer-link {
+            margin: 10px auto;
+        }
+    }
+}
+
+@media (max-width: 520px) {
+    .footer.ant-layout-footer {
+        margin-bottom: 42px;
+        padding: 0 16px;
+    }
+    .footer {
+        .footer-link {
+            margin: 0 auto;
+        }
+    }
+}

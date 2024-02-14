@@ -1,0 +1,50 @@
+@import '/src/style.less';
+
+.side-panel {
+    background: @character-light-sider-background !important;
+    // height: 100% !important;
+    max-height: 1024px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+    background: @character-light-primary-inverse;
+    padding-left: 28.5px;
+}
+
+.side-panel-logo {
+    height: 64px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: left;
+    margin: 30px 0 50px;
+}
+
+.side-panel-collapsed {
+    transition: 0.6s;
+    padding-left: 18.5px;
+}
+
+@media (max-width: 835px) {
+    .side-panel {
+        max-height: 1194px;
+    }
+}
+
+@media (max-width: 768px) {
+    .side-panel {
+        max-height: unset;
+    }
+}
+
+@media (max-width: 520px) {
+    .side-panel.ant-layout-sider {
+        position: fixed;
+        z-index: 2;
+        height: 100%;
+        padding-left: 0;
+    }
+    .side-panel-logo {
+        width: 74px;
+        height: 18px;
+        margin: 16px 17px;
+        background-size: contain;
+    }
+}

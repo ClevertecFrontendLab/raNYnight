@@ -1,0 +1,28 @@
+@import '/src/style.less';
+
+.main-content-description {
+    padding: 24px;
+    border-radius: 2px;
+    max-width: 752px;
+    width: 100%;
+    height: fit-content;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+    background: @character-light-primary-inverse;
+    font-family: @font-family !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 132% !important;
+    color: @primary-light-9 !important;
+    letter-spacing: 0.55px;
+}
+
+@media (max-width: 835px) {
+    .main-content-description {
+        padding-right: 30px;
+    }
+}
+@media (max-width: 768px) {
+    .main-content-description {
+        padding: 16px;
+    }
+}
