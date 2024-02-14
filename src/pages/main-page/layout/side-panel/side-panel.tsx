@@ -7,6 +7,13 @@ import headerLogoCollaped from '/cleverfit-logo-collapsed.svg';
 import CollapseButton from './collapse-button/collapse-button';
 import ExitButton from './exit-button/exit-button';
 import NavPanel from './nav-panel/nav-panel';
+import {
+    SIDER_WIDTH_MOBILE,
+    SIDER_WIDTH_DEFAULT,
+    SIDER_WIDTH_COLLAPSED_MOBILE,
+    SIDER_WIDTH_COLLAPSED_DEFAULT,
+} from '@constants/sizes';
+import { BREAKPOINT_520 } from '@constants/breakpoints';
 
 import './side-panel.less';
 
@@ -18,9 +25,13 @@ const SidePanel = () => {
     };
     return (
         <Sider
-            width={width < 520 ? 106 : 208}
+            width={width < BREAKPOINT_520 ? SIDER_WIDTH_MOBILE : SIDER_WIDTH_DEFAULT}
             collapsed={isCollapsed}
-            collapsedWidth={width < 520 ? 0 : 64}
+            collapsedWidth={
+                width < BREAKPOINT_520
+                    ? SIDER_WIDTH_COLLAPSED_MOBILE
+                    : SIDER_WIDTH_COLLAPSED_DEFAULT
+            }
             collapsible
             trigger={null}
             breakpoint='xl'

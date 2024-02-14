@@ -1,17 +1,16 @@
 @import '/src/style.less';
 
-header {
+.ant-layout-header.header {
     display: flex;
-    padding: 10px 24px !important;
-    // max-width: 1232px !important;
+    padding: 13px 24px;
     justify-content: space-between;
     width: 100%;
-    height: 100% !important;
-    max-height: 168px !important;
-    background: @primary-light-1 !important;
+    height: fit-content;
+    max-height: 194px;
+    background: @primary-light-1;
 }
 
-header.ant-layout-header {
+.ant-typography.header-title {
     max-width: 100%;
 }
 
@@ -48,52 +47,50 @@ header.ant-layout-header {
     max-width: 1055px;
 }
 
-.header-title {
+h1.ant-typography.header-title {
     margin-top: 16px;
-    margin-bottom: 0px !important;
+    margin-bottom: 0px;
     font-family: @font-family;
     font-weight: 700;
-    color: @character-light-title-85 !important;
+    color: @character-light-title-85;
     letter-spacing: 0.6px;
 }
 
-.settings-icon {
-    color: @character-light-title-85 !important;
-    background: rgb(233, 222, 222) !important;
+.anticon .settings-icon {
+    color: @character-light-title-85;
+    background: rgb(233, 222, 222);
 }
 
 @media (max-width: 1300px) {
-    h1 {
-        font-weight: 500 !important;
-        font-size: 2em !important;
-        font-weight: 500 !important;
+    h1.ant-typography.header-title {
+        font-weight: 500;
+        font-size: 2em;
+        font-weight: 500;
         line-height: 1.27;
-    }
-    header.ant-layout-header {
-        height: fit-content !important;
-        max-height: 194px !important;
+        height: fit-content;
+        max-height: 194px;
     }
 }
 
 @media (max-width: 835px) {
-    header.ant-layout-header {
-        height: fit-content !important;
-        max-height: 194px !important;
+    .ant-layout-header.header {
+        padding: 8px 24px;
     }
-    h1 {
-        font-weight: 500 !important;
-        font-size: 24px !important;
-        font-weight: 500 !important;
+    h1.ant-typography.header-title {
+        font-weight: 500;
+        font-size: 24px;
+        font-weight: 500;
         line-height: 1.27;
-    }
-    .header-title {
         max-width: 100%;
         letter-spacing: 1px;
         line-height: 1.28;
-        margin-bottom: 7px !important;
+        margin-bottom: 7px;
+        height: fit-content;
+        max-height: 194px;
     }
 
     .header-left-col {
+        height: fit-content;
         max-width: 573px;
     }
     .header-right-col {
@@ -109,28 +106,27 @@ header.ant-layout-header {
         max-width: 100%;
         width: 100%;
     }
-    header.ant-layout-header {
-        max-height: unset !important;
+    h1.ant-typography.header-title {
+        max-height: unset;
     }
 }
 
 @media (max-width: 520px) {
-    header.ant-layout-header {
-        height: 166px !important;
-        padding-right: 39px !important;
+    .ant-layout-header.header {
+        max-height: 166px;
     }
-
-    .header-title {
+    h1.ant-typography.header-title {
+        font-weight: 500;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 1.3;
         margin-top: 5px;
         letter-spacing: 0.85px;
-    }
-    h1 {
-        font-weight: 500 !important;
-        font-size: 20px !important;
-        font-weight: 500 !important;
-        line-height: 1.3 !important;
+        height: 166px;
+        padding-right: 28px;
     }
     .header-right-col {
+        padding: 0;
         margin-top: 24px;
         min-width: unset;
         display: block;
