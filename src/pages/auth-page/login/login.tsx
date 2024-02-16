@@ -1,6 +1,6 @@
 import Link from 'antd/lib/typography/Link';
+import { Paths } from '@router/paths';
 import './login.less';
-import { Paths } from '../../../router/paths';
 
 const Login: React.FC = () => {
     return (

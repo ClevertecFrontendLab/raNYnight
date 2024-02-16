@@ -1,5 +1,5 @@
+import { Paths } from '@router/paths';
 import './auth-page.less';
-import { Paths } from '../../router/paths';
 import { Link, Outlet } from 'react-router-dom';
 
 export const AuthPage: React.FC = () => {
