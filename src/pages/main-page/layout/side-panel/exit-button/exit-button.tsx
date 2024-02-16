@@ -1,6 +1,7 @@
 import exitIcon from '/exit-icon.svg';
 import { Typography } from 'antd';
 import { useWindowSize } from 'usehooks-ts';
+import { BREAKPOINT_520 } from '@constants/breakpoints';
 
 import './exit-button.less';
 
@@ -21,7 +22,7 @@ const ExitButton = ({ onClick, isCollapsed }: ExitButtonProps) => {
             }`}
             onClick={onClick}
         >
-            {width < 520 ? null : <img src={exitIcon} alt='exitIcon' />}
+            {width < BREAKPOINT_520 ? null : <img src={exitIcon} alt='exitIcon' />}
             {isCollapsed ? null : <Text className='side-panel-exit-text'>Выход</Text>}
         </div>
     );

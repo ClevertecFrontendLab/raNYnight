@@ -5,14 +5,12 @@ import MainCards from './main-cards/main-cards';
 
 import './main-content.less';
 
-const MainContent = () => {
-    return (
-        <Content className='main-content-wrapper'>
-            <MainDescription />
-            <MainTitle />
-            <MainCards />
-        </Content>
-    );
-};
+const MainContent = () => (
+    <Content className='main-content-wrapper'>
+        <MainDescription />
+        <MainTitle />
+        <MainCards />
+    </Content>
+);
 
 export default MainContent;

@@ -12,13 +12,11 @@ interface NavLinkWithIconProps {
     isCollapsed: boolean;
 }
 
-const NavLinkWithIcon = ({ linkTo, icon, text, isCollapsed }: NavLinkWithIconProps) => {
-    return (
-        <Link href={linkTo} className='nav-link'>
-            {icon}
-            {isCollapsed ? null : <Text>{text}</Text>}
-        </Link>
-    );
-};
+const NavLinkWithIcon = ({ linkTo, icon, text, isCollapsed }: NavLinkWithIconProps) => (
+    <Link href={linkTo} className='nav-link'>
+        {icon}
+        {isCollapsed ? null : <Text>{text}</Text>}
+    </Link>
+);
 
 export default NavLinkWithIcon;
