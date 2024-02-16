@@ -1,6 +1,6 @@
 import Link from 'antd/lib/typography/Link';
 import './forgot-password.less';
-import Paths from '@router/paths';
+import { Paths } from '../../../router/paths';
 
 const ForgotPassword: React.FC = () => {
     return (

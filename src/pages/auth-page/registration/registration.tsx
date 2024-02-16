@@ -1,4 +1,4 @@
-import Paths from '@router/paths';
+import { Paths } from '../../../router/paths';
 import './registration.less';
 import Link from 'antd/lib/typography/Link';
 

@@ -1,4 +1,4 @@
-enum Paths {
+export enum Paths {
     DEFAULT = '/',
     MAIN = '/main',
     AUTH = '/auth',
@@ -18,5 +18,3 @@ enum Paths {
     SUCCESS_PASSWORD_CHANGE = 'success-password-change',
     NotFound = '*',
 }
-
-export default Paths;

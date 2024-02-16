@@ -1,11 +1,11 @@
 import Link from 'antd/lib/typography/Link';
 import './login.less';
-import Paths from '@router/paths';
+import { Paths } from '../../../router/paths';
 
 const Login: React.FC = () => {
     return (
         <>
-            <div>Forgot password</div>
+            <div> Вход </div>
             <Link href={Paths.AUTH}> Авторизация </Link>
         </>
     );

@@ -2,8 +2,8 @@ import ForgotPassword from '@pages/auth-page/forgot-password/forgot-password';
 import Login from '@pages/auth-page/login/login';
 import Registration from '@pages/auth-page/registration/registration';
 import { AuthPage, MainPage } from '@pages/index';
+import { Paths } from './paths';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Paths from './paths';
 
 export const routes = (
     <Routes>
