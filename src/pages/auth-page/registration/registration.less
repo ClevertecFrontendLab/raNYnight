@@ -1,1 +1,34 @@
 @import '/src/style.less';
+
+.register-container {
+    border-radius: 2px;
+    padding: 64px 32px;
+    margin: auto;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+    background: @character-light-primary-inverse;
+    z-index: 1;
+    width: 539px;
+    height: 686px;
+}
+
+.ant-form.register-form {
+    margin: 0 auto;
+    max-width: 368px;
+    padding-top: 7px;
+}
+
+.register-form {
+    .auth-input-password {
+        margin-bottom: 34px;
+        height: 60px;
+        .ant-form-item-row {
+            height: 100%;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+    }
+}
+
+label[for='normal_register_password-repeat'] {
+    margin-top: 16px;
+}

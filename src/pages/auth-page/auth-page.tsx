@@ -1,15 +1,12 @@
-import { Paths } from '@router/paths';
+import { Layout } from 'antd';
+import { Outlet } from 'react-router-dom';
+
 import './auth-page.less';
-import { Link, Outlet } from 'react-router-dom';
 
 export const AuthPage: React.FC = () => {
     return (
-        <>
-            <div>AuthPage</div>
-            <Link to={Paths.REGISTRATION}> Регистрация </Link>
-            <Link to={Paths.LOGIN}> Вход </Link>
-            <Link to={Paths.FORGOT_PASSWORD}> Забыли пароль </Link>
+        <Layout className='auth-page-layout background-filter'>
             <Outlet />
-        </>
+        </Layout>
     );
 };
