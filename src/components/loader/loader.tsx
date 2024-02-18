@@ -1,5 +1,6 @@
 import Lottie, { Options } from 'react-lottie';
 import { default as animationData } from './loader.json';
+import './loader.less';
 
 const defaultOptions: Options = {
     loop: true,
