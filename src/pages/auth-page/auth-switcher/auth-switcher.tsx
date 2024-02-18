@@ -17,7 +17,7 @@ const AuthSwitcher = ({ activeLink }: AuthSwitcherProps) => {
                 Вход
             </Link>
             <Link
-                to={Paths.REGISTRATION}
+                to={`${Paths.AUTH}/${Paths.REGISTRATION}`}
                 className={`auth-switcher-link ${activeLink === 'registration' ? 'active' : ''}`}
             >
                 Регистрация

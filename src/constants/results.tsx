@@ -29,14 +29,6 @@ export enum ResultActions {
     TRY_AGAIN = 'Попробовать снова',
 }
 
-// export enum ResultImages {
-//     WARN = '/public/result-icons/warn.svg',
-//     SUCCESS = '/public/result-icons/success.svg',
-//     ERROR = '/public/result-icons/error.svg',
-//     SOMETHING_WRONG = '/public/result-icons/smth-wrong.svg',
-//     NOTICE = '/public/result-icons/notice.svg',
-// }
-
 export const ResultImages = {
     WARN: (
         <svg

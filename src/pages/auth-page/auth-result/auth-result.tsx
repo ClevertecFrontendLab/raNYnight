@@ -1,6 +1,6 @@
 import { Button, Typography } from 'antd';
-import './auth-result.less';
 import { Link } from 'react-router-dom';
+import './auth-result.less';
 
 const { Text } = Typography;
 
@@ -19,7 +19,7 @@ const AuthResult = ({ title, message, action, image, href }: AuthResultProps) =>
             <Text className='auth-result-title'>{title}</Text>
             <Text className='auth-result-message'>{message}</Text>
             <Button type='primary' htmlType='submit' className='auth-result-button'>
-                <Link to={href}>{action}</Link>
+                <Link to={`/auth/${href}`}>{action}</Link>
             </Button>
         </div>
     );
