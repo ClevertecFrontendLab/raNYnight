@@ -6,11 +6,15 @@ import { Paths } from './paths';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AuthResult from '@pages/auth-page/auth-result/auth-result';
 import { ResultActions, ResultImages, ResultMessages, ResultTitles } from '@constants/results';
+import PrivateRoutes from './private-routes';
 
 export const routes = (
     <Routes>
-        <Route path={Paths.MAIN} element={<MainPage />} />
-        <Route path={Paths.DEFAULT} element={<Navigate to={Paths.MAIN} />} />
+        <Route element={<PrivateRoutes />}>
+            <Route path={Paths.MAIN} element={<MainPage />} />
+            <Route path={Paths.DEFAULT} element={<Navigate to={Paths.MAIN} />} />
+        </Route>
+
         <Route path={Paths.AUTH} element={<AuthPage />}>
             <Route path={Paths.LOGIN} element={<Login />} />
             <Route path={Paths.REGISTRATION} element={<Registration />} />
@@ -68,5 +72,3 @@ export const routes = (
         </Route>
     </Routes>
 );
-
-// function reRegister (values)

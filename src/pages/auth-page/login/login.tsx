@@ -1,6 +1,6 @@
 import { Button, Checkbox, Form, Input } from 'antd';
 import AuthSwitcher from '../auth-switcher/auth-switcher';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { Paths } from '@router/paths';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { useLoginUserMutation } from '@redux/auth/authApi';
@@ -8,24 +8,31 @@ import { LoginRequest } from 'src/types/auth';
 import Loader from '@components/loader/loader';
 
 import './login.less';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { setAuthToken } from '@redux/auth/authSlice';
+import { useEffect } from 'react';
 // import { history } from '@redux/configure-store';
 
 const Login: React.FC = () => {
-    const [loginUser, { data: loginData, isLoading, isError, error: loginError, isSuccess }] =
-        useLoginUserMutation();
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const [loginUser, { data: loginData, isLoading, isError, isSuccess }] = useLoginUserMutation();
 
     const onFinish = async (values: LoginRequest) => {
         const { email, password } = values;
         await loginUser({ email, password });
     };
 
+    useEffect(() => {
+        if (isSuccess && loginData) {
+            dispatch(setAuthToken(loginData.accessToken));
+            // history.push(Paths.MAIN);
+            navigate(Paths.MAIN);
+        }
+    }, [isSuccess]);
+
     if (isError) {
         return <Navigate to={`${Paths.RESULT}/${Paths.ERROR_LOGIN}`} />;
-    }
-    if (isSuccess && loginData) {
-        localStorage.setItem('jwtToken', loginData.accessToken);
-        // history.push(Paths.MAIN);
-        return <Navigate to={Paths.MAIN} />;
     }
 
     return (

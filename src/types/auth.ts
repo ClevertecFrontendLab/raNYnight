@@ -1,7 +1,3 @@
-export interface User {
-    email: string;
-}
-
 export interface LoginRequest {
     email: string;
     password: string;
@@ -27,6 +23,7 @@ export interface ApiError {
 }
 
 export interface AuthStore {
+    authToken: string | null;
     shouldRefetch: boolean;
     lastRegisterRequest: RegisterInput;
 }
