@@ -4,25 +4,27 @@ import { Link, Navigate } from 'react-router-dom';
 import { Paths } from '@router/paths';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { useLoginUserMutation } from '@redux/auth/authApi';
-import { LoginData } from 'src/types/auth';
+import { LoginRequest } from 'src/types/auth';
 import Loader from '@components/loader/loader';
 
 import './login.less';
+// import { history } from '@redux/configure-store';
 
 const Login: React.FC = () => {
     const [loginUser, { data: loginData, isLoading, isError, error: loginError, isSuccess }] =
         useLoginUserMutation();
 
-    const onFinish = async (values: LoginData) => {
+    const onFinish = async (values: LoginRequest) => {
         const { email, password } = values;
-        console.log('Received values of form: ', values);
         await loginUser({ email, password });
     };
 
     if (isError) {
         return <Navigate to={`${Paths.RESULT}/${Paths.ERROR_LOGIN}`} />;
     }
-    if (isSuccess) {
+    if (isSuccess && loginData) {
+        localStorage.setItem('jwtToken', loginData.accessToken);
+        // history.push(Paths.MAIN);
         return <Navigate to={Paths.MAIN} />;
     }
 

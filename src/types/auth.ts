@@ -2,10 +2,14 @@ export interface User {
     email: string;
 }
 
-export interface LoginData {
+export interface LoginRequest {
     email: string;
     password: string;
     rememberMe?: boolean;
+}
+
+export interface LoginResponse {
+    accessToken: string;
 }
 
 export interface RegisterInput {
