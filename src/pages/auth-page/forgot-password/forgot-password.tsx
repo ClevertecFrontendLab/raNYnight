@@ -1,13 +1,35 @@
-import Link from 'antd/lib/typography/Link';
-import './forgot-password.less';
-import { Paths } from '@router/paths';
+import { ResultImages, ResultMessages } from '@constants/results';
+import { Typography } from 'antd';
+import VerificationInput from 'react-verification-input';
 
-const ForgotPassword: React.FC = () => {
+import './forgot-password.less';
+const { Text } = Typography;
+
+const ForgotPassword = () => {
+    const onComplete = (value: string) => {
+        console.log(value);
+    };
     return (
-        <>
-            <div>ForgotPassword</div>
-            <Link href={Paths.AUTH}> Авторизация </Link>
-        </>
+        <div className='auth-forgot-wrapper'>
+            <div className='auth-result-image'>{ResultImages.NOTICE}</div>
+            <Text className='auth-forgot-title'>
+                Введите код <br /> для восстановления аккауанта
+            </Text>
+            <Text className='auth-forgot-message'>{ResultMessages.RESET_CODE}</Text>
+            <VerificationInput
+                validChars='0-9'
+                placeholder=''
+                classNames={{
+                    container: 'verification-input-container',
+                    character: 'verification-input-character',
+                    characterInactive: 'verification-input-character--inactive',
+                    characterSelected: 'verification-input-character--selected',
+                    characterFilled: 'verification-input-character--filled',
+                }}
+                onComplete={onComplete}
+            />
+            <Text className='auth-forgot-message'>{ResultMessages.RESET_CODE_SPAM}</Text>
+        </div>
     );
 };
 

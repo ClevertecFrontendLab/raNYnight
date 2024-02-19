@@ -10,7 +10,6 @@ interface AuthResultProps {
     action: string;
     image: JSX.Element | null;
     href: string;
-    callback?: () => void;
 }
 
 const AuthResult = ({ title, message, action, image, href }: AuthResultProps) => {

@@ -1,4 +1,3 @@
-import ForgotPassword from '@pages/auth-page/forgot-password/forgot-password';
 import Login from '@pages/auth-page/login/login';
 import Registration from '@pages/auth-page/registration/registration';
 import { AuthPage, MainPage } from '@pages/index';
@@ -7,6 +6,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import AuthResult from '@pages/auth-page/auth-result/auth-result';
 import { ResultActions, ResultImages, ResultMessages, ResultTitles } from '@constants/results';
 import PrivateRoutes from './private-routes';
+import AuthChangePassword from '@pages/auth-page/change-password/change-password';
+import ForgotPassword from '@pages/auth-page/forgot-password/forgot-password';
 
 export const routes = (
     <Routes>
@@ -19,6 +20,7 @@ export const routes = (
             <Route path={Paths.LOGIN} element={<Login />} />
             <Route path={Paths.REGISTRATION} element={<Registration />} />
             <Route path={Paths.FORGOT_PASSWORD} element={<ForgotPassword />} />
+            <Route path={Paths.CHANGE_PASSWORD} element={<AuthChangePassword />} />
         </Route>
         <Route path={Paths.RESULT} element={<AuthPage />}>
             <Route

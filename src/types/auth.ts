@@ -8,6 +8,16 @@ export interface LoginResponse {
     accessToken: string;
 }
 
+export interface EmailResponse {
+    email: string;
+    message: string;
+}
+
+export interface ConfirmEmailRequest {
+    email: string;
+    code: string;
+}
+
 export interface RegisterInput {
     email: string;
     password: string;

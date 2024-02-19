@@ -7,7 +7,6 @@ export enum ResultTitles {
     ERROR_BAD_CODE = 'Неверный код. Введите код для восстановления аккауанта',
     SUCCESS_REGISTER = 'Регистрация успешна',
     SUCCESS_PASSWORD_CHANGE = 'Пароль успешно изменен',
-    RESET_CODE = 'Введите код для восстановления аккауанта',
 }
 
 export enum ResultMessages {
@@ -16,6 +15,7 @@ export enum ResultMessages {
     ERROR_500 = 'Произошла ошибка, попробуйте отправить форму ещё раз.',
     ERROR_CHECK_EMAIL_NO_EXIST = 'Мы не нашли в базе вашего e-mail. Попробуйте войти с другим e-mail.',
     RESET_CODE = 'Мы отправили вам на e-mail victorbyden@gmail.com шестизначный код. Введите его в поле ниже.',
+    RESET_CODE_SPAM = 'Не пришло письмо? Проверьте папку Спам.',
     SUCCESS_REGISTER = 'Регистрация прошла успешно. Зайдите в приложение, используя свои e-mail и пароль.',
     SUCCESS_PASSWORD_CHANGE = 'Теперь можно войти в аккаунт, используя свой логин и новый пароль',
     ERROR_NO_SUCCESS = 'Что-то пошло не так и ваша регистрация не завершилась. Попробуйте ещё раз.',
@@ -471,7 +471,7 @@ export const ResultImages = {
         <svg
             width='81'
             height='80'
-            viewBox='0 0 81 80'
+            viewBox='0 0 81 70'
             fill='none'
             xmlns='http://www.w3.org/2000/svg'
         >

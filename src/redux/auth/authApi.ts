@@ -1,6 +1,12 @@
 import { authBaseQuery } from '@constants/api';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { LoginRequest, LoginResponse, RegisterInput } from 'src/types/auth';
+import {
+    ConfirmEmailRequest,
+    EmailResponse,
+    LoginRequest,
+    LoginResponse,
+    RegisterInput,
+} from 'src/types/auth';
 
 export const authApi = createApi({
     reducerPath: 'authApi',
@@ -35,7 +41,21 @@ export const authApi = createApi({
                 };
             },
         }),
+        checkEmail: builder.mutation<EmailResponse, { email: string }>({
+            query: (body) => ({
+                url: 'check-email',
+                method: 'POST',
+                body,
+            }),
+        }),
+        confirmEmail: builder.mutation<EmailResponse, ConfirmEmailRequest>({
+            query: (body) => ({
+                url: 'confirm-email',
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 });
 
-export const { useLoginUserMutation, useRegisterUserMutation } = authApi;
+export const { useLoginUserMutation, useRegisterUserMutation, useCheckEmailMutation } = authApi;
