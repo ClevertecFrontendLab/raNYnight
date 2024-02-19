@@ -18,6 +18,30 @@ export const routes = (
         </Route>
         <Route path={Paths.RESULT} element={<AuthPage />}>
             <Route
+                path={Paths.SUCCESS}
+                element={
+                    <AuthResult
+                        title={ResultTitles.SUCCESS_REGISTER}
+                        message={ResultMessages.SUCCESS_REGISTER}
+                        action={ResultActions.LOGIN}
+                        image={ResultImages.SUCCESS}
+                        href={Paths.LOGIN}
+                    />
+                }
+            />
+            <Route
+                path={Paths.ERROR}
+                element={
+                    <AuthResult
+                        title={ResultTitles.ERROR_DATA_NOT_SAVED}
+                        message={ResultMessages.ERROR_NO_SUCCESS}
+                        action={ResultActions.REPEAT}
+                        image={ResultImages.ERROR}
+                        href={Paths.REGISTRATION}
+                    />
+                }
+            />
+            <Route
                 path={Paths.ERROR_LOGIN}
                 element={
                     <AuthResult
@@ -29,6 +53,20 @@ export const routes = (
                     />
                 }
             />
+            <Route
+                path={Paths.ERROR_USER_EXIST}
+                element={
+                    <AuthResult
+                        title={ResultTitles.ERROR_USER_EXIST}
+                        message={ResultMessages.ERROR_USER_EXIST}
+                        action={ResultActions.TO_REGISTER}
+                        image={ResultImages.ERROR}
+                        href={Paths.REGISTRATION}
+                    />
+                }
+            />
         </Route>
     </Routes>
 );
+
+// function reRegister (values)

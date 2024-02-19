@@ -22,6 +22,9 @@ const Login: React.FC = () => {
     if (isError) {
         return <Navigate to={`${Paths.RESULT}/${Paths.ERROR_LOGIN}`} />;
     }
+    if (isSuccess) {
+        return <Navigate to={Paths.MAIN} />;
+    }
 
     return (
         <>
@@ -33,7 +36,8 @@ const Login: React.FC = () => {
                     className='login-form'
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
-                    autoComplete='off'
+                    autoComplete='nope'
+                    disabled={isLoading}
                 >
                     <Form.Item
                         name='email'
@@ -61,7 +65,12 @@ const Login: React.FC = () => {
                     </Form.Item>
 
                     <Form.Item className='login-form-button-wrapper'>
-                        <Button type='primary' htmlType='submit' className='login-form-button'>
+                        <Button
+                            type='primary'
+                            htmlType='submit'
+                            className='login-form-button'
+                            disabled={isLoading}
+                        >
                             Войти
                         </Button>
                     </Form.Item>
@@ -70,6 +79,7 @@ const Login: React.FC = () => {
                             type='primary'
                             htmlType='submit'
                             className='login-form-button google-auth'
+                            disabled={isLoading}
                         >
                             <GooglePlusOutlined />
                             Войти через Google
