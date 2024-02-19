@@ -71,6 +71,30 @@ export const routes = (
                     />
                 }
             />
+            <Route
+                path={Paths.ERROR_CHECK_EMAIL}
+                element={
+                    <AuthResult
+                        title={ResultTitles.ERROR_SOMETHING_WRONG}
+                        message={ResultMessages.ERROR_500}
+                        action={ResultActions.BACK}
+                        image={ResultImages.SOMETHING_WRONG}
+                        href={Paths.LOGIN}
+                    />
+                }
+            />
+            <Route
+                path={Paths.ERROR_CHECK_EMAIL_NO_EXIST}
+                element={
+                    <AuthResult
+                        title={ResultTitles.ERROR_CHECK_EMAIL_NO_EXIST}
+                        message={ResultMessages.ERROR_CHECK_EMAIL_NO_EXIST}
+                        action={ResultActions.TRY_AGAIN}
+                        image={ResultImages.ERROR}
+                        href={Paths.LOGIN}
+                    />
+                }
+            />
         </Route>
     </Routes>
 );

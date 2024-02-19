@@ -8,6 +8,7 @@ const initialState: AuthStore = {
         email: '',
         password: '',
     },
+    forgotEmail: '',
 };
 
 const authSlice = createSlice({
@@ -30,11 +31,19 @@ const authSlice = createSlice({
         setShouldRefetch: (state, action: PayloadAction<boolean>) => {
             state.shouldRefetch = action.payload;
         },
+        setForgotEmail: (state, action: PayloadAction<string>) => {
+            state.forgotEmail = action.payload;
+        },
     },
 });
 
-export const { setAuthToken, setLastRegisterRequest, clearLastRegisterRequest, setShouldRefetch } =
-    authSlice.actions;
+export const {
+    setAuthToken,
+    setLastRegisterRequest,
+    clearLastRegisterRequest,
+    setShouldRefetch,
+    setForgotEmail,
+} = authSlice.actions;
 
 export const selectLastRegisterRequest = (state: { auth: AuthStore }) =>
     state.auth.lastRegisterRequest;
@@ -42,5 +51,7 @@ export const selectLastRegisterRequest = (state: { auth: AuthStore }) =>
 export const selectShouldRefetch = (state: { auth: AuthStore }) => state.auth.shouldRefetch;
 
 export const selectAuthToken = (state: { auth: AuthStore }) => state.auth.authToken;
+
+export const selectForgotEmail = (state: { auth: AuthStore }) => state.auth.forgotEmail;
 
 export default authSlice.reducer;

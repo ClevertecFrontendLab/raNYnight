@@ -36,4 +36,5 @@ export interface AuthStore {
     authToken: string | null;
     shouldRefetch: boolean;
     lastRegisterRequest: RegisterInput;
+    forgotEmail: string;
 }

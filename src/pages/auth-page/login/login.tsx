@@ -1,65 +1,108 @@
-import { Button, Checkbox, Form, Input } from 'antd';
-import AuthSwitcher from '../auth-switcher/auth-switcher';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { Paths } from '@router/paths';
 import { GooglePlusOutlined } from '@ant-design/icons';
-import { useLoginUserMutation } from '@redux/auth/authApi';
-import { LoginRequest } from 'src/types/auth';
 import Loader from '@components/loader/loader';
+import { useCheckEmailMutation, useLoginUserMutation } from '@redux/auth/authApi';
+import { Paths } from '@router/paths';
+import { Button, Checkbox, Form, Input } from 'antd';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { LoginRequest } from 'src/types/auth';
+import AuthSwitcher from '../auth-switcher/auth-switcher';
 
-import './login.less';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { setAuthToken } from '@redux/auth/authSlice';
-import { useEffect } from 'react';
+import { setAuthToken, setForgotEmail } from '@redux/auth/authSlice';
+import { useForm } from 'antd/lib/form/Form';
+import { useEffect, useState } from 'react';
+import './login.less';
 // import { history } from '@redux/configure-store';
 
 const Login: React.FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const [loginUser, { data: loginData, isLoading, isError, isSuccess }] = useLoginUserMutation();
+    const [isEmailValid, setIsEmailValid] = useState(false);
+    const [form] = useForm();
+
+    const [
+        loginUser,
+        {
+            data: loginData,
+            isLoading: isLoadingLogin,
+            isError: isLoginError,
+            isSuccess: isLoginSuccess,
+        },
+    ] = useLoginUserMutation();
+    const [checkEmail, { isLoading: isEmailCheckLoading }] = useCheckEmailMutation();
 
     const onFinish = async (values: LoginRequest) => {
         const { email, password } = values;
         await loginUser({ email, password });
     };
 
+    const handleFormChange = () => {
+        const email = form.getFieldValue('email');
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        if (email && emailRegex.test(email)) {
+            setIsEmailValid(true);
+        } else {
+            setIsEmailValid(false);
+        }
+    };
+
+    const onForgotButtonClick = async () => {
+        const email = form.getFieldValue('email');
+        await checkEmail({ email })
+            .unwrap()
+            .then(() => {
+                dispatch(setForgotEmail(email));
+                navigate(Paths.FORGOT_PASSWORD);
+            })
+            .catch((error) => {
+                if (error.status === 404 && error.message !== 'Email не найден') {
+                    navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL_NO_EXIST}`);
+                } else {
+                    navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL}`);
+                }
+            });
+    };
+
     useEffect(() => {
-        if (isSuccess && loginData) {
+        if (isLoginSuccess && loginData) {
             dispatch(setAuthToken(loginData.accessToken));
             // history.push(Paths.MAIN);
             navigate(Paths.MAIN);
         }
-    }, [isSuccess]);
+    }, [isLoginSuccess]);
 
-    if (isError) {
+    if (isLoginError) {
         return <Navigate to={`${Paths.RESULT}/${Paths.ERROR_LOGIN}`} />;
     }
 
     return (
         <>
-            <div className={`login-container ${isLoading ? 'background-filter' : ''}`}>
+            <div
+                className={`login-container ${
+                    isLoadingLogin || isEmailCheckLoading ? 'background-filter' : ''
+                }`}
+            >
                 <div className='auth-logo' />
                 <AuthSwitcher activeLink='login' />
                 <Form
+                    form={form}
                     name='normal_login'
                     className='login-form'
                     initialValues={{ remember: true }}
+                    onFieldsChange={handleFormChange}
                     onFinish={onFinish}
                     autoComplete='nope'
-                    disabled={isLoading}
+                    disabled={isLoadingLogin || isEmailCheckLoading}
                 >
                     <Form.Item
                         name='email'
-                        // rules={[{ required: true, message: '' }]}
                         className='auth-input-wrapper'
+                        required
+                        rules={[{ type: 'email', message: '' }]}
                     >
                         <Input prefix={'e-mail:'} className='auth-input' />
                     </Form.Item>
-                    <Form.Item
-                        name='password'
-                        // rules={[{ required: true, message: '' }]}
-                        className='auth-input-wrapper auth-input-password'
-                    >
+                    <Form.Item name='password' className='auth-input-wrapper auth-input-password'>
                         <Input.Password placeholder='Пароль' />
                     </Form.Item>
 
@@ -68,9 +111,13 @@ const Login: React.FC = () => {
                             <Checkbox>Запомнить меня</Checkbox>
                         </Form.Item>
 
-                        <Link className='login-form-forgot' to={Paths.FORGOT_PASSWORD}>
+                        <Button
+                            className='login-form-forgot-button '
+                            disabled={!isEmailValid}
+                            onClick={onForgotButtonClick}
+                        >
                             Забыли пароль?
-                        </Link>
+                        </Button>
                     </Form.Item>
 
                     <Form.Item className='login-form-button-wrapper'>
@@ -78,7 +125,11 @@ const Login: React.FC = () => {
                             type='primary'
                             htmlType='submit'
                             className='login-form-button'
-                            disabled={isLoading}
+                            disabled={
+                                isLoadingLogin ||
+                                isEmailCheckLoading ||
+                                (!isEmailValid && !form.getFieldValue('password'))
+                            }
                         >
                             Войти
                         </Button>
@@ -88,7 +139,7 @@ const Login: React.FC = () => {
                             type='primary'
                             htmlType='submit'
                             className='login-form-button google-auth'
-                            disabled={isLoading}
+                            disabled={isLoadingLogin || isEmailCheckLoading}
                         >
                             <GooglePlusOutlined />
                             Войти через Google
@@ -96,7 +147,7 @@ const Login: React.FC = () => {
                     </Form.Item>
                 </Form>
             </div>
-            {isLoading && <Loader />}
+            {isLoadingLogin || (isEmailCheckLoading && <Loader />)}
         </>
     );
 };
