@@ -7,7 +7,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { LoginRequest } from 'src/types/auth';
 import AuthSwitcher from '../auth-switcher/auth-switcher';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { setAuthToken, setForgotEmail } from '@redux/auth/authSlice';
+import { setAuthToken, setForgotEmail, setRememberMe } from '@redux/auth/authSlice';
 import { useEffect, useState } from 'react';
 import useForm from 'antd/lib/form/hooks/useForm';
 
@@ -70,6 +70,7 @@ const Login: React.FC = () => {
 
     useEffect(() => {
         if (isLoginSuccess && loginData) {
+            dispatch(setRememberMe(form.getFieldValue('remember')));
             dispatch(setAuthToken(loginData.accessToken));
             navigate(Paths.MAIN);
         }

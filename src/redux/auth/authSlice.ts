@@ -3,6 +3,7 @@ import { AuthStore, RegisterInput } from 'src/types/auth';
 
 const initialState: AuthStore = {
     authToken: null,
+    rememberMe: false,
     shouldRefetch: false,
     lastRegisterRequest: {
         email: '',
@@ -16,8 +17,14 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         setAuthToken: (state, action: PayloadAction<string | null>) => {
+            if (state.rememberMe) {
+                localStorage.setItem('jwtToken', action.payload || '');
+            }
             sessionStorage.setItem('jwtToken', action.payload || '');
             state.authToken = action.payload;
+        },
+        setRememberMe: (state, action: PayloadAction<boolean>) => {
+            state.rememberMe = action.payload;
         },
         setLastRegisterRequest: (state, action: PayloadAction<RegisterInput>) => {
             state.lastRegisterRequest = action.payload;
@@ -43,6 +50,7 @@ export const {
     clearLastRegisterRequest,
     setShouldRefetch,
     setForgotEmail,
+    setRememberMe,
 } = authSlice.actions;
 
 export const selectLastRegisterRequest = (state: { auth: AuthStore }) =>

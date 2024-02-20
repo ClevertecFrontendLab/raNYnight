@@ -14,7 +14,7 @@ export const authApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: authBaseQuery,
         prepareHeaders: (headers) => {
-            const token = localStorage.getItem('jwtToken');
+            const token = sessionStorage.getItem('jwtToken') || localStorage.getItem('jwtToken');
             if (token) {
                 headers.set('authentication', `Bearer ${token}`);
             }

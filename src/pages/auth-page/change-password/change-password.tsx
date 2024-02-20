@@ -12,10 +12,10 @@ import { Paths } from '@router/paths';
 import { useForm } from 'antd/lib/form/Form';
 import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { selectPreviousPath } from '@redux/configure-store';
+import { shouldRedirect } from '@router/should-redirect';
 
 import './change-password.less';
-import { selectRouterPreviousLocations } from '@redux/configure-store';
-import { shouldRedirect } from '@router/should-redirect';
 
 const { Text } = Typography;
 
@@ -23,7 +23,9 @@ const AuthChangePassword = () => {
     console.log('authChangePass component start render');
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const previousLocations = useAppSelector(selectRouterPreviousLocations);
+
+    const previousPath = useAppSelector(selectPreviousPath);
+
     const shouldRefetch = useAppSelector(selectShouldRefetch);
     const lastRegisterRequest = useAppSelector(selectLastRegisterRequest);
 
@@ -47,13 +49,11 @@ const AuthChangePassword = () => {
         const passwordRepeat = form.getFieldValue('password-repeat');
         if (password && passwordRepeat) {
             const hasErrors = form.getFieldsError().some(({ errors }) => errors.length);
-            console.log('has ERR', hasErrors);
             setFormValid(!hasErrors);
         }
     };
 
     const onFinish = async (values: any) => {
-        console.log(values);
         const { password } = values;
         await changePasswordFunction(password, password);
         form.resetFields();
@@ -68,17 +68,15 @@ const AuthChangePassword = () => {
         }
     }, []);
 
-    // if (shouldRedirect(previousLocations, `${Paths.AUTH}/${Paths.FORGOT_PASSWORD}`)) {
-    //     console.log('change-path chck redirect');
-    //     // return <Navigate to={Paths.AUTH} />;
-    // }
-
-    // useEffect(() => {
-    //     console.log('change-path chck redirect');
-    //     if (shouldRedirect(previousLocations, `${Paths.AUTH}/${Paths.FORGOT_PASSWORD}`)) {
-    //         navigate(Paths.AUTH);
-    //     }
-    // }, []);
+    useEffect(() => {
+        if (
+            !previousPath &&
+            !shouldRedirect(previousPath!, `${Paths.AUTH}/${Paths.FORGOT_PASSWORD}`) &&
+            !shouldRedirect(previousPath!, `${Paths.RESULT}/${Paths.ERROR_CHANGE_PASSWORD}`)
+        ) {
+            navigate(Paths.AUTH);
+        }
+    }, []);
 
     if (isSuccess) {
         return <Navigate to={`${Paths.RESULT}/${Paths.SUCCESS_PASSWORD_CHANGE}`} />;

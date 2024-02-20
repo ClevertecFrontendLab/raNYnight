@@ -1,25 +1,25 @@
 import { ResultImages, ResultMessages, ResultTitles } from '@constants/results';
 import { Typography } from 'antd';
 import VerificationInput from 'react-verification-input';
-
 import Loader from '@components/loader/loader';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useConfirmEmailMutation } from '@redux/auth/authApi';
 import { selectForgotEmail } from '@redux/auth/authSlice';
-import { selectRouterPreviousLocations } from '@redux/configure-store';
+import { selectPreviousPath } from '@redux/configure-store';
 import { Paths } from '@router/paths';
-import { Navigate, useNavigate } from 'react-router-dom';
-import './forgot-password.less';
 import { shouldRedirect } from '@router/should-redirect';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import './forgot-password.less';
 
 const { Text } = Typography;
 
 const ForgotPassword = () => {
     const forgotEmail = useAppSelector(selectForgotEmail);
-    const previousLocations = useAppSelector(selectRouterPreviousLocations);
+    const previousPath = useAppSelector(selectPreviousPath);
     const navigate = useNavigate();
-    const [confirmEmail, { isLoading, isError, isSuccess }] = useConfirmEmailMutation();
+    const [confirmEmail, { isLoading, isError }] = useConfirmEmailMutation();
 
     const onComplete = async (code: string) => {
         await confirmEmail({ email: forgotEmail, code })
@@ -27,21 +27,11 @@ const ForgotPassword = () => {
             .then(() => navigate(`${Paths.AUTH}/${Paths.CHANGE_PASSWORD}`));
     };
 
-    if (shouldRedirect(previousLocations, Paths.AUTH)) {
-        console.log('forgot-path chck redirect');
-        console.log(shouldRedirect(previousLocations, Paths.AUTH));
-        navigate(Paths.AUTH);
-    }
-
     useEffect(() => {
-        if (shouldRedirect(previousLocations, Paths.AUTH)) {
+        if (!previousPath || shouldRedirect(previousPath, Paths.AUTH)) {
             navigate(Paths.AUTH);
         }
     }, []);
-
-    // if (isSuccess) {
-    //     return <Navigate to={`${Paths.AUTH}/${Paths.CHANGE_PASSWORD}`} />;
-    // }
 
     return (
         <>

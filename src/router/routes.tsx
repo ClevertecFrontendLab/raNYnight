@@ -8,6 +8,7 @@ import { ResultActions, ResultImages, ResultMessages, ResultTitles } from '@cons
 import PrivateRoutes from './private-routes';
 import AuthChangePassword from '@pages/auth-page/change-password/change-password';
 import ForgotPassword from '@pages/auth-page/forgot-password/forgot-password';
+import { ResultsPage } from '@pages/results-page/results-page';
 
 export const routes = (
     <Routes>
@@ -22,7 +23,8 @@ export const routes = (
             <Route path={Paths.FORGOT_PASSWORD} element={<ForgotPassword />} />
             <Route path={Paths.CHANGE_PASSWORD} element={<AuthChangePassword />} />
         </Route>
-        <Route path={Paths.RESULT} element={<AuthPage />}>
+
+        <Route path={Paths.RESULT} element={<ResultsPage />}>
             <Route
                 path={Paths.SUCCESS}
                 element={
@@ -32,6 +34,7 @@ export const routes = (
                         action={ResultActions.LOGIN}
                         image={ResultImages.SUCCESS}
                         href={Paths.LOGIN}
+                        previousPathToCheck={`${Paths.AUTH}/${Paths.REGISTRATION}`}
                     />
                 }
             />
@@ -44,6 +47,7 @@ export const routes = (
                         action={ResultActions.REPEAT}
                         image={ResultImages.ERROR}
                         href={Paths.REGISTRATION}
+                        previousPathToCheck={`${Paths.AUTH}/${Paths.REGISTRATION}`}
                     />
                 }
             />
@@ -56,6 +60,7 @@ export const routes = (
                         action={ResultActions.REPEAT}
                         image={ResultImages.WARN}
                         href={Paths.LOGIN}
+                        previousPathToCheck={`${Paths.AUTH}`}
                     />
                 }
             />
@@ -68,6 +73,7 @@ export const routes = (
                         action={ResultActions.TO_REGISTER}
                         image={ResultImages.ERROR}
                         href={Paths.REGISTRATION}
+                        previousPathToCheck={`${Paths.AUTH}/${Paths.REGISTRATION}`}
                     />
                 }
             />
@@ -80,6 +86,7 @@ export const routes = (
                         action={ResultActions.BACK}
                         image={ResultImages.SOMETHING_WRONG}
                         href={Paths.LOGIN}
+                        previousPathToCheck={`${Paths.AUTH}`}
                     />
                 }
             />
@@ -92,6 +99,7 @@ export const routes = (
                         action={ResultActions.TRY_AGAIN}
                         image={ResultImages.ERROR}
                         href={Paths.LOGIN}
+                        previousPathToCheck={`${Paths.AUTH}`}
                     />
                 }
             />
@@ -104,6 +112,7 @@ export const routes = (
                         action={ResultActions.REPEAT}
                         image={ResultImages.ERROR}
                         href={Paths.CHANGE_PASSWORD}
+                        previousPathToCheck={`${Paths.AUTH}/${Paths.CHANGE_PASSWORD}`}
                     />
                 }
             />
@@ -116,6 +125,7 @@ export const routes = (
                         action={ResultActions.LOGIN}
                         image={ResultImages.SUCCESS}
                         href={Paths.LOGIN}
+                        previousPathToCheck={`${Paths.AUTH}/${Paths.CHANGE_PASSWORD}`}
                     />
                 }
             />
