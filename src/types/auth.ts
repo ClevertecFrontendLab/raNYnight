@@ -18,6 +18,11 @@ export interface ConfirmEmailRequest {
     code: string;
 }
 
+export interface ChangePasswordRequest {
+    password: string;
+    confirmPassword: string;
+}
+
 export interface RegisterInput {
     email: string;
     password: string;

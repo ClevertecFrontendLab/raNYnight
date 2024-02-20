@@ -19,7 +19,7 @@ import './registration.less';
 
 const Registration: React.FC = () => {
     const [form] = useForm();
-    const [isFormValid, setFormValid] = useState(true);
+    const [isFormValid, setFormValid] = useState(false);
     const [registerUser, { isLoading, isSuccess }] = useRegisterUserMutation();
     const shouldRefetch = useAppSelector(selectShouldRefetch);
     const lastRegisterRequest = useAppSelector(selectLastRegisterRequest);
@@ -48,11 +48,12 @@ const Registration: React.FC = () => {
     };
 
     const handleFormChange = () => {
+        const email = form.getFieldValue('email');
         const password = form.getFieldValue('password');
         const passwordRepeat = form.getFieldValue('password-repeat');
-        if (password && passwordRepeat) {
+        if (password && passwordRepeat && email) {
             const hasErrors = form.getFieldsError().some(({ errors }) => errors.length);
-            setFormValid(hasErrors);
+            setFormValid(!hasErrors);
         }
     };
 
@@ -145,7 +146,7 @@ const Registration: React.FC = () => {
                             type='primary'
                             htmlType='submit'
                             className='login-form-button'
-                            disabled={isFormValid || isLoading}
+                            disabled={!isFormValid || isLoading}
                         >
                             Войти
                         </Button>

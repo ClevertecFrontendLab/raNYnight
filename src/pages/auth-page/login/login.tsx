@@ -6,20 +6,20 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { LoginRequest } from 'src/types/auth';
 import AuthSwitcher from '../auth-switcher/auth-switcher';
-
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { setAuthToken, setForgotEmail } from '@redux/auth/authSlice';
-import { useForm } from 'antd/lib/form/Form';
 import { useEffect, useState } from 'react';
+import useForm from 'antd/lib/form/hooks/useForm';
+
 import './login.less';
-// import { history } from '@redux/configure-store';
 
 const Login: React.FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [isEmailValid, setIsEmailValid] = useState(false);
-    const [form] = useForm();
+    const [isLoginAvailable, setIsLoginAvailable] = useState(false);
 
+    const [form] = useForm();
     const [
         loginUser,
         {
@@ -39,10 +39,15 @@ const Login: React.FC = () => {
     const handleFormChange = () => {
         const email = form.getFieldValue('email');
         const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        const password = form.getFieldValue('password');
+        if (isEmailValid && password) {
+            setIsLoginAvailable(true);
+        }
         if (email && emailRegex.test(email)) {
             setIsEmailValid(true);
         } else {
             setIsEmailValid(false);
+            setIsLoginAvailable(false);
         }
     };
 
@@ -66,7 +71,6 @@ const Login: React.FC = () => {
     useEffect(() => {
         if (isLoginSuccess && loginData) {
             dispatch(setAuthToken(loginData.accessToken));
-            // history.push(Paths.MAIN);
             navigate(Paths.MAIN);
         }
     }, [isLoginSuccess]);
@@ -128,7 +132,8 @@ const Login: React.FC = () => {
                             disabled={
                                 isLoadingLogin ||
                                 isEmailCheckLoading ||
-                                (!isEmailValid && !form.getFieldValue('password'))
+                                !isEmailValid ||
+                                !isLoginAvailable
                             }
                         >
                             Войти

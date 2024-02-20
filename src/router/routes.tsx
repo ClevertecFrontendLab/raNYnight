@@ -95,6 +95,30 @@ export const routes = (
                     />
                 }
             />
+            <Route
+                path={Paths.ERROR_CHANGE_PASSWORD}
+                element={
+                    <AuthResult
+                        title={ResultTitles.ERROR_DATA_NOT_SAVED}
+                        message={ResultMessages.ERROR_SOMETHING_WRONG}
+                        action={ResultActions.REPEAT}
+                        image={ResultImages.ERROR}
+                        href={Paths.CHANGE_PASSWORD}
+                    />
+                }
+            />
+            <Route
+                path={Paths.SUCCESS_PASSWORD_CHANGE}
+                element={
+                    <AuthResult
+                        title={ResultTitles.SUCCESS_PASSWORD_CHANGE}
+                        message={ResultMessages.SUCCESS_PASSWORD_CHANGE}
+                        action={ResultActions.LOGIN}
+                        image={ResultImages.SUCCESS}
+                        href={Paths.LOGIN}
+                    />
+                }
+            />
         </Route>
     </Routes>
 );

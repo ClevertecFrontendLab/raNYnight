@@ -11,9 +11,12 @@ const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
 root.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    </React.StrictMode>,
+    // <React.StrictMode>
+    <Provider store={store}>
+        <App />
+    </Provider>,
 );
+
+{
+    /* </React.StrictMode> */
+}

@@ -7,8 +7,11 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import authReducer from '@redux/auth/authSlice';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
+    savePreviousLocations: 2,
     history: createBrowserHistory(),
 });
+
+export const selectRouterPreviousLocations = (state: RootState) => state.router.previousLocations;
 
 export const store = configureStore({
     reducer: combineReducers({

@@ -2,29 +2,47 @@ import { ResultImages, ResultMessages, ResultTitles } from '@constants/results';
 import { Typography } from 'antd';
 import VerificationInput from 'react-verification-input';
 
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { selectForgotEmail } from '@redux/auth/authSlice';
-import './forgot-password.less';
-import { useConfirmEmailMutation } from '@redux/auth/authApi';
 import Loader from '@components/loader/loader';
-import { Navigate } from 'react-router-dom';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useConfirmEmailMutation } from '@redux/auth/authApi';
+import { selectForgotEmail } from '@redux/auth/authSlice';
+import { selectRouterPreviousLocations } from '@redux/configure-store';
 import { Paths } from '@router/paths';
+import { Navigate, useNavigate } from 'react-router-dom';
+import './forgot-password.less';
+import { shouldRedirect } from '@router/should-redirect';
+import { useEffect } from 'react';
+
 const { Text } = Typography;
 
 const ForgotPassword = () => {
     const forgotEmail = useAppSelector(selectForgotEmail);
-
+    const previousLocations = useAppSelector(selectRouterPreviousLocations);
+    const navigate = useNavigate();
     const [confirmEmail, { isLoading, isError, isSuccess }] = useConfirmEmailMutation();
 
     const onComplete = async (code: string) => {
-        console.log(code);
-        await confirmEmail({ email: forgotEmail, code });
-        console.log('code sent', { email: forgotEmail, code });
+        await confirmEmail({ email: forgotEmail, code })
+            .unwrap()
+            .then(() => navigate(`${Paths.AUTH}/${Paths.CHANGE_PASSWORD}`));
     };
 
-    if (isSuccess) {
-        return <Navigate to={`${Paths.AUTH}/${Paths.CHANGE_PASSWORD}`} />;
+    if (shouldRedirect(previousLocations, Paths.AUTH)) {
+        console.log('forgot-path chck redirect');
+        console.log(shouldRedirect(previousLocations, Paths.AUTH));
+        navigate(Paths.AUTH);
     }
+
+    useEffect(() => {
+        if (shouldRedirect(previousLocations, Paths.AUTH)) {
+            navigate(Paths.AUTH);
+        }
+    }, []);
+
+    // if (isSuccess) {
+    //     return <Navigate to={`${Paths.AUTH}/${Paths.CHANGE_PASSWORD}`} />;
+    // }
+
     return (
         <>
             <div className={`auth-forgot-wrapper ${isLoading ? 'background-filter' : ''}`}>

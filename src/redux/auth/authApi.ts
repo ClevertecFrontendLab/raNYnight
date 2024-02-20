@@ -1,6 +1,7 @@
 import { authBaseQuery } from '@constants/api';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
+    ChangePasswordRequest,
     ConfirmEmailRequest,
     EmailResponse,
     LoginRequest,
@@ -53,6 +54,15 @@ export const authApi = createApi({
                 url: 'confirm-email',
                 method: 'POST',
                 body,
+                credentials: 'include',
+            }),
+        }),
+        changePassword: builder.mutation<{ email: string }, ChangePasswordRequest>({
+            query: (body) => ({
+                url: 'change-password',
+                method: 'POST',
+                body,
+                credentials: 'include',
             }),
         }),
     }),
@@ -63,4 +73,5 @@ export const {
     useRegisterUserMutation,
     useCheckEmailMutation,
     useConfirmEmailMutation,
+    useChangePasswordMutation,
 } = authApi;
