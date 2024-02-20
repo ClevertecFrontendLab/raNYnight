@@ -20,7 +20,6 @@ import './change-password.less';
 const { Text } = Typography;
 
 const AuthChangePassword = () => {
-    console.log('authChangePass component start render');
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -115,7 +114,7 @@ const AuthChangePassword = () => {
                         ]}
                         className='auth-input-wrapper auth-input-password'
                     >
-                        <Input.Password placeholder='Пароль' />
+                        <Input.Password placeholder='Пароль' data-test-id='change-password' />
                     </Form.Item>
                     <Form.Item
                         name='password-repeat'
@@ -135,7 +134,10 @@ const AuthChangePassword = () => {
                         ]}
                         className='auth-input-wrapper auth-input-password password-repeat'
                     >
-                        <Input.Password placeholder='Повторите пароль' />
+                        <Input.Password
+                            placeholder='Повторите пароль'
+                            data-test-id='change-confirm-password'
+                        />
                     </Form.Item>
                     <Form.Item className='register-form-button-wrapper'>
                         <Button
@@ -143,6 +145,7 @@ const AuthChangePassword = () => {
                             htmlType='submit'
                             className='login-form-button'
                             disabled={!isFormValid || isLoading}
+                            data-test-id='change-submit-button'
                         >
                             Сохранить
                         </Button>

@@ -105,21 +105,26 @@ const Login: React.FC = () => {
                         required
                         rules={[{ type: 'email', message: '' }]}
                     >
-                        <Input prefix={'e-mail:'} className='auth-input' />
+                        <Input
+                            prefix={'e-mail:'}
+                            className='auth-input'
+                            data-test-id='login-email'
+                        />
                     </Form.Item>
                     <Form.Item name='password' className='auth-input-wrapper auth-input-password'>
-                        <Input.Password placeholder='Пароль' />
+                        <Input.Password placeholder='Пароль' data-test-id='login-password' />
                     </Form.Item>
 
                     <Form.Item className='login-form-utils'>
                         <Form.Item name='remember' valuePropName='checked' noStyle>
-                            <Checkbox>Запомнить меня</Checkbox>
+                            <Checkbox data-test-id='login-remember'>Запомнить меня</Checkbox>
                         </Form.Item>
 
                         <Button
                             className='login-form-forgot-button '
                             disabled={!isEmailValid}
                             onClick={onForgotButtonClick}
+                            data-test-id='login-forgot-button'
                         >
                             Забыли пароль?
                         </Button>
@@ -136,6 +141,7 @@ const Login: React.FC = () => {
                                 !isEmailValid ||
                                 !isLoginAvailable
                             }
+                            data-test-id='login-submit-button'
                         >
                             Войти
                         </Button>

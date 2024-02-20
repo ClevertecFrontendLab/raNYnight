@@ -12,7 +12,7 @@ const defaultOptions: Options = {
 };
 const Loader = () => (
     <div className='loader-wrapper'>
-        <Lottie options={defaultOptions} height={200} width={200} />
+        <Lottie options={defaultOptions} height={200} width={200} data-test-id='loader' />
     </div>
 );
 

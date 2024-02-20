@@ -95,7 +95,11 @@ const Registration: React.FC = () => {
                         ]}
                         className='auth-input-wrapper auth-input-email'
                     >
-                        <Input prefix={'e-mail:'} className='auth-input' />
+                        <Input
+                            prefix={'e-mail:'}
+                            className='auth-input'
+                            data-test-id='registration-email'
+                        />
                     </Form.Item>
                     <Form.Item
                         name='password'
@@ -118,7 +122,7 @@ const Registration: React.FC = () => {
                         ]}
                         className='auth-input-wrapper auth-input-password'
                     >
-                        <Input.Password placeholder='Пароль' />
+                        <Input.Password placeholder='Пароль' data-test-id='registration-password' />
                     </Form.Item>
                     <Form.Item
                         name='password-repeat'
@@ -138,7 +142,10 @@ const Registration: React.FC = () => {
                         ]}
                         className='auth-input-wrapper auth-input-password password-repeat'
                     >
-                        <Input.Password placeholder='Повторите пароль' />
+                        <Input.Password
+                            placeholder='Повторите пароль'
+                            data-test-id='registration-confirm-password'
+                        />
                     </Form.Item>
 
                     <Form.Item className='register-form-button-wrapper'>
@@ -147,6 +154,7 @@ const Registration: React.FC = () => {
                             htmlType='submit'
                             className='login-form-button'
                             disabled={!isFormValid || isLoading}
+                            data-test-id='registration-submit-button'
                         >
                             Войти
                         </Button>

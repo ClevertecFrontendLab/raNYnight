@@ -35,6 +35,7 @@ export const routes = (
                         image={ResultImages.SUCCESS}
                         href={Paths.LOGIN}
                         previousPathToCheck={`${Paths.AUTH}/${Paths.REGISTRATION}`}
+                        dataTestId='registration-enter-button'
                     />
                 }
             />
@@ -48,6 +49,7 @@ export const routes = (
                         image={ResultImages.ERROR}
                         href={Paths.REGISTRATION}
                         previousPathToCheck={`${Paths.AUTH}/${Paths.REGISTRATION}`}
+                        dataTestId='registration-retry-button'
                     />
                 }
             />
@@ -61,6 +63,7 @@ export const routes = (
                         image={ResultImages.WARN}
                         href={Paths.LOGIN}
                         previousPathToCheck={`${Paths.AUTH}`}
+                        dataTestId='login-retry-button'
                     />
                 }
             />
@@ -74,6 +77,7 @@ export const routes = (
                         image={ResultImages.ERROR}
                         href={Paths.REGISTRATION}
                         previousPathToCheck={`${Paths.AUTH}/${Paths.REGISTRATION}`}
+                        dataTestId='registration-back-button'
                     />
                 }
             />
@@ -87,6 +91,7 @@ export const routes = (
                         image={ResultImages.SOMETHING_WRONG}
                         href={Paths.LOGIN}
                         previousPathToCheck={`${Paths.AUTH}`}
+                        dataTestId='check-back-button'
                     />
                 }
             />
@@ -100,6 +105,7 @@ export const routes = (
                         image={ResultImages.ERROR}
                         href={Paths.LOGIN}
                         previousPathToCheck={`${Paths.AUTH}`}
+                        dataTestId='check-retry-button'
                     />
                 }
             />
@@ -113,6 +119,7 @@ export const routes = (
                         image={ResultImages.ERROR}
                         href={Paths.CHANGE_PASSWORD}
                         previousPathToCheck={`${Paths.AUTH}/${Paths.CHANGE_PASSWORD}`}
+                        dataTestId='change-retry-button'
                     />
                 }
             />
@@ -126,6 +133,7 @@ export const routes = (
                         image={ResultImages.SUCCESS}
                         href={Paths.LOGIN}
                         previousPathToCheck={`${Paths.AUTH}/${Paths.CHANGE_PASSWORD}`}
+                        dataTestId='change-entry-button'
                     />
                 }
             />

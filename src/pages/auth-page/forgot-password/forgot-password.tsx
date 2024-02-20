@@ -62,6 +62,8 @@ const ForgotPassword = () => {
                         characterFilled: 'verification-input-character--filled',
                     }}
                     onComplete={onComplete}
+                    // data-test-id='verification-input'
+                    inputProps={{ 'data-test-id': 'verification-input' }}
                 />
                 <Text className='auth-forgot-message'>{ResultMessages.RESET_CODE_SPAM}</Text>
             </div>
