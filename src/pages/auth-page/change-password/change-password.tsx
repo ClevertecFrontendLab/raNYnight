@@ -1,4 +1,3 @@
-import { Button, Form, Input, Typography } from 'antd';
 import Loader from '@components/loader/loader';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useChangePasswordMutation } from '@redux/auth/authApi';
@@ -8,12 +7,12 @@ import {
     setLastRegisterRequest,
     setShouldRefetch,
 } from '@redux/auth/authSlice';
+import { selectPreviousPath } from '@redux/configure-store';
 import { Paths } from '@router/paths';
+import { Button, Form, Input, Typography } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { selectPreviousPath } from '@redux/configure-store';
-import { shouldRedirect } from '@router/should-redirect';
 
 import './change-password.less';
 
@@ -23,7 +22,9 @@ const AuthChangePassword = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const previousPath = useAppSelector(selectPreviousPath);
+    const previousPath = useAppSelector(selectPreviousPath) ?? '';
+
+    const [shouldRedirect, setShouldRedirect] = useState(false);
 
     const shouldRefetch = useAppSelector(selectShouldRefetch);
     const lastRegisterRequest = useAppSelector(selectLastRegisterRequest);
@@ -68,18 +69,30 @@ const AuthChangePassword = () => {
     }, []);
 
     useEffect(() => {
-        if (
-            !previousPath &&
-            !shouldRedirect(previousPath!, `${Paths.AUTH}/${Paths.FORGOT_PASSWORD}`) &&
-            !shouldRedirect(previousPath!, `${Paths.RESULT}/${Paths.ERROR_CHANGE_PASSWORD}`)
-        ) {
-            navigate(Paths.AUTH);
+        const normalizedPrevPathname = previousPath.endsWith('/')
+            ? previousPath.slice(0, -1)
+            : previousPath;
+
+        const allowedPaths = [
+            `${Paths.AUTH}/${Paths.CONFIRM_EMAIL}`,
+            `${Paths.RESULT}/${Paths.ERROR_CHANGE_PASSWORD}`,
+            `${Paths.AUTH}/${Paths.CONFIRM_EMAIL}/`,
+            `${Paths.RESULT}/${Paths.ERROR_CHANGE_PASSWORD}/`,
+        ];
+
+        if (!previousPath || !allowedPaths.includes(normalizedPrevPathname)) {
+            setShouldRedirect(true);
         }
     }, []);
+
+    if (shouldRedirect) {
+        return <Navigate to={Paths.AUTH} />;
+    }
 
     if (isSuccess) {
         return <Navigate to={`${Paths.RESULT}/${Paths.SUCCESS_PASSWORD_CHANGE}`} />;
     }
+
     return (
         <>
             <div className={`auth-change-password-wrapper ${isLoading ? 'background-filter' : ''}`}>

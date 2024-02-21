@@ -7,8 +7,8 @@ import AuthResult from '@pages/auth-page/auth-result/auth-result';
 import { ResultActions, ResultImages, ResultMessages, ResultTitles } from '@constants/results';
 import PrivateRoutes from './private-routes';
 import AuthChangePassword from '@pages/auth-page/change-password/change-password';
-import ForgotPassword from '@pages/auth-page/forgot-password/forgot-password';
 import { ResultsPage } from '@pages/results-page/results-page';
+import AuthConfirmEmail from '@pages/auth-page/confirm-email/confirm-email';
 
 export const routes = (
     <Routes>
@@ -20,7 +20,7 @@ export const routes = (
         <Route path={Paths.AUTH} element={<AuthPage />}>
             <Route path={Paths.LOGIN} element={<Login />} />
             <Route path={Paths.REGISTRATION} element={<Registration />} />
-            <Route path={Paths.FORGOT_PASSWORD} element={<ForgotPassword />} />
+            <Route path={Paths.CONFIRM_EMAIL} element={<AuthConfirmEmail />} />
             <Route path={Paths.CHANGE_PASSWORD} element={<AuthChangePassword />} />
         </Route>
 

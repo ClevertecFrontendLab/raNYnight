@@ -26,7 +26,7 @@ const Registration: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const registerUserFunction = async (values: RegisterInput) => {
+    const handleRegisterUser = async (values: RegisterInput) => {
         const { email, password } = values;
         await registerUser({ email, password })
             .unwrap()
@@ -43,7 +43,7 @@ const Registration: React.FC = () => {
 
     const onFinish = async (values: any) => {
         const { email, password } = values;
-        await registerUserFunction({ email, password });
+        await handleRegisterUser({ email, password });
         form.resetFields();
     };
 
@@ -60,7 +60,7 @@ const Registration: React.FC = () => {
     useEffect(() => {
         if (shouldRefetch) {
             const { email, password } = lastRegisterRequest;
-            registerUserFunction({ email, password });
+            handleRegisterUser({ email, password });
             dispatch(setShouldRefetch(false));
         }
     }, []);

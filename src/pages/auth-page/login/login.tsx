@@ -6,8 +6,15 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { LoginRequest } from 'src/types/auth';
 import AuthSwitcher from '../auth-switcher/auth-switcher';
-import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { setAuthToken, setForgotEmail, setRememberMe } from '@redux/auth/authSlice';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import {
+    selectForgotEmail,
+    selectShouldRefetch,
+    setAuthToken,
+    setForgotEmail,
+    setRememberMe,
+    setShouldRefetch,
+} from '@redux/auth/authSlice';
 import { useEffect, useState } from 'react';
 import useForm from 'antd/lib/form/hooks/useForm';
 
@@ -16,8 +23,11 @@ import './login.less';
 const Login: React.FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const shouldRefetch = useAppSelector(selectShouldRefetch);
+    const forgotEmail = useAppSelector(selectForgotEmail);
     const [isEmailValid, setIsEmailValid] = useState(false);
     const [isLoginAvailable, setIsLoginAvailable] = useState(false);
+    const [isFormValid, setFormValid] = useState(false);
 
     const [form] = useForm();
     const [
@@ -29,7 +39,8 @@ const Login: React.FC = () => {
             isSuccess: isLoginSuccess,
         },
     ] = useLoginUserMutation();
-    const [checkEmail, { isLoading: isEmailCheckLoading }] = useCheckEmailMutation();
+    const [checkEmail, { isLoading: isEmailCheckLoading, error }] = useCheckEmailMutation();
+    console.log('check error from mutatuoin', error);
 
     const onFinish = async (values: LoginRequest) => {
         const { email, password } = values;
@@ -40,32 +51,67 @@ const Login: React.FC = () => {
         const email = form.getFieldValue('email');
         const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
         const password = form.getFieldValue('password');
-        if (isEmailValid && password) {
-            setIsLoginAvailable(true);
+        if (password && email) {
+            const hasErrors = form.getFieldsError().some(({ errors }) => errors.length);
+            setFormValid(!hasErrors);
         }
+
         if (email && emailRegex.test(email)) {
             setIsEmailValid(true);
         } else {
             setIsEmailValid(false);
-            setIsLoginAvailable(false);
+        }
+    };
+
+    const handleCheckEmail = async (email: string) => {
+        try {
+            dispatch(setForgotEmail(email));
+            await checkEmail({ email })
+                .unwrap()
+                .then(() => {
+                    dispatch(setForgotEmail(''));
+                    dispatch(setShouldRefetch(false));
+                    navigate(Paths.CONFIRM_EMAIL);
+                })
+                .catch((error) => {
+                    if (error.status === 404) {
+                        navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL_NO_EXIST}`);
+                    } else {
+                        dispatch(setShouldRefetch(true));
+                        navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL}`);
+                    }
+                });
+        } catch (error) {
+            console.error(error);
         }
     };
 
     const onForgotButtonClick = async () => {
         const email = form.getFieldValue('email');
-        await checkEmail({ email })
-            .unwrap()
-            .then(() => {
-                dispatch(setForgotEmail(email));
-                navigate(Paths.FORGOT_PASSWORD);
-            })
-            .catch((error) => {
-                if (error.status === 404 && error.message !== 'Email не найден') {
-                    navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL_NO_EXIST}`);
-                } else {
-                    navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL}`);
-                }
-            });
+        dispatch(setForgotEmail(email));
+        handleCheckEmail(email);
+        // await checkEmail({ email })
+        //     .unwrap()
+        //     .then(() => {
+        //         dispatch(setForgotEmail(''));
+        //         navigate(Paths.CONFIRM_EMAIL);
+        //     })
+        //     .catch((error) => {
+        //         // console.log('errr', error, error.data.statusCode, error.data.message);
+        //         console.log('err data', error);
+        //         if (
+        //             // error.data.statusCode == 404 ||
+        //             error.status == 404
+        //             // (error.data.message === 'Email не найден' ||
+        //             //     error.message === 'Email не найден')
+        //         ) {
+        //             console.log('we are her ERROR_CHECK_EMAIL_NO_EXIST');
+        //             navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL_NO_EXIST}`);
+        //         } else {
+        //             console.log('we are here ERROR_CHECK_EMAIL');
+        //             navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL}`);
+        //         }
+        //     });
     };
 
     useEffect(() => {
@@ -75,6 +121,12 @@ const Login: React.FC = () => {
             navigate(Paths.MAIN);
         }
     }, [isLoginSuccess]);
+
+    useEffect(() => {
+        if (shouldRefetch) {
+            handleCheckEmail(forgotEmail);
+        }
+    }, []);
 
     if (isLoginError) {
         return <Navigate to={`${Paths.RESULT}/${Paths.ERROR_LOGIN}`} />;
@@ -111,7 +163,22 @@ const Login: React.FC = () => {
                             data-test-id='login-email'
                         />
                     </Form.Item>
-                    <Form.Item name='password' className='auth-input-wrapper auth-input-password'>
+                    <Form.Item
+                        name='password'
+                        className='auth-input-wrapper auth-input-password'
+                        rules={[
+                            {
+                                required: true,
+                                message: '',
+                                validator: (_, value) => {
+                                    const passRegExp = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+                                    return RegExp(passRegExp).test(value)
+                                        ? Promise.resolve()
+                                        : Promise.reject(new Error('asd'));
+                                },
+                            },
+                        ]}
+                    >
                         <Input.Password placeholder='Пароль' data-test-id='login-password' />
                     </Form.Item>
 
@@ -122,8 +189,8 @@ const Login: React.FC = () => {
 
                         <Button
                             className='login-form-forgot-button '
-                            disabled={!isEmailValid}
-                            onClick={onForgotButtonClick}
+                            // disabled={!isEmailValid}
+                            onClick={isEmailValid ? onForgotButtonClick : undefined}
                             data-test-id='login-forgot-button'
                         >
                             Забыли пароль?
@@ -136,10 +203,9 @@ const Login: React.FC = () => {
                             htmlType='submit'
                             className='login-form-button'
                             disabled={
-                                isLoadingLogin ||
-                                isEmailCheckLoading ||
-                                !isEmailValid ||
-                                !isLoginAvailable
+                                isLoadingLogin || isEmailCheckLoading
+                                // !isEmailValid ||
+                                // !isFormValid
                             }
                             data-test-id='login-submit-button'
                         >
@@ -159,7 +225,7 @@ const Login: React.FC = () => {
                     </Form.Item>
                 </Form>
             </div>
-            {isLoadingLogin || (isEmailCheckLoading && <Loader />)}
+            {isLoadingLogin || isEmailCheckLoading ? <Loader /> : null}
         </>
     );
 };

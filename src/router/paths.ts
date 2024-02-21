@@ -5,7 +5,7 @@ export enum Paths {
     LOGIN = '',
     REGISTRATION = 'registration',
     RESULT = '/result',
-    FORGOT_PASSWORD = 'forgot-password',
+    // FORGOT_PASSWORD = 'forgot-password',
     CHANGE_PASSWORD = 'change-password',
     CONFIRM_EMAIL = 'confirm-email',
     ERROR = 'error',
@@ -15,6 +15,6 @@ export enum Paths {
     ERROR_CHECK_EMAIL_NO_EXIST = 'error-check-email-no-exist',
     ERROR_CHANGE_PASSWORD = 'error-change-password',
     SUCCESS = 'success',
-    SUCCESS_PASSWORD_CHANGE = 'success-password-change',
+    SUCCESS_PASSWORD_CHANGE = 'success-change-password',
     NotFound = '*',
 }

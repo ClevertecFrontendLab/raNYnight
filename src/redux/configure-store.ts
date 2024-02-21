@@ -7,7 +7,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import authReducer from '@redux/auth/authSlice';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
-    savePreviousLocations: 2,
+    savePreviousLocations: 1,
     history: createBrowserHistory(),
 });
 
