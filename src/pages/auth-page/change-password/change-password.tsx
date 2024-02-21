@@ -7,12 +7,11 @@ import {
     setLastRegisterRequest,
     setShouldRefetch,
 } from '@redux/auth/authSlice';
-import { selectPreviousPath } from '@redux/configure-store';
 import { Paths } from '@router/paths';
 import { Button, Form, Input, Typography } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 import './change-password.less';
 
@@ -21,10 +20,15 @@ const { Text } = Typography;
 const AuthChangePassword = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-
-    const previousPath = useAppSelector(selectPreviousPath) ?? '';
-
-    const [shouldRedirect, setShouldRedirect] = useState(false);
+    const location = useLocation();
+    const prevPath: string = location.state?.prevPath ?? '';
+    const allowedPaths = [
+        `${Paths.AUTH}/${Paths.CONFIRM_EMAIL}`,
+        `${Paths.RESULT}/${Paths.ERROR_CHANGE_PASSWORD}`,
+        `${Paths.AUTH}/${Paths.CONFIRM_EMAIL}/`,
+        `${Paths.RESULT}/${Paths.ERROR_CHANGE_PASSWORD}/`,
+    ];
+    const shouldRedirect = !allowedPaths.includes(prevPath);
 
     const shouldRefetch = useAppSelector(selectShouldRefetch);
     const lastRegisterRequest = useAppSelector(selectLastRegisterRequest);
@@ -34,11 +38,13 @@ const AuthChangePassword = () => {
 
     const [changePassword, { isSuccess, isLoading }] = useChangePasswordMutation();
 
-    const changePasswordFunction = async (password: string, confirmPassword: string) => {
+    const handleChangePassword = async (password: string, confirmPassword: string) => {
         await changePassword({ password, confirmPassword })
             .unwrap()
             .catch(() => {
-                navigate(`${Paths.RESULT}/${Paths.ERROR_CHANGE_PASSWORD}`);
+                navigate(`${Paths.RESULT}/${Paths.ERROR_CHANGE_PASSWORD}`, {
+                    state: { prevPath: location.pathname },
+                });
                 dispatch(setShouldRefetch(true));
                 dispatch(setLastRegisterRequest({ email: '', password }));
             });
@@ -55,7 +61,7 @@ const AuthChangePassword = () => {
 
     const onFinish = async (values: any) => {
         const { password } = values;
-        await changePasswordFunction(password, password);
+        await handleChangePassword(password, password);
         form.resetFields();
         setFormValid(false);
     };
@@ -63,25 +69,8 @@ const AuthChangePassword = () => {
     useEffect(() => {
         if (shouldRefetch) {
             const { password } = lastRegisterRequest;
-            changePasswordFunction(password, password);
+            handleChangePassword(password, password);
             dispatch(setShouldRefetch(false));
-        }
-    }, []);
-
-    useEffect(() => {
-        const normalizedPrevPathname = previousPath.endsWith('/')
-            ? previousPath.slice(0, -1)
-            : previousPath;
-
-        const allowedPaths = [
-            `${Paths.AUTH}/${Paths.CONFIRM_EMAIL}`,
-            `${Paths.RESULT}/${Paths.ERROR_CHANGE_PASSWORD}`,
-            `${Paths.AUTH}/${Paths.CONFIRM_EMAIL}/`,
-            `${Paths.RESULT}/${Paths.ERROR_CHANGE_PASSWORD}/`,
-        ];
-
-        if (!previousPath || !allowedPaths.includes(normalizedPrevPathname)) {
-            setShouldRedirect(true);
         }
     }, []);
 
@@ -90,7 +79,12 @@ const AuthChangePassword = () => {
     }
 
     if (isSuccess) {
-        return <Navigate to={`${Paths.RESULT}/${Paths.SUCCESS_PASSWORD_CHANGE}`} />;
+        return (
+            <Navigate
+                to={`${Paths.RESULT}/${Paths.SUCCESS_PASSWORD_CHANGE}`}
+                state={{ prevPath: location.pathname }}
+            />
+        );
     }
 
     return (

@@ -1,9 +1,6 @@
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { selectPreviousPath } from '@redux/configure-store';
 import { Paths } from '@router/paths';
-import { shouldRedirect } from '@router/should-redirect';
 import { Button, Typography } from 'antd';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 
 import './auth-result.less';
 
@@ -28,9 +25,11 @@ const AuthResult = ({
     previousPathToCheck,
     dataTestId,
 }: AuthResultProps) => {
-    const previousRouterPath = useAppSelector(selectPreviousPath);
+    const location = useLocation();
 
-    if (!previousRouterPath || shouldRedirect(previousRouterPath, previousPathToCheck)) {
+    const prevPath: string = location.state?.prevPath ?? '';
+
+    if (!prevPath || prevPath !== previousPathToCheck) {
         return <Navigate to={Paths.AUTH} />;
     }
 
@@ -45,7 +44,9 @@ const AuthResult = ({
                 className='auth-result-button'
                 data-test-id={dataTestId}
             >
-                <Link to={`/auth/${href}`}>{action}</Link>
+                <Link to={`/auth/${href}`} state={{ prevPath: location.pathname }}>
+                    {action}
+                </Link>
             </Button>
         </div>
     );

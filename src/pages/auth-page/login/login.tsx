@@ -3,7 +3,7 @@ import Loader from '@components/loader/loader';
 import { useCheckEmailMutation, useLoginUserMutation } from '@redux/auth/authApi';
 import { Paths } from '@router/paths';
 import { Button, Checkbox, Form, Input } from 'antd';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { LoginRequest } from 'src/types/auth';
 import AuthSwitcher from '../auth-switcher/auth-switcher';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
@@ -23,6 +23,7 @@ import './login.less';
 const Login: React.FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
     const shouldRefetch = useAppSelector(selectShouldRefetch);
     const forgotEmail = useAppSelector(selectForgotEmail);
     const [isEmailValid, setIsEmailValid] = useState(false);
@@ -60,21 +61,24 @@ const Login: React.FC = () => {
             .unwrap()
             .then(() => {
                 dispatch(setShouldRefetch(false));
-                navigate(Paths.CONFIRM_EMAIL);
+                navigate(Paths.CONFIRM_EMAIL, { state: { prevPath: location.pathname } });
             })
             .catch((error) => {
                 if (error.status === 404) {
-                    navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL_NO_EXIST}`);
+                    navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL_NO_EXIST}`, {
+                        state: { prevPath: location.pathname },
+                    });
                 } else {
                     dispatch(setShouldRefetch(true));
-                    navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL}`);
+                    navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL}`, {
+                        state: { prevPath: location.pathname },
+                    });
                 }
             });
     };
 
     const onForgotButtonClick = async () => {
         const email = form.getFieldValue('email');
-        dispatch(setForgotEmail(email));
         handleCheckEmail(email);
     };
 
@@ -82,7 +86,7 @@ const Login: React.FC = () => {
         if (isLoginSuccess && loginData) {
             dispatch(setRememberMe(form.getFieldValue('remember')));
             dispatch(setAuthToken(loginData.accessToken));
-            navigate(Paths.MAIN);
+            navigate(Paths.MAIN, { state: { prevPath: location.pathname } });
         }
     }, [isLoginSuccess]);
 
@@ -93,7 +97,12 @@ const Login: React.FC = () => {
     }, []);
 
     if (isLoginError) {
-        return <Navigate to={`${Paths.RESULT}/${Paths.ERROR_LOGIN}`} />;
+        return (
+            <Navigate
+                to={`${Paths.RESULT}/${Paths.ERROR_LOGIN}`}
+                state={{ prevPath: location.pathname }}
+            />
+        );
     }
 
     return (

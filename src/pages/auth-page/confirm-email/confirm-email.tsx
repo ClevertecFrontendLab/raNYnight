@@ -3,25 +3,26 @@ import { ResultImages, ResultMessages, ResultTitles } from '@constants/results';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useConfirmEmailMutation } from '@redux/auth/authApi';
 import { selectForgotEmail, setForgotEmail } from '@redux/auth/authSlice';
-import { selectPreviousPath } from '@redux/configure-store';
 import { Paths } from '@router/paths';
 import { Typography } from 'antd';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import VerificationInput from 'react-verification-input';
+import { useState } from 'react';
 
-import { useEffect, useState } from 'react';
 import './confirm-email.less';
 
 const { Text } = Typography;
 
 const AuthConfirmEmail = () => {
     const dispatch = useAppDispatch();
-
+    const location = useLocation();
     const navigate = useNavigate();
+
+    const prevPath: string = location.state.prevPath ?? '';
+    const normalizedPrevPathname = prevPath.endsWith('/') ? prevPath.slice(0, -1) : prevPath;
+
     const forgotEmail = useAppSelector(selectForgotEmail);
-    const previousPath = useAppSelector(selectPreviousPath) ?? '';
     const [inputvalue, setInputValue] = useState('');
-    const [shouldRedirect, setShouldRedirect] = useState(false);
 
     const [confirmEmail, { isLoading, isError }] = useConfirmEmailMutation();
 
@@ -30,24 +31,15 @@ const AuthConfirmEmail = () => {
             .unwrap()
             .then(() => {
                 dispatch(setForgotEmail(''));
-                navigate(`${Paths.AUTH}/${Paths.CHANGE_PASSWORD}`);
+                navigate(`${Paths.AUTH}/${Paths.CHANGE_PASSWORD}`, {
+                    state: { prevPath: location.pathname },
+                });
             })
             .catch((err) => console.log('err', err));
         setInputValue('');
     };
 
-    useEffect(() => {
-        const normalizedPrevPathname = previousPath.endsWith('/')
-            ? previousPath.slice(0, -1)
-            : previousPath;
-        const allowedPaths = [`${Paths.AUTH}/`, `${Paths.AUTH}`];
-
-        if (!previousPath || !allowedPaths.includes(normalizedPrevPathname)) {
-            setShouldRedirect(true);
-        }
-    }, []);
-
-    if (shouldRedirect) {
+    if (!prevPath || normalizedPrevPathname !== Paths.AUTH) {
         return <Navigate to={Paths.AUTH} />;
     }
 

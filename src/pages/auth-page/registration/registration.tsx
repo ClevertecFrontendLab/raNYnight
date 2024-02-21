@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { RegisterInput } from 'src/types/auth';
 import AuthSwitcher from '../auth-switcher/auth-switcher';
+
 import './registration.less';
 
 const Registration: React.FC = () => {
@@ -24,6 +25,7 @@ const Registration: React.FC = () => {
     const shouldRefetch = useAppSelector(selectShouldRefetch);
     const lastRegisterRequest = useAppSelector(selectLastRegisterRequest);
     const navigate = useNavigate();
+
     const dispatch = useAppDispatch();
 
     const handleRegisterUser = async (values: RegisterInput) => {
@@ -32,9 +34,13 @@ const Registration: React.FC = () => {
             .unwrap()
             .catch((error) => {
                 if (error.status === 409) {
-                    navigate(`${Paths.RESULT}/${Paths.ERROR_USER_EXIST}`);
+                    navigate(`${Paths.RESULT}/${Paths.ERROR_USER_EXIST}`, {
+                        state: { prevPath: `${Paths.AUTH}/${Paths.REGISTRATION}` },
+                    });
                 } else {
-                    navigate(`${Paths.RESULT}/${Paths.ERROR}`);
+                    navigate(`${Paths.RESULT}/${Paths.ERROR}`, {
+                        state: { prevPath: `${Paths.AUTH}/${Paths.REGISTRATION}` },
+                    });
                     dispatch(setShouldRefetch(true));
                     dispatch(setLastRegisterRequest({ email, password }));
                 }
@@ -66,7 +72,12 @@ const Registration: React.FC = () => {
     }, []);
 
     if (isSuccess) {
-        return <Navigate to={`${Paths.RESULT}/${Paths.SUCCESS}`} />;
+        return (
+            <Navigate
+                to={`${Paths.RESULT}/${Paths.SUCCESS}`}
+                state={{ prevPath: `${Paths.AUTH}/${Paths.REGISTRATION}` }}
+            />
+        );
     }
 
     return (

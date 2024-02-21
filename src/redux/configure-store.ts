@@ -1,18 +1,14 @@
-import { combineReducers } from 'redux';
-import { configureStore } from '@reduxjs/toolkit';
-import { RouterState, createReduxHistoryContext } from 'redux-first-history';
-import { createBrowserHistory } from 'history';
-import { authApi } from './auth/authApi';
-import { setupListeners } from '@reduxjs/toolkit/query';
 import authReducer from '@redux/auth/authSlice';
+import { configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query';
+import { createBrowserHistory } from 'history';
+import { combineReducers } from 'redux';
+import { createReduxHistoryContext } from 'redux-first-history';
+import { authApi } from './auth/authApi';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
-    savePreviousLocations: 1,
     history: createBrowserHistory(),
 });
-
-export const selectPreviousPath = (state: { router: RouterState }) =>
-    state.router.previousLocations?.[1]?.location?.pathname;
 
 export const store = configureStore({
     reducer: combineReducers({

@@ -23,7 +23,7 @@ const ExitButton = ({ isCollapsed }: ExitButtonProps) => {
         localStorage.getItem('jwtToken') && localStorage.removeItem('jwtToken');
         sessionStorage.getItem('jwtToken') && sessionStorage.removeItem('jwtToken');
         dispatch(setAuthToken(null));
-        navigate(Paths.AUTH);
+        navigate(Paths.AUTH, { state: { prevPath: Paths.MAIN } });
     };
 
     return (
