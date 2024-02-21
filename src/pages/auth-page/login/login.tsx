@@ -26,8 +26,6 @@ const Login: React.FC = () => {
     const shouldRefetch = useAppSelector(selectShouldRefetch);
     const forgotEmail = useAppSelector(selectForgotEmail);
     const [isEmailValid, setIsEmailValid] = useState(false);
-    const [isLoginAvailable, setIsLoginAvailable] = useState(false);
-    const [isFormValid, setFormValid] = useState(false);
 
     const [form] = useForm();
     const [
@@ -39,8 +37,7 @@ const Login: React.FC = () => {
             isSuccess: isLoginSuccess,
         },
     ] = useLoginUserMutation();
-    const [checkEmail, { isLoading: isEmailCheckLoading, error }] = useCheckEmailMutation();
-    console.log('check error from mutatuoin', error);
+    const [checkEmail, { isLoading: isEmailCheckLoading }] = useCheckEmailMutation();
 
     const onFinish = async (values: LoginRequest) => {
         const { email, password } = values;
@@ -50,12 +47,6 @@ const Login: React.FC = () => {
     const handleFormChange = () => {
         const email = form.getFieldValue('email');
         const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-        const password = form.getFieldValue('password');
-        if (password && email) {
-            const hasErrors = form.getFieldsError().some(({ errors }) => errors.length);
-            setFormValid(!hasErrors);
-        }
-
         if (email && emailRegex.test(email)) {
             setIsEmailValid(true);
         } else {
@@ -64,54 +55,27 @@ const Login: React.FC = () => {
     };
 
     const handleCheckEmail = async (email: string) => {
-        try {
-            dispatch(setForgotEmail(email));
-            await checkEmail({ email })
-                .unwrap()
-                .then(() => {
-                    dispatch(setForgotEmail(''));
-                    dispatch(setShouldRefetch(false));
-                    navigate(Paths.CONFIRM_EMAIL);
-                })
-                .catch((error) => {
-                    if (error.status === 404) {
-                        navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL_NO_EXIST}`);
-                    } else {
-                        dispatch(setShouldRefetch(true));
-                        navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL}`);
-                    }
-                });
-        } catch (error) {
-            console.error(error);
-        }
+        dispatch(setForgotEmail(email));
+        await checkEmail({ email })
+            .unwrap()
+            .then(() => {
+                dispatch(setShouldRefetch(false));
+                navigate(Paths.CONFIRM_EMAIL);
+            })
+            .catch((error) => {
+                if (error.status === 404) {
+                    navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL_NO_EXIST}`);
+                } else {
+                    dispatch(setShouldRefetch(true));
+                    navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL}`);
+                }
+            });
     };
 
     const onForgotButtonClick = async () => {
         const email = form.getFieldValue('email');
         dispatch(setForgotEmail(email));
         handleCheckEmail(email);
-        // await checkEmail({ email })
-        //     .unwrap()
-        //     .then(() => {
-        //         dispatch(setForgotEmail(''));
-        //         navigate(Paths.CONFIRM_EMAIL);
-        //     })
-        //     .catch((error) => {
-        //         // console.log('errr', error, error.data.statusCode, error.data.message);
-        //         console.log('err data', error);
-        //         if (
-        //             // error.data.statusCode == 404 ||
-        //             error.status == 404
-        //             // (error.data.message === 'Email не найден' ||
-        //             //     error.message === 'Email не найден')
-        //         ) {
-        //             console.log('we are her ERROR_CHECK_EMAIL_NO_EXIST');
-        //             navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL_NO_EXIST}`);
-        //         } else {
-        //             console.log('we are here ERROR_CHECK_EMAIL');
-        //             navigate(`${Paths.RESULT}/${Paths.ERROR_CHECK_EMAIL}`);
-        //         }
-        //     });
     };
 
     useEffect(() => {
@@ -189,7 +153,6 @@ const Login: React.FC = () => {
 
                         <Button
                             className='login-form-forgot-button '
-                            // disabled={!isEmailValid}
                             onClick={isEmailValid ? onForgotButtonClick : undefined}
                             data-test-id='login-forgot-button'
                         >
@@ -202,11 +165,7 @@ const Login: React.FC = () => {
                             type='primary'
                             htmlType='submit'
                             className='login-form-button'
-                            disabled={
-                                isLoadingLogin || isEmailCheckLoading
-                                // !isEmailValid ||
-                                // !isFormValid
-                            }
+                            disabled={isLoadingLogin || isEmailCheckLoading}
                             data-test-id='login-submit-button'
                         >
                             Войти

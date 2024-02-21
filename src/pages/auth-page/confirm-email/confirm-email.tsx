@@ -1,8 +1,8 @@
 import Loader from '@components/loader/loader';
 import { ResultImages, ResultMessages, ResultTitles } from '@constants/results';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useConfirmEmailMutation } from '@redux/auth/authApi';
-import { selectForgotEmail } from '@redux/auth/authSlice';
+import { selectForgotEmail, setForgotEmail } from '@redux/auth/authSlice';
 import { selectPreviousPath } from '@redux/configure-store';
 import { Paths } from '@router/paths';
 import { Typography } from 'antd';
@@ -11,15 +11,16 @@ import VerificationInput from 'react-verification-input';
 
 import { useEffect, useState } from 'react';
 import './confirm-email.less';
-import { error } from 'console';
 
 const { Text } = Typography;
 
 const AuthConfirmEmail = () => {
+    const dispatch = useAppDispatch();
+
     const navigate = useNavigate();
     const forgotEmail = useAppSelector(selectForgotEmail);
     const previousPath = useAppSelector(selectPreviousPath) ?? '';
-
+    const [inputvalue, setInputValue] = useState('');
     const [shouldRedirect, setShouldRedirect] = useState(false);
 
     const [confirmEmail, { isLoading, isError }] = useConfirmEmailMutation();
@@ -27,8 +28,12 @@ const AuthConfirmEmail = () => {
     const onComplete = async (code: string) => {
         await confirmEmail({ email: forgotEmail, code })
             .unwrap()
-            .then(() => navigate(`${Paths.AUTH}/${Paths.CHANGE_PASSWORD}`))
-            .catch((error) => console.error(error));
+            .then(() => {
+                dispatch(setForgotEmail(''));
+                navigate(`${Paths.AUTH}/${Paths.CHANGE_PASSWORD}`);
+            })
+            .catch((err) => console.log('err', err));
+        setInputValue('');
     };
 
     useEffect(() => {
@@ -63,6 +68,8 @@ const AuthConfirmEmail = () => {
                 </Text>
                 <Text className='auth-forgot-message'>{`Мы отправили вам на e-mail ${forgotEmail} шестизначный код. Введите его в поле ниже.`}</Text>
                 <VerificationInput
+                    value={inputvalue}
+                    autoFocus
                     validChars='0-9'
                     placeholder=''
                     classNames={{
@@ -75,6 +82,7 @@ const AuthConfirmEmail = () => {
                         characterFilled: 'verification-input-character--filled',
                     }}
                     onComplete={onComplete}
+                    onChange={setInputValue}
                     inputProps={{ 'data-test-id': 'verification-input' }}
                 />
                 <Text className='auth-forgot-message'>{ResultMessages.RESET_CODE_SPAM}</Text>
