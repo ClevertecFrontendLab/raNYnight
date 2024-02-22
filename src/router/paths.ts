@@ -5,7 +5,6 @@ export enum Paths {
     LOGIN = '',
     REGISTRATION = 'registration',
     RESULT = '/result',
-    // FORGOT_PASSWORD = 'forgot-password',
     CHANGE_PASSWORD = 'change-password',
     CONFIRM_EMAIL = 'confirm-email',
     ERROR = 'error',

@@ -28,16 +28,13 @@ const ExitButton = ({ isCollapsed }: ExitButtonProps) => {
 
     return (
         <div
+            onClick={handleExit}
             className={`side-panel-exit-button ${
                 isCollapsed ? 'side-panel-exit-button-collapsed' : ''
             }`}
         >
             {width < BREAKPOINT_520 ? null : <img src={exitIcon} alt='exitIcon' />}
-            {isCollapsed ? null : (
-                <Text className='side-panel-exit-text' onClick={handleExit}>
-                    Выход
-                </Text>
-            )}
+            {isCollapsed ? null : <Text className='side-panel-exit-text'>Выход</Text>}
         </div>
     );
 };

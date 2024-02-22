@@ -133,7 +133,11 @@ const Registration: React.FC = () => {
                         ]}
                         className='auth-input-wrapper auth-input-password'
                     >
-                        <Input.Password placeholder='Пароль' data-test-id='registration-password' />
+                        <Input.Password
+                            placeholder='Пароль'
+                            data-test-id='registration-password'
+                            autoComplete='on'
+                        />
                     </Form.Item>
                     <Form.Item
                         name='password-repeat'
@@ -156,6 +160,7 @@ const Registration: React.FC = () => {
                         <Input.Password
                             placeholder='Повторите пароль'
                             data-test-id='registration-confirm-password'
+                            autoComplete='on'
                         />
                     </Form.Item>
 

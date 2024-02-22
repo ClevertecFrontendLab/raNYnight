@@ -3,7 +3,7 @@ import Registration from '@pages/auth-page/registration/registration';
 import { AuthPage, MainPage } from '@pages/index';
 import { Paths } from './paths';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import AuthResult from '@pages/auth-page/auth-result/auth-result';
+import AuthResult from '@pages/results-page/auth-result/auth-result';
 import { ResultActions, ResultImages, ResultMessages, ResultTitles } from '@constants/results';
 import PrivateRoutes from './private-routes';
 import AuthChangePassword from '@pages/auth-page/change-password/change-password';

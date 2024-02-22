@@ -18,7 +18,7 @@ const AuthConfirmEmail = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const prevPath: string = location.state.prevPath ?? '';
+    const prevPath: string = location.state?.prevPath ?? '';
     const normalizedPrevPathname = prevPath.endsWith('/') ? prevPath.slice(0, -1) : prevPath;
 
     const forgotEmail = useAppSelector(selectForgotEmail);

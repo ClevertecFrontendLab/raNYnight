@@ -121,7 +121,11 @@ const AuthChangePassword = () => {
                         ]}
                         className='auth-input-wrapper auth-input-password'
                     >
-                        <Input.Password placeholder='Пароль' data-test-id='change-password' />
+                        <Input.Password
+                            placeholder='Пароль'
+                            data-test-id='change-password'
+                            autoComplete='on'
+                        />
                     </Form.Item>
                     <Form.Item
                         name='password-repeat'
@@ -144,6 +148,7 @@ const AuthChangePassword = () => {
                         <Input.Password
                             placeholder='Повторите пароль'
                             data-test-id='change-confirm-password'
+                            autoComplete='on'
                         />
                     </Form.Item>
                     <Form.Item className='register-form-button-wrapper'>

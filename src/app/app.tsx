@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useAppDispatch } from '@hooks/index';
 import { setAuthToken } from '@redux/auth/authSlice';
 
-const App = () => {
+export const App = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -32,5 +32,3 @@ const App = () => {
     }, []);
     return <Router history={history}>{routes}</Router>;
 };
-
-export default App;

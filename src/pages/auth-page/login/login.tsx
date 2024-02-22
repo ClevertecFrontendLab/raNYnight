@@ -152,7 +152,11 @@ const Login: React.FC = () => {
                             },
                         ]}
                     >
-                        <Input.Password placeholder='Пароль' data-test-id='login-password' />
+                        <Input.Password
+                            placeholder='Пароль'
+                            data-test-id='login-password'
+                            autoComplete='on'
+                        />
                     </Form.Item>
 
                     <Form.Item className='login-form-utils'>
