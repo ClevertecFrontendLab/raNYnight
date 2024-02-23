@@ -59,8 +59,8 @@ const AuthConfirmEmail = () => {
                     )}
                 </Text>
                 <Text className='auth-forgot-message'>
-                    Мы отправили вам на e-mail
-                    <br /> <b>{forgotEmail} </b>шестизначный код. Введите его в поле ниже.
+                    Мы отправили вам на e-mail <b>{forgotEmail} </b>шестизначный код. Введите его в
+                    поле ниже.
                 </Text>{' '}
                 <VerificationInput
                     value={inputvalue}
