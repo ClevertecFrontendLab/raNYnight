@@ -1,14 +1,16 @@
+import { Navigate,Route, Routes } from 'react-router-dom';
+
+import { ResultActions, ResultImages, ResultMessages, ResultTitles } from '@constants/results';
+import AuthChangePassword from '@pages/auth-page/change-password/change-password';
+import AuthConfirmEmail from '@pages/auth-page/confirm-email/confirm-email';
 import Login from '@pages/auth-page/login/login';
 import Registration from '@pages/auth-page/registration/registration';
 import { AuthPage, MainPage } from '@pages/index';
-import { Paths } from './paths';
-import { Routes, Route, Navigate } from 'react-router-dom';
 import AuthResult from '@pages/results-page/auth-result/auth-result';
-import { ResultActions, ResultImages, ResultMessages, ResultTitles } from '@constants/results';
-import PrivateRoutes from './private-routes';
-import AuthChangePassword from '@pages/auth-page/change-password/change-password';
 import { ResultsPage } from '@pages/results-page/results-page';
-import AuthConfirmEmail from '@pages/auth-page/confirm-email/confirm-email';
+
+import { Paths } from './paths';
+import PrivateRoutes from './private-routes';
 
 export const routes = (
     <Routes>

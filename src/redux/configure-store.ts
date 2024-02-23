@@ -4,6 +4,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import { createBrowserHistory } from 'history';
 import { combineReducers } from 'redux';
 import { createReduxHistoryContext } from 'redux-first-history';
+
 import { authApi } from './auth/authApi';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({

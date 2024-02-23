@@ -1,19 +1,21 @@
-import Sider from 'antd/lib/layout/Sider';
 import { useState } from 'react';
+
+import Sider from 'antd/lib/layout/Sider';
+
+import { BREAKPOINT_520 } from '@constants/breakpoints';
+import {
+    SIDER_WIDTH_COLLAPSED_DEFAULT,
+    SIDER_WIDTH_COLLAPSED_MOBILE,
+    SIDER_WIDTH_DEFAULT,
+    SIDER_WIDTH_MOBILE,
+} from '@constants/sizes';
 import { useWindowSize } from 'usehooks-ts';
-import headerLogo from '/cleverfit-logo.svg';
-import headerLogoCollaped from '/cleverfit-logo-collapsed.svg';
 
 import CollapseButton from './collapse-button/collapse-button';
 import ExitButton from './exit-button/exit-button';
 import NavPanel from './nav-panel/nav-panel';
-import {
-    SIDER_WIDTH_MOBILE,
-    SIDER_WIDTH_DEFAULT,
-    SIDER_WIDTH_COLLAPSED_MOBILE,
-    SIDER_WIDTH_COLLAPSED_DEFAULT,
-} from '@constants/sizes';
-import { BREAKPOINT_520 } from '@constants/breakpoints';
+import headerLogo from '/cleverfit-logo.svg';
+import headerLogoCollaped from '/cleverfit-logo-collapsed.svg';
 
 import './side-panel.less';
 

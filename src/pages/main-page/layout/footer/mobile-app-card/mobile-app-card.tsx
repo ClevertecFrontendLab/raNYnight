@@ -1,4 +1,5 @@
 import { Typography } from 'antd';
+
 import { AndroidFilled, AppleFilled } from '@ant-design/icons';
 
 import './mobile-app-card.less';

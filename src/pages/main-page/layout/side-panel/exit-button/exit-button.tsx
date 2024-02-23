@@ -1,13 +1,16 @@
-import exitIcon from '/exit-icon.svg';
-import { Typography } from 'antd';
-import { useWindowSize } from 'usehooks-ts';
-import { BREAKPOINT_520 } from '@constants/breakpoints';
 import { useNavigate } from 'react-router-dom';
-import { Paths } from '@router/paths';
+
+import { Typography } from 'antd';
+
+import { BREAKPOINT_520 } from '@constants/breakpoints';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { setAuthToken } from '@redux/auth/authSlice';
+import { Paths } from '@router/paths';
+import { useWindowSize } from 'usehooks-ts';
+
+import exitIcon from '/exit-icon.svg';
 
 import './exit-button.less';
-import { setAuthToken } from '@redux/auth/authSlice';
 
 const { Text } = Typography;
 

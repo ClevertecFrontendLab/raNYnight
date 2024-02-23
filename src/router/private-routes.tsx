@@ -1,6 +1,8 @@
+import { Navigate, Outlet } from 'react-router-dom';
+
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { selectAuthToken } from '@redux/auth/authSlice';
-import { Navigate, Outlet } from 'react-router-dom';
+
 import { Paths } from './paths';
 
 const PrivateRoutes = () => {

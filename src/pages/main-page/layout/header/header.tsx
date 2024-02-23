@@ -1,7 +1,8 @@
 import { Layout, Typography } from 'antd';
+
 import { SettingOutlined } from '@ant-design/icons';
-import { useWindowSize } from 'usehooks-ts';
 import { BREAKPOINT_520, BREAKPOINT_768, BREAKPOINT_834 } from '@constants/breakpoints';
+import { useWindowSize } from 'usehooks-ts';
 
 import './header.less';
 

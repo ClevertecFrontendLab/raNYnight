@@ -1,6 +1,6 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import { useWindowSize } from 'usehooks-ts';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
+import { useWindowSize } from 'usehooks-ts';
 
 import './collapse-button.less';
 

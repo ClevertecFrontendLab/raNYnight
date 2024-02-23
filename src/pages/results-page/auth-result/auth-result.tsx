@@ -1,6 +1,8 @@
-import { Paths } from '@router/paths';
-import { Button, Typography } from 'antd';
 import { Link, Navigate, useLocation } from 'react-router-dom';
+
+import { Button, Typography } from 'antd';
+
+import { Paths } from '@router/paths';
 
 import './auth-result.less';
 

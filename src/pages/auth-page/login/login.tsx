@@ -1,12 +1,14 @@
+import { useEffect, useState } from 'react';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+
+import { Button, Checkbox, Form, Input } from 'antd';
+import useForm from 'antd/lib/form/hooks/useForm';
+
 import { GooglePlusOutlined } from '@ant-design/icons';
 import Loader from '@components/loader/loader';
-import { useCheckEmailMutation, useLoginUserMutation } from '@redux/auth/authApi';
-import { Paths } from '@router/paths';
-import { Button, Checkbox, Form, Input } from 'antd';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { LoginRequest } from 'src/types/auth';
-import AuthSwitcher from '../auth-switcher/auth-switcher';
+import { BREAKPOINT_520 } from '@constants/breakpoints';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useCheckEmailMutation, useLoginUserMutation } from '@redux/auth/authApi';
 import {
     selectForgotEmail,
     selectShouldRefetch,
@@ -15,10 +17,11 @@ import {
     setRememberMe,
     setShouldRefetch,
 } from '@redux/auth/authSlice';
-import { useEffect, useState } from 'react';
-import useForm from 'antd/lib/form/hooks/useForm';
+import { Paths } from '@router/paths';
+import { LoginRequest } from 'src/types/auth';
 import { useWindowSize } from 'usehooks-ts';
-import { BREAKPOINT_520 } from '@constants/breakpoints';
+
+import AuthSwitcher from '../auth-switcher/auth-switcher';
 
 import './login.less';
 

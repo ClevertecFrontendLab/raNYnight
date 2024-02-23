@@ -1,7 +1,9 @@
 import { StrictMode } from 'react';
-import { store } from '@redux/configure-store';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+
+import { store } from '@redux/configure-store';
+
 import { App } from './app';
 
 import 'normalize.css';

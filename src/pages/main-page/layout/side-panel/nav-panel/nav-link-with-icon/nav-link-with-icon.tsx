@@ -1,5 +1,5 @@
-import Link from 'antd/lib/typography/Link';
 import { Typography } from 'antd';
+import Link from 'antd/lib/typography/Link';
 
 import './nav-link-with-icon.less';
 

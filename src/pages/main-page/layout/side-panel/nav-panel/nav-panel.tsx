@@ -1,8 +1,9 @@
 import { HeartFilled, IdcardOutlined, TrophyFilled } from '@ant-design/icons';
-import calendarOutlinedIcon from '/calendar-icon.svg';
-import { useWindowSize } from 'usehooks-ts';
-import NavLinkWithIcon from './nav-link-with-icon/nav-link-with-icon';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
+import { useWindowSize } from 'usehooks-ts';
+
+import NavLinkWithIcon from './nav-link-with-icon/nav-link-with-icon';
+import calendarOutlinedIcon from '/calendar-icon.svg';
 
 import './nav-panel.less';
 
