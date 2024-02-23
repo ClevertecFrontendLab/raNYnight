@@ -17,10 +17,13 @@ import {
 } from '@redux/auth/authSlice';
 import { useEffect, useState } from 'react';
 import useForm from 'antd/lib/form/hooks/useForm';
+import { useWindowSize } from 'usehooks-ts';
+import { BREAKPOINT_520 } from '@constants/breakpoints';
 
 import './login.less';
 
 const Login: React.FC = () => {
+    const { width } = useWindowSize();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const location = useLocation();
@@ -191,7 +194,7 @@ const Login: React.FC = () => {
                             className='login-form-button google-auth'
                             disabled={isLoadingLogin || isEmailCheckLoading}
                         >
-                            <GooglePlusOutlined />
+                            {width <= BREAKPOINT_520 ? null : <GooglePlusOutlined />}
                             Войти через Google
                         </Button>
                     </Form.Item>

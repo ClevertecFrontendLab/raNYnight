@@ -91,6 +91,7 @@ export const routes = (
                         image={ResultImages.SOMETHING_WRONG}
                         href={Paths.LOGIN}
                         previousPathToCheck={`${Paths.AUTH}`}
+                        className='result-back-btn'
                         dataTestId='check-back-button'
                     />
                 }
@@ -105,6 +106,7 @@ export const routes = (
                         image={ResultImages.ERROR}
                         href={Paths.LOGIN}
                         previousPathToCheck={`${Paths.AUTH}`}
+                        className='result-try-again-btn'
                         dataTestId='check-retry-button'
                     />
                 }

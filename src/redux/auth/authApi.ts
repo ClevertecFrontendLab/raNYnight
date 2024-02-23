@@ -33,7 +33,7 @@ export const authApi = createApi({
             },
         }),
 
-        registerUser: builder.mutation<{}, RegisterInput>({
+        registerUser: builder.mutation<object, RegisterInput>({
             query(body) {
                 return {
                     url: 'registration',

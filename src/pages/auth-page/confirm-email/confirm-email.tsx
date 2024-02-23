@@ -58,7 +58,10 @@ const AuthConfirmEmail = () => {
                         </>
                     )}
                 </Text>
-                <Text className='auth-forgot-message'>{`Мы отправили вам на e-mail ${forgotEmail} шестизначный код. Введите его в поле ниже.`}</Text>
+                <Text className='auth-forgot-message'>
+                    Мы отправили вам на e-mail
+                    <br /> <b>{forgotEmail} </b>шестизначный код. Введите его в поле ниже.
+                </Text>{' '}
                 <VerificationInput
                     value={inputvalue}
                     autoFocus

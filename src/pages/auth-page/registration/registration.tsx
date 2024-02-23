@@ -15,11 +15,14 @@ import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { RegisterInput } from 'src/types/auth';
 import AuthSwitcher from '../auth-switcher/auth-switcher';
+import { useWindowSize } from 'usehooks-ts';
+import { BREAKPOINT_520 } from '@constants/breakpoints';
 
 import './registration.less';
 
 const Registration: React.FC = () => {
     const [form] = useForm();
+    const { width } = useWindowSize();
     const [isFormValid, setFormValid] = useState(false);
     const [registerUser, { isLoading, isSuccess }] = useRegisterUserMutation();
     const shouldRefetch = useAppSelector(selectShouldRefetch);
@@ -47,7 +50,7 @@ const Registration: React.FC = () => {
             });
     };
 
-    const onFinish = async (values: any) => {
+    const onFinish = async (values: RegisterInput) => {
         const { email, password } = values;
         await handleRegisterUser({ email, password });
         form.resetFields();
@@ -181,7 +184,7 @@ const Registration: React.FC = () => {
                             htmlType='submit'
                             className='login-form-button google-auth'
                         >
-                            <GooglePlusOutlined />
+                            {width <= BREAKPOINT_520 ? null : <GooglePlusOutlined />}
                             Регистрация через Google
                         </Button>
                     </Form.Item>

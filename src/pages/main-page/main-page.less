@@ -11,19 +11,15 @@
 
 section .ant-layout {
     height: 100%;
-    max-height: 1024px;
     background: url('/Main_page_light.png');
-    background-position: bottom 0px right 0px;
+    background-position: bottom 0 right 0;
     background-repeat: no-repeat;
 }
 
 @media (max-width: 835px) {
-    .page-layout {
-        height: 1194px;
-    }
     section .ant-layout {
         max-height: 1194px;
-        background-position: bottom 0px left -633px;
+        background-position: bottom 0 left -633px;
         background-size: cover;
     }
 }

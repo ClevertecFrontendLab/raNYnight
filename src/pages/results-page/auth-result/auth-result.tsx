@@ -14,6 +14,7 @@ interface AuthResultProps {
     href: string;
     previousPathToCheck: string;
     dataTestId?: string;
+    className?: string;
 }
 
 const AuthResult = ({
@@ -24,12 +25,14 @@ const AuthResult = ({
     href,
     previousPathToCheck,
     dataTestId,
+    className,
 }: AuthResultProps) => {
     const location = useLocation();
 
     const prevPath: string = location.state?.prevPath ?? '';
+    const normalizedPrevPathname = prevPath.endsWith('/') ? prevPath.slice(0, -1) : prevPath;
 
-    if (!prevPath || prevPath !== previousPathToCheck) {
+    if (!prevPath || normalizedPrevPathname !== previousPathToCheck) {
         return <Navigate to={Paths.AUTH} />;
     }
 
@@ -41,7 +44,7 @@ const AuthResult = ({
             <Button
                 type='primary'
                 htmlType='submit'
-                className='auth-result-button'
+                className={`auth-result-button ${className ?? ''}`}
                 data-test-id={dataTestId}
             >
                 <Link to={`/auth/${href}`} state={{ prevPath: location.pathname }}>

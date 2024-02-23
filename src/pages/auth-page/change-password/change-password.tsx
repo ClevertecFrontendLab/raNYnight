@@ -12,6 +12,7 @@ import { Button, Form, Input, Typography } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import { useEffect, useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { ChangePasswordRequest } from 'src/types/auth';
 
 import './change-password.less';
 
@@ -59,7 +60,7 @@ const AuthChangePassword = () => {
         }
     };
 
-    const onFinish = async (values: any) => {
+    const onFinish = async (values: ChangePasswordRequest) => {
         const { password } = values;
         await handleChangePassword(password, password);
         form.resetFields();
@@ -90,7 +91,7 @@ const AuthChangePassword = () => {
     return (
         <>
             <div className={`auth-change-password-wrapper ${isLoading ? 'background-filter' : ''}`}>
-                <Text className='auth-сhange-title'>Восстановление аккаунта</Text>
+                <Text className='auth-change-title'>Восстановление аккаунта</Text>
                 <Form
                     name='normal_register'
                     className='register-form'
