@@ -1,30 +1,27 @@
 @import '/src/style.less';
 
-.main-content-title {
+.ant-typography.main-content-title {
     padding: 24.5px;
-    margin-top: 8px !important;
     border-radius: 2px;
     max-width: 752px;
     width: 100%;
     height: 126px;
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
     background: @character-light-primary-inverse;
-    font-family: @font-family !important;
-    font-weight: 500 !important;
+    font-family: @font-family;
     font-size: 20px;
-    line-height: 130% !important;
+    line-height: 130%;
     color: @character-light-title-85;
-    letter-spacing: 0.6px;
 }
 
 @media (max-width: 835px) {
-    .main-content-title {
+    .ant-typography.main-content-title {
         height: fit-content;
     }
 }
 
 @media (max-width: 768px) {
-    .main-content-title {
+    .ant-typography.main-content-title {
         height: fit-content;
         padding: 16px;
     }

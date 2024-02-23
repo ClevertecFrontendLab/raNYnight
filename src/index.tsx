@@ -1,10 +1,10 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { HashRouter, Route, Routes } from 'react-router-dom';
 
 import { store } from '@redux/configure-store';
-import { MainPage } from './pages';
+
+import { App } from './app';
 
 import 'normalize.css';
 import './style.less';
@@ -13,13 +13,9 @@ const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
 root.render(
-    <React.StrictMode>
+    <StrictMode>
         <Provider store={store}>
-            <HashRouter>
-                <Routes>
-                    <Route path='/' element={<MainPage />} />
-                </Routes>
-            </HashRouter>
+            <App />
         </Provider>
-    </React.StrictMode>,
+    </StrictMode>,
 );

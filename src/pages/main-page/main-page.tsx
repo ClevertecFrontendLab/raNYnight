@@ -1,9 +1,11 @@
-import { Layout } from 'antd';
 import React from 'react';
-import SidePanel from './layout/side-panel/side-panel';
+
+import { Layout } from 'antd';
+
+import Footer from './layout/footer/footer';
 import Header from './layout/header/header';
 import MainContent from './layout/main-content/main-content';
-import Footer from './layout/footer/footer';
+import SidePanel from './layout/side-panel/side-panel';
 
 import './main-page.less';
 

@@ -1,0 +1,88 @@
+@import '/src/style.less';
+
+.register-container {
+    border-radius: 2px;
+    padding: 64px 32px;
+    margin: auto;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+    background: @character-light-primary-inverse;
+    z-index: 1;
+    width: 539px;
+    height: 686px;
+}
+
+.ant-form.register-form {
+    margin: 0 auto;
+    max-width: 368px;
+    padding-top: 7px;
+}
+
+.register-form {
+    .auth-input-email {
+        margin-bottom: 31px;
+    }
+    .auth-input-password {
+        margin-bottom: 27px;
+        height: 60px;
+        .ant-form-item-row {
+            height: 100%;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+    }
+    .password-repeat {
+        margin-bottom: 42px;
+    }
+
+    .ant-input-affix-wrapper-status-error .ant-input-prefix {
+        color: @character-light-title-85;
+    }
+
+    .ant-form-item-explain-error,
+    .ant-form-item-explain-success,
+    .ant-form-item-explain,
+    .ant-form-item-explain-connected {
+        margin-top: 4px;
+        font-family: @font-family;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 130%;
+        letter-spacing: 0.35px;
+    }
+    .ant-form-item-explain-success {
+        color: @character-light-secondary-45;
+    }
+    .ant-form-item-explain-error {
+        color: @character-light-error;
+    }
+}
+
+label[for='normal_register_password-repeat'] {
+    margin-top: 16px;
+}
+
+.ant-form-item.register-form-button-wrapper {
+    margin-bottom: 16px;
+}
+
+@media (max-width: 520px) {
+    .register-container {
+        padding: 30px 16px;
+        width: 328px;
+        height: 564px;
+    }
+
+    .ant-form.register-form {
+        padding-top: 0;
+    }
+
+    .register-form .auth-input-email {
+        margin-bottom: 35px;
+    }
+    .register-form .auth-input-password {
+        margin-bottom: 21px;
+    }
+    .register-form .auth-input-password.password-repeat {
+        margin-bottom: 35px;
+    }
+}

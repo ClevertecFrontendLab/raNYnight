@@ -1,0 +1,184 @@
+@import '/src/style.less';
+
+.login-container {
+    border-radius: 2px;
+    padding: 64px 32px;
+    margin: auto;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+    background: @character-light-primary-inverse;
+    z-index: 1;
+    width: 539px;
+    height: 742px;
+    .ant-input-affix-wrapper-status-error .ant-input-prefix {
+        color: @character-light-title-85;
+    }
+}
+
+.auth-logo {
+    height: 100%;
+    max-height: 80px;
+    background: url('/cleverfit-logo.svg') no-repeat center;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+.auth-input-wrapper {
+    padding: 0;
+    border-radius: 2px;
+    width: 368px;
+    height: 40px;
+}
+
+.ant-form-item.auth-input-wrapper {
+    margin-bottom: 31px;
+}
+
+.ant-form-item.auth-input-password {
+    margin-bottom: 51px;
+}
+
+.ant-input-prefix {
+    border: 1px solid @character-light-border;
+    border-radius: 2px 0 0 2px;
+    background: @character-light-table-header;
+    padding: 0 12px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    text-align: center;
+    color: @character-light-title-85;
+}
+
+.ant-input-affix-wrapper.auth-input {
+    height: 40px;
+    padding: 0;
+
+    .ant-input {
+        padding-left: 10px;
+    }
+}
+
+.ant-form-item-control-input-content {
+    .ant-input-affix-wrapper {
+        height: 40px;
+    }
+}
+
+input {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: @character-light-title-85;
+}
+
+.ant-input:focus,
+.success:focus {
+    border-color: @character-light-border !important;
+    outline: 0 !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    color: @character-light-title-85 !important;
+}
+
+.ant-form.login-form {
+    margin: 0 auto;
+    max-width: 368px;
+}
+
+.ant-btn.login-form-button {
+    width: 100%;
+    height: 40px;
+    border: 1px solid @primary-light-6;
+    border-radius: 2px;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+    background: @primary-light-6;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    text-align: center;
+    color: @character-light-primary-inverse;
+}
+
+.ant-btn.google-auth {
+    background: @character-light-primary-inverse;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.02);
+    border: 1px solid @character-light-border;
+    border-radius: 2px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    text-align: center;
+    color: @character-light-title-85;
+    letter-spacing: 0.6px;
+}
+
+.ant-btn.login-form-forgot-button,
+.ant-btn[disabled].login-form-forgot-button {
+    padding: 0;
+    display: inline;
+    background-color: transparent;
+    border: none;
+    color: @primary-light-6;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    text-align: center;
+    margin-left: auto;
+}
+.ant-btn[disabled].login-form-forgot-button:hover {
+    color: @primary-light-6;
+    background-color: transparent;
+}
+
+.login-form-utils {
+    .ant-form-item-control-input-content {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.ant-form-item.login-form-utils {
+    margin-bottom: 20px;
+}
+.ant-form-item.login-form-button-wrapper {
+    margin-bottom: 16px;
+}
+
+.loading {
+    background: rgba(121, 156, 212, 0.5);
+    background-repeat: no-repeat;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+}
+
+@media (max-width: 520px) {
+    .login-container {
+        padding: 30px 16px;
+        width: 328px;
+        height: 612px;
+    }
+
+    .auth-logo {
+        height: 51.5px;
+    }
+
+    .auth-input-wrapper {
+        width: 296px;
+    }
+
+    .ant-btn.login-form-button,
+    .ant-btn.google-auth,
+    .ant-btn.login-form-forgot-button {
+        font-weight: 400;
+        font-size: 14px;
+    }
+
+    .ant-form-item.login-form-utils {
+        margin-bottom: 13px;
+    }
+
+    .ant-btn.login-form-forgot-button {
+        padding-bottom: 10px;
+        padding-right: 10px;
+    }
+}

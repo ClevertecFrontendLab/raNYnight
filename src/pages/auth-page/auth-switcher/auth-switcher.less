@@ -1,0 +1,46 @@
+@import '/src/style.less';
+
+.auth-switcher {
+    display: flex;
+    height: 46px;
+    width: 368px;
+    margin: 0 auto;
+    margin-top: 44px;
+    margin-bottom: 24px;
+    letter-spacing: 0.8px;
+    border-bottom: 1px solid @character-light-dividers;
+}
+
+.auth-switcher-link {
+    width: 184px;
+    height: 46px;
+    font-family: @font-family;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: @character-light-title-85;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.active {
+    color: @primary-light-6;
+    border-bottom: 2px solid @primary-light-6;
+}
+
+@media (max-width: 520px) {
+    .auth-switcher {
+        width: 296px;
+        margin-top: 30px;
+    }
+
+    .auth-switcher-link {
+        width: 148px;
+    }
+
+    .auth-switcher-link {
+        font-weight: 400;
+        font-size: 14px;
+    }
+}
