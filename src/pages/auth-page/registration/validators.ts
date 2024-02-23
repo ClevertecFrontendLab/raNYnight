@@ -7,13 +7,6 @@ export const validatePassword = async (_: RuleObject, value: string) => {
         : Promise.reject(new Error('Пароль не менее 8 символов, с заглавной буквой и цифрой'));
 };
 
-// export const validateRepeatPassword = async (_: RuleObject, value: string) => {
-//     if (!value || getFieldValue('password') === value) {
-//         return Promise.resolve();
-//     }
-//     return Promise.reject(new Error('Пароли не совпадают'));
-// }
-
 export const validateRepeatPassword = ({
     getFieldValue,
 }: {
