@@ -22,6 +22,7 @@ import { LoginRequest } from 'src/types/auth';
 import { useWindowSize } from 'usehooks-ts';
 
 import AuthSwitcher from '../auth-switcher/auth-switcher';
+import { validatePassword } from '../registration/validators';
 
 import './login.less';
 
@@ -149,12 +150,7 @@ const Login: React.FC = () => {
                             {
                                 required: true,
                                 message: '',
-                                validator: (_, value) => {
-                                    const passRegExp = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-                                    return RegExp(passRegExp).test(value)
-                                        ? Promise.resolve()
-                                        : Promise.reject(new Error('asd'));
-                                },
+                                validator: validatePassword,
                             },
                         ]}
                     >

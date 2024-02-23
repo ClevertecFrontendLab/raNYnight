@@ -20,6 +20,7 @@ import { RegisterInput } from 'src/types/auth';
 import { useWindowSize } from 'usehooks-ts';
 
 import AuthSwitcher from '../auth-switcher/auth-switcher';
+import { validatePassword, validateRepeatPassword } from './validators';
 
 import './registration.less';
 
@@ -125,16 +126,7 @@ const Registration: React.FC = () => {
                             {
                                 required: true,
                                 message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой',
-                                validator: (_, value) => {
-                                    const passRegExp = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-                                    return RegExp(passRegExp).test(value)
-                                        ? Promise.resolve()
-                                        : Promise.reject(
-                                              new Error(
-                                                  'Пароль не менее 8 символов, с заглавной буквой и цифрой',
-                                              ),
-                                          );
-                                },
+                                validator: validatePassword,
                             },
                         ]}
                         className='auth-input-wrapper auth-input-password'
@@ -152,14 +144,7 @@ const Registration: React.FC = () => {
                                 required: true,
                                 message: '',
                             },
-                            ({ getFieldValue }) => ({
-                                validator(_, value) {
-                                    if (!value || getFieldValue('password') === value) {
-                                        return Promise.resolve();
-                                    }
-                                    return Promise.reject(new Error('Пароли не совпадают'));
-                                },
-                            }),
+                            validateRepeatPassword,
                         ]}
                         className='auth-input-wrapper auth-input-password password-repeat'
                     >
