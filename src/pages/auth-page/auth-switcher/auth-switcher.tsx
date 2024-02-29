@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-
 import { Paths } from '@router/paths';
 
 import './auth-switcher.less';

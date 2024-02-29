@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-
-import { Button, Form, Input, Typography } from 'antd';
-import { useForm } from 'antd/lib/form/Form';
-
 import Loader from '@components/loader/loader';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useChangePasswordMutation } from '@redux/auth/authApi';
@@ -14,7 +10,10 @@ import {
     setShouldRefetch,
 } from '@redux/auth/authSlice';
 import { Paths } from '@router/paths';
+import { Button, Form, Input, Typography } from 'antd';
+import { useForm } from 'antd/lib/form/Form';
 import { ChangePasswordRequest } from 'src/types/auth';
+
 import { validatePassword, validateRepeatPassword } from '../registration/validators';
 
 import './change-password.less';

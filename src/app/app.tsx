@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-
 import { useAppDispatch } from '@hooks/index';
 import { setAuthToken } from '@redux/auth/authSlice';
 import { history } from '@redux/configure-store';

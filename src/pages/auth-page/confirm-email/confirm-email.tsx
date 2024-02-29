@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import VerificationInput from 'react-verification-input';
-
-import { Typography } from 'antd';
-
 import Loader from '@components/loader/loader';
 import { ResultImages, ResultMessages, ResultTitles } from '@constants/results';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useConfirmEmailMutation } from '@redux/auth/authApi';
 import { selectForgotEmail, setForgotEmail } from '@redux/auth/authSlice';
 import { Paths } from '@router/paths';
+import { Typography } from 'antd';
 
 import './confirm-email.less';
 

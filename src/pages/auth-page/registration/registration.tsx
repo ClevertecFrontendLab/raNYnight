@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-
-import { Button, Form, Input } from 'antd';
-import { useForm } from 'antd/lib/form/Form';
-
 import { GooglePlusOutlined } from '@ant-design/icons';
 import Loader from '@components/loader/loader';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
@@ -16,10 +12,13 @@ import {
     setShouldRefetch,
 } from '@redux/auth/authSlice';
 import { Paths } from '@router/paths';
+import { Button, Form, Input } from 'antd';
+import { useForm } from 'antd/lib/form/Form';
 import { RegisterInput } from 'src/types/auth';
 import { useWindowSize } from 'usehooks-ts';
 
 import AuthSwitcher from '../auth-switcher/auth-switcher';
+
 import { validatePassword, validateRepeatPassword } from './validators';
 
 import './registration.less';
