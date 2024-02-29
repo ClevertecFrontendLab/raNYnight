@@ -8,12 +8,11 @@ const { Header: AntdHeader } = Layout;
 
 const FeedbacksHeader = () => {
     return (
-        <AntdHeader className='header'>
-            <div className='header-left-col'>
-                <Link to='/' className='header-link'>
-                    Главная / <Text className='header-link-current'>Отзывы пользователей</Text>
-                </Link>
-            </div>
+        <AntdHeader className='feedbacks-header'>
+            <Link to='/' className='feedbacks-header-link'>
+                Главная &nbsp; / &nbsp;
+            </Link>
+            <Text className='feedbacks-header-link-current'>Отзывы пользователей</Text>
         </AntdHeader>
     );
 };

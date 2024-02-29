@@ -5,14 +5,16 @@ import FeedbacksFooter from './layout/footer/footer';
 import FeedbacksHeader from './layout/header/header';
 
 import './feedbacks-page.less';
+import FeedbacksList from './layout/feedbacks/feedbacks';
 
 export const FeedbacksPage = () => {
     return (
         <>
             <Layout className='page-layout'>
                 <SidePanel />
-                <Layout>
+                <Layout className='feedbacks-page-layout'>
                     <FeedbacksHeader />
+                    <FeedbacksList />
                     <FeedbacksFooter />
                 </Layout>
             </Layout>
