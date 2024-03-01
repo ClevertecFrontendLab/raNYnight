@@ -4,13 +4,13 @@ import { GooglePlusOutlined } from '@ant-design/icons';
 import Loader from '@components/loader/loader';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { useRegisterUserMutation } from '@redux/auth/authApi';
+import { useRegisterUserMutation } from '@redux/auth/auth-api';
 import {
     selectLastRegisterRequest,
     selectShouldRefetch,
     setLastRegisterRequest,
     setShouldRefetch,
-} from '@redux/auth/authSlice';
+} from '@redux/auth/auth-slice';
 import { Paths } from '@router/paths';
 import { Button, Form, Input } from 'antd';
 import { useForm } from 'antd/lib/form/Form';

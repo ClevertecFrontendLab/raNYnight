@@ -4,8 +4,8 @@ import VerificationInput from 'react-verification-input';
 import Loader from '@components/loader/loader';
 import { ResultImages, ResultMessages, ResultTitles } from '@constants/results';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { useConfirmEmailMutation } from '@redux/auth/authApi';
-import { selectForgotEmail, setForgotEmail } from '@redux/auth/authSlice';
+import { useConfirmEmailMutation } from '@redux/auth/auth-api';
+import { selectForgotEmail, setForgotEmail } from '@redux/auth/auth-slice';
 import { Paths } from '@router/paths';
 import { Typography } from 'antd';
 

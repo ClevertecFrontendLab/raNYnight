@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { selectAuthToken } from '@redux/auth/authSlice';
+import { selectAuthToken } from '@redux/auth/auth-slice';
 import { Paths } from '@router/paths';
 import { Layout } from 'antd';
 

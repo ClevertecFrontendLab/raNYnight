@@ -4,7 +4,7 @@ import { GooglePlusOutlined } from '@ant-design/icons';
 import Loader from '@components/loader/loader';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { useCheckEmailMutation, useLoginUserMutation } from '@redux/auth/authApi';
+import { useCheckEmailMutation, useLoginUserMutation } from '@redux/auth/auth-api';
 import {
     selectForgotEmail,
     selectShouldRefetch,
@@ -12,7 +12,7 @@ import {
     setForgotEmail,
     setRememberMe,
     setShouldRefetch,
-} from '@redux/auth/authSlice';
+} from '@redux/auth/auth-slice';
 import { Paths } from '@router/paths';
 import { Button, Checkbox, Form, Input } from 'antd';
 import useForm from 'antd/lib/form/hooks/useForm';

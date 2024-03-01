@@ -1,4 +1,4 @@
-@import '/src/style.less';
+@import '/src/style-variables.less';
 
 .page-layout {
     margin: 0 auto;
@@ -14,13 +14,16 @@ section .ant-layout {
     background: url('/Main_page_light.png');
     background-position: bottom 0 right 0;
     background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position: right;
 }
 
 @media (max-width: 835px) {
     section .ant-layout {
         max-height: 1194px;
-        background-position: bottom 0 left -633px;
-        background-size: cover;
+
+        /* background-position: bottom 0 left -633px;
+        background-size: cover; */
     }
 }
 

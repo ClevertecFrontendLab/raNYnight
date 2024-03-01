@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Loader from '@components/loader/loader';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { useChangePasswordMutation } from '@redux/auth/authApi';
+import { useChangePasswordMutation } from '@redux/auth/auth-api';
 import {
     selectLastRegisterRequest,
     selectShouldRefetch,
     setLastRegisterRequest,
     setShouldRefetch,
-} from '@redux/auth/authSlice';
+} from '@redux/auth/auth-slice';
 import { Paths } from '@router/paths';
 import { Button, Form, Input, Typography } from 'antd';
 import { useForm } from 'antd/lib/form/Form';

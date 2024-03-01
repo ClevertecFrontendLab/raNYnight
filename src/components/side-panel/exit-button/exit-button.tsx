@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { setAuthToken } from '@redux/auth/authSlice';
+import { setAuthToken } from '@redux/auth/auth-slice';
 import { Paths } from '@router/paths';
 import { Typography } from 'antd';
 import { useWindowSize } from 'usehooks-ts';

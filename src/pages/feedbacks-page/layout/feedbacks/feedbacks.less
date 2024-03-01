@@ -1,9 +1,20 @@
-@import '/src/style.less';
+@import '/src/style-variables.less';
+
+.feedbacks-content-wrapper {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.feedbacks-content-wrapper::-webkit-scrollbar {
+    display: none;
+}
 
 .feedback-card-list {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 20;
+    gap: 20px;
     max-width: 1184px;
 }
