@@ -52,7 +52,9 @@
     width: 96px;
     height: 16px;
     font-size: 12.5px;
+    color: @character-light-warning;
 }
+
 .ant-typography.feedback-date {
     height: 16px;
     flex: 1 1 auto;
@@ -73,4 +75,36 @@
     line-height: 130%;
     color: @character-light-secondary-45;
     letter-spacing: 0.5px;
+}
+
+.ant-rate-star-zero {
+    .ant-rate-star-second {
+        span {
+            svg {
+                fill: @character-light-warning;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .feedback-card {
+        flex-direction: column;
+    }
+    .feedback-user {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 16px;
+    }
+    .ant-typography.user-name {
+        text-align: left;
+    }
+
+    .feedback-user {
+        height: fit-content;
+    }
+    .ant-typography.feedback-text {
+        margin-top: 16px;
+    }
 }

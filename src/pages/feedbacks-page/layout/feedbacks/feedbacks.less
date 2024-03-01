@@ -1,10 +1,18 @@
 @import '/src/style-variables.less';
 
 .feedbacks-content-wrapper {
+    padding: 0 24px;
     -ms-overflow-style: none;
     scrollbar-width: none;
     overflow-y: scroll;
-    height: 100%;
+    max-height: calc(100vh - 240px);
+}
+.ant-layout-content.feedbacks-content-wrapper {
+    flex: none;
+}
+
+.ant-layout-content.feedbacks-content-wrapper.collapsed {
+    max-height: fit-content;
 }
 
 .feedbacks-content-wrapper::-webkit-scrollbar {
@@ -12,9 +20,14 @@
 }
 
 .feedback-card-list {
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 20px;
     max-width: 1184px;
+}
+
+@media (max-width: 768px) {
+    .feedbacks-content-wrapper {
+        padding: 0 16px;
+    }
 }

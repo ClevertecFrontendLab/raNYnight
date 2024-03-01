@@ -1,4 +1,4 @@
-import { UserOutlined } from '@ant-design/icons';
+import { StarFilled, StarOutlined, UserOutlined } from '@ant-design/icons';
 import { Rate, Typography } from 'antd';
 
 import './feedback-card.less';
@@ -31,7 +31,14 @@ const FeedbackCard = ({ avatar, name, rate, date, feedback }: FeedbackCardProps)
                 </Text>
             </div>
             <div className='feedback-data'>
-                <Rate disabled defaultValue={rate} className='feedback-rate' />
+                <Rate
+                    disabled
+                    defaultValue={rate}
+                    className='feedback-rate'
+                    character={({ value, index }) => {
+                        return value && index! < value ? <StarFilled /> : <StarOutlined />;
+                    }}
+                />
                 <Text className='feedback-date'>{date}</Text>
                 <Text className='feedback-text'>{feedback}</Text>
             </div>

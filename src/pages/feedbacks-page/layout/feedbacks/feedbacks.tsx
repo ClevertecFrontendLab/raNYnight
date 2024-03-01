@@ -156,10 +156,12 @@ const data = [
 const FeedbacksList = () => {
     const isFeedbackListCollapsed = useAppSelector(selectIsFeedbackListCollapsed);
 
-    const displayedData = isFeedbackListCollapsed ? data.slice(-4) : data;
+    const displayedData = isFeedbackListCollapsed ? data.slice(-1) : data;
 
     return (
-        <Content className='feedbacks-content-wrapper'>
+        <Content
+            className={`feedbacks-content-wrapper ${isFeedbackListCollapsed ? 'collapsed' : ''}`}
+        >
             <div className='feedback-card-list'>
                 {displayedData.map((card, i) => (
                     <FeedbackCard
