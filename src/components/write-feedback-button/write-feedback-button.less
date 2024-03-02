@@ -1,0 +1,48 @@
+@import '/src/style-variables.less';
+
+.ant-btn.write-feedback-button-ok {
+    width: 130px;
+    height: 40px;
+    background: @primary-light-6;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    text-align: center;
+    color: @character-light-primary-inverse;
+}
+
+.ant-modal {
+    transform: translateY(-50px);
+    .ant-modal-body {
+        .ant-input {
+            margin-top: 16px;
+            font-family: @font-family;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 130%;
+            color: @character-light-title-85;
+        }
+
+        .ant-rate.feedback-rate {
+            margin: 0;
+            height: fit-content;
+            transform: translate(-3px, 0px);
+        }
+        padding: 25px 20px;
+    }
+    .ant-modal-header {
+        padding: 12px 24px;
+        .ant-modal-title {
+            font-family: @font-family;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 130%;
+            color: @character-light-title-85;
+            letter-spacing: 0.7px;
+        }
+    }
+    .ant-modal-footer {
+        margin-top: 10px;
+        padding: 10px 16px;
+    }
+}

@@ -1,0 +1,47 @@
+@import '/src/style-variables.less';
+
+.empty-feedback-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    padding: 24px;
+    margin: auto;
+    transform: translateY(-25px);
+}
+
+.empty-feedback-list {
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+    background: @character-light-primary-inverse;
+    border-radius: 2px;
+
+    height: 284px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 76px 130px 0 130px;
+}
+
+.ant-typography.empty-feedback-list-title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 130%;
+    text-align: center;
+    color: @primary-light-9;
+    margin-bottom: 48px;
+    letter-spacing: 0.5px;
+}
+
+.ant-typography.empty-feedback-list-text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    text-align: center;
+    color: @character-light-secondary-45;
+    max-width: 522px;
+    letter-spacing: 0.5px;
+}
+
+.empty-feedback-list-button {
+    align-self: center;
+}

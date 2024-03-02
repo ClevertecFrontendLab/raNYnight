@@ -1,6 +1,7 @@
-import { StarFilled, StarOutlined, UserOutlined } from '@ant-design/icons';
-import { Rate, Typography } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+import { Typography } from 'antd';
 
+import CustomRate from '@components/custom-rate/custom-rate';
 import './feedback-card.less';
 
 const { Text } = Typography;
@@ -15,6 +16,13 @@ interface FeedbackCardProps {
 
 const FeedbackCard = ({ avatar, name, rate, date, feedback }: FeedbackCardProps) => {
     const [firstName, lastName] = name.split(' ');
+    const feedbackDate = new Date(date);
+    const formattedDate = feedbackDate.toLocaleDateString('ru-RU', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+    });
+
     return (
         <div className='feedback-card'>
             <div className='feedback-user'>
@@ -31,15 +39,8 @@ const FeedbackCard = ({ avatar, name, rate, date, feedback }: FeedbackCardProps)
                 </Text>
             </div>
             <div className='feedback-data'>
-                <Rate
-                    disabled
-                    defaultValue={rate}
-                    className='feedback-rate'
-                    character={({ value, index }) => {
-                        return value && index! < value ? <StarFilled /> : <StarOutlined />;
-                    }}
-                />
-                <Text className='feedback-date'>{date}</Text>
+                <CustomRate rate={rate} disabled={true} size={13} />
+                <Text className='feedback-date'>{formattedDate}</Text>
                 <Text className='feedback-text'>{feedback}</Text>
             </div>
         </div>

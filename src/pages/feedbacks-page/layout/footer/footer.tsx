@@ -7,6 +7,7 @@ import { Button, Typography } from 'antd';
 import { Footer as AntdFooter } from 'antd/lib/layout/layout';
 
 import './footer.less';
+import WriteFeedbackButton from '@components/write-feedback-button/write-feedback-button';
 
 const { Text } = Typography;
 
@@ -16,9 +17,9 @@ const FeedbacksFooter = () => {
 
     return (
         <AntdFooter className='feedbacks-footer'>
-            <Button className='feedbacks-footer-button'>Написать отзыв</Button>
+            <WriteFeedbackButton />
             <Text className='feedbacks-footer-link' onClick={() => dispatch(toggleFeedbacksList())}>
-                {isFeedbackListCollapsed ? 'Развернуть все отзывы' : 'Свернуть отзывы'}
+                {isFeedbackListCollapsed ? 'Развернуть все отзывы' : 'Свернуть все отзывы'}
             </Text>
         </AntdFooter>
     );
