@@ -75,374 +75,370 @@ export const ResultImages = {
     SOMETHING_WRONG: (
         <svg width='255' height='294' fill='none' xmlns='http://www.w3.org/2000/svg'>
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M.8 127.8v-2.1C.8 56.3 57 0 126.4 0h2.2C198 0 254.2 56.3 254.2 125.7v2.1c0 69.4-56.2 125.7-125.6 125.7h-2.2A125.7 125.7 0 0 1 .8 127.8Z'
                 fill='#E4EBF7'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M40.7 131.7a8.3 8.3 0 1 1-16.5-1.7 8.3 8.3 0 0 1 16.5 1.7'
                 fill='#fff'
             />
+            <path d='m49.4 147.5-12.7 10.8m1.2-23.1 10.6 6-10.6-6Z' stroke='#fff' strokeWidth='2' />
             <path
-                d='m49.4 147.5-12.7 10.8m1.2-23.1 10.6 6-10.6-6Z'
-                stroke='#fff'
-                stroke-width='2'
-            />
-            <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M40.9 160.4a5.7 5.7 0 1 1-11.4-1 5.7 5.7 0 0 1 11.4 1Zm17.8-16.2a5.7 5.7 0 1 1-11.4-1.1 5.7 5.7 0 0 1 11.4 1.1ZM100.4 27h30a4.6 4.6 0 1 0 0-9.2h-30a4.6 4.6 0 0 0 0 9.2ZM112 45.5h30a4.6 4.6 0 1 0 0-9.3h-30a4.6 4.6 0 0 0 0 9.3M114.3 27h15.9a4.6 4.6 0 1 0 0 9.2h-16a4.6 4.6 0 0 0 0-9.2Zm36.6 42.7h-4a4.8 4.8 0 0 1-3.3-8.2c.9-.9 2-1.4 3.3-1.4h4a4.8 4.8 0 0 1 3.4 8.2c-.9.9-2.1 1.4-3.4 1.4Z'
                 fill='#fff'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M172.4 29.8a29.7 29.7 0 1 1 59.4 0 29.7 29.7 0 0 1-59.4 0'
                 fill='#FF603B'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='m204.3 19-.7 15a1.5 1.5 0 0 1-3 0l-.7-15a2.2 2.2 0 1 1 4.4 0Zm-.3 19.4c.6.5.8 1.1.8 1.9 0 .8-.2 1.4-.8 1.9a3 3 0 0 1-3 .5l-.8-.5c-.5-.6-.8-1.2-.8-2 0-.7.3-1.3.8-1.8s1.2-.7 2-.7c.7 0 1.3.2 1.8.7Z'
                 fill='#fff'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M120 132.9c4.5-.6 3.7-1.2 4.1-4.8.7-5.2-3-17-8.2-25.1-1.1-10.7-12.6-11.3-12.6-11.3s4.3 5 4.2 16.2c1.4 5.3.8 14.5.8 14.5s5.2 11.4 11.8 10.5'
                 fill='#FFB594'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M101.7 91.2s1.5-.6 3.2.6c8 1.4 10.4 6.7 11.3 11.4 1.9 1.2 1.9 2.3 1.9 3.5l1.5 3s-7.2 1.7-11 6.7c-1.4-6.4-6.9-25.2-6.9-25.2'
                 fill='#fff'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='m94.8 90.1 1-5.8-9.2-11.9-5.3 5.6-2.6 9.9s8.4 5 16 2.2'
                 fill='#FFB594'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M83.7 77.8S79 75 81.2 71c1.7-3 4.6 1.2 4.6 1.2s.5-3.7 3.1-3.7c.5-1 1.6-4.2 1.6-4.2s11.5 2.6 13.6 3.2c0 5.2-2.3 19.5-7.9 20-9 .6-12.5-9.6-12.5-9.6Z'
                 fill='#FFC6A0'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M103.7 71.8c2.6-2 3.5-9.7 3.5-9.7s-2.5-.5-6.7-2c-4.7-2.2-12.8-4.9-17.5.9-9.6 4.4-2.1 20-2.1 20l2.7-3.1s-4-3.3-2-6.3c2.1-3.5 3.9 1 3.9 1s.6-2.3 3.6-3.3l1.4-3.8a1 1 0 0 1 1.3-.8l11.4 2.7c.5.1.9.6.8 1.2l-.3 3.2Z'
                 fill='#520038'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M102 76.1c-.1.6-.6 1-1.1 1-.5-.1-.8-.7-.7-1.3.1-.6.6-1 1-1 .6.1.9.7.8 1.3Zm-7-1.4c0 .6-.6 1-1 1-.6-.1-.9-.7-.8-1.3.1-.6.6-1 1.1-1 .5 0 .8.7.7 1.3Z'
                 fill='#552950'
             />
             <path
                 d='M100 73.2 99 75l-.2 4.3h-2.3'
                 stroke='#DB836E'
-                stroke-width='1.1'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.1'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
                 d='M100.7 72.9s1.8-.7 2.5.5'
                 stroke='#5C2552'
-                stroke-width='1.1'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.1'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
                 d='M82.1 72.7s.5-1.1 1.1-.7c.7.4 1.3 1.4.6 2-.7.5.2 1.6.2 1.6'
                 stroke='#DB836E'
-                stroke-width='1.1'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.1'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
                 d='M93 71.3s2 1.1 4.2 1'
                 stroke='#5C2552'
-                stroke-width='1.1'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.1'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
                 d='M84.4 79.6s1.8 6.6 9.3 8m-.2-7.4s2.2 1.2 4.4 1.2l-4.4-1.2Zm1 2.6s.9.4 1.5.3l-1.6-.3Z'
                 stroke='#DB836E'
-                stroke-width='1.1'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.1'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
                 d='M96.3 91.3s-1 2.8-8.3 2c-7.2-.6-10.3-5-10.3-5'
                 stroke='#E4EBF7'
-                stroke-width='1.1'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.1'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M78.9 87s6.5 5 16.5 2.6c0 0 9.5 1 11.5 5.3 5.3 11.8.5 36.8 0 40 3.5 4-.5 8.4-.5 8.4-15.6-3.5-35.8-.6-35.8-.6-4.8-3.5-1.2-9-1.2-9L63 109.9c-2.5-15.2.9-19.8 3.6-20.7 3-1 8-1.3 8-1.3.5 0 1.1 0 1.4-.2 2.4-1.3 2.8-.6 2.8-.6'
                 fill='#fff'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M66.6 89.4s-6.9.5-7.6 8.2c-.5 8.8 3 11 3 11s6.1 22 16.8 22.9c8.4-2.2 4.8-6.7 4.7-11.4a23 23 0 0 0-7.1-17s-4.2-13.7-9.8-13.7Z'
                 fill='#FFC6A0'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M72.5 123.8s.8 11.3 9.8 6.5c4.8-2.5 7.6-13.8 9.8-22.6 1.4-5.7 2.6-12.2 2.6-12.2l-5-1.7s-2.4 5.6-7.8 12.3c-4.3 5.5-9.1 11.1-9.4 17.7Z'
                 fill='#FFC6A0'
             />
             <path
                 d='M109.2 104.8s1.8 2.7-2.3 30.5c2.4 2.2 1 6-.2 7.5'
                 stroke='#E4EBF7'
-                stroke-width='1.1'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.1'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M124 131.1s-.4 2.8-11.8 2C97.1 132.1 87 130 87 130l1-5.8s.7.2 9.7-.1c11.9-.4 18.7-6 25-1 4 3.2 1.4 8.1 1.4 8.1'
                 fill='#FFC6A0'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M71 90.6s-5.6-4.8-11 2.7c-3.4 7.2.5 15.2 2.6 19.5-.3 3.8 2.3 4.3 2.3 4.3s.1 1 1.6 2.7c4-7 6.7-9.1 13.7-12.5-.4-.7-2-3.3-1.9-3.8.2-1.7-1.2-2.6-1.2-2.6s-.3-.2-1.2-2.8c-.8-2.3-2-5.1-5-7.5Z'
                 fill='#fff'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M91 287.6s4.8 2.3 8.3 1.2c3.2-1 5.1.7 8 1.3a20 20 0 0 0 13.2-1.4c-.1-6.2-7.8-4.5-13.5-7.6-2.9-1.6-4.3-5.3-4-10H92.2s-1.6 12-1.3 16.5Z'
                 fill='#CBD1D1'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M91 287.4s2.7 1.5 7.6.8c3.5-.5 3.2.6 7.4 1.3 4.2.6 13.1-.2 14.4-1.2.4 1.3-.4 2.4-.4 2.4s-1.7.6-5.5.9c-2.3.1-8 .3-10.1-.6-2-1.6-5-1.5-6-.3-4.5 1.1-7.3-.3-7.3-.3l-.1-3Z'
                 fill='#2B0849'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M99.2 271.9h3.5s-.1 7.5 5.1 9.6c-5.2.7-9.7-2.6-8.6-9.6Z'
                 fill='#A4AABA'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M45.2 271.6s-2.2 7.8-4.7 13c-2 3.8-4.5 7.8 5.7 7.8 7 0 9.4-.5 7.8-7-1.6-6.3.3-13.8.3-13.8h-9.1Z'
                 fill='#CBD1D1'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M38.8 289.9s2.2 1.2 7 1.2c6.4 0 8.6-1.7 8.6-1.7s.7 1.1-.6 2.2c-1 1-3.8 1.7-7.8 1.7-4.3 0-6-.6-7-1.3-.9-.5-.8-1.6-.2-2.1Z'
                 fill='#2B0849'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M46.1 273.6s0 1.6-.3 3.1c-.4 1.5-1.2 3.3-1.2 4.4 0 1.2 4.7 1.6 5.4 0 .6-1.6 1.3-6.8 2-7.6.6-.9-5.1-2.2-5.9.1Z'
                 fill='#A4AABA'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M90.2 277.2h14s1.3-56.6 1.9-66.8c.5-10.3 3.9-45.1 1-65.6l-13-.7-23.8.8-1.2 10.4c0 .5-.7.8-.8 1.4 0 .6.4 1.4.3 2-2.4 14.7-5.8 32.8-8.2 46.9-.1.7-1.3 1-1.5 2.8 0 .3.2 1.6 0 1.8-7 19.5-12.1 52.6-15.6 67.2h15.2l4.2-18.9c2.9-13.3 24-88.3 24-88.3l3.1-1-.1 48.6s-.3 1.3.3 2.1-.6 1.2-.4 2.4l.4 1.8s-.4 7.5-1 12.4c-.4 4.9 1.2 40.7 1.2 40.7'
                 fill='#7BB2F9'
             />
             <path
                 d='M96.8 222.1s2.9-1.1 6.3-4m-37.8.4c1.2 0 4.2-2.1 7.2-5.1l-7.2 5Z'
                 stroke='#648BD8'
-                stroke-width='1.1'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.1'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
                 d='M97.7 219s3-1.2 6.4-4'
                 stroke='#648BD8'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
                 d='M45 273.3h13.8m5.1-51.6s2.8-.6 6.8-3.5l-6.8 3.5Zm11.8-76c-.3 3.3.3 9-4.5 9.5l4.5-9.4Zm18.2-1.8s.2 14.6-1.3 15.7c-2.3 1.7-3.1 2-3.1 2l4.4-17.7Zm-4 .6s.3 13.2-1 25.1l1-25Zm-5.6 25.8s6.8-1 9.1-1l-9.1 1Zm-37.5 99.3-1 4.6 1-4.6Zm.9-6.7-.8 4.1.8-4.1ZM63.5 202c-.4 1.6-.1 2-.5 3.4 0 0-2.7 2-2.3 4 .5 2-.3 3.4-4.5 17.2-1.7 5.8-4.2 19-6.1 28.3l-1.2 5.8L63.5 202Zm1.4-8.4-.9 5 1-5Zm7.2-47.3-1.3 10.9s-1.1.1-.5 2.3c.1 1.4-2.8 16.4-5.4 31.6l7.2-44.8Z'
                 stroke='#648BD8'
-                stroke-width='1.1'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.1'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M107 141.7a119.6 119.6 0 0 0-36.7.4l-.1.5a32.8 32.8 0 0 1 0 3.2.6.6 0 0 0 .7.4c3.3-.5 17-2.4 35.7-.3.3 0 .7-.2.7-.5a41 41 0 0 0 0-3.5.6.6 0 0 0-.4-.2Z'
                 fill='#192064'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M97.2 144.9v-5.1a.8.8 0 0 0-.9-.9 114 114 0 0 0-8.7.3l-.2.5v5.1c0 .5.4.9.8.9a145.9 145.9 0 0 1 8.4 0 .8.8 0 0 0 .6-.8Z'
                 fill='#fff'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M96 143.9v-3.2a.7.7 0 0 0-.6-.7 99.4 99.4 0 0 0-6.6.2l-.2.5v3.2c0 .4.3.7.7.7h6c.4 0 .7-.3.7-.7Z'
                 fill='#192064'
             />
             <path
                 d='m91.2 170 1 46.4s.6 1.6-.3 2.8c-1 1.1 2.6.7 1 2.3-1.7 1.6.9 1.2 0 3.5-.7 1.6-1.1 22-1.2 36.5m-.8 11.6h12.8-12.8Zm1-3.7v6.3-6.3Zm-.2-6.3v4.5-4.5Z'
                 stroke='#648BD8'
-                stroke-width='1.1'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.1'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
                 d='M78.4 89.6s7.6 6.2 16.5 2.8m-20.4 5.9 2.2 4.3s2.1.8 1.9 2.7l.8 2.2-5-9.2Zm-9.4 18c.2-1 2.1-7.2 12.5-10.6l-12.5 10.5Z'
                 stroke='#E4EBF7'
-                stroke-width='1.1'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.1'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M92.7 86.6s5.5-.9 7.6-4.6c1.3-.3.7 2.2-.3 3.7l-1 1.5s.2.3.1.8c0 .7-.2.7-.3 1.1 0 .3.2.7 0 1l-.3 1c-.2.2-.1.6-.2.9l-2.7 2.8c-3.8 3.6-5 1.7-6-.4-.9-1.8-.6-5.1-.8-6.9-.4-2.9-2.7-3-2-4.4.4-.7 3 .7 3.3 1.8.8 2 3 1.8 2.6 1.7Z'
                 fill='#FFC6A0'
             />
             <path
                 d='M100.6 82c-.5.1-.4.3-1 1.3s-4.8 2.9-6.4 3.2c-2.6.5-2.3-1.6-4.3-2.9-1.6-1-3.5-.6-1.4 1.4 1 1 1 1.1 1.4 3.2.4 1.5-.6 3.7.7 5.6'
                 stroke='#DB836E'
-                stroke-width='.8'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='.8'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
                 d='M80.3 108.3c-2.1 2.9-4.3 6.1-5.6 8.7'
                 stroke='#E59788'
-                stroke-width='.8'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='.8'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M88.5 124.4s-2.1-2-5.2-2.8c-3-.7-3.5-.1-5.5.1-2 .3-3.9-1-3.6.7.2 1.7 5 1 5.2 2.1.1 1.1-6.4 2.8-8.3 2.2-.8.8.4 1.9 2 2.2.2 1.5 2.2 1.5 2.2 1.5s.7 1 2.7 1.1c2.5 1.3 9-.7 11-1.5 2-.9-.5-5.6-.5-5.6Z'
                 fill='#FFC6A0'
             />
             <path
                 d='M79.6 107.7s-8.4 2.8-13.1 12.1m7.7 2.6s.6 1.2 3.1 1.4c2.4.3 2.6.6 2.6.6s-2.5 3-9 2.3l3.3-4.3Zm-1 6.5s3.8 0 4.9-.7l-5 .7Zm2.5 1.4s2 .2 3.4-.5l-3.4.5Zm2.3 1.2s1.7 0 2.9-.5l-3 .5Zm-4-9.6s-.5-1 1.3-.4c1.7.5 2.9 0 5.2.1 1.4.1 3-.2 4 .2 1.6.8 3.6 2.2 3.6 2.2s10.5 1.2 19-1.1l-33-1Z'
                 stroke='#E59788'
-                stroke-width='.8'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='.8'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
                 d='M110 112.1s3.4-3.6 7.6-4.6'
                 stroke='#E4EBF7'
-                stroke-width='1.1'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.1'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
                 d='M108.1 122.6s9.7-2.7 11.5-.9'
                 stroke='#E59788'
-                stroke-width='.8'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='.8'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
                 d='m133.7 169.6-4-4m65.7-82.3 4-4-4 4Zm-7.5 7.2 3.8-3.6-3.8 3.6Zm4.6-6.7-4.5-4.6 4.5 4.6Zm6.7 6.9-4.1-4.3 4.1 4.3Zm-69.2 72 3.7-3.7-3.7 3.7Zm-7 7 3.5-3.6-3.5 3.5Zm4.3-6.5L123 159l4.3 4.2Z'
                 stroke='#BFCDDD'
-                stroke-width='2'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M191 211.4h-1.7a4 4 0 0 1-4-4v-32.1a4 4 0 0 1 4-4h1.6a4 4 0 0 1 4 4v32a4 4 0 0 1-4 4'
                 fill='#A3B4C6'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M238.6 212.6a4.8 4.8 0 0 1-4.8 4.8H147a4.8 4.8 0 1 1 0-9.6h86.7a4.8 4.8 0 0 1 4.8 4.8ZM154.9 189.7h70.5V105h-70.5v84.6Z'
                 fill='#A3B4C6'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M225.7 189.7h-71.2a3.2 3.2 0 0 1-3.2-3.2v-19a3.2 3.2 0 0 1 3.2-3.2h71.2a3.2 3.2 0 0 1 3.2 3.2v19a3.2 3.2 0 0 1-3.2 3.2Zm0-59.3h-71.2a3.2 3.2 0 0 1-3.2-3.2v-19a3.2 3.2 0 0 1 3.2-3.2h71.2a3.2 3.2 0 0 1 3.2 3.3v19a3.2 3.2 0 0 1-3.2 3.1'
                 fill='#BFCDDD'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M160.3 120.1a2.4 2.4 0 0 1-2.4-2.4 2.4 2.4 0 1 1 2.4 2.4Zm7.4 0a2.4 2.4 0 0 1-2.4-2.4 2.4 2.4 0 1 1 2.4 2.4Zm7.5 0a2.4 2.4 0 0 1-2.5-2.4 2.4 2.4 0 1 1 2.5 2.4Zm48 0h-22.4a.8.8 0 0 1-.8-.8v-3.2c0-.4.4-.8.8-.8h22.5c.4 0 .8.4.8.8v3.2c0 .5-.4.8-.8.8Z'
                 fill='#fff'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M225.7 160h-71.2a3.2 3.2 0 0 1-3.2-3.1v-19a3.2 3.2 0 0 1 3.2-3.2h71.2a3.2 3.2 0 0 1 3.2 3.2v19a3.2 3.2 0 0 1-3.2 3.2'
                 fill='#BFCDDD'
             />
             <path
                 d='M156.3 160.2h6.8m11.1-29.8h49.3-49.3Zm-8.5 0h6.1-6Zm-9 0h6.8-6.8Zm17.9 29.8h49.3-49.3Zm-8.5 0h6.1-6Z'
                 stroke='#7C90A5'
-                stroke-width='1.1'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.1'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M160.3 150.6a2.4 2.4 0 1 1 0-4.8 2.4 2.4 0 0 1 0 4.8Zm7.4 0a2.4 2.4 0 1 1 0-4.8 2.4 2.4 0 0 1 0 4.8Zm7.5 0a2.4 2.4 0 1 1 0-4.8 2.4 2.4 0 0 1 0 4.8Zm48 0h-22.4a.8.8 0 0 1-.8-.8v-3.2c0-.4.4-.8.8-.8h22.5c.4 0 .8.4.8.8v3.2c0 .5-.4.8-.8.8Zm-62.9 29a2.4 2.4 0 0 1-2.3-3.4 2.4 2.4 0 0 1 2.3-1.4 2.4 2.4 0 0 1 0 4.8Zm7.4 0a2.4 2.4 0 0 1-2.2-3.4 2.4 2.4 0 0 1 2.2-1.4 2.4 2.4 0 0 1 0 4.8Zm7.5 0a2.4 2.4 0 0 1-2.3-3.4 2.4 2.4 0 0 1 2.3-1.4 2.4 2.4 0 0 1 0 4.8Zm48 0h-22.4a.8.8 0 0 1-.8-.8v-3.2c0-.5.4-.8.8-.8h22.5c.4 0 .8.3.8.8v3.2c0 .4-.4.8-.8.8Z'
                 fill='#fff'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M203.8 220.7h-27.4a2.4 2.4 0 0 1-2.4-2.4v-11.4a2.4 2.4 0 0 1 2.4-2.5h27.4a2.4 2.4 0 0 1 2.4 2.5v11.4a2.4 2.4 0 0 1-2.4 2.4'
                 fill='#BFCDDD'
             />
             <path
                 d='M201.8 206.8v11.5M178 206.8v11.5-11.5Z'
                 stroke='#A3B4C6'
-                stroke-width='1.1'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='1.1'
+                strokeLinecap='round'
+                strokeLinejoin='round'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M163.6 267.5a9.4 9.4 0 0 1-9.4-9.4v-14.8a9.4 9.4 0 0 1 18.9 0V258a9.4 9.4 0 0 1-9.5 9.4Z'
                 fill='#5BA02E'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M172 267.4a9.4 9.4 0 0 1-9.4-9.4v-3.4a9.4 9.4 0 0 1 18.8 0v3.4a9.4 9.4 0 0 1-9.4 9.4'
                 fill='#92C110'
             />
             <path
-                fill-rule='evenodd'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipRule='evenodd'
                 d='M182 293.3h-27.6a3.2 3.2 0 0 1-3.3-3.2v-20.7a3.2 3.2 0 0 1 3.3-3.2H182a3.2 3.2 0 0 1 3.2 3.2V290a3.2 3.2 0 0 1-3.2 3.2'
                 fill='#F2D7AD'
             />

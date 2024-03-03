@@ -7,15 +7,14 @@ import FeedbackCard from './feedback-card/feedback-card';
 import './feedbacks.less';
 
 interface FeedbacksListProps {
-    data:
-        | {
-              id: string;
-              fullname: string | null;
-              imageSrc: string | null;
-              message: string | null;
-              rating: number;
-              createdAt: string;
-          }[];
+    data: {
+        id: string;
+        fullname: string | null;
+        imageSrc: string | null;
+        message: string | null;
+        rating: number;
+        createdAt: string;
+    }[];
 }
 
 const FeedbacksList = ({ data }: FeedbacksListProps) => {

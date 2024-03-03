@@ -1,11 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface FeedbackStore {
     isCollapsed: boolean;
+    shouldRefetch: boolean;
 }
 
 const initialState: FeedbackStore = {
     isCollapsed: false,
+    shouldRefetch: false,
 };
 
 const feedbacksSlice = createSlice({
@@ -15,12 +17,18 @@ const feedbacksSlice = createSlice({
         toggleFeedbacksList: (state) => {
             state.isCollapsed = !state.isCollapsed;
         },
+        setShouldRefetch: (state, action: PayloadAction<boolean>) => {
+            state.shouldRefetch = action.payload;
+        },
     },
 });
 
-export const { toggleFeedbacksList } = feedbacksSlice.actions;
+export const { toggleFeedbacksList, setShouldRefetch } = feedbacksSlice.actions;
 
 export const selectIsFeedbackListCollapsed = (state: { feedbacks: FeedbackStore }) =>
     state.feedbacks.isCollapsed;
+
+export const selectShouldRefetch = (state: { feedbacks: FeedbackStore }) =>
+    state.feedbacks.shouldRefetch;
 
 export default feedbacksSlice.reducer;

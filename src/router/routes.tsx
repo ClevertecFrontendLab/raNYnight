@@ -16,8 +16,8 @@ export const routes = (
     <Routes>
         <Route element={<PrivateRoutes />}>
             <Route path={Paths.MAIN} element={<MainPage />} />
-            <Route path={Paths.FEEDBACKS} element={<FeedbacksPage />} />
             <Route path={Paths.DEFAULT} element={<Navigate to={Paths.MAIN} />} />
+            <Route path={Paths.FEEDBACKS} element={<FeedbacksPage />} />
         </Route>
 
         <Route path={Paths.AUTH} element={<AuthPage />}>

@@ -8,7 +8,7 @@ import './footer.less';
 
 const MainFooter = () => (
     <AntdFooter className='footer'>
-        <Link to={Paths.FEEDBACKS} className='footer-link'>
+        <Link to={Paths.FEEDBACKS} className='footer-link' data-test-id='see-reviews'>
             Смотреть отзывы
         </Link>
         <MobileAppCard />

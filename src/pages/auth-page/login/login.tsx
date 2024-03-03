@@ -51,6 +51,7 @@ const Login: React.FC = () => {
     };
 
     const handleFormChange = () => {
+        console.log(form.getFieldValue('remember'));
         const email = form.getFieldValue('email');
         const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
         if (email && emailRegex.test(email)) {
@@ -123,7 +124,7 @@ const Login: React.FC = () => {
                     form={form}
                     name='normal_login'
                     className='login-form'
-                    initialValues={{ remember: true }}
+                    initialValues={{ remember: false }}
                     onFieldsChange={handleFormChange}
                     onFinish={onFinish}
                     autoComplete='nope'
@@ -160,7 +161,7 @@ const Login: React.FC = () => {
                     </Form.Item>
 
                     <Form.Item className='login-form-utils'>
-                        <Form.Item name='remember' valuePropName='checked' noStyle>
+                        <Form.Item name='remember' noStyle valuePropName='checked'>
                             <Checkbox data-test-id='login-remember'>Запомнить меня</Checkbox>
                         </Form.Item>
 

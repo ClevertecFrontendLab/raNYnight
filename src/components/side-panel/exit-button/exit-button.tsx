@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { setAuthToken } from '@redux/auth/auth-slice';
+import { setAuthToken, setRememberMe } from '@redux/auth/auth-slice';
 import { Paths } from '@router/paths';
 import { Typography } from 'antd';
 import { useWindowSize } from 'usehooks-ts';
@@ -24,6 +24,7 @@ const ExitButton = ({ isCollapsed }: ExitButtonProps) => {
         localStorage.getItem('jwtToken') && localStorage.removeItem('jwtToken');
         sessionStorage.getItem('jwtToken') && sessionStorage.removeItem('jwtToken');
         dispatch(setAuthToken(null));
+        dispatch(setRememberMe(false));
         navigate(Paths.AUTH, { state: { prevPath: Paths.MAIN } });
     };
 

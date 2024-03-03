@@ -9,6 +9,22 @@
     line-height: 130%;
     text-align: center;
     color: @character-light-primary-inverse;
+    margin: 0 auto;
+}
+
+.ant-btn.empty-feedback-list-button {
+    height: 40px;
+    background: @primary-light-6;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    text-align: center;
+    color: @character-light-primary-inverse;
+    border: none;
+}
+.ant-modal.feedback-error-modal,
+.ant-modal.write-feedback-modal-result {
+    transform: translateY(0px);
 }
 
 .ant-modal {
@@ -44,5 +60,67 @@
     .ant-modal-footer {
         margin-top: 10px;
         padding: 10px 16px;
+    }
+
+    .ant-modal-confirm-body-wrapper {
+        margin: 0 auto;
+        .ant-modal-confirm-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .ant-modal-confirm-content {
+                margin-top: 25px;
+                font-family: @font-family;
+                font-weight: 500;
+                font-size: 24px;
+                line-height: 130%;
+                text-align: center;
+                color: @character-light-title-85;
+                letter-spacing: 1px;
+                display: flex;
+                flex-direction: column;
+            }
+            svg {
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+.ant-modal-root {
+    .ant-modal-mask {
+        backdrop-filter: blur(6px);
+        background: rgba(121, 156, 212, 0.1);
+    }
+}
+
+.ant-btn.feedback-error,
+.ant-btn.feedback-success {
+    width: 100%;
+}
+
+.ant-modal.feedback-error-modal {
+    .ant-modal-content {
+        .ant-modal-confirm-btns {
+            margin: 0;
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 8px;
+            .ant-btn.feedback-error {
+                box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.02);
+                background: @character-light-primary-inverse;
+                border: 1px solid @character-light-border;
+                color: @character-light-title-85;
+            }
+        }
+
+        .ant-modal-confirm-body-wrapper {
+            .ant-modal-confirm {
+                .ant-modal-confirm-content {
+                    margin-top: 0px;
+                }
+            }
+        }
     }
 }

@@ -1,19 +1,16 @@
 import { StarFilled, StarOutlined } from '@ant-design/icons';
 import { Rate } from 'antd';
-import { useState } from 'react';
 
 interface CustomRateProps {
     rate?: number;
     disabled: boolean;
     size: number;
     onChange?: (value: number) => void;
+    value?: number;
 }
 
-const CustomRate = ({ rate, disabled, onChange, size }: CustomRateProps) => {
-    const [value, setValue] = useState<number | undefined>();
-
+const CustomRate = ({ rate, disabled, onChange, size, value }: CustomRateProps) => {
     const handleRateChange = (newValue: number) => {
-        setValue(newValue);
         if (onChange) {
             onChange(newValue);
         }

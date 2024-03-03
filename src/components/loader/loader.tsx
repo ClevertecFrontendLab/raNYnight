@@ -13,9 +13,12 @@ const defaultOptions: Options = {
     },
 };
 const Loader = () => (
-    <div className='loader-wrapper' data-test-id='loader'>
-        <Lottie options={defaultOptions} height={200} width={200} data-test-id='loader' />
-    </div>
+    <>
+        <div className='loader-mask' />
+        <div className='loader-wrapper' data-test-id='loader'>
+            <Lottie options={defaultOptions} height={200} width={200} data-test-id='loader' />
+        </div>
+    </>
 );
 
 export default Loader;
