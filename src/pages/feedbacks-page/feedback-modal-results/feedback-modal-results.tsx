@@ -56,7 +56,7 @@ const showGetErrorModal = (handleCancel?: () => void) => {
         centered: true,
         cancelButtonProps: { style: { display: 'none' } },
         okButtonProps: {
-            className: 'write-feedback-button-ok feedback-success',
+            className: 'write-feedback-button-ok',
             style: { width: 'fit-content', margin: '0 auto' },
         },
         width: FEEDBACK_MODAL_WIDTH,
