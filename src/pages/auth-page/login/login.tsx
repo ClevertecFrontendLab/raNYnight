@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import Loader from '@components/loader/loader';
+import { authGoogleQuery } from '@constants/api';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useCheckEmailMutation, useLoginUserMutation } from '@redux/auth/auth-api';
@@ -51,7 +52,6 @@ const Login: React.FC = () => {
     };
 
     const handleFormChange = () => {
-        console.log(form.getFieldValue('remember'));
         const email = form.getFieldValue('email');
         const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
         if (email && emailRegex.test(email)) {
@@ -86,6 +86,10 @@ const Login: React.FC = () => {
     const onForgotButtonClick = async () => {
         const email = form.getFieldValue('email');
         handleCheckEmail(email);
+    };
+
+    const handleGoogleLogin = async () => {
+        window.location.href = authGoogleQuery;
     };
 
     useEffect(() => {
@@ -191,6 +195,7 @@ const Login: React.FC = () => {
                             htmlType='submit'
                             className='login-form-button google-auth'
                             disabled={isLoadingLogin || isEmailCheckLoading}
+                            onClick={handleGoogleLogin}
                         >
                             {width <= BREAKPOINT_520 ? null : <GooglePlusOutlined />}
                             Войти через Google

@@ -7,6 +7,7 @@ import { HistoryRouter as Router } from 'redux-first-history/rr6';
 
 export const App = () => {
     const dispatch = useAppDispatch();
+    const googleAccessToken = history.location.search.split('=')[1];
 
     useEffect(() => {
         const clearSessionStorage = () => {
@@ -23,12 +24,15 @@ export const App = () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
     }, []);
-
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
+        if (googleAccessToken) {
+            dispatch(setAuthToken(googleAccessToken));
+        }
         if (token) {
             dispatch(setAuthToken(token));
         }
     }, []);
+
     return <Router history={history}>{routes}</Router>;
 };

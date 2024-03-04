@@ -15,8 +15,8 @@ import PrivateRoutes from './private-routes';
 export const routes = (
     <Routes>
         <Route element={<PrivateRoutes />}>
-            <Route path={Paths.MAIN} element={<MainPage />} />
             <Route path={Paths.DEFAULT} element={<Navigate to={Paths.MAIN} />} />
+            <Route path={Paths.MAIN} element={<MainPage />} />
             <Route path={Paths.FEEDBACKS} element={<FeedbacksPage />} />
         </Route>
 

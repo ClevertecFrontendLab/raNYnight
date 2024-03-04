@@ -43,7 +43,6 @@ const showSendErrorModal = (showModal: () => void, handleCancel: () => void) => 
 };
 
 const showGetErrorModal = (handleCancel?: () => void) => {
-    console.log('error modal');
     Modal.confirm({
         className: 'write-feedback-modal-result feedback-error-modal',
         icon: ResultImages.SOMETHING_WRONG,
