@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-
-import { Button, Checkbox, Form, Input } from 'antd';
-import useForm from 'antd/lib/form/hooks/useForm';
-
 import { GooglePlusOutlined } from '@ant-design/icons';
 import Loader from '@components/loader/loader';
+import { authGoogleQuery } from '@constants/api';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { useCheckEmailMutation, useLoginUserMutation } from '@redux/auth/authApi';
+import { useCheckEmailMutation, useLoginUserMutation } from '@redux/auth/auth-api';
 import {
     selectForgotEmail,
     selectShouldRefetch,
@@ -16,8 +13,10 @@ import {
     setForgotEmail,
     setRememberMe,
     setShouldRefetch,
-} from '@redux/auth/authSlice';
+} from '@redux/auth/auth-slice';
 import { Paths } from '@router/paths';
+import { Button, Checkbox, Form, Input } from 'antd';
+import useForm from 'antd/lib/form/hooks/useForm';
 import { LoginRequest } from 'src/types/auth';
 import { useWindowSize } from 'usehooks-ts';
 
@@ -89,6 +88,10 @@ const Login: React.FC = () => {
         handleCheckEmail(email);
     };
 
+    const handleGoogleLogin = async () => {
+        window.location.href = authGoogleQuery;
+    };
+
     useEffect(() => {
         if (isLoginSuccess && loginData) {
             dispatch(setRememberMe(form.getFieldValue('remember')));
@@ -125,7 +128,7 @@ const Login: React.FC = () => {
                     form={form}
                     name='normal_login'
                     className='login-form'
-                    initialValues={{ remember: true }}
+                    initialValues={{ remember: false }}
                     onFieldsChange={handleFormChange}
                     onFinish={onFinish}
                     autoComplete='nope'
@@ -162,7 +165,7 @@ const Login: React.FC = () => {
                     </Form.Item>
 
                     <Form.Item className='login-form-utils'>
-                        <Form.Item name='remember' valuePropName='checked' noStyle>
+                        <Form.Item name='remember' noStyle valuePropName='checked'>
                             <Checkbox data-test-id='login-remember'>Запомнить меня</Checkbox>
                         </Form.Item>
 
@@ -192,6 +195,7 @@ const Login: React.FC = () => {
                             htmlType='submit'
                             className='login-form-button google-auth'
                             disabled={isLoadingLogin || isEmailCheckLoading}
+                            onClick={handleGoogleLogin}
                         >
                             {width <= BREAKPOINT_520 ? null : <GooglePlusOutlined />}
                             Войти через Google

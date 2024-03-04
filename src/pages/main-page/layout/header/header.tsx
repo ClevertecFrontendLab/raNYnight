@@ -1,7 +1,6 @@
-import { Layout, Typography } from 'antd';
-
 import { SettingOutlined } from '@ant-design/icons';
 import { BREAKPOINT_520, BREAKPOINT_768, BREAKPOINT_834 } from '@constants/breakpoints';
+import { Layout, Typography } from 'antd';
 import { useWindowSize } from 'usehooks-ts';
 
 import './header.less';
@@ -9,7 +8,7 @@ import './header.less';
 const { Text, Title } = Typography;
 const { Header: AntdHeader } = Layout;
 
-const Header = () => {
+const MainHeader = () => {
     const { width } = useWindowSize();
     return (
         <AntdHeader className='header'>
@@ -34,4 +33,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default MainHeader;

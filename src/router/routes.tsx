@@ -1,10 +1,10 @@
-import { Navigate,Route, Routes } from 'react-router-dom';
-
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { ResultActions, ResultImages, ResultMessages, ResultTitles } from '@constants/results';
 import AuthChangePassword from '@pages/auth-page/change-password/change-password';
 import AuthConfirmEmail from '@pages/auth-page/confirm-email/confirm-email';
 import Login from '@pages/auth-page/login/login';
 import Registration from '@pages/auth-page/registration/registration';
+import { FeedbacksPage } from '@pages/feedbacks-page';
 import { AuthPage, MainPage } from '@pages/index';
 import AuthResult from '@pages/results-page/auth-result/auth-result';
 import { ResultsPage } from '@pages/results-page/results-page';
@@ -15,8 +15,9 @@ import PrivateRoutes from './private-routes';
 export const routes = (
     <Routes>
         <Route element={<PrivateRoutes />}>
-            <Route path={Paths.MAIN} element={<MainPage />} />
             <Route path={Paths.DEFAULT} element={<Navigate to={Paths.MAIN} />} />
+            <Route path={Paths.MAIN} element={<MainPage />} />
+            <Route path={Paths.FEEDBACKS} element={<FeedbacksPage />} />
         </Route>
 
         <Route path={Paths.AUTH} element={<AuthPage />}>

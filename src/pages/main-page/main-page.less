@@ -1,41 +1,18 @@
-@import '/src/style.less';
+@import '/src/style-variables.less';
 
 .page-layout {
     margin: 0 auto;
-    height: 100vh;
 }
 
 .ant-layout.page-layout {
     flex-direction: row;
+    min-height: 100vh;
 }
 
 section .ant-layout {
-    height: 100%;
     background: url('/Main_page_light.png');
     background-position: bottom 0 right 0;
     background-repeat: no-repeat;
-}
-
-@media (max-width: 835px) {
-    section .ant-layout {
-        max-height: 1194px;
-        background-position: bottom 0 left -633px;
-        background-size: cover;
-    }
-}
-
-@media (max-width: 768px) {
-    section .ant-layout,
-    .page-layout {
-        max-height: unset;
-        height: unset;
-    }
-}
-
-@media (max-width: 520px) {
-    section .ant-layout,
-    .page-layout {
-        max-height: 1362px;
-        height: 1362px;
-    }
+    background-size: auto 100%;
+    background-position: right;
 }

@@ -1,11 +1,10 @@
+import { HeartFilled, IdcardOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
 import Link from 'antd/lib/typography/Link';
 
-import { HeartFilled, IdcardOutlined } from '@ant-design/icons';
+import './main-cards.less';
 
 import calendarOutlinedIcon from '/calendar-icon-2.svg';
-
-import './main-cards.less';
 
 const { Text } = Typography;
 

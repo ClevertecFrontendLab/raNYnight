@@ -1,7 +1,4 @@
 import { useState } from 'react';
-
-import Sider from 'antd/lib/layout/Sider';
-
 import { BREAKPOINT_520 } from '@constants/breakpoints';
 import {
     SIDER_WIDTH_COLLAPSED_DEFAULT,
@@ -9,15 +6,17 @@ import {
     SIDER_WIDTH_DEFAULT,
     SIDER_WIDTH_MOBILE,
 } from '@constants/sizes';
+import Sider from 'antd/lib/layout/Sider';
 import { useWindowSize } from 'usehooks-ts';
 
 import CollapseButton from './collapse-button/collapse-button';
 import ExitButton from './exit-button/exit-button';
 import NavPanel from './nav-panel/nav-panel';
-import headerLogo from '/cleverfit-logo.svg';
-import headerLogoCollaped from '/cleverfit-logo-collapsed.svg';
 
 import './side-panel.less';
+
+import headerLogo from '/cleverfit-logo.svg';
+import headerLogoCollaped from '/cleverfit-logo-collapsed.svg';
 
 const SidePanel = () => {
     const { width } = useWindowSize();

@@ -2,6 +2,7 @@ export enum Paths {
     DEFAULT = '/',
     MAIN = '/main',
     AUTH = '/auth',
+    FEEDBACKS = '/feedbacks',
     LOGIN = '',
     REGISTRATION = 'registration',
     RESULT = '/result',
