@@ -1,13 +1,13 @@
-import { useState } from 'react';
 import CustomRate from '@components/custom-rate/custom-rate';
 import Loader from '@components/loader/loader';
 import { FEEDBACK_MODAL_WIDTH, RATE_STAR_MODAL } from '@constants/sizes';
-import { okButtonProps } from '@constants/utils';
+import { createOkButtonProps } from '@constants/utils';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import FeedbackModalResult from '@pages/feedbacks-page/feedback-modal-results/feedback-modal-results';
 import { useSendFeedbackMutation } from '@redux/feedbacks/feedback-api';
 import { setShouldRefetch } from '@redux/feedbacks/feedbacks-slice';
 import { Button, Input, Modal } from 'antd';
+import { useState } from 'react';
 
 import './write-feedback-button.less';
 
@@ -71,7 +71,7 @@ const WriteFeedbackButton = () => {
                 centered
                 onCancel={handleCancel}
                 cancelButtonProps={{ style: { display: 'none' } }}
-                okButtonProps={okButtonProps}
+                okButtonProps={createOkButtonProps('new-review-submit-button')}
                 width={FEEDBACK_MODAL_WIDTH}
             >
                 <CustomRate
