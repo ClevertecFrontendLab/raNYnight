@@ -1,6 +1,6 @@
 import { ResultImages, ResultMessages, ResultTitles } from '@constants/results';
 import { FEEDBACK_MODAL_WIDTH } from '@constants/sizes';
-import { createOkButtonProps } from '@constants/utils';
+import { okButtonProps } from '@constants/utils';
 import { Modal, Typography } from 'antd';
 
 import './feedback-modal-result.less';
@@ -34,7 +34,7 @@ const showSendErrorModal = (showModal: () => void, handleCancel: () => void) => 
         cancelText: 'Закрыть',
         centered: true,
         cancelButtonProps: { className: 'write-feedback-button-ok feedback-error' },
-        okButtonProps: createOkButtonProps('write-review-not-saved-modal'),
+        okButtonProps: okButtonProps,
         width: FEEDBACK_MODAL_WIDTH,
         closable: false,
         onOk: showModal,
