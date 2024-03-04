@@ -1,12 +1,14 @@
-import { Button, Input, Modal } from 'antd';
 import { useState } from 'react';
-
 import CustomRate from '@components/custom-rate/custom-rate';
 import Loader from '@components/loader/loader';
+import { FEEDBACK_MODAL_WIDTH, RATE_STAR_MODAL } from '@constants/sizes';
+import { okButtonProps } from '@constants/utils';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import FeedbackModalResult from '@pages/feedbacks-page/layout/feedbacks/feedback-modal-results/feedback-modal-results';
+import FeedbackModalResult from '@pages/feedbacks-page/feedback-modal-results/feedback-modal-results';
 import { useSendFeedbackMutation } from '@redux/feedbacks/feedback-api';
 import { setShouldRefetch } from '@redux/feedbacks/feedbacks-slice';
+import { Button, Input, Modal } from 'antd';
+
 import './write-feedback-button.less';
 
 const { TextArea } = Input;
@@ -69,16 +71,13 @@ const WriteFeedbackButton = () => {
                 centered
                 onCancel={handleCancel}
                 cancelButtonProps={{ style: { display: 'none' } }}
-                okButtonProps={{
-                    className: 'write-feedback-button-ok',
-                    'data-test-id': 'new-review-submit-button',
-                }}
-                width={539}
+                okButtonProps={okButtonProps}
+                width={FEEDBACK_MODAL_WIDTH}
             >
                 <CustomRate
                     disabled={false}
                     onChange={handleFeedbackRatingChange}
-                    size={20}
+                    size={RATE_STAR_MODAL}
                     value={feedbackRating}
                 />
                 <TextArea

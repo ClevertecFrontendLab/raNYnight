@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface FeedbackStore {
     isCollapsed: boolean;
@@ -6,7 +6,7 @@ interface FeedbackStore {
 }
 
 const initialState: FeedbackStore = {
-    isCollapsed: false,
+    isCollapsed: true,
     shouldRefetch: false,
 };
 

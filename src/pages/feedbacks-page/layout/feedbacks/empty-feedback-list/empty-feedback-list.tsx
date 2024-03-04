@@ -1,5 +1,6 @@
-import WriteFeedbackButton from '@components/write-feedback-button/write-feedback-button';
+import WriteFeedbackButton from '@pages/feedbacks-page/write-feedback-button/write-feedback-button';
 import { Typography } from 'antd';
+
 import './empty-feedback-list.less';
 
 const { Text } = Typography;

@@ -1,21 +1,21 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Loader from '@components/loader/loader';
 import SidePanel from '@components/side-panel/side-panel';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { setAuthToken } from '@redux/auth/auth-slice';
+import { useGetFeedbacksQuery } from '@redux/feedbacks/feedback-api';
+import { selectShouldRefetch } from '@redux/feedbacks/feedbacks-slice';
+import { Paths } from '@router/paths';
 import { Layout } from 'antd';
 
+import FeedbackModalResult from './feedback-modal-results/feedback-modal-results';
+import EmptyFeedbackList from './layout/feedbacks/empty-feedback-list/empty-feedback-list';
 import FeedbacksList from './layout/feedbacks/feedbacks';
 import FeedbacksFooter from './layout/footer/footer';
 import FeedbacksHeader from './layout/header/header';
 
-import { useGetFeedbacksQuery } from '@redux/feedbacks/feedback-api';
 import './feedbacks-page.less';
-import EmptyFeedbackList from './layout/feedbacks/empty-feedback-list/empty-feedback-list';
-import Loader from '@components/loader/loader';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { selectShouldRefetch } from '@redux/feedbacks/feedbacks-slice';
-import { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { Paths } from '@router/paths';
-import { setAuthToken } from '@redux/auth/auth-slice';
-import FeedbackModalResult from './layout/feedbacks/feedback-modal-results/feedback-modal-results';
 
 export const FeedbacksPage = () => {
     const navigate = useNavigate();
@@ -60,7 +60,6 @@ export const FeedbacksPage = () => {
                     ) : (
                         <EmptyFeedbackList />
                     )}
-                    {/* <EmptyFeedbackList /> */}
                     {data && data.length > 0 && <FeedbacksFooter />}
                 </Layout>
             </Layout>

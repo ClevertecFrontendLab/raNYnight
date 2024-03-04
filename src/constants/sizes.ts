@@ -2,3 +2,6 @@ export const SIDER_WIDTH_DEFAULT = 208;
 export const SIDER_WIDTH_COLLAPSED_DEFAULT = 64;
 export const SIDER_WIDTH_MOBILE = 106;
 export const SIDER_WIDTH_COLLAPSED_MOBILE = 0;
+export const RATE_STAR_MODAL = 20;
+export const RATE_STAR_CARD = 13;
+export const FEEDBACK_MODAL_WIDTH = 539;

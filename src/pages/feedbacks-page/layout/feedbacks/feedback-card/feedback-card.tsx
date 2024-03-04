@@ -1,7 +1,8 @@
 import { UserOutlined } from '@ant-design/icons';
+import CustomRate from '@components/custom-rate/custom-rate';
+import { RATE_STAR_CARD } from '@constants/sizes';
 import { Typography } from 'antd';
 
-import CustomRate from '@components/custom-rate/custom-rate';
 import './feedback-card.less';
 
 const { Text } = Typography;
@@ -39,7 +40,7 @@ const FeedbackCard = ({ avatar, name, rate, date, feedback }: FeedbackCardProps)
                 </Text>
             </div>
             <div className='feedback-data'>
-                <CustomRate rate={rate} disabled={true} size={13} />
+                <CustomRate rate={rate} disabled={true} size={RATE_STAR_CARD} />
                 <Text className='feedback-date'>{formattedDate}</Text>
                 <Text className='feedback-text'>{feedback}</Text>
             </div>

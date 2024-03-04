@@ -1,5 +1,9 @@
-import { ResultImages, ResultTitles, ResultMessages } from '@constants/results';
+import { ResultImages, ResultMessages, ResultTitles } from '@constants/results';
+import { FEEDBACK_MODAL_WIDTH } from '@constants/sizes';
+import { okButtonProps } from '@constants/utils';
 import { Modal, Typography } from 'antd';
+
+import './feedback-modal-result.less';
 
 const { Text } = Typography;
 
@@ -12,8 +16,7 @@ const showSendSuccessModal = () => {
         centered: true,
         cancelButtonProps: { style: { display: 'none' } },
         okButtonProps: { className: 'write-feedback-button-ok feedback-success' },
-        bodyStyle: { padding: '64px 86px' },
-        width: 539,
+        width: FEEDBACK_MODAL_WIDTH,
     });
 };
 
@@ -31,12 +34,8 @@ const showSendErrorModal = (showModal: () => void, handleCancel: () => void) => 
         cancelText: 'Закрыть',
         centered: true,
         cancelButtonProps: { className: 'write-feedback-button-ok feedback-error' },
-        okButtonProps: {
-            className: 'write-feedback-button-ok feedback-success',
-            'data-test-id': 'write-review-not-saved-modal',
-        },
-        bodyStyle: { padding: '60px 86px' },
-        width: 539,
+        okButtonProps: okButtonProps,
+        width: FEEDBACK_MODAL_WIDTH,
         closable: false,
         onOk: showModal,
         onCancel: handleCancel,
@@ -61,8 +60,7 @@ const showGetErrorModal = (handleCancel?: () => void) => {
             className: 'write-feedback-button-ok feedback-success',
             style: { width: 'fit-content', margin: '0 auto' },
         },
-        bodyStyle: { padding: '60px 86px' },
-        width: 539,
+        width: FEEDBACK_MODAL_WIDTH,
         closable: false,
         okCancel: true,
         onOk: handleCancel,

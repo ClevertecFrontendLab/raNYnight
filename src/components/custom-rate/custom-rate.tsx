@@ -23,7 +23,9 @@ const CustomRate = ({ rate, disabled, onChange, size, value }: CustomRateProps) 
             onChange={handleRateChange}
             className='feedback-rate'
             character={({ value, index }) => {
-                return value && index! < value ? <StarFilled /> : <StarOutlined />;
+                if (index !== undefined && index >= 0) {
+                    return value && index < value ? <StarFilled /> : <StarOutlined />;
+                }
             }}
             style={{ fontSize: `${size}px` }}
         />

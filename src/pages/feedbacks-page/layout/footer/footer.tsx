@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import WriteFeedbackButton from '@pages/feedbacks-page/write-feedback-button/write-feedback-button';
 import {
     selectIsFeedbackListCollapsed,
     toggleFeedbacksList,
@@ -6,7 +7,6 @@ import {
 import { Typography } from 'antd';
 import { Footer as AntdFooter } from 'antd/lib/layout/layout';
 
-import WriteFeedbackButton from '@components/write-feedback-button/write-feedback-button';
 import './footer.less';
 
 const { Text } = Typography;

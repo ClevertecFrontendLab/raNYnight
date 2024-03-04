@@ -1,7 +1,15 @@
 @import '/src/style-variables.less';
 
-.ant-btn.write-feedback-button-ok {
-    width: 130px;
+.ant-modal-content {
+    .ant-modal-footer {
+        .ant-btn.ant-btn-primary.write-feedback-button-ok {
+            margin-left: 0;
+        }
+    }
+}
+
+.ant-btn.ant-btn-primary.write-feedback-button-ok {
+    width: 100%;
     height: 40px;
     background: @primary-light-6;
     font-weight: 400;
@@ -24,7 +32,7 @@
 }
 .ant-modal.feedback-error-modal,
 .ant-modal.write-feedback-modal-result {
-    transform: translateY(0px);
+    transform: translateY(0);
 }
 
 .ant-modal {
@@ -42,7 +50,7 @@
         .ant-rate.feedback-rate {
             margin: 0;
             height: fit-content;
-            transform: translate(-3px, 0px);
+            transform: translate(-3px, 0);
         }
         padding: 25px 20px;
     }
@@ -112,13 +120,14 @@
                 background: @character-light-primary-inverse;
                 border: 1px solid @character-light-border;
                 color: @character-light-title-85;
+                height: 40px;
             }
         }
 
         .ant-modal-confirm-body-wrapper {
             .ant-modal-confirm {
                 .ant-modal-confirm-content {
-                    margin-top: 0px;
+                    margin-top: 0;
                 }
             }
         }

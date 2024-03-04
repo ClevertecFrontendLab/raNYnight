@@ -20,7 +20,7 @@ interface FeedbacksListProps {
 const FeedbacksList = ({ data }: FeedbacksListProps) => {
     const isFeedbackListCollapsed = useAppSelector(selectIsFeedbackListCollapsed);
 
-    let displayedData = isFeedbackListCollapsed ? data.slice(-4) : data;
+    const displayedData = isFeedbackListCollapsed ? data.slice(-4) : data;
 
     return (
         <Content
