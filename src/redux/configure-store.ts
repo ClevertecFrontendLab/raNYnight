@@ -8,6 +8,7 @@ import { createReduxHistoryContext } from 'redux-first-history';
 
 import { authApi } from './auth/auth-api';
 import { feedbacksApi } from './feedbacks/feedback-api';
+import { trainingsApi } from './trainings/trainings-api';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
     history: createBrowserHistory(),
@@ -20,12 +21,14 @@ export const store = configureStore({
         router: routerReducer,
         [authApi.reducerPath]: authApi.reducer,
         [feedbacksApi.reducerPath]: feedbacksApi.reducer,
+        [trainingsApi.reducerPath]: trainingsApi.reducer,
     }),
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()
             .concat(routerMiddleware)
             .concat(authApi.middleware)
-            .concat(feedbacksApi.middleware),
+            .concat(feedbacksApi.middleware)
+            .concat(trainingsApi.middleware),
 });
 
 export const history = createReduxHistory(store);
