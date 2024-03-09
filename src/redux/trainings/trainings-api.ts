@@ -23,14 +23,11 @@ export const trainingsApi = createApi({
                 credentials: 'include',
             }),
         }),
-        getTrainings: builder.query<NewTrainingResponse[], { trainingName: string }>({
-            query: (params) => ({
+        getTrainings: builder.query<NewTrainingResponse[], void>({
+            query: () => ({
                 url: 'training',
                 method: 'GET',
                 credentials: 'include',
-                params: {
-                    name: params.trainingName,
-                },
             }),
         }),
 

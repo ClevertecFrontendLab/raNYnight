@@ -1,0 +1,63 @@
+@import '/src/style-variables.less';
+
+.ant-modal.training-list-modal {
+    padding: 0;
+    margin: 0;
+    transform: translateY(0);
+
+    .ant-modal-header {
+        .ant-modal-title {
+            font-family: @font-family;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 130%;
+            color: @character-light-title-85;
+        }
+    }
+}
+
+.calendar-training-list {
+    padding: 0;
+}
+
+.calendar-training-list li {
+    list-style-type: none;
+    position: relative;
+    padding-left: 20px;
+}
+
+.calendar-training-list li::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.anticon.training-edit-icon {
+    color: @primary-light-6;
+    position: absolute;
+    right: 0;
+}
+
+.calendar-training-list li.legs::before {
+    background-color: @tranie-red;
+}
+.calendar-training-list li.strength::before {
+    background-color: @tranie-yellow;
+}
+.calendar-training-list li.hands::before {
+    background-color: @tranie-cyan;
+}
+.calendar-training-list li.chest::before {
+    background-color: @tranie-green;
+}
+.calendar-training-list li.back::before {
+    background-color: @tranie-orange;
+}
+.calendar-training-list li.cardio::before {
+    background-color: @tranie-magenta;
+}

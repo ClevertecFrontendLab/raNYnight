@@ -1,6 +1,8 @@
+import dayjs from 'dayjs';
+
 export type BaseTraining = {
     name: string;
-    date: string;
+    date: dayjs.Dayjs;
     isImplementation: boolean;
     parameters: TrainingParameters;
 };
@@ -32,3 +34,8 @@ export type NewTrainingResponse = BaseTraining & {
     _id: string;
     exercises: ExerciseResponse[];
 };
+
+export interface TrainingItem {
+    name: 'Силовая' | 'Ноги' | 'Руки' | 'Грудь' | 'Спина' | 'Кардио';
+    key: 'strength' | 'legs' | 'hands' | 'chest' | 'back' | 'cardio';
+}
