@@ -1,9 +1,10 @@
 import { EditOutlined } from '@ant-design/icons';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { setIsDrawerOpen, setTrainingToEdit } from '@redux/trainings/trainings-slice';
 import { NewTrainingResponse } from 'src/types/trainings';
 
 export interface CalendarTrainingItemProps {
     training: NewTrainingResponse;
-    onEdit: () => void;
     isEditable: boolean;
 }
 
@@ -16,13 +17,19 @@ export enum Trainings {
     Кардио = 'cardio',
 }
 
-const CalendarTrainingItem = ({ training, onEdit, isEditable }: CalendarTrainingItemProps) => {
+const CalendarTrainingItem = ({ training, isEditable }: CalendarTrainingItemProps) => {
+    const dispatch = useAppDispatch();
     const trainingKey: Trainings | undefined = Trainings[training.name as keyof typeof Trainings];
+
+    const handleClick = () => {
+        dispatch(setTrainingToEdit(training));
+        dispatch(setIsDrawerOpen(true));
+    };
 
     return (
         <li className={`calendar-training-item ${trainingKey}`}>
             {training.name}{' '}
-            {isEditable && <EditOutlined onClick={onEdit} className='training-edit-icon' />}
+            {isEditable && <EditOutlined onClick={handleClick} className='training-edit-icon' />}
         </li>
     );
 };

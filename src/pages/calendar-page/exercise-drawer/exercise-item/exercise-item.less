@@ -1,0 +1,59 @@
+@import '/src/style-variables.less';
+
+section.exercise-item {
+    padding: 24px 0px 0px 0px;
+
+    :global {
+        .ant-input:hover,
+        .ant-input-number:hover {
+            border-color: @primary-light-5;
+        }
+
+        .ant-input-number {
+            color: @character-light-disable-25;
+        }
+
+        .ant-input:focus,
+        .ant-input-number-focused {
+            border-color: @primary-light-5;
+            box-shadow: none;
+            color: @character-light-title-85;
+        }
+    }
+
+    .exercise-header {
+        margin-top: 8px;
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+    }
+
+    .exercise-input-text {
+        color: @character-light-title-85;
+        background: @character-light-dividers;
+        width: 89px;
+        padding: 8px;
+    }
+
+    .exercise-input-text:first-child {
+        width: 120px;
+    }
+
+    .exercise-inputs-wrapper {
+        margin-top: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: @character-light-disable-25;
+    }
+
+    .exercise-input {
+        width: 90px;
+        height: 24px;
+    }
+
+    .exercise-input:first-child {
+        width: 120px;
+        margin-right: 16px;
+    }
+}

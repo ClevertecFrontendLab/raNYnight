@@ -37,10 +37,6 @@ const AppCalendar = () => {
         dispatch(setTodaysTrainings(filteredTrainings));
     };
 
-    const handleCloseTrainingListModal = () => {
-        setIsTrainingListModalOpen(false);
-    };
-
     return (
         <main className='calendar-wrapper'>
             <Calendar
@@ -65,9 +61,7 @@ const AppCalendar = () => {
             />
             <TrainingListModal
                 date={selectedDate}
-                isModalOpen={isTrainingListModalOpen}
                 trainings={trainingList || []}
-                onClose={handleCloseTrainingListModal}
                 position={cellPosition}
             />
         </main>

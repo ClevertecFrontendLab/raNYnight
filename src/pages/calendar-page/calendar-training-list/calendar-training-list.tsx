@@ -18,7 +18,6 @@ const CalendarTrainingList = ({ trainings, isEditable, date }: CalendarTrainingL
             {filteredTrainings.map((training: NewTrainingResponse) => (
                 <CalendarTrainingItem
                     training={training}
-                    onEdit={() => console.log('open drawer')}
                     key={training._id}
                     isEditable={isEditable}
                 />

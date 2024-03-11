@@ -6,44 +6,45 @@ import { useState } from 'react';
 import { NewTrainingResponse } from 'src/types/trainings';
 import CreateTrainingModal from '../create-training-modal/create-training-modal';
 import './training-list-modal.less';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { ModalTypes, selectModalByType, toggleModal } from '@redux/modals/modals-slice';
 
 interface TrainingListModalProps {
     date: dayjs.Dayjs;
     trainings: NewTrainingResponse[];
-    isModalOpen: boolean;
-    onClose: () => void;
     position: {
         top: number;
         left: number;
     };
 }
 
-const TrainingListModal = ({
-    date,
-    trainings,
-    isModalOpen,
-    onClose,
-    position,
-}: TrainingListModalProps) => {
-    const [isCreateTrainingModalOpen, setIsCreateTrainingModalOpen] = useState(false);
+const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps) => {
+    const dispatch = useAppDispatch();
+    const isTrainingListModalOpen = useAppSelector(
+        selectModalByType(ModalTypes.calendarTrainingListModal),
+    );
+    const isCreateTrainingModalOpen = useAppSelector(
+        selectModalByType(ModalTypes.calendarCreateTrainingModal),
+    );
 
-    const handleOpenCreateTrainingModal = () => {
-        setIsCreateTrainingModalOpen(true);
+    const handleToggleCreateTrainingModal = () => {
+        dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));
     };
 
-    const handleCloseCreateTrainingModal = () => {
-        setIsCreateTrainingModalOpen(false);
+    const handleTogleModal = () => {
+        dispatch(toggleModal(ModalTypes.calendarTrainingListModal));
     };
+
     return (
         <>
             <Modal
                 title={`Тренировки на ${date.format('DD.MM.YYYY')}`}
                 okText='Добавить тренировку'
-                onOk={handleOpenCreateTrainingModal}
-                onCancel={onClose}
+                onOk={handleToggleCreateTrainingModal}
+                onCancel={handleTogleModal}
                 cancelButtonProps={{ style: { display: 'none' } }}
                 okButtonProps={{ style: { width: '100%', margin: 0 } }}
-                open={isModalOpen && !isCreateTrainingModalOpen}
+                open={isTrainingListModalOpen && !isCreateTrainingModalOpen}
                 className='training-list-modal'
                 width={264}
                 mask={false}
@@ -54,11 +55,9 @@ const TrainingListModal = ({
             <CreateTrainingModal
                 date={date}
                 trainings={trainings}
-                isModalOpen={isCreateTrainingModalOpen}
-                onClose={handleCloseCreateTrainingModal}
+                onClose={handleToggleCreateTrainingModal}
                 position={position}
-                body={<></>}
-            ></CreateTrainingModal>
+            />
         </>
     );
 };
