@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { NewTrainingResponse } from 'src/types/trainings';
 import { Button, Modal } from 'antd';
@@ -12,19 +12,18 @@ import './create-training-modal.less';
 import ExerciseItem from '@pages/calendar-page/exercise-drawer/exercise-item/exercise-item';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { selectTrainingToEdit, setIsDrawerOpen } from '@redux/trainings/trainings-slice';
-import { selectModalByType, ModalTypes } from '@redux/modals/modals-slice';
+import { selectModalByType, ModalTypes, toggleModal } from '@redux/modals/modals-slice';
 
 interface CreateTrainingModalProps {
     date: dayjs.Dayjs;
     trainings: NewTrainingResponse[];
-    onClose: () => void;
     position: {
         top: number;
         left: number;
     };
 }
 
-const CreateTrainingModal = ({ trainings, onClose, position }: CreateTrainingModalProps) => {
+const CreateTrainingModal = ({ trainings, position }: CreateTrainingModalProps) => {
     const dispatch = useAppDispatch();
 
     const isCreateTrainingModalOpen = useAppSelector(
@@ -51,6 +50,10 @@ const CreateTrainingModal = ({ trainings, onClose, position }: CreateTrainingMod
         handleOpenDrawer();
     };
 
+    const handleToggleCreateTrainingModal = () => {
+        dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));
+    };
+
     return (
         <>
             <Modal
@@ -60,20 +63,20 @@ const CreateTrainingModal = ({ trainings, onClose, position }: CreateTrainingMod
                             type='text'
                             size='small'
                             icon={<ArrowLeftOutlined />}
-                            onClick={onClose}
+                            onClick={handleToggleCreateTrainingModal}
                         />
                         <DropdownSelect onChange={handleDropdownChange} />
                     </div>
                 }
-                onCancel={onClose}
                 cancelButtonProps={{ style: { display: 'none' } }}
                 okButtonProps={{ style: { width: '100%', margin: 0 } }}
                 open={isCreateTrainingModalOpen}
                 className='training-list-modal'
                 width={264}
                 mask={false}
-                style={{ top: position.top, left: position.left }}
+                onCancel={handleToggleCreateTrainingModal}
                 closable={false}
+                style={{ top: position.top, left: position.left }}
                 maskClosable={false}
                 footer={
                     <div className='create-training-modal-footer'>
@@ -93,7 +96,8 @@ const CreateTrainingModal = ({ trainings, onClose, position }: CreateTrainingMod
                         </Button>
                     </div>
                 }
-            ></Modal>
+                key={'create-training-modal'}
+            />
 
             <ExerciseDrawer
                 title={drawerTitles.addNew}

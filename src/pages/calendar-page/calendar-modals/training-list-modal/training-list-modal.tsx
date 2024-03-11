@@ -8,6 +8,7 @@ import CreateTrainingModal from '../create-training-modal/create-training-modal'
 import './training-list-modal.less';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { ModalTypes, selectModalByType, toggleModal } from '@redux/modals/modals-slice';
+import { selectTodaysTrainings } from '@redux/trainings/trainings-slice';
 
 interface TrainingListModalProps {
     date: dayjs.Dayjs;
@@ -20,6 +21,7 @@ interface TrainingListModalProps {
 
 const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps) => {
     const dispatch = useAppDispatch();
+    const todaysTrainings = useAppSelector(selectTodaysTrainings);
     const isTrainingListModalOpen = useAppSelector(
         selectModalByType(ModalTypes.calendarTrainingListModal),
     );
@@ -34,6 +36,7 @@ const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps
     const handleTogleModal = () => {
         dispatch(toggleModal(ModalTypes.calendarTrainingListModal));
     };
+    console.log(trainings.length);
 
     return (
         <>
@@ -43,7 +46,10 @@ const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps
                 onOk={handleToggleCreateTrainingModal}
                 onCancel={handleTogleModal}
                 cancelButtonProps={{ style: { display: 'none' } }}
-                okButtonProps={{ style: { width: '100%', margin: 0 } }}
+                okButtonProps={{
+                    style: { width: '100%', margin: 0 },
+                    disabled: todaysTrainings.length === 5,
+                }}
                 open={isTrainingListModalOpen && !isCreateTrainingModalOpen}
                 className='training-list-modal'
                 width={264}
@@ -52,12 +58,7 @@ const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps
             >
                 <CalendarTrainingList trainings={trainings} isEditable={true} date={date} />
             </Modal>
-            <CreateTrainingModal
-                date={date}
-                trainings={trainings}
-                onClose={handleToggleCreateTrainingModal}
-                position={position}
-            />
+            <CreateTrainingModal date={date} trainings={trainings} position={position} />
         </>
     );
 };

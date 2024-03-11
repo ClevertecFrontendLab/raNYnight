@@ -8,6 +8,7 @@ import { useState } from 'react';
 import './calendar.less';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { setTodaysTrainings } from '@redux/trainings/trainings-slice';
+import { ModalTypes, toggleModal } from '@redux/modals/modals-slice';
 
 const AppCalendar = () => {
     const dispatch = useAppDispatch();
@@ -35,6 +36,7 @@ const AppCalendar = () => {
         setCellPosition(cellPosition);
         setIsTrainingListModalOpen(true);
         dispatch(setTodaysTrainings(filteredTrainings));
+        dispatch(toggleModal(ModalTypes.calendarTrainingListModal));
     };
 
     return (
