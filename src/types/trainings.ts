@@ -36,6 +36,6 @@ export type NewTrainingResponse = BaseTraining & {
 };
 
 export interface TrainingItem {
-    name: 'Силовая' | 'Ноги' | 'Руки' | 'Грудь' | 'Спина' | 'Кардио';
-    key: 'strength' | 'legs' | 'hands' | 'chest' | 'back' | 'cardio';
+    name: 'Силовая' | 'Ноги' | 'Руки' | 'Грудь' | 'Спина';
+    key: 'strength' | 'legs' | 'hands' | 'chest' | 'back';
 }

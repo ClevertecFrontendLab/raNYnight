@@ -6,32 +6,35 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import { useState } from 'react';
 import './calendar.less';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { setTodaysTrainings } from '@redux/trainings/trainings-slice';
 
 const AppCalendar = () => {
+    const dispatch = useAppDispatch();
     const [isTrainingListModalOpen, setIsTrainingListModalOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState(dayjs());
     const [cellPosition, setCellPosition] = useState({
         top: 0,
         left: 0,
     });
-    const { data: trainingList } = useGetTrainingsQuery();
 
-    // const handleCellSelect = (date: dayjs.Dayjs) => {
-    //     const cellPosition = getSelectedCellPosition(date);
-    //     setSelectedDate(date);
-    //     setCellPosition(cellPosition);
-    //     setIsTrainingListModalOpen(true);
-    // };
+    const { data: trainingList } = useGetTrainingsQuery();
 
     const handleCellClick = (event: React.MouseEvent<HTMLDivElement>) => {
         const target = event.target as HTMLElement;
         const cellNode = target.closest('.calendar-date-cell');
         const dateAttribute = cellNode?.getAttribute('data-date');
         const date = dayjs(dateAttribute);
+        const filteredTrainings =
+            trainingList?.filter((training) => {
+                const trainingDate = dayjs(training.date).format('YYYY-MM-DD');
+                return trainingDate === date.format('YYYY-MM-DD').toString();
+            }) || [];
         const cellPosition = getSelectedCellPosition(date);
         setSelectedDate(date);
         setCellPosition(cellPosition);
         setIsTrainingListModalOpen(true);
+        dispatch(setTodaysTrainings(filteredTrainings));
     };
 
     const handleCloseTrainingListModal = () => {
@@ -42,7 +45,6 @@ const AppCalendar = () => {
         <main className='calendar-wrapper'>
             <Calendar
                 className='app-calendar'
-                // onSelect={handleCellSelect}
                 dateCellRender={(date) => (
                     <>
                         <div
