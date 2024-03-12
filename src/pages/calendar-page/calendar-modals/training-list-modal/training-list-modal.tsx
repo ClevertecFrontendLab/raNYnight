@@ -1,14 +1,13 @@
 import { Modal } from 'antd';
 import dayjs from 'dayjs';
 
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import CalendarTrainingList from '@pages/calendar-page/calendar-training-list/calendar-training-list';
-import { useState } from 'react';
+import { ModalTypes, selectModalByType, toggleModal } from '@redux/modals/modals-slice';
+import { selectTodaysTrainings } from '@redux/trainings/trainings-slice';
 import { NewTrainingResponse } from 'src/types/trainings';
 import CreateTrainingModal from '../create-training-modal/create-training-modal';
 import './training-list-modal.less';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { ModalTypes, selectModalByType, toggleModal } from '@redux/modals/modals-slice';
-import { selectTodaysTrainings } from '@redux/trainings/trainings-slice';
 
 interface TrainingListModalProps {
     date: dayjs.Dayjs;
@@ -36,7 +35,6 @@ const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps
     const handleTogleModal = () => {
         dispatch(toggleModal(ModalTypes.calendarTrainingListModal));
     };
-    console.log(trainings.length);
 
     return (
         <>

@@ -25,10 +25,19 @@ const modalsSlice = createSlice({
             const modalType = action.payload;
             state[modalType] = !state[modalType];
         },
+        setOpenModal: (state, action: PayloadAction<ModalTypes>) => {
+            const modalType = action.payload;
+            state[modalType] = true;
+        },
+        setAllModalsToFalse: (state) => {
+            Object.keys(state).forEach((key) => {
+                state[key] = false;
+            });
+        },
     },
 });
 
-export const { toggleModal } = modalsSlice.actions;
+export const { toggleModal, setAllModalsToFalse, setOpenModal } = modalsSlice.actions;
 
 export const selectModalState = (state: RootState) => state.modals;
 

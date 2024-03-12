@@ -1,18 +1,17 @@
 import Calendar from '@components/calendar/calendar';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import TrainingListModal from '@pages/calendar-page/calendar-modals/training-list-modal/training-list-modal';
 import CalendarTrainingList from '@pages/calendar-page/calendar-training-list/calendar-training-list';
+import { ModalTypes, setOpenModal } from '@redux/modals/modals-slice';
 import { useGetTrainingsQuery } from '@redux/trainings/trainings-api';
+import { setTodaysTrainings } from '@redux/trainings/trainings-slice';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import { useState } from 'react';
 import './calendar.less';
-import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { setTodaysTrainings } from '@redux/trainings/trainings-slice';
-import { ModalTypes, toggleModal } from '@redux/modals/modals-slice';
 
 const AppCalendar = () => {
     const dispatch = useAppDispatch();
-    const [isTrainingListModalOpen, setIsTrainingListModalOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState(dayjs());
     const [cellPosition, setCellPosition] = useState({
         top: 0,
@@ -22,6 +21,7 @@ const AppCalendar = () => {
     const { data: trainingList } = useGetTrainingsQuery();
 
     const handleCellClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        event.stopPropagation();
         const target = event.target as HTMLElement;
         const cellNode = target.closest('.calendar-date-cell');
         const dateAttribute = cellNode?.getAttribute('data-date');
@@ -34,14 +34,14 @@ const AppCalendar = () => {
         const cellPosition = getSelectedCellPosition(date);
         setSelectedDate(date);
         setCellPosition(cellPosition);
-        setIsTrainingListModalOpen(true);
         dispatch(setTodaysTrainings(filteredTrainings));
-        dispatch(toggleModal(ModalTypes.calendarTrainingListModal));
+        dispatch(setOpenModal(ModalTypes.calendarTrainingListModal));
     };
 
     return (
         <main className='calendar-wrapper'>
             <Calendar
+                fullscreen={true}
                 className='app-calendar'
                 dateCellRender={(date) => (
                     <>
@@ -78,58 +78,25 @@ function getSelectedCellPosition(date: dayjs.Dayjs) {
         ?.closest('.ant-picker-cell');
 
     if (cell) {
-        const { top, left, width: cellWidth } = cell.getBoundingClientRect();
+        const { top, left: cellLeft, width: cellWidth } = cell.getBoundingClientRect();
+        const { left: bodyLeft } = document.body.getBoundingClientRect();
+
         const modalWidth = 264;
-        const windowWidth = window.innerWidth;
-        let adjustedLeft = left + window.scrollX;
+        const bodyWidth = document.body.offsetWidth;
+        const leftRelativeToBody = cellLeft - bodyLeft;
+
+        let adjustedLeft = cellLeft + window.scrollX;
         const toMove = modalWidth - cellWidth;
 
-        if (adjustedLeft + modalWidth > windowWidth) {
-            adjustedLeft = left + window.scrollX - toMove;
+        if (leftRelativeToBody + modalWidth > bodyWidth) {
+            adjustedLeft -= toMove;
         }
 
-        const result = {
+        return {
             top: top + window.scrollY,
             left: adjustedLeft,
         };
-
-        return result;
     }
 
     return { top: 0, left: 0 };
 }
-
-// const testRequest = {
-//     name: 'Спина',
-//     date,
-//     isImplementation: false,
-//     parameters: {
-//         repeat: false,
-//         period: 7,
-//         jointTraining: false,
-//         participants: [],
-//     },
-//     exercises: [
-//         {
-//             name: 'Сгибание ног',
-//             replays: 4,
-//             weight: 25,
-//             approaches: 10,
-//             isImplementation: false,
-//         },
-//         {
-//             name: 'Разгибание ног',
-//             replays: 4,
-//             weight: 25,
-//             approaches: 10,
-//             isImplementation: false,
-//         },
-//         {
-//             name: 'Приседания',
-//             replays: 4,
-//             weight: 25,
-//             approaches: 10,
-//             isImplementation: false,
-//         },
-//     ],
-// };
