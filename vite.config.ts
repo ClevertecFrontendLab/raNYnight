@@ -21,13 +21,4 @@ export default defineConfig({
             '@router': path.resolve(__dirname, 'src/router'),
         },
     },
-    css: {
-        preprocessorOptions: {
-            less: {
-                math: 'always',
-                relativeUrls: true,
-                javascriptEnabled: true,
-            },
-        },
-    },
 });

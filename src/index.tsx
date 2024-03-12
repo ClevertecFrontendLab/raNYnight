@@ -7,7 +7,7 @@ import 'normalize.css';
 
 import { App } from './app';
 
-import './style.less';
+import 'antd/dist/antd.variable.min.css';
 import { ConfigProvider } from 'antd';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
