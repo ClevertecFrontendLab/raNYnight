@@ -1,6 +1,7 @@
 import { EditOutlined } from '@ant-design/icons';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { setIsDrawerOpen, setTrainingToEdit } from '@redux/trainings/trainings-slice';
+import { ModalTypes, toggleModal } from '@redux/modals/modals-slice';
+import { setTrainingToEdit } from '@redux/trainings/trainings-slice';
 import { NewTrainingResponse } from 'src/types/trainings';
 
 export interface CalendarTrainingItemProps {
@@ -23,7 +24,7 @@ const CalendarTrainingItem = ({ training, isEditable }: CalendarTrainingItemProp
 
     const handleClick = () => {
         dispatch(setTrainingToEdit(training));
-        dispatch(setIsDrawerOpen(true));
+        dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));
     };
 
     return (

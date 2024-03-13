@@ -20,7 +20,7 @@ const trainingsSlice = createSlice({
         setTodaysTrainings: (state, action: PayloadAction<NewTrainingResponse[]>) => {
             state.todaysTrainings = action.payload;
         },
-        setTrainingToEdit: (state, action: PayloadAction<NewTrainingResponse>) => {
+        setTrainingToEdit: (state, action: PayloadAction<NewTrainingResponse | null>) => {
             state.trainingToEdit = action.payload;
         },
         setIsDrawerOpen: (state, action: PayloadAction<boolean>) => {

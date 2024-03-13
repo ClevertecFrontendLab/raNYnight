@@ -1,18 +1,21 @@
-import { useEffect, useState } from 'react';
+import { PlusOutlined } from '@ant-design/icons';
+import { drawerTitles } from '@constants/drawer';
+import ExerciseDrawer from '@pages/calendar-page/exercise-drawer/exercise-drawer';
+import { Button, Modal } from 'antd';
 import dayjs from 'dayjs';
 import { NewTrainingResponse } from 'src/types/trainings';
-import { Button, Modal } from 'antd';
-import ExerciseDrawer from '@pages/calendar-page/exercise-drawer/exercise-drawer';
-import { ArrowLeftOutlined, PlusOutlined } from '@ant-design/icons';
-import { drawerTitles } from '@constants/drawer';
-import DropdownSelect from './dropdown-select/dropdown-select';
-import { title } from 'process';
 
-import './create-training-modal.less';
-import ExerciseItem from '@pages/calendar-page/exercise-drawer/exercise-item/exercise-item';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { selectTrainingToEdit, setIsDrawerOpen } from '@redux/trainings/trainings-slice';
-import { selectModalByType, ModalTypes, toggleModal } from '@redux/modals/modals-slice';
+import CalendarExercisesList from '@pages/calendar-page/calendar-exercises-list/calendar-exercises-list';
+import { ModalTypes, selectModalByType, toggleModal } from '@redux/modals/modals-slice';
+import {
+    selectTrainingToEdit,
+    setIsDrawerOpen,
+    setTrainingToEdit,
+} from '@redux/trainings/trainings-slice';
+import CreateTrainingModalTitle from './create-training-modal-title/create-training-modal-title';
+import './create-training-modal.less';
+import { useEffect, useState } from 'react';
 
 interface CreateTrainingModalProps {
     date: dayjs.Dayjs;
@@ -25,13 +28,14 @@ interface CreateTrainingModalProps {
 
 const CreateTrainingModal = ({ trainings, position }: CreateTrainingModalProps) => {
     const dispatch = useAppDispatch();
+    const trainingToEdit = useAppSelector(selectTrainingToEdit);
+    const [selectedOption, setSelectedOption] = useState<string>(
+        trainingToEdit ? trainingToEdit.name : 'Выбор тренировки',
+    );
 
     const isCreateTrainingModalOpen = useAppSelector(
         selectModalByType(ModalTypes.calendarCreateTrainingModal),
     );
-
-    const trainingToEdit = useAppSelector(selectTrainingToEdit);
-    const [selectedTraining, setSelectedTraining] = useState<NewTrainingResponse | null>(null);
 
     const handleCloseDrawer = () => {
         dispatch(setIsDrawerOpen(false));
@@ -41,32 +45,27 @@ const CreateTrainingModal = ({ trainings, position }: CreateTrainingModalProps) 
         dispatch(setIsDrawerOpen(true));
     };
 
-    const handleDropdownChange = (selectedValue: string) => {
-        console.log('Выбранное значение:', selectedValue);
-        setSelectedTraining(trainings.filter((training) => training.name === selectedValue)[0]);
-    };
-
     const handleAddExercise = () => {
         handleOpenDrawer();
     };
 
     const handleToggleCreateTrainingModal = () => {
         dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));
+        dispatch(setTrainingToEdit(null));
+    };
+
+    const handleDropdownChange = (selectedOption: string) => {
+        setSelectedOption(selectedOption);
     };
 
     return (
         <>
             <Modal
                 title={
-                    <div className='create-training-modal-title'>
-                        <Button
-                            type='text'
-                            size='small'
-                            icon={<ArrowLeftOutlined />}
-                            onClick={handleToggleCreateTrainingModal}
-                        />
-                        <DropdownSelect onChange={handleDropdownChange} />
-                    </div>
+                    <CreateTrainingModalTitle
+                        defaultSelect={trainingToEdit?.name || 'Выбор тренировки'}
+                        onChange={handleDropdownChange}
+                    />
                 }
                 cancelButtonProps={{ style: { display: 'none' } }}
                 okButtonProps={{ style: { width: '100%', margin: 0 } }}
@@ -78,6 +77,7 @@ const CreateTrainingModal = ({ trainings, position }: CreateTrainingModalProps) 
                 closable={false}
                 style={{ top: position.top, left: position.left }}
                 maskClosable={false}
+                destroyOnClose
                 footer={
                     <div className='create-training-modal-footer'>
                         <Button
@@ -97,7 +97,12 @@ const CreateTrainingModal = ({ trainings, position }: CreateTrainingModalProps) 
                     </div>
                 }
                 key={'create-training-modal'}
-            />
+            >
+                <CalendarExercisesList
+                    exercises={trainingToEdit?.exercises || []}
+                    isEditable={true}
+                />
+            </Modal>
 
             <ExerciseDrawer
                 title={drawerTitles.addNew}

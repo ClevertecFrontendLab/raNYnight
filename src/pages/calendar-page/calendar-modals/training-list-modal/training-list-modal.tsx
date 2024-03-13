@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import CalendarTrainingList from '@pages/calendar-page/calendar-training-list/calendar-training-list';
 import { ModalTypes, selectModalByType, toggleModal } from '@redux/modals/modals-slice';
-import { selectTodaysTrainings } from '@redux/trainings/trainings-slice';
+import { selectTodaysTrainings, setTrainingToEdit } from '@redux/trainings/trainings-slice';
 import { NewTrainingResponse } from 'src/types/trainings';
 import CreateTrainingModal from '../create-training-modal/create-training-modal';
 import './training-list-modal.less';
@@ -30,9 +30,10 @@ const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps
 
     const handleToggleCreateTrainingModal = () => {
         dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));
+        dispatch(setTrainingToEdit(null));
     };
 
-    const handleTogleModal = () => {
+    const handleTogleTrainingListModal = () => {
         dispatch(toggleModal(ModalTypes.calendarTrainingListModal));
     };
 
@@ -42,7 +43,7 @@ const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps
                 title={`Тренировки на ${date.format('DD.MM.YYYY')}`}
                 okText='Добавить тренировку'
                 onOk={handleToggleCreateTrainingModal}
-                onCancel={handleTogleModal}
+                onCancel={handleTogleTrainingListModal}
                 cancelButtonProps={{ style: { display: 'none' } }}
                 okButtonProps={{
                     style: { width: '100%', margin: 0 },

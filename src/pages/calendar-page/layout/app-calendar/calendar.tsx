@@ -2,7 +2,7 @@ import Calendar from '@components/calendar/calendar';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import TrainingListModal from '@pages/calendar-page/calendar-modals/training-list-modal/training-list-modal';
 import CalendarTrainingList from '@pages/calendar-page/calendar-training-list/calendar-training-list';
-import { ModalTypes, setOpenModal } from '@redux/modals/modals-slice';
+import { ModalTypes, setCloseModal, setOpenModal } from '@redux/modals/modals-slice';
 import { useGetTrainingsQuery } from '@redux/trainings/trainings-api';
 import { setTodaysTrainings } from '@redux/trainings/trainings-slice';
 import dayjs from 'dayjs';
@@ -35,6 +35,7 @@ const AppCalendar = () => {
         setSelectedDate(date);
         setCellPosition(cellPosition);
         dispatch(setTodaysTrainings(filteredTrainings));
+        dispatch(setCloseModal(ModalTypes.calendarCreateTrainingModal));
         dispatch(setOpenModal(ModalTypes.calendarTrainingListModal));
     };
 
