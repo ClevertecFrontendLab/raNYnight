@@ -5,18 +5,23 @@ interface TrainingStore {
     todaysTrainings: NewTrainingResponse[] | [];
     trainingToEdit: NewTrainingResponse | null;
     isDrawerOpen: boolean;
+    selectedDay: string | null;
 }
 
 const initialState: TrainingStore = {
     todaysTrainings: [],
     trainingToEdit: null,
     isDrawerOpen: false,
+    selectedDay: null,
 };
 
 const trainingsSlice = createSlice({
     name: 'trainings',
     initialState: initialState,
     reducers: {
+        setSelectedDay: (state, action: PayloadAction<string | null>) => {
+            state.selectedDay = action.payload;
+        },
         setTodaysTrainings: (state, action: PayloadAction<NewTrainingResponse[]>) => {
             state.todaysTrainings = action.payload;
         },
@@ -29,7 +34,8 @@ const trainingsSlice = createSlice({
     },
 });
 
-export const { setTodaysTrainings, setTrainingToEdit, setIsDrawerOpen } = trainingsSlice.actions;
+export const { setTodaysTrainings, setTrainingToEdit, setIsDrawerOpen, setSelectedDay } =
+    trainingsSlice.actions;
 
 export const selectTodaysTrainings = (state: { trainings: TrainingStore }) =>
     state.trainings.todaysTrainings;
@@ -39,5 +45,8 @@ export const selectTrainingToEdit = (state: { trainings: TrainingStore }) =>
 
 export const selectIsDrawerOpen = (state: { trainings: TrainingStore }) =>
     state.trainings.isDrawerOpen;
+
+export const selectSelectedDay = (state: { trainings: TrainingStore }) =>
+    state.trainings.selectedDay;
 
 export default trainingsSlice.reducer;

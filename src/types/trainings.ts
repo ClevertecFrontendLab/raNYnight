@@ -9,9 +9,9 @@ export type BaseTraining = {
 
 export type TrainingParameters = {
     repeat: boolean;
-    period: number;
+    period: number | null;
     jointTraining: boolean;
-    participants: string[];
+    participants: string[] | null;
 };
 
 export type Exercise = {

@@ -13,9 +13,9 @@ import {
     setIsDrawerOpen,
     setTrainingToEdit,
 } from '@redux/trainings/trainings-slice';
+import { useState } from 'react';
 import CreateTrainingModalTitle from './create-training-modal-title/create-training-modal-title';
 import './create-training-modal.less';
-import { useEffect, useState } from 'react';
 
 interface CreateTrainingModalProps {
     date: dayjs.Dayjs;
@@ -55,6 +55,7 @@ const CreateTrainingModal = ({ trainings, position }: CreateTrainingModalProps) 
     };
 
     const handleDropdownChange = (selectedOption: string) => {
+        console.log('handleDropdownChange', selectedOption);
         setSelectedOption(selectedOption);
     };
 
@@ -105,7 +106,8 @@ const CreateTrainingModal = ({ trainings, position }: CreateTrainingModalProps) 
             </Modal>
 
             <ExerciseDrawer
-                title={drawerTitles.addNew}
+                selectedTraining={selectedOption}
+                title={trainingToEdit ? drawerTitles.edit : drawerTitles.addNew}
                 onClose={handleCloseDrawer}
                 closeIcon={<PlusOutlined />}
             />
