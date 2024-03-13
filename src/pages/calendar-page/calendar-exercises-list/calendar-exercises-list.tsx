@@ -19,8 +19,8 @@ const CalendarExercisesList = ({ exercises, isEditable }: CalendarExercisesListP
 
     return (
         <ul className='calendar-exercises-list'>
-            {exercises.map((exercise: Exercise) => (
-                <li className={`calendar-exercises-list-item`}>
+            {exercises.map((exercise: Exercise, i) => (
+                <li className={`calendar-exercises-list-item`} key={i}>
                     {exercise.name}
                     {isEditable && (
                         <EditOutlined onClick={handleClick} className='exercises-edit-icon' />

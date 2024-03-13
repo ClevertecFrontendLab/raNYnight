@@ -1,8 +1,6 @@
-import dayjs from 'dayjs';
-
 export type BaseTraining = {
     name: string;
-    date: dayjs.Dayjs;
+    date: string;
     isImplementation: boolean;
     parameters: TrainingParameters;
 };
@@ -16,10 +14,12 @@ export type TrainingParameters = {
 
 export type Exercise = {
     name: string;
-    replays: number;
-    weight: number;
-    approaches: number;
-    isImplementation: boolean;
+    replays: string;
+    weight: string;
+    approaches: string;
+    isImplementation?: boolean;
+    selected?: boolean;
+    index?: number;
 };
 
 export type ExerciseResponse = Exercise & {
