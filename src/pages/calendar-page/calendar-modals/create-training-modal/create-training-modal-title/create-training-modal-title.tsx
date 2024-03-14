@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { defaultTrainings } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
@@ -8,7 +9,7 @@ import {
     setTrainingToEdit,
 } from '@redux/trainings/trainings-slice';
 import { Button, Select } from 'antd';
-import { useEffect, useState } from 'react';
+
 import './create-training-modal-title.less';
 
 interface CreateTrainingModalTitleProps {
@@ -29,6 +30,7 @@ const CreateTrainingModalTitle = ({ defaultSelect, onChange }: CreateTrainingMod
         setSelectedOption(selectedValue);
         onChange(selectedValue);
         dispatch(setTrainingToEdit(null));
+        dispatch(setModifiedTraining(null));
     };
 
     const handleToggleCreateTrainingModal = () => {

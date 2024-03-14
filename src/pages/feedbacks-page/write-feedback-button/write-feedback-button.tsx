@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import CustomRate from '@components/custom-rate/custom-rate';
 import Loader from '@components/loader/loader';
 import { FEEDBACK_MODAL_WIDTH, RATE_STAR_MODAL } from '@constants/sizes';
@@ -7,7 +8,6 @@ import FeedbackModalResult from '@pages/feedbacks-page/feedback-modal-results/fe
 import { useSendFeedbackMutation } from '@redux/feedbacks/feedback-api';
 import { setShouldRefetch } from '@redux/feedbacks/feedbacks-slice';
 import { Button, Input, Modal } from 'antd';
-import { useState } from 'react';
 
 import './write-feedback-button.less';
 

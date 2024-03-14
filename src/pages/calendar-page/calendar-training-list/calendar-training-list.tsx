@@ -1,9 +1,10 @@
 import dayjs from 'dayjs';
-import { NewTrainingResponse } from 'src/types/trainings';
+
 import CalendarTrainingItem from '../calendar-training-item/calendar-training-item';
+import { ModifiedTraining } from 'src/types/trainings';
 
 interface CalendarTrainingListProps {
-    trainings: NewTrainingResponse[];
+    trainings: ModifiedTraining[];
     isEditable: boolean;
     date: dayjs.Dayjs;
 }
@@ -15,7 +16,7 @@ const CalendarTrainingList = ({ trainings, isEditable, date }: CalendarTrainingL
     });
     return (
         <ul className='calendar-training-list'>
-            {filteredTrainings.map((training: NewTrainingResponse) => (
+            {filteredTrainings.map((training: ModifiedTraining) => (
                 <CalendarTrainingItem
                     training={training}
                     key={training._id}

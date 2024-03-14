@@ -1,5 +1,6 @@
+import { useEffect, useState } from 'react';
 import Calendar from '@components/calendar/calendar';
-import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import TrainingListModal from '@pages/calendar-page/calendar-modals/training-list-modal/training-list-modal';
 import CalendarTrainingList from '@pages/calendar-page/calendar-training-list/calendar-training-list';
 import { ModalTypes, setCloseModal, setOpenModal } from '@redux/modals/modals-slice';
@@ -10,9 +11,12 @@ import {
     setTodaysTrainings,
 } from '@redux/trainings/trainings-slice';
 import dayjs from 'dayjs';
+
 import 'dayjs/locale/ru';
-import { useState } from 'react';
+
 import './calendar.less';
+import { selectShouldRefetch } from '@redux/auth/auth-slice';
+import { filterTrainingsByDate } from '@utils/filter-trainings-by-date';
 
 const AppCalendar = () => {
     const dispatch = useAppDispatch();
@@ -21,8 +25,9 @@ const AppCalendar = () => {
         top: 0,
         left: 0,
     });
+    const shouldRefetch = useAppSelector(selectShouldRefetch);
 
-    const { data: trainingList } = useGetTrainingsQuery();
+    const { data: trainingList, refetch } = useGetTrainingsQuery();
 
     const handleCellClick = (event: React.MouseEvent<HTMLDivElement>) => {
         event.stopPropagation();
@@ -30,11 +35,7 @@ const AppCalendar = () => {
         const cellNode = target.closest('.calendar-date-cell');
         const dateAttribute = cellNode?.getAttribute('data-date');
         const date = dayjs(dateAttribute);
-        const filteredTrainings =
-            trainingList?.filter((training) => {
-                const trainingDate = dayjs(training.date).format('YYYY-MM-DD');
-                return trainingDate === date.format('YYYY-MM-DD').toString();
-            }) || [];
+        const filteredTrainings = filterTrainingsByDate(trainingList || [], selectedDate);
         const cellPosition = getSelectedCellPosition(date);
         setSelectedDate(date);
         setCellPosition(cellPosition);
@@ -44,6 +45,20 @@ const AppCalendar = () => {
         dispatch(setCloseModal(ModalTypes.calendarCreateTrainingModal));
         dispatch(setOpenModal(ModalTypes.calendarTrainingListModal));
     };
+
+    useEffect(() => {
+        if (shouldRefetch) {
+            refetch()
+                .unwrap()
+                .then(() => {
+                    const filteredTrainings = filterTrainingsByDate(
+                        trainingList || [],
+                        selectedDate,
+                    );
+                    dispatch(setTodaysTrainings(filteredTrainings));
+                });
+        }
+    }, [shouldRefetch, dispatch, trainingList]);
 
     return (
         <main className='calendar-wrapper'>

@@ -1,4 +1,6 @@
+import { FC, ReactNode, useEffect, useState } from 'react';
 import { CloseOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { trainingButtonTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import {
     selectIsDrawerOpen,
@@ -8,13 +10,17 @@ import {
     setModifiedTraining,
 } from '@redux/trainings/trainings-slice';
 import { Button, Drawer, Typography } from 'antd';
-import { FC, ReactNode, useEffect, useState } from 'react';
-import { Trainings } from '../calendar-training-item/calendar-training-item';
-import './exercise-drawer.less';
-import ExerciseItem from './exercise-item/exercise-item';
 import dayjs from 'dayjs';
-import { Exercise, NewTrainingRequest } from 'src/types/trainings';
-import { exercisesTitles, trainingButtonTitles, trainingDrawerTitles } from '@constants/trainings';
+import { Exercise, ModifiedTraining } from 'src/types/trainings';
+
+import { Trainings } from '../calendar-training-item/calendar-training-item';
+
+import ExerciseItem from './exercise-item/exercise-item';
+
+import './exercise-drawer.less';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
 
 type ExerciseDrawerProps = {
     title: string;
@@ -36,7 +42,7 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
         isImplementation: false,
     };
 
-    const newTrainingObj: NewTrainingRequest = {
+    const newTrainingObj: ModifiedTraining = {
         name: selectedTraining,
         date: selectedDay!,
         isImplementation: false,
@@ -81,10 +87,15 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
     };
 
     const handleCloseDrawer = () => {
+        const modifiedDate = `${dayjs(selectedDay, 'DD-MM-YYYY').format(
+            'YYYY-MM-DD',
+        )}T00:00:00.000Z`;
         const modifiedTraining = {
             ...trainingToUpdate,
+            _id: undefined,
+            date: modifiedDate,
             exercises: trainingToUpdate.exercises
-                .map(({ index, selected, ...rest }) => rest)
+                .map(({ index, selected, _id, ...rest }) => rest)
                 .filter((exercise) => exercise.name !== ''),
         };
         setTrainingToUpdate(modifiedTraining);

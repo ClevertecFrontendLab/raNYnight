@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { NewTrainingRequest, NewTrainingResponse } from 'src/types/trainings';
+import { ModifiedTraining } from 'src/types/trainings';
 
 interface TrainingStore {
-    todaysTrainings: NewTrainingResponse[] | [];
-    trainingToEdit: NewTrainingResponse | null;
+    todaysTrainings: ModifiedTraining[] | [];
+    trainingToEdit: ModifiedTraining | null;
     isDrawerOpen: boolean;
     selectedDay: string | null;
-    modifiedTraining: NewTrainingRequest | null;
+    modifiedTraining: ModifiedTraining | null;
 }
 
 const initialState: TrainingStore = {
@@ -28,13 +28,13 @@ const trainingsSlice = createSlice({
         setIsDrawerOpen: (state, action: PayloadAction<boolean>) => {
             state.isDrawerOpen = action.payload;
         },
-        setTodaysTrainings: (state, action: PayloadAction<NewTrainingResponse[]>) => {
+        setTodaysTrainings: (state, action: PayloadAction<ModifiedTraining[]>) => {
             state.todaysTrainings = action.payload;
         },
-        setTrainingToEdit: (state, action: PayloadAction<NewTrainingResponse | null>) => {
+        setTrainingToEdit: (state, action: PayloadAction<ModifiedTraining | null>) => {
             state.trainingToEdit = action.payload;
         },
-        setModifiedTraining: (state, action: PayloadAction<NewTrainingRequest | null>) => {
+        setModifiedTraining: (state, action: PayloadAction<ModifiedTraining | null>) => {
             state.modifiedTraining = action.payload;
         },
     },

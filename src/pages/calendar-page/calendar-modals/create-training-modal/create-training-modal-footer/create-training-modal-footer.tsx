@@ -1,8 +1,19 @@
-import { trainingButtonTitles } from '@constants/trainings';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { selectModifiedTraining } from '@redux/trainings/trainings-slice';
-import { Button } from 'antd';
 import { FC } from 'react';
+import Loader from '@components/loader/loader';
+import { trainingButtonTitles } from '@constants/trainings';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import {
+    useCreateTrainingMutation,
+    useUpdateTrainingMutation,
+} from '@redux/trainings/trainings-api';
+import {
+    selectModifiedTraining,
+    selectTrainingToEdit,
+    setModifiedTraining,
+} from '@redux/trainings/trainings-slice';
+import { Button } from 'antd';
+import { setShouldRefetch } from '@redux/auth/auth-slice';
+import { ModalTypes, toggleModal } from '@redux/modals/modals-slice';
 
 interface CreateTrainingModalFooterProps {
     onAddExercisesClick: () => void;
@@ -12,26 +23,61 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
     onAddExercisesClick,
     isAddButtonDisabled,
 }) => {
+    const dispatch = useAppDispatch();
     const modifiedTraining = useAppSelector(selectModifiedTraining);
+    const trainingToEdit = useAppSelector(selectTrainingToEdit);
+
+    const [createTraining, { isLoading: isCreateLoading }] = useCreateTrainingMutation();
+    const [updateTraining, { isLoading: isUpdateLoading }] = useUpdateTrainingMutation();
+
+    const handleSaveModifiedTraining = () => {
+        if (modifiedTraining) {
+            if (trainingToEdit) {
+                updateTraining({ ...modifiedTraining, _id: trainingToEdit._id })
+                    .unwrap()
+                    .then(() => {
+                        dispatch(setShouldRefetch(true));
+                        dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));
+                        dispatch(setModifiedTraining(null));
+                    });
+            }
+            if (trainingToEdit === null) {
+                createTraining(modifiedTraining)
+                    .unwrap()
+                    .then(() => {
+                        dispatch(setShouldRefetch(true));
+                        dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));
+                        dispatch(setModifiedTraining(null));
+                    });
+            }
+            // createTraining(modifiedTraining)
+            // dispatch should refetch
+            // close CREATE MODAL
+            //OPEN LIST MODAL
+        }
+    };
     return (
-        <div className='create-training-modal-footer'>
-            <Button
-                type='text'
-                onClick={onAddExercisesClick}
-                className='create-training-footer-add-btn'
-                disabled={isAddButtonDisabled}
-            >
-                {trainingButtonTitles.addExercises}
-            </Button>
-            <Button
-                type='text'
-                onClick={() => console.log('save and close drawer')}
-                className='create-training-footer-save-btn'
-                disabled={modifiedTraining === null ? true : false}
-            >
-                {trainingButtonTitles.saveExercises}
-            </Button>
-        </div>
+        <>
+            <div className='create-training-modal-footer'>
+                <Button
+                    type='text'
+                    onClick={onAddExercisesClick}
+                    className='create-training-footer-add-btn'
+                    disabled={isAddButtonDisabled}
+                >
+                    {trainingButtonTitles.addExercises}
+                </Button>
+                <Button
+                    type='text'
+                    onClick={handleSaveModifiedTraining}
+                    className='create-training-footer-save-btn'
+                    disabled={modifiedTraining === null ? true : false}
+                >
+                    {trainingButtonTitles.saveExercises}
+                </Button>
+            </div>
+            {(isCreateLoading || isUpdateLoading) && <Loader />}
+        </>
     );
 };
 

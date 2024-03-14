@@ -1,11 +1,11 @@
+import { Link } from 'react-router-dom';
 import { HeartFilled, IdcardOutlined } from '@ant-design/icons';
+import { Paths } from '@router/paths';
 import { Typography } from 'antd';
 
 import './main-cards.less';
 
 import calendarOutlinedIcon from '/calendar-icon-2.svg';
-import { Link } from 'react-router-dom';
-import { Paths } from '@router/paths';
 
 const { Text } = Typography;
 

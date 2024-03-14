@@ -1,6 +1,6 @@
 import { baseQuery } from '@constants/api';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { NewTrainingRequest, NewTrainingResponse } from 'src/types/trainings';
+import { ModifiedTraining } from 'src/types/trainings';
 
 export const trainingsApi = createApi({
     reducerPath: 'trainingsApi',
@@ -23,7 +23,7 @@ export const trainingsApi = createApi({
                 credentials: 'include',
             }),
         }),
-        getTrainings: builder.query<NewTrainingResponse[], void>({
+        getTrainings: builder.query<ModifiedTraining[], void>({
             query: () => ({
                 url: 'training',
                 method: 'GET',
@@ -31,7 +31,7 @@ export const trainingsApi = createApi({
             }),
         }),
 
-        createTraining: builder.mutation<NewTrainingResponse, NewTrainingRequest>({
+        createTraining: builder.mutation<void, ModifiedTraining>({
             query: (body) => ({
                 url: 'training',
                 method: 'POST',
@@ -39,8 +39,19 @@ export const trainingsApi = createApi({
                 credentials: 'include',
             }),
         }),
+        updateTraining: builder.mutation<void, ModifiedTraining>({
+            query: (body) => ({
+                url: `training/${body._id}`,
+                method: 'PUT',
+                body,
+            }),
+        }),
     }),
 });
 
-export const { useGetTrainingsQuery, useCreateTrainingMutation, useGetTrainingListQuery } =
-    trainingsApi;
+export const {
+    useGetTrainingsQuery,
+    useCreateTrainingMutation,
+    useGetTrainingListQuery,
+    useUpdateTrainingMutation,
+} = trainingsApi;

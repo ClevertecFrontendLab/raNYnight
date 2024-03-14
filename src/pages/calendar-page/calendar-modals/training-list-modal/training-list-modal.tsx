@@ -1,18 +1,19 @@
-import { Modal } from 'antd';
-import dayjs from 'dayjs';
-
+import { trainingButtonTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import CalendarTrainingList from '@pages/calendar-page/calendar-training-list/calendar-training-list';
 import { ModalTypes, selectModalByType, toggleModal } from '@redux/modals/modals-slice';
 import { selectTodaysTrainings, setTrainingToEdit } from '@redux/trainings/trainings-slice';
-import { NewTrainingResponse } from 'src/types/trainings';
+import { Modal } from 'antd';
+import dayjs from 'dayjs';
+import { ModifiedTraining } from 'src/types/trainings';
+
 import CreateTrainingModal from '../create-training-modal/create-training-modal';
+
 import './training-list-modal.less';
-import { trainingButtonTitles } from '@constants/trainings';
 
 interface TrainingListModalProps {
     date: dayjs.Dayjs;
-    trainings: NewTrainingResponse[];
+    trainings: ModifiedTraining[];
     position: {
         top: number;
         left: number;

@@ -1,16 +1,21 @@
+import { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
-import ExerciseDrawer from '@pages/calendar-page/exercise-drawer/exercise-drawer';
-import { Modal } from 'antd';
-
+import { trainingButtonTitles, trainingDrawerTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import CalendarExercisesList from '@pages/calendar-page/calendar-exercises-list/calendar-exercises-list';
+import ExerciseDrawer from '@pages/calendar-page/exercise-drawer/exercise-drawer';
 import { ModalTypes, selectModalByType } from '@redux/modals/modals-slice';
-import { selectTrainingToEdit, setIsDrawerOpen } from '@redux/trainings/trainings-slice';
-import { useState } from 'react';
+import {
+    selectModifiedTraining,
+    selectTrainingToEdit,
+    setIsDrawerOpen,
+} from '@redux/trainings/trainings-slice';
+import { Modal } from 'antd';
+
 import CreateTrainingModalFooter from './create-training-modal-footer/create-training-modal-footer';
 import CreateTrainingModalTitle from './create-training-modal-title/create-training-modal-title';
+
 import './create-training-modal.less';
-import { trainingButtonTitles, trainingDrawerTitles } from '@constants/trainings';
 
 interface CreateTrainingModalProps {
     position: {
@@ -21,7 +26,13 @@ interface CreateTrainingModalProps {
 
 const CreateTrainingModal = ({ position }: CreateTrainingModalProps) => {
     const dispatch = useAppDispatch();
+
     const trainingToEdit = useAppSelector(selectTrainingToEdit);
+    const modifiedTraining = useAppSelector(selectModifiedTraining);
+
+    const modifiedExercises = modifiedTraining?.exercises;
+    const exercisecToEdit = trainingToEdit?.exercises;
+
     const [selectedOption, setSelectedOption] = useState<string>(
         trainingToEdit ? trainingToEdit.name : trainingButtonTitles.selectTraining,
     );
@@ -67,7 +78,7 @@ const CreateTrainingModal = ({ position }: CreateTrainingModalProps) => {
                 key={`create-training-modal ${trainingToEdit?._id}`}
             >
                 <CalendarExercisesList
-                    exercises={trainingToEdit?.exercises || []}
+                    exercises={modifiedExercises ?? exercisecToEdit ?? []}
                     isEditable={true}
                 />
             </Modal>

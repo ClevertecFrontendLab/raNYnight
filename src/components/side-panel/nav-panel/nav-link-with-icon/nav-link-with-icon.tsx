@@ -1,7 +1,7 @@
+import { Link } from 'react-router-dom';
 import { Typography } from 'antd';
 
 import './nav-link-with-icon.less';
-import { Link } from 'react-router-dom';
 
 const { Text } = Typography;
 

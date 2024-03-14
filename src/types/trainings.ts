@@ -1,4 +1,5 @@
 export type BaseTraining = {
+    _id?: string;
     name: string;
     date: string;
     isImplementation: boolean;
@@ -20,22 +21,14 @@ export type Exercise = {
     isImplementation?: boolean;
     selected?: boolean;
     index?: number;
-};
-
-export type ExerciseResponse = Exercise & {
-    _id: string;
-};
-
-export type NewTrainingRequest = BaseTraining & {
-    exercises: Exercise[];
-};
-
-export type NewTrainingResponse = BaseTraining & {
-    _id: string;
-    exercises: ExerciseResponse[];
+    _id?: string;
 };
 
 export interface TrainingItem {
     name: 'Силовая' | 'Ноги' | 'Руки' | 'Грудь' | 'Спина';
     key: 'strength' | 'legs' | 'hands' | 'chest' | 'back';
 }
+
+export type ModifiedTraining = BaseTraining & {
+    exercises: Exercise[];
+};

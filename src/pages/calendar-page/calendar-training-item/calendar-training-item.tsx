@@ -1,8 +1,8 @@
+import { FC } from 'react';
 import { EditOutlined } from '@ant-design/icons';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { ModalTypes, toggleModal } from '@redux/modals/modals-slice';
 import { setTrainingToEdit } from '@redux/trainings/trainings-slice';
-import { FC } from 'react';
 import { NewTrainingResponse } from 'src/types/trainings';
 
 export interface CalendarTrainingItemProps {

@@ -1,8 +1,9 @@
-import { Checkbox, Input } from 'antd';
 import { FC, useState } from 'react';
-import { Exercise } from 'src/types/trainings';
-import './exercise-item.less';
 import { exercisesTitles } from '@constants/trainings';
+import { Checkbox, Input } from 'antd';
+import { Exercise } from 'src/types/trainings';
+
+import './exercise-item.less';
 
 interface ExerciseItemProps {
     exercise: Exercise;

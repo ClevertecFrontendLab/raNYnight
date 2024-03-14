@@ -1,3 +1,4 @@
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { ResultActions, ResultImages, ResultMessages, ResultTitles } from '@constants/results';
 import AuthChangePassword from '@pages/auth-page/change-password/change-password';
 import AuthConfirmEmail from '@pages/auth-page/confirm-email/confirm-email';
@@ -7,7 +8,6 @@ import { FeedbacksPage } from '@pages/feedbacks-page';
 import { AuthPage, CalendarPage, MainPage } from '@pages/index';
 import AuthResult from '@pages/results-page/auth-result/auth-result';
 import { ResultsPage } from '@pages/results-page/results-page';
-import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Paths } from './paths';
 import PrivateRoutes from './private-routes';
