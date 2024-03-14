@@ -14,9 +14,9 @@ export type TrainingParameters = {
 
 export type Exercise = {
     name: string;
-    replays: string;
-    weight: string;
-    approaches: string;
+    replays: number;
+    weight: number;
+    approaches: number;
     isImplementation?: boolean;
     selected?: boolean;
     index?: number;

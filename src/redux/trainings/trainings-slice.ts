@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { NewTrainingResponse } from 'src/types/trainings';
+import { NewTrainingRequest, NewTrainingResponse } from 'src/types/trainings';
 
 interface TrainingStore {
     todaysTrainings: NewTrainingResponse[] | [];
     trainingToEdit: NewTrainingResponse | null;
     isDrawerOpen: boolean;
     selectedDay: string | null;
+    modifiedTraining: NewTrainingRequest | null;
 }
 
 const initialState: TrainingStore = {
@@ -13,6 +14,7 @@ const initialState: TrainingStore = {
     trainingToEdit: null,
     isDrawerOpen: false,
     selectedDay: null,
+    modifiedTraining: null,
 };
 
 const trainingsSlice = createSlice({
@@ -22,20 +24,29 @@ const trainingsSlice = createSlice({
         setSelectedDay: (state, action: PayloadAction<string | null>) => {
             state.selectedDay = action.payload;
         },
+
+        setIsDrawerOpen: (state, action: PayloadAction<boolean>) => {
+            state.isDrawerOpen = action.payload;
+        },
         setTodaysTrainings: (state, action: PayloadAction<NewTrainingResponse[]>) => {
             state.todaysTrainings = action.payload;
         },
         setTrainingToEdit: (state, action: PayloadAction<NewTrainingResponse | null>) => {
             state.trainingToEdit = action.payload;
         },
-        setIsDrawerOpen: (state, action: PayloadAction<boolean>) => {
-            state.isDrawerOpen = action.payload;
+        setModifiedTraining: (state, action: PayloadAction<NewTrainingRequest | null>) => {
+            state.modifiedTraining = action.payload;
         },
     },
 });
 
-export const { setTodaysTrainings, setTrainingToEdit, setIsDrawerOpen, setSelectedDay } =
-    trainingsSlice.actions;
+export const {
+    setTodaysTrainings,
+    setTrainingToEdit,
+    setIsDrawerOpen,
+    setSelectedDay,
+    setModifiedTraining,
+} = trainingsSlice.actions;
 
 export const selectTodaysTrainings = (state: { trainings: TrainingStore }) =>
     state.trainings.todaysTrainings;
@@ -48,5 +59,8 @@ export const selectIsDrawerOpen = (state: { trainings: TrainingStore }) =>
 
 export const selectSelectedDay = (state: { trainings: TrainingStore }) =>
     state.trainings.selectedDay;
+
+export const selectModifiedTraining = (state: { trainings: TrainingStore }) =>
+    state.trainings.modifiedTraining;
 
 export default trainingsSlice.reducer;

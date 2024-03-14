@@ -1,57 +1,37 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { drawerTitles } from '@constants/drawer';
 import ExerciseDrawer from '@pages/calendar-page/exercise-drawer/exercise-drawer';
-import { Button, Modal } from 'antd';
-import dayjs from 'dayjs';
-import { NewTrainingResponse } from 'src/types/trainings';
+import { Modal } from 'antd';
 
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import CalendarExercisesList from '@pages/calendar-page/calendar-exercises-list/calendar-exercises-list';
-import { ModalTypes, selectModalByType, toggleModal } from '@redux/modals/modals-slice';
-import {
-    selectTrainingToEdit,
-    setIsDrawerOpen,
-    setTrainingToEdit,
-} from '@redux/trainings/trainings-slice';
+import { ModalTypes, selectModalByType } from '@redux/modals/modals-slice';
+import { selectTrainingToEdit, setIsDrawerOpen } from '@redux/trainings/trainings-slice';
 import { useState } from 'react';
+import CreateTrainingModalFooter from './create-training-modal-footer/create-training-modal-footer';
 import CreateTrainingModalTitle from './create-training-modal-title/create-training-modal-title';
 import './create-training-modal.less';
+import { trainingButtonTitles, trainingDrawerTitles } from '@constants/trainings';
 
 interface CreateTrainingModalProps {
-    date: dayjs.Dayjs;
-    trainings: NewTrainingResponse[];
     position: {
         top: number;
         left: number;
     };
 }
 
-const CreateTrainingModal = ({ trainings, position }: CreateTrainingModalProps) => {
+const CreateTrainingModal = ({ position }: CreateTrainingModalProps) => {
     const dispatch = useAppDispatch();
     const trainingToEdit = useAppSelector(selectTrainingToEdit);
     const [selectedOption, setSelectedOption] = useState<string>(
-        trainingToEdit ? trainingToEdit.name : 'Выбор тренировки',
+        trainingToEdit ? trainingToEdit.name : trainingButtonTitles.selectTraining,
     );
 
     const isCreateTrainingModalOpen = useAppSelector(
         selectModalByType(ModalTypes.calendarCreateTrainingModal),
     );
 
-    const handleCloseDrawer = () => {
-        dispatch(setIsDrawerOpen(false));
-    };
-
     const handleOpenDrawer = () => {
         dispatch(setIsDrawerOpen(true));
-    };
-
-    const handleAddExercise = () => {
-        handleOpenDrawer();
-    };
-
-    const handleToggleCreateTrainingModal = () => {
-        dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));
-        dispatch(setTrainingToEdit(null));
     };
 
     const handleDropdownChange = (selectedOption: string) => {
@@ -64,7 +44,7 @@ const CreateTrainingModal = ({ trainings, position }: CreateTrainingModalProps) 
             <Modal
                 title={
                     <CreateTrainingModalTitle
-                        defaultSelect={trainingToEdit?.name || 'Выбор тренировки'}
+                        defaultSelect={trainingToEdit?.name || trainingButtonTitles.selectTraining}
                         onChange={handleDropdownChange}
                     />
                 }
@@ -74,30 +54,17 @@ const CreateTrainingModal = ({ trainings, position }: CreateTrainingModalProps) 
                 className='training-list-modal'
                 width={264}
                 mask={false}
-                onCancel={handleToggleCreateTrainingModal}
                 closable={false}
                 style={{ top: position.top, left: position.left }}
                 maskClosable={false}
                 destroyOnClose
                 footer={
-                    <div className='create-training-modal-footer'>
-                        <Button
-                            type='text'
-                            onClick={handleAddExercise}
-                            className='create-training-footer-add-btn'
-                        >
-                            Добавить упражнения
-                        </Button>
-                        <Button
-                            type='text'
-                            onClick={() => console.log('save and close drawer')}
-                            className='create-training-footer-save-btn'
-                        >
-                            Сохранить
-                        </Button>
-                    </div>
+                    <CreateTrainingModalFooter
+                        onAddExercisesClick={handleOpenDrawer}
+                        isAddButtonDisabled={selectedOption === trainingButtonTitles.selectTraining}
+                    />
                 }
-                key={'create-training-modal'}
+                key={`create-training-modal ${trainingToEdit?._id}`}
             >
                 <CalendarExercisesList
                     exercises={trainingToEdit?.exercises || []}
@@ -107,8 +74,7 @@ const CreateTrainingModal = ({ trainings, position }: CreateTrainingModalProps) 
 
             <ExerciseDrawer
                 selectedTraining={selectedOption}
-                title={trainingToEdit ? drawerTitles.edit : drawerTitles.addNew}
-                onClose={handleCloseDrawer}
+                title={trainingToEdit ? trainingDrawerTitles.edit : trainingDrawerTitles.addNew}
                 closeIcon={<PlusOutlined />}
             />
         </>

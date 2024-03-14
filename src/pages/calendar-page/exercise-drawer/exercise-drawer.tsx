@@ -1,9 +1,11 @@
 import { CloseOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import {
     selectIsDrawerOpen,
     selectSelectedDay,
     selectTrainingToEdit,
+    setIsDrawerOpen,
+    setModifiedTraining,
 } from '@redux/trainings/trainings-slice';
 import { Button, Drawer, Typography } from 'antd';
 import { FC, ReactNode, useEffect, useState } from 'react';
@@ -12,29 +14,25 @@ import './exercise-drawer.less';
 import ExerciseItem from './exercise-item/exercise-item';
 import dayjs from 'dayjs';
 import { Exercise, NewTrainingRequest } from 'src/types/trainings';
+import { exercisesTitles, trainingButtonTitles, trainingDrawerTitles } from '@constants/trainings';
 
 type ExerciseDrawerProps = {
     title: string;
-    onClose: () => void;
     closeIcon?: ReactNode;
     selectedTraining: string;
 };
 
-const ExerciseDrawer: FC<ExerciseDrawerProps> = ({
-    title,
-    onClose,
-    closeIcon,
-    selectedTraining,
-}) => {
+const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTraining }) => {
+    const dispatch = useAppDispatch();
     const isDrawerOpen = useAppSelector(selectIsDrawerOpen);
     const trainingToEdit = useAppSelector(selectTrainingToEdit);
     const selectedDay = useAppSelector(selectSelectedDay);
 
     const newExerciseObj: Exercise = {
         name: '',
-        replays: '1',
-        weight: '0',
-        approaches: '3',
+        replays: 1,
+        weight: 0,
+        approaches: 3,
         isImplementation: false,
     };
 
@@ -59,7 +57,6 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({
         Trainings[trainingToUpdate.name as keyof typeof Trainings];
 
     const handleExerciseChange = (updatedExercise: Exercise) => {
-        console.log('handleExerciseChange', updatedExercise);
         const updatedExercises = trainingToUpdate.exercises.map((exercise, i) => {
             if (i === updatedExercise.index) {
                 return updatedExercise;
@@ -77,34 +74,46 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({
     };
 
     const handleRemoveExercises = () => {
-        console.log('before filter', trainingToUpdate.exercises);
         const updatedExercises = trainingToUpdate.exercises.filter(
             (exercise) => !exercise.selected,
         );
-        console.log('after filter', updatedExercises);
         setTrainingToUpdate((prevState) => ({ ...prevState, exercises: updatedExercises }));
+    };
+
+    const handleCloseDrawer = () => {
+        const modifiedTraining = {
+            ...trainingToUpdate,
+            exercises: trainingToUpdate.exercises
+                .map(({ index, selected, ...rest }) => rest)
+                .filter((exercise) => exercise.name !== ''),
+        };
+        setTrainingToUpdate(modifiedTraining);
+        dispatch(setModifiedTraining(modifiedTraining));
+        dispatch(setIsDrawerOpen(false));
     };
 
     useEffect(() => {
         setTrainingToUpdate(trainingToEdit ? { ...trainingToEdit } : { ...newTrainingObj });
     }, [selectedTraining, trainingToEdit]);
 
-    useEffect(() => {
-        console.log('Updated training:', trainingToUpdate.exercises);
-    }, [trainingToUpdate, handleRemoveExercises]);
-
-    console.log('trainingToUpdate', trainingToUpdate.exercises);
     return (
         <Drawer
             title={title}
-            destroyOnClose={true}
+            destroyOnClose
             placement='right'
             closable={true}
             closeIcon={closeIcon}
             open={isDrawerOpen}
             className={'exercise-drawer'}
             width={360}
-            extra={<Button type='text' size='middle' icon={<CloseOutlined />} onClick={onClose} />}
+            extra={
+                <Button
+                    type='text'
+                    size='middle'
+                    icon={<CloseOutlined />}
+                    onClick={handleCloseDrawer}
+                />
+            }
         >
             <div className='drawer-exercise-header'>
                 <li className={`calendar-training-item ${trainingKey}`}>{trainingToUpdate.name}</li>
@@ -115,7 +124,7 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({
             {trainingToUpdate.exercises.map((exercise, i) => (
                 <ExerciseItem
                     exercise={exercise}
-                    key={i}
+                    key={exercise.name + i}
                     onExerciseChange={handleExerciseChange}
                     index={i}
                 />
@@ -126,10 +135,14 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({
                     className='drawer-exercise-button-add'
                     onClick={handleAddExercise}
                 >
-                    Добавить ещё
+                    {trainingButtonTitles.addMoreExercises}
                 </Button>
-                <Button icon={<MinusOutlined />} onClick={handleRemoveExercises}>
-                    Удалить
+                <Button
+                    icon={<MinusOutlined />}
+                    onClick={handleRemoveExercises}
+                    disabled={trainingToUpdate.exercises.length === 0}
+                >
+                    {trainingButtonTitles.deleteExercises}
                 </Button>
             </div>
         </Drawer>

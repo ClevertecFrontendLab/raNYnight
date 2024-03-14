@@ -2,9 +2,13 @@ import { ArrowLeftOutlined } from '@ant-design/icons';
 import { defaultTrainings } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { ModalTypes, toggleModal } from '@redux/modals/modals-slice';
-import { selectTodaysTrainings, setTrainingToEdit } from '@redux/trainings/trainings-slice';
+import {
+    selectTodaysTrainings,
+    setModifiedTraining,
+    setTrainingToEdit,
+} from '@redux/trainings/trainings-slice';
 import { Button, Select } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './create-training-modal-title.less';
 
 interface CreateTrainingModalTitleProps {
@@ -30,7 +34,13 @@ const CreateTrainingModalTitle = ({ defaultSelect, onChange }: CreateTrainingMod
     const handleToggleCreateTrainingModal = () => {
         dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));
         dispatch(setTrainingToEdit(null));
+        dispatch(setModifiedTraining(null));
     };
+
+    useEffect(() => {
+        onChange(selectedOption);
+    }, []);
+
     return (
         <div className='create-training-modal-title'>
             <Button

@@ -1,8 +1,8 @@
-import { Checkbox, Input, InputNumber } from 'antd';
-import './exercise-item.less';
+import { Checkbox, Input } from 'antd';
 import { FC, useState } from 'react';
 import { Exercise } from 'src/types/trainings';
-import { CheckboxChangeEvent } from 'antd/es/checkbox';
+import './exercise-item.less';
+import { exercisesTitles } from '@constants/trainings';
 
 interface ExerciseItemProps {
     exercise: Exercise;
@@ -10,15 +10,12 @@ interface ExerciseItemProps {
     onExerciseChange: (exercise: Exercise) => void;
 }
 
-// export type ExerciseState = Exercise & {
-//     selected: boolean;
-//     index: number;
-// };
-
 const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index }) => {
     const [exerciseState, setExerciseState] = useState<Exercise>(exercise);
 
-    const handleInputChange = (name: string, value: string | boolean) => {
+    const { exerciseApproaches, exerciseReplays, exerciseName, exerciseWeigth } = exercisesTitles;
+
+    const handleInputChange = (name: string, value: string | number | boolean) => {
         setExerciseState((prevExercise) => {
             const res = {
                 ...prevExercise,
@@ -33,8 +30,9 @@ const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index
     return (
         <section className='exercise-item'>
             <Input
+                autoFocus
                 name='name'
-                placeholder='Упражнение'
+                placeholder={exerciseName}
                 value={exerciseState.name}
                 addonAfter={
                     <Checkbox
@@ -47,9 +45,9 @@ const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index
                 onChange={(e) => handleInputChange(e.target.name, e.target.value)}
             />
             <div className='exercise-header'>
-                <div className='exercise-input-text'>Подходы</div>
-                <div className='exercise-input-text'>Вес, кг</div>
-                <div className='exercise-input-text'>Количество</div>
+                <div className='exercise-input-text'>{exerciseReplays}</div>
+                <div className='exercise-input-text'>{exerciseWeigth}, кг</div>
+                <div className='exercise-input-text'>{exerciseApproaches}</div>
             </div>
             <div className={'exercise-inputs-wrapper'}>
                 <div className='exercise-input'>

@@ -8,6 +8,7 @@ import { selectTodaysTrainings, setTrainingToEdit } from '@redux/trainings/train
 import { NewTrainingResponse } from 'src/types/trainings';
 import CreateTrainingModal from '../create-training-modal/create-training-modal';
 import './training-list-modal.less';
+import { trainingButtonTitles } from '@constants/trainings';
 
 interface TrainingListModalProps {
     date: dayjs.Dayjs;
@@ -41,7 +42,7 @@ const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps
         <>
             <Modal
                 title={`Тренировки на ${date.format('DD.MM.YYYY')}`}
-                okText='Добавить тренировку'
+                okText={trainingButtonTitles.addTraining}
                 onOk={handleToggleCreateTrainingModal}
                 onCancel={handleTogleTrainingListModal}
                 cancelButtonProps={{ style: { display: 'none' } }}
@@ -57,7 +58,7 @@ const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps
             >
                 <CalendarTrainingList trainings={trainings} isEditable={true} date={date} />
             </Modal>
-            <CreateTrainingModal date={date} trainings={trainings} position={position} />
+            <CreateTrainingModal position={position} />
         </>
     );
 };

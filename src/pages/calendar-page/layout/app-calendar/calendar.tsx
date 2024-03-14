@@ -4,7 +4,11 @@ import TrainingListModal from '@pages/calendar-page/calendar-modals/training-lis
 import CalendarTrainingList from '@pages/calendar-page/calendar-training-list/calendar-training-list';
 import { ModalTypes, setCloseModal, setOpenModal } from '@redux/modals/modals-slice';
 import { useGetTrainingsQuery } from '@redux/trainings/trainings-api';
-import { setSelectedDay, setTodaysTrainings } from '@redux/trainings/trainings-slice';
+import {
+    setModifiedTraining,
+    setSelectedDay,
+    setTodaysTrainings,
+} from '@redux/trainings/trainings-slice';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import { useState } from 'react';
@@ -36,6 +40,7 @@ const AppCalendar = () => {
         setCellPosition(cellPosition);
         dispatch(setSelectedDay(date.format('DD-MM-YYYY').toString()));
         dispatch(setTodaysTrainings(filteredTrainings));
+        dispatch(setModifiedTraining(null));
         dispatch(setCloseModal(ModalTypes.calendarCreateTrainingModal));
         dispatch(setOpenModal(ModalTypes.calendarTrainingListModal));
     };
