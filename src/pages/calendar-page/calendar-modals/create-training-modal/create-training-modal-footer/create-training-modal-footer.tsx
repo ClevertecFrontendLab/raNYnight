@@ -30,30 +30,21 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
     const [createTraining, { isLoading: isCreateLoading }] = useCreateTrainingMutation();
     const [updateTraining, { isLoading: isUpdateLoading }] = useUpdateTrainingMutation();
 
+    const handleSaveSuccess = () => {
+        dispatch(setShouldRefetch(true));
+        dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));
+        dispatch(setModifiedTraining(null));
+    };
+
     const handleSaveModifiedTraining = () => {
         if (modifiedTraining) {
             if (trainingToEdit) {
                 updateTraining({ ...modifiedTraining, _id: trainingToEdit._id })
                     .unwrap()
-                    .then(() => {
-                        dispatch(setShouldRefetch(true));
-                        dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));
-                        dispatch(setModifiedTraining(null));
-                    });
+                    .then(handleSaveSuccess);
+            } else {
+                createTraining(modifiedTraining).unwrap().then(handleSaveSuccess);
             }
-            if (trainingToEdit === null) {
-                createTraining(modifiedTraining)
-                    .unwrap()
-                    .then(() => {
-                        dispatch(setShouldRefetch(true));
-                        dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));
-                        dispatch(setModifiedTraining(null));
-                    });
-            }
-            // createTraining(modifiedTraining)
-            // dispatch should refetch
-            // close CREATE MODAL
-            //OPEN LIST MODAL
         }
     };
     return (
@@ -77,6 +68,7 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
                 </Button>
             </div>
             {(isCreateLoading || isUpdateLoading) && <Loader />}
+            {/* <Loader /> */}
         </>
     );
 };

@@ -16,11 +16,11 @@ const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
 root.render(
-    <StrictMode>
-        <ConfigProvider locale={ruRu}>
-            <Provider store={store}>
-                <App />
-            </Provider>
-        </ConfigProvider>
-    </StrictMode>,
+    // <StrictMode>
+    <ConfigProvider locale={ruRu}>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </ConfigProvider>,
+    // </StrictMode>,
 );

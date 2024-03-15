@@ -25,7 +25,7 @@ export const trainingsApi = createApi({
         }),
         getTrainings: builder.query<ModifiedTraining[], void>({
             query: () => ({
-                url: 'training',
+                url: 'trainings',
                 method: 'GET',
                 credentials: 'include',
             }),
