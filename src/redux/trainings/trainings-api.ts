@@ -19,7 +19,7 @@ export const trainingsApi = createApi({
     endpoints: (builder) => ({
         getTrainingList: builder.query<string[], void>({
             query: () => ({
-                url: 'catalogs/training-lists',
+                url: 'catalogs/training-list',
                 method: 'GET',
                 credentials: 'include',
             }),

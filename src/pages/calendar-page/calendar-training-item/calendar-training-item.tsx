@@ -3,10 +3,12 @@ import { EditOutlined } from '@ant-design/icons';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { ModalTypes, toggleModal } from '@redux/modals/modals-slice';
 import { setTrainingToEdit } from '@redux/trainings/trainings-slice';
-import { NewTrainingResponse } from 'src/types/trainings';
+import { ModifiedTraining } from 'src/types/trainings';
+
+import './calendar-training-item.less';
 
 export interface CalendarTrainingItemProps {
-    training: NewTrainingResponse | null;
+    training: ModifiedTraining | null;
     isEditable: boolean;
 }
 
@@ -23,6 +25,9 @@ const CalendarTrainingItem: FC<CalendarTrainingItemProps> = ({ training, isEdita
     const dispatch = useAppDispatch();
 
     const handleClick = () => {
+        if (training?.isImplementation) {
+            return;
+        }
         dispatch(setTrainingToEdit(training));
         dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));
     };
@@ -31,10 +36,19 @@ const CalendarTrainingItem: FC<CalendarTrainingItemProps> = ({ training, isEdita
         const trainingKey: Trainings | undefined =
             Trainings[training.name as keyof typeof Trainings];
         return (
-            <li className={`calendar-training-item ${trainingKey}`}>
+            <li
+                className={`calendar-training-item ${trainingKey} ${
+                    training.isImplementation ? 'implemented' : ''
+                }`}
+            >
                 {training.name}
                 {isEditable && (
-                    <EditOutlined onClick={handleClick} className='training-edit-icon' />
+                    <EditOutlined
+                        onClick={handleClick}
+                        className={`training-edit-icon ${
+                            training.isImplementation ? 'implemented' : ''
+                        }`}
+                    />
                 )}
             </li>
         );

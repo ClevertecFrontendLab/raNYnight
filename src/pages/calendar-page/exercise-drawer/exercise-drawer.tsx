@@ -34,6 +34,10 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
     const trainingToEdit = useAppSelector(selectTrainingToEdit);
     const selectedDay = useAppSelector(selectSelectedDay);
 
+    const isPast = dayjs(selectedDay, 'DD-MM-YYYY').isBefore(dayjs(), 'day');
+    const isToday = dayjs(selectedDay, 'DD-MM-YYYY').isSame(dayjs(), 'day');
+    const isImplementation = isPast || isToday;
+
     const newExerciseObj: Exercise = {
         name: '',
         replays: 1,
@@ -92,6 +96,7 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
         )}T00:00:00.000Z`;
         const modifiedTraining = {
             ...trainingToUpdate,
+            isImplementation,
             _id: undefined,
             date: modifiedDate,
             exercises: trainingToUpdate.exercises

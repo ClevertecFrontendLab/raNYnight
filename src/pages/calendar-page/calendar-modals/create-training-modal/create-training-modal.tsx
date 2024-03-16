@@ -34,7 +34,7 @@ const CreateTrainingModal = ({ position }: CreateTrainingModalProps) => {
     const exercisecToEdit = trainingToEdit?.exercises;
 
     const [selectedOption, setSelectedOption] = useState<string>(
-        trainingToEdit ? trainingToEdit.name : trainingButtonTitles.selectTraining,
+        trainingToEdit !== null ? trainingToEdit.name : trainingButtonTitles.selectTraining,
     );
 
     const isCreateTrainingModalOpen = useAppSelector(
@@ -55,7 +55,7 @@ const CreateTrainingModal = ({ position }: CreateTrainingModalProps) => {
             <Modal
                 title={
                     <CreateTrainingModalTitle
-                        defaultSelect={trainingToEdit?.name || trainingButtonTitles.selectTraining}
+                        defaultSelect={selectedOption}
                         onChange={handleDropdownChange}
                     />
                 }

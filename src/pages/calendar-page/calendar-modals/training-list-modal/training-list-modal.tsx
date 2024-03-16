@@ -2,7 +2,7 @@ import { trainingButtonTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import CalendarTrainingList from '@pages/calendar-page/calendar-training-list/calendar-training-list';
 import { ModalTypes, selectModalByType, toggleModal } from '@redux/modals/modals-slice';
-import { selectTodaysTrainings, setTrainingToEdit } from '@redux/trainings/trainings-slice';
+import { selectDefaultTrainings, setTrainingToEdit } from '@redux/trainings/trainings-slice';
 import { Modal } from 'antd';
 import dayjs from 'dayjs';
 import { ModifiedTraining } from 'src/types/trainings';
@@ -22,13 +22,19 @@ interface TrainingListModalProps {
 
 const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps) => {
     const dispatch = useAppDispatch();
-    const todaysTrainings = useAppSelector(selectTodaysTrainings);
     const isTrainingListModalOpen = useAppSelector(
         selectModalByType(ModalTypes.calendarTrainingListModal),
     );
     const isCreateTrainingModalOpen = useAppSelector(
         selectModalByType(ModalTypes.calendarCreateTrainingModal),
     );
+    const defaultTrainings = useAppSelector(selectDefaultTrainings);
+
+    const isPastDay = date.isBefore(dayjs(), 'day');
+    const isToday = date.isSame(dayjs(), 'day');
+
+    const isOkButtonDisasbled =
+        isPastDay || isToday || trainings.length === defaultTrainings.length;
 
     const handleToggleCreateTrainingModal = () => {
         dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));
@@ -49,7 +55,7 @@ const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps
                 cancelButtonProps={{ style: { display: 'none' } }}
                 okButtonProps={{
                     style: { width: '100%', margin: 0 },
-                    disabled: todaysTrainings.length === 5,
+                    disabled: isOkButtonDisasbled,
                 }}
                 open={isTrainingListModalOpen && !isCreateTrainingModalOpen}
                 className='training-list-modal'

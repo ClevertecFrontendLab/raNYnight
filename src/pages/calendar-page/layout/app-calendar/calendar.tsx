@@ -32,8 +32,6 @@ import { Paths } from '@router/paths';
 import { NotificationModal } from '@pages/calendar-page/calendar-modals/notification-modal/notification-modal';
 
 const AppCalendar = () => {
-    console.log('AppCalendar');
-
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
@@ -42,6 +40,7 @@ const AppCalendar = () => {
         top: 0,
         left: 0,
     });
+
     const shouldRefetch = useAppSelector(selectShouldRefetch);
     const defaultTrainings = useAppSelector(selectDefaultTrainings);
     const isCalendarBlocked = useAppSelector(selectIsCalendarBlocked);

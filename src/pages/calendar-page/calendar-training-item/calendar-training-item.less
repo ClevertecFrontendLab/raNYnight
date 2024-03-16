@@ -1,0 +1,55 @@
+@import '/src/style-variables.less';
+
+.calendar-training-list {
+    padding: 0;
+}
+
+.calendar-training-list li,
+.drawer-exercise-header li {
+    list-style-type: none;
+    position: relative;
+    padding-left: 20px;
+}
+
+.calendar-training-list li:before,
+.calendar-training-item:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.anticon.training-edit-icon {
+    color: @primary-light-6;
+    position: absolute;
+    right: 0;
+}
+.anticon.training-edit-icon.implemented,
+.calendar-training-item.implemented {
+    color: @character-light-secondary-45;
+}
+
+.calendar-training-list li.legs:before,
+.calendar-training-item.legs:before {
+    background-color: @tranie-red;
+}
+.calendar-training-list li.strength:before,
+.calendar-training-item.strength:before {
+    background-color: @tranie-yellow;
+}
+.calendar-training-list li.hands:before,
+.calendar-training-item.hands:before {
+    background-color: @tranie-cyan;
+}
+.calendar-training-list li.chest:before,
+.calendar-training-item.chest:before {
+    background-color: @tranie-green;
+}
+.calendar-training-list li.back:before,
+.calendar-training-item.back:before {
+    background-color: @tranie-orange;
+}

@@ -1,6 +1,6 @@
-import { FC, memo, useEffect, useState } from 'react';
 import { CloseCircleOutlined, CloseOutlined } from '@ant-design/icons';
-import { Button, Modal, notification, Typography } from 'antd';
+import { Button, Modal, Typography, notification } from 'antd';
+import { FC, useEffect, useState } from 'react';
 
 import './notification-modal.less';
 
