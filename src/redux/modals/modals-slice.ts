@@ -9,6 +9,7 @@ export enum ModalTypes {
     none = 'none',
     calendarTrainingListModal = 'calendarTrainingListModal',
     calendarCreateTrainingModal = 'calendarCreateTrainingModal',
+    calendarGetDefaultTrainingsModal = 'calendarGetDefaultTrainingsModal',
 }
 
 const initialState: ModalStore = {

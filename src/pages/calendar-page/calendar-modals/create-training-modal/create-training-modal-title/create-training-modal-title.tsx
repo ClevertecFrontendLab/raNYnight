@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { defaultTrainings } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { ModalTypes, toggleModal } from '@redux/modals/modals-slice';
 import {
+    selectDefaultTrainings,
     selectTodaysTrainings,
     setModifiedTraining,
     setTrainingToEdit,
@@ -20,6 +20,7 @@ interface CreateTrainingModalTitleProps {
 const CreateTrainingModalTitle = ({ defaultSelect, onChange }: CreateTrainingModalTitleProps) => {
     const dispatch = useAppDispatch();
     const todaysTrainings = useAppSelector(selectTodaysTrainings);
+    const defaultTrainings = useAppSelector(selectDefaultTrainings);
     const [selectedOption, setSelectedOption] = useState<string>(defaultSelect);
 
     const selectItems = defaultTrainings

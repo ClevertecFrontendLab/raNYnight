@@ -1,6 +1,7 @@
 import { baseQuery } from '@constants/api';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ModifiedTraining } from 'src/types/trainings';
+import { ModifiedTraining, Training } from 'src/types/trainings';
+import { setDefaultTrainings } from './trainings-slice';
 
 export const trainingsApi = createApi({
     reducerPath: 'trainingsApi',
@@ -16,16 +17,21 @@ export const trainingsApi = createApi({
         },
     }),
     endpoints: (builder) => ({
-        getTrainingList: builder.query<void, void>({
+        getTrainingList: builder.query<string[], void>({
             query: () => ({
-                url: 'catalogs/training-list',
+                url: 'catalogs/training-lists',
                 method: 'GET',
                 credentials: 'include',
             }),
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                const { data } = await queryFulfilled;
+                dispatch(setDefaultTrainings(data));
+            },
+            transformResponse: (response: Training[]) => response.map(({ name }) => name),
         }),
         getTrainings: builder.query<ModifiedTraining[], void>({
             query: () => ({
-                url: 'trainings',
+                url: 'training',
                 method: 'GET',
                 credentials: 'include',
             }),
@@ -50,6 +56,7 @@ export const trainingsApi = createApi({
 });
 
 export const {
+    useLazyGetTrainingListQuery,
     useGetTrainingsQuery,
     useCreateTrainingMutation,
     useGetTrainingListQuery,

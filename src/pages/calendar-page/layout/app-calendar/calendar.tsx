@@ -3,9 +3,18 @@ import Calendar from '@components/calendar/calendar';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import TrainingListModal from '@pages/calendar-page/calendar-modals/training-list-modal/training-list-modal';
 import CalendarTrainingList from '@pages/calendar-page/calendar-training-list/calendar-training-list';
-import { ModalTypes, setCloseModal, setOpenModal } from '@redux/modals/modals-slice';
-import { useGetTrainingsQuery } from '@redux/trainings/trainings-api';
 import {
+    ModalTypes,
+    selectModalByType,
+    setCloseModal,
+    setOpenModal,
+} from '@redux/modals/modals-slice';
+import { useGetTrainingsQuery, useLazyGetTrainingListQuery } from '@redux/trainings/trainings-api';
+import {
+    resetTrainigState,
+    selectDefaultTrainings,
+    selectIsCalendarBlocked,
+    setCalendarBlocked,
     setModifiedTraining,
     setSelectedDay,
     setTodaysTrainings,
@@ -20,6 +29,7 @@ import { filterTrainingsByDate } from '@utils/filter-trainings-by-date';
 import FeedbackModalResult from '@pages/feedbacks-page/feedback-modal-results/feedback-modal-results';
 import { useNavigate } from 'react-router-dom';
 import { Paths } from '@router/paths';
+import { NotificationModal } from '@pages/calendar-page/calendar-modals/notification-modal/notification-modal';
 
 const AppCalendar = () => {
     console.log('AppCalendar');
@@ -33,16 +43,26 @@ const AppCalendar = () => {
         left: 0,
     });
     const shouldRefetch = useAppSelector(selectShouldRefetch);
+    const defaultTrainings = useAppSelector(selectDefaultTrainings);
+    const isCalendarBlocked = useAppSelector(selectIsCalendarBlocked);
+    const isGetDefaultTrainingsModalOpen = useAppSelector(
+        selectModalByType(ModalTypes.calendarGetDefaultTrainingsModal),
+    );
 
     const { data: trainingList, refetch, error } = useGetTrainingsQuery();
+    const [getTrainingList, { isError: isRequestError }] = useLazyGetTrainingListQuery();
 
     const handleCellClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        if (isCalendarBlocked) {
+            return;
+        }
         event.stopPropagation();
         const target = event.target as HTMLElement;
         const cellNode = target.closest('.calendar-date-cell');
         const dateAttribute = cellNode?.getAttribute('data-date');
         const date = dayjs(dateAttribute);
-        const filteredTrainings = filterTrainingsByDate(trainingList || [], selectedDate);
+
+        const filteredTrainings = filterTrainingsByDate(trainingList || [], date);
         const cellPosition = getSelectedCellPosition(date);
         setSelectedDate(date);
         setCellPosition(cellPosition);
@@ -53,8 +73,20 @@ const AppCalendar = () => {
         dispatch(setOpenModal(ModalTypes.calendarTrainingListModal));
     };
 
+    const handleGetTrainingList = () => {
+        getTrainingList();
+        dispatch(setCloseModal(ModalTypes.calendarGetDefaultTrainingsModal));
+    };
+
+    const handleCloseNotificationModal = () => {
+        dispatch(setCloseModal(ModalTypes.calendarGetDefaultTrainingsModal));
+        dispatch(resetTrainigState());
+        dispatch(setCalendarBlocked(true));
+    };
+
     useEffect(() => {
         if (shouldRefetch) {
+            console.log('refetch');
             refetch()
                 .unwrap()
                 .then(() => {
@@ -74,6 +106,18 @@ const AppCalendar = () => {
             FeedbackModalResult.getError(handleCancel);
         }
     }, [shouldRefetch, dispatch, trainingList, FeedbackModalResult, navigate]);
+
+    useEffect(() => {
+        if (!defaultTrainings?.length) {
+            getTrainingList();
+        }
+    }, []);
+
+    useEffect(() => {
+        if (isRequestError) {
+            dispatch(setOpenModal(ModalTypes.calendarGetDefaultTrainingsModal));
+        }
+    }, [isRequestError]);
 
     return (
         <main className='calendar-wrapper'>
@@ -102,6 +146,16 @@ const AppCalendar = () => {
                 date={selectedDate}
                 trainings={trainingList || []}
                 position={cellPosition}
+            />
+            <NotificationModal
+                textButton='Обновить'
+                onClickButton={handleGetTrainingList}
+                type='warning'
+                isCloseIcon={true}
+                title='При открытии данных произошла ошибка'
+                subtitle='Попробуйте ещё раз.'
+                open={isGetDefaultTrainingsModalOpen}
+                onClose={handleCloseNotificationModal}
             />
         </main>
     );

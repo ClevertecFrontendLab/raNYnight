@@ -32,3 +32,5 @@ export interface TrainingItem {
 export type ModifiedTraining = BaseTraining & {
     exercises: Exercise[];
 };
+
+export type Training = { name: string };
