@@ -16,6 +16,7 @@ import CreateTrainingModalFooter from './create-training-modal-footer/create-tra
 import CreateTrainingModalTitle from './create-training-modal-title/create-training-modal-title';
 
 import './create-training-modal.less';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 interface CreateTrainingModalProps {
     position: {
@@ -53,6 +54,7 @@ const CreateTrainingModal = ({ position }: CreateTrainingModalProps) => {
     return (
         <>
             <Modal
+                data-test-id={DATA_TEST_ID.modalCreateExercise}
                 title={
                     <CreateTrainingModalTitle
                         defaultSelect={selectedOption}

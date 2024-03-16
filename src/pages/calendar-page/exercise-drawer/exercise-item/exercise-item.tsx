@@ -4,6 +4,7 @@ import { Checkbox, Input } from 'antd';
 import { Exercise } from 'src/types/trainings';
 
 import './exercise-item.less';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 interface ExerciseItemProps {
     exercise: Exercise;
@@ -41,9 +42,11 @@ const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index
                         name='selected'
                         checked={exerciseState.selected}
                         onChange={(e) => handleInputChange(e.target.name!, e.target.checked)}
+                        data-test-id={`${DATA_TEST_ID.modalDrawerRightCheckboxExercise}${index}`}
                     />
                 }
                 onChange={(e) => handleInputChange(e.target.name, e.target.value)}
+                data-test-id={`${DATA_TEST_ID.modalDrawerRightInputExercise}${index}`}
             />
             <div className='exercise-header'>
                 <div className='exercise-input-text'>{exerciseReplays}</div>
@@ -58,6 +61,7 @@ const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index
                         addonBefore='+'
                         value={exerciseState.replays}
                         onChange={(e) => handleInputChange(e.target.name, e.target.value)}
+                        data-test-id={`${DATA_TEST_ID.modalDrawerRightInputApproach}${index}`}
                     />
                 </div>
                 <div className='exercise-input'>
@@ -66,6 +70,7 @@ const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index
                         name='weight'
                         value={exerciseState.weight}
                         onChange={(e) => handleInputChange(e.target.name, e.target.value)}
+                        data-test-id={`${DATA_TEST_ID.modalDrawerRightInputWeight}${index}`}
                     />
                 </div>
                 x
@@ -75,6 +80,7 @@ const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index
                         name='approaches'
                         value={exerciseState.approaches}
                         onChange={(e) => handleInputChange(e.target.name, e.target.value)}
+                        data-test-id={`${DATA_TEST_ID.modalDrawerRightInputQuantity}${index}`}
                     />
                 </div>
             </div>

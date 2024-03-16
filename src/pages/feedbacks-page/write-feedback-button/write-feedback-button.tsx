@@ -10,6 +10,7 @@ import { setShouldRefetch } from '@redux/feedbacks/feedbacks-slice';
 import { Button, Input, Modal } from 'antd';
 
 import './write-feedback-button.less';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const { TextArea } = Input;
 
@@ -57,7 +58,7 @@ const WriteFeedbackButton = () => {
             <Button
                 className='feedbacks-footer-button empty-feedback-list-button'
                 onClick={showModal}
-                data-test-id='write-review'
+                data-test-id={DATA_TEST_ID.writeReview}
             >
                 Написать отзыв
             </Button>

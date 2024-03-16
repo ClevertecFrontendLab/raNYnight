@@ -3,6 +3,7 @@ import { BREAKPOINT_520 } from '@constants/breakpoints';
 import { useWindowSize } from 'usehooks-ts';
 
 import './collapse-button.less';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 interface CollapseButtonProps {
     onClick: () => void;
@@ -11,12 +12,13 @@ interface CollapseButtonProps {
 
 const CollapseButton = ({ onClick, isCollapsed }: CollapseButtonProps) => {
     const { width } = useWindowSize();
+    const { siderSwitch, siderSwitchMobile } = DATA_TEST_ID;
 
     return (
         <div
             className='side-panel-collapse-button'
             onClick={onClick}
-            data-test-id={width < BREAKPOINT_520 ? 'sider-switch-mobile' : 'sider-switch'}
+            data-test-id={width < BREAKPOINT_520 ? siderSwitchMobile : siderSwitch}
         >
             {isCollapsed ? (
                 <MenuUnfoldOutlined className='side-panel-collapse-icon' />

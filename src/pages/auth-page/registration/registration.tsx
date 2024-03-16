@@ -22,6 +22,7 @@ import AuthSwitcher from '../auth-switcher/auth-switcher';
 import { validatePassword, validateRepeatPassword } from './validators';
 
 import './registration.less';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const Registration: React.FC = () => {
     const [form] = useForm();
@@ -115,7 +116,7 @@ const Registration: React.FC = () => {
                         <Input
                             prefix={'e-mail:'}
                             className='auth-input'
-                            data-test-id='registration-email'
+                            data-test-id={DATA_TEST_ID.registrationEmail}
                         />
                     </Form.Item>
                     <Form.Item
@@ -132,7 +133,7 @@ const Registration: React.FC = () => {
                     >
                         <Input.Password
                             placeholder='Пароль'
-                            data-test-id='registration-password'
+                            data-test-id={DATA_TEST_ID.registrationPassword}
                             autoComplete='on'
                         />
                     </Form.Item>
@@ -149,7 +150,7 @@ const Registration: React.FC = () => {
                     >
                         <Input.Password
                             placeholder='Повторите пароль'
-                            data-test-id='registration-confirm-password'
+                            data-test-id={DATA_TEST_ID.registrationConfirmPassword}
                             autoComplete='on'
                         />
                     </Form.Item>
@@ -160,7 +161,7 @@ const Registration: React.FC = () => {
                             htmlType='submit'
                             className='login-form-button'
                             disabled={!isFormValid || isLoading}
-                            data-test-id='registration-submit-button'
+                            data-test-id={DATA_TEST_ID.registrationSubmitButton}
                         >
                             Войти
                         </Button>

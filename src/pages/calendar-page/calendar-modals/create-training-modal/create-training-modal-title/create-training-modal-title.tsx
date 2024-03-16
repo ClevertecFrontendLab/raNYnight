@@ -14,6 +14,7 @@ import { Button, Select } from 'antd';
 
 import './create-training-modal-title.less';
 import dayjs from 'dayjs';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 interface CreateTrainingModalTitleProps {
     defaultSelect: string;
@@ -67,6 +68,7 @@ const CreateTrainingModalTitle = ({ defaultSelect, onChange }: CreateTrainingMod
                 size='small'
                 icon={<ArrowLeftOutlined />}
                 onClick={handleToggleCreateTrainingModal}
+                data-test-id={DATA_TEST_ID.modalExerciseTrainingButtonClose}
             />
             <Select
                 defaultValue={trainingToEdit?.name}
@@ -74,6 +76,7 @@ const CreateTrainingModalTitle = ({ defaultSelect, onChange }: CreateTrainingMod
                 onChange={handleSelectChange}
                 options={selectItems}
                 value={trainingToEdit?.name || selectedOption}
+                data-test-id={DATA_TEST_ID.modalCreateExerciseSelect}
             />
         </div>
     );

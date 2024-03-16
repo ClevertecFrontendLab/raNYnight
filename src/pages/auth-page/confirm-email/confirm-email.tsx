@@ -10,6 +10,7 @@ import { Paths } from '@router/paths';
 import { Typography } from 'antd';
 
 import './confirm-email.less';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const { Text } = Typography;
 
@@ -78,7 +79,7 @@ const AuthConfirmEmail = () => {
                     }}
                     onComplete={onComplete}
                     onChange={setInputValue}
-                    inputProps={{ 'data-test-id': 'verification-input' }}
+                    inputProps={{ 'data-test-id': DATA_TEST_ID.verificationInput }}
                 />
                 <Text className='auth-forgot-message'>{ResultMessages.RESET_CODE_SPAM}</Text>
             </div>

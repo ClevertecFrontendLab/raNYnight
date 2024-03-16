@@ -17,6 +17,7 @@ import { ChangePasswordRequest } from 'src/types/auth';
 import { validatePassword, validateRepeatPassword } from '../registration/validators';
 
 import './change-password.less';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const { Text } = Typography;
 
@@ -117,7 +118,7 @@ const AuthChangePassword = () => {
                     >
                         <Input.Password
                             placeholder='Пароль'
-                            data-test-id='change-password'
+                            data-test-id={DATA_TEST_ID.changePassword}
                             autoComplete='on'
                         />
                     </Form.Item>
@@ -134,7 +135,7 @@ const AuthChangePassword = () => {
                     >
                         <Input.Password
                             placeholder='Повторите пароль'
-                            data-test-id='change-confirm-password'
+                            data-test-id={DATA_TEST_ID.confirmPassword}
                             autoComplete='on'
                         />
                     </Form.Item>
@@ -144,7 +145,7 @@ const AuthChangePassword = () => {
                             htmlType='submit'
                             className='login-form-button'
                             disabled={!isFormValid || isLoading}
-                            data-test-id='change-submit-button'
+                            data-test-id={DATA_TEST_ID.changeSubmitButton}
                         >
                             Сохранить
                         </Button>

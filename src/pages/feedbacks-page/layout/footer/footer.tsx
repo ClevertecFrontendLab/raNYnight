@@ -8,6 +8,7 @@ import { Typography } from 'antd';
 import { Footer as AntdFooter } from 'antd/lib/layout/layout';
 
 import './footer.less';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const { Text } = Typography;
 
@@ -21,7 +22,7 @@ const FeedbacksFooter = () => {
             <Text
                 className='feedbacks-footer-link'
                 onClick={() => dispatch(toggleFeedbacksList())}
-                data-test-id='all-reviews-button'
+                data-test-id={DATA_TEST_ID.allReviewsButton}
             >
                 {isFeedbackListCollapsed ? 'Развернуть все отзывы' : 'Свернуть все отзывы'}
             </Text>

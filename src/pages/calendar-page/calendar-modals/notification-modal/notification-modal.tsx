@@ -3,6 +3,7 @@ import { Button, Modal, Typography, notification } from 'antd';
 import { FC, useEffect, useState } from 'react';
 
 import './notification-modal.less';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 type NotificationModalProps = {
     textButton: string;
@@ -32,12 +33,15 @@ export const NotificationModal: FC<NotificationModalProps> = ({
 
         notification.open({
             message: (
-                <Typography.Title data-test-id='modal-error-user-training-title' level={5}>
+                <Typography.Title data-test-id={DATA_TEST_ID.modalErrorUserTrainingTitle} level={5}>
                     {title}
                 </Typography.Title>
             ),
             description: (
-                <Typography.Text data-test-id='modal-error-user-training-subtitle' type='secondary'>
+                <Typography.Text
+                    data-test-id={DATA_TEST_ID.modalErrorUserTrainingSubtitle}
+                    type='secondary'
+                >
                     {subtitle}
                 </Typography.Text>
             ),
@@ -46,7 +50,7 @@ export const NotificationModal: FC<NotificationModalProps> = ({
                     type='primary'
                     size='middle'
                     onClick={onClickButton}
-                    data-test-id='modal-error-user-training-button'
+                    data-test-id={DATA_TEST_ID.modalErrorUserTrainingButton}
                 >
                     {textButton}
                 </Button>
@@ -59,7 +63,7 @@ export const NotificationModal: FC<NotificationModalProps> = ({
             ),
             duration: 0,
             closeIcon: isCloseIcon ? (
-                <CloseOutlined data-test-id='modal-error-user-training-button-close' />
+                <CloseOutlined data-test-id={DATA_TEST_ID.modalErrorUserTrainingButtonClose} />
             ) : null,
             onClose,
             className: 'notification-wrapper',

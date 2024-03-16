@@ -6,6 +6,7 @@ import { setTrainingToEdit } from '@redux/trainings/trainings-slice';
 import { ModifiedTraining } from 'src/types/trainings';
 
 import './calendar-training-item.less';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 export interface CalendarTrainingItemProps {
     training: ModifiedTraining | null;
@@ -44,6 +45,7 @@ const CalendarTrainingItem: FC<CalendarTrainingItemProps> = ({ training, isEdita
                 {training.name}
                 {isEditable && (
                     <EditOutlined
+                        data-test-id={DATA_TEST_ID.modalUpdateTrainingEditButton}
                         onClick={handleClick}
                         className={`training-edit-icon ${
                             training.isImplementation ? 'implemented' : ''

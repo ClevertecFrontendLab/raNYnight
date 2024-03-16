@@ -19,6 +19,7 @@ import ExerciseItem from './exercise-item/exercise-item';
 
 import './exercise-drawer.less';
 import utc from 'dayjs/plugin/utc';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 dayjs.extend(utc);
 
@@ -128,8 +129,10 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
                     size='middle'
                     icon={<CloseOutlined />}
                     onClick={handleCloseDrawer}
+                    data-test-id={DATA_TEST_ID.modalDrawerRightButtonClose}
                 />
             }
+            data-test-id={DATA_TEST_ID.modalDrawerRight}
         >
             <div className='drawer-exercise-header'>
                 <li className={`calendar-training-item ${trainingKey}`}>{trainingToUpdate.name}</li>

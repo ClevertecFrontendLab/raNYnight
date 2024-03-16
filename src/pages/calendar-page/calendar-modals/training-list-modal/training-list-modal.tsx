@@ -10,6 +10,8 @@ import { ModifiedTraining } from 'src/types/trainings';
 import CreateTrainingModal from '../create-training-modal/create-training-modal';
 
 import './training-list-modal.less';
+import { DATA_TEST_ID } from '@constants/data-test-id';
+import { CloseOutlined } from '@ant-design/icons';
 
 interface TrainingListModalProps {
     date: dayjs.Dayjs;
@@ -22,6 +24,7 @@ interface TrainingListModalProps {
 
 const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps) => {
     const dispatch = useAppDispatch();
+
     const isTrainingListModalOpen = useAppSelector(
         selectModalByType(ModalTypes.calendarTrainingListModal),
     );
@@ -48,6 +51,7 @@ const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps
     return (
         <>
             <Modal
+                data-test-id={DATA_TEST_ID.modalCreateTraining}
                 title={`Тренировки на ${date.format('DD.MM.YYYY')}`}
                 okText={trainingButtonTitles.addTraining}
                 onOk={handleToggleCreateTrainingModal}
@@ -62,6 +66,9 @@ const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps
                 width={264}
                 mask={false}
                 style={{ top: position.top, left: position.left }}
+                closeIcon={
+                    <CloseOutlined data-test-id={DATA_TEST_ID.modalCreateTrainingButtonClose} />
+                }
             >
                 <CalendarTrainingList trainings={trainings} isEditable={true} date={date} />
             </Modal>

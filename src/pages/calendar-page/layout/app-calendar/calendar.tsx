@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import Calendar from '@components/calendar/calendar';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import TrainingListModal from '@pages/calendar-page/calendar-modals/training-list-modal/training-list-modal';
@@ -8,6 +7,7 @@ import {
     selectModalByType,
     setCloseModal,
     setOpenModal,
+    toggleModal,
 } from '@redux/modals/modals-slice';
 import { useGetTrainingsQuery, useLazyGetTrainingListQuery } from '@redux/trainings/trainings-api';
 import {
@@ -20,16 +20,17 @@ import {
     setTodaysTrainings,
 } from '@redux/trainings/trainings-slice';
 import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
 
 import 'dayjs/locale/ru';
 
-import './calendar.less';
+import { NotificationModal } from '@pages/calendar-page/calendar-modals/notification-modal/notification-modal';
+import FeedbackModalResult from '@pages/feedbacks-page/feedback-modal-results/feedback-modal-results';
 import { selectShouldRefetch, setShouldRefetch } from '@redux/auth/auth-slice';
 import { filterTrainingsByDate } from '@utils/filter-trainings-by-date';
-import FeedbackModalResult from '@pages/feedbacks-page/feedback-modal-results/feedback-modal-results';
 import { useNavigate } from 'react-router-dom';
-import { Paths } from '@router/paths';
-import { NotificationModal } from '@pages/calendar-page/calendar-modals/notification-modal/notification-modal';
+import './calendar.less';
+import { SomethingWrongModal } from '@pages/calendar-page/calendar-modals/error-modal/error-modal';
 
 const AppCalendar = () => {
     const navigate = useNavigate();
@@ -99,10 +100,7 @@ const AppCalendar = () => {
         }
 
         if (error) {
-            const handleCancel = () => {
-                navigate(Paths.MAIN);
-            };
-            FeedbackModalResult.getError(handleCancel);
+            dispatch(toggleModal(ModalTypes.somethingWrongModal));
         }
     }, [shouldRefetch, dispatch, trainingList, FeedbackModalResult, navigate]);
 
@@ -156,6 +154,7 @@ const AppCalendar = () => {
                 open={isGetDefaultTrainingsModalOpen}
                 onClose={handleCloseNotificationModal}
             />
+            <SomethingWrongModal />
         </main>
     );
 };

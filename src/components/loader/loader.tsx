@@ -4,6 +4,7 @@ import { default as animationData } from './loader.json';
 
 import './loader.less';
 import { createPortal } from 'react-dom';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const defaultOptions: Options = {
     loop: true,
@@ -22,12 +23,12 @@ const Loader = ({ size }: LoaderProps) => {
     const loader = (
         <div className='loader-container'>
             <div className='loader-mask' />
-            <div className='loader-wrapper' data-test-id='loader'>
+            <div className='loader-wrapper' data-test-id={DATA_TEST_ID.loader}>
                 <Lottie
                     options={defaultOptions}
                     height={size ? size : 200}
                     width={size ? size : 200}
-                    data-test-id='loader'
+                    data-test-id={DATA_TEST_ID.loader}
                 />
             </div>
         </div>

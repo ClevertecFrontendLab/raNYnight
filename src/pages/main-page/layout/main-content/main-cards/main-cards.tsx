@@ -6,6 +6,7 @@ import { Typography } from 'antd';
 import './main-cards.less';
 
 import calendarOutlinedIcon from '/calendar-icon-2.svg';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const { Text } = Typography;
 
@@ -22,7 +23,9 @@ const MainCards = () => {
                 <Text className='card-title'>Назначить календарь</Text>
                 <div className='card-link'>
                     <img src={calendarOutlinedIcon} alt='calendar' className='card-link-icon' />
-                    <Link to={Paths.CALENDAR}>Календарь</Link>
+                    <Link to={Paths.CALENDAR} data-test-id={DATA_TEST_ID.menuButtonCalendar}>
+                        Календарь
+                    </Link>
                 </div>
             </div>
             <div className='card-wrapper'>
