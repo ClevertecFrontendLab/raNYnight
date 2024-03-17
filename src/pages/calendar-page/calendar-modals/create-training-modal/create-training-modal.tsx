@@ -38,6 +38,8 @@ const CreateTrainingModal = ({ position }: CreateTrainingModalProps) => {
         trainingToEdit !== null ? trainingToEdit.name : trainingButtonTitles.selectTraining,
     );
 
+    console.log('selectedOption', selectedOption);
+
     const isCreateTrainingModalOpen = useAppSelector(
         selectModalByType(ModalTypes.calendarCreateTrainingModal),
     );
@@ -57,7 +59,11 @@ const CreateTrainingModal = ({ position }: CreateTrainingModalProps) => {
                 data-test-id={DATA_TEST_ID.modalCreateExercise}
                 title={
                     <CreateTrainingModalTitle
-                        defaultSelect={selectedOption}
+                        defaultSelect={
+                            trainingToEdit !== null
+                                ? trainingToEdit.name
+                                : trainingButtonTitles.selectTraining
+                        }
                         onChange={handleDropdownChange}
                     />
                 }

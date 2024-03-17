@@ -2,7 +2,11 @@ import { trainingButtonTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import CalendarTrainingList from '@pages/calendar-page/calendar-training-list/calendar-training-list';
 import { ModalTypes, selectModalByType, toggleModal } from '@redux/modals/modals-slice';
-import { selectDefaultTrainings, setTrainingToEdit } from '@redux/trainings/trainings-slice';
+import {
+    selectDefaultTrainings,
+    selectTodaysTrainings,
+    setTrainingToEdit,
+} from '@redux/trainings/trainings-slice';
 import { Modal } from 'antd';
 import dayjs from 'dayjs';
 import { ModifiedTraining } from 'src/types/trainings';
@@ -32,12 +36,13 @@ const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps
         selectModalByType(ModalTypes.calendarCreateTrainingModal),
     );
     const defaultTrainings = useAppSelector(selectDefaultTrainings);
+    const todayTrainings = useAppSelector(selectTodaysTrainings);
 
     const isPastDay = date.isBefore(dayjs(), 'day');
     const isToday = date.isSame(dayjs(), 'day');
 
     const isOkButtonDisasbled =
-        isPastDay || isToday || trainings.length === defaultTrainings.length;
+        isPastDay || isToday || todayTrainings.length === defaultTrainings.length;
 
     const handleToggleCreateTrainingModal = () => {
         dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));

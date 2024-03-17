@@ -7,9 +7,11 @@ import {
     selectModalByType,
     setCloseModal,
     setOpenModal,
-    toggleModal,
 } from '@redux/modals/modals-slice';
-import { useGetTrainingsQuery, useLazyGetTrainingListQuery } from '@redux/trainings/trainings-api';
+import {
+    useLazyGetTrainingListQuery,
+    useLazyGetTrainingsQuery,
+} from '@redux/trainings/trainings-api';
 import {
     resetTrainigState,
     selectDefaultTrainings,
@@ -25,12 +27,11 @@ import { useEffect, useState } from 'react';
 import 'dayjs/locale/ru';
 
 import { NotificationModal } from '@pages/calendar-page/calendar-modals/notification-modal/notification-modal';
-import FeedbackModalResult from '@pages/feedbacks-page/feedback-modal-results/feedback-modal-results';
 import { selectShouldRefetch, setShouldRefetch } from '@redux/auth/auth-slice';
+import { Paths } from '@router/paths';
 import { filterTrainingsByDate } from '@utils/filter-trainings-by-date';
 import { useNavigate } from 'react-router-dom';
 import './calendar.less';
-import { SomethingWrongModal } from '@pages/calendar-page/calendar-modals/error-modal/error-modal';
 
 const AppCalendar = () => {
     const navigate = useNavigate();
@@ -49,7 +50,9 @@ const AppCalendar = () => {
         selectModalByType(ModalTypes.calendarGetDefaultTrainingsModal),
     );
 
-    const { data: trainingList, refetch, error } = useGetTrainingsQuery();
+    const [getUserTrainings, { data: trainingList, isError: isTrainingListError }] =
+        useLazyGetTrainingsQuery();
+
     const [getTrainingList, { isError: isRequestError }] = useLazyGetTrainingListQuery();
 
     const handleCellClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -74,7 +77,11 @@ const AppCalendar = () => {
     };
 
     const handleGetTrainingList = () => {
-        getTrainingList();
+        getTrainingList()
+            .unwrap()
+            .catch(() => {
+                dispatch(setOpenModal(ModalTypes.calendarGetDefaultTrainingsModal));
+            });
         dispatch(setCloseModal(ModalTypes.calendarGetDefaultTrainingsModal));
     };
 
@@ -86,8 +93,7 @@ const AppCalendar = () => {
 
     useEffect(() => {
         if (shouldRefetch) {
-            console.log('refetch');
-            refetch()
+            getUserTrainings()
                 .unwrap()
                 .then(() => {
                     const filteredTrainings = filterTrainingsByDate(
@@ -98,23 +104,25 @@ const AppCalendar = () => {
                     dispatch(setShouldRefetch(false));
                 });
         }
-
-        if (error) {
-            dispatch(toggleModal(ModalTypes.somethingWrongModal));
-        }
-    }, [shouldRefetch, dispatch, trainingList, FeedbackModalResult, navigate]);
+    }, [shouldRefetch, dispatch, trainingList, navigate]);
 
     useEffect(() => {
+        getUserTrainings();
         if (!defaultTrainings?.length) {
             getTrainingList();
         }
     }, []);
 
     useEffect(() => {
+        if (isTrainingListError) {
+            navigate(Paths.MAIN);
+            dispatch(setOpenModal(ModalTypes.somethingWrongModal));
+            return;
+        }
         if (isRequestError) {
             dispatch(setOpenModal(ModalTypes.calendarGetDefaultTrainingsModal));
         }
-    }, [isRequestError]);
+    }, [isTrainingListError, isRequestError, dispatch]);
 
     return (
         <main className='calendar-wrapper'>
@@ -154,7 +162,6 @@ const AppCalendar = () => {
                 open={isGetDefaultTrainingsModalOpen}
                 onClose={handleCloseNotificationModal}
             />
-            <SomethingWrongModal />
         </main>
     );
 };

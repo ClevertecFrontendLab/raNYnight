@@ -4,6 +4,7 @@ import { trainingButtonTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import {
     selectIsDrawerOpen,
+    selectModifiedTraining,
     selectSelectedDay,
     selectTrainingToEdit,
     setIsDrawerOpen,
@@ -34,6 +35,7 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
     const isDrawerOpen = useAppSelector(selectIsDrawerOpen);
     const trainingToEdit = useAppSelector(selectTrainingToEdit);
     const selectedDay = useAppSelector(selectSelectedDay);
+    const modifiedTraining = useAppSelector(selectModifiedTraining);
 
     const isPast = dayjs(selectedDay, 'DD-MM-YYYY').isBefore(dayjs(), 'day');
     const isToday = dayjs(selectedDay, 'DD-MM-YYYY').isSame(dayjs(), 'day');
@@ -112,6 +114,12 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
     useEffect(() => {
         setTrainingToUpdate(trainingToEdit ? { ...trainingToEdit } : { ...newTrainingObj });
     }, [selectedTraining, trainingToEdit]);
+
+    useEffect(() => {
+        if (modifiedTraining && modifiedTraining.exercises.length === 0) {
+            handleAddExercise();
+        }
+    }, [modifiedTraining]);
 
     return (
         <Drawer

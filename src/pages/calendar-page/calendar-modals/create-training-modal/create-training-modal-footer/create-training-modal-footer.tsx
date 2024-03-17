@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Loader from '@components/loader/loader';
 import { trainingButtonTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
@@ -8,12 +8,22 @@ import {
 } from '@redux/trainings/trainings-api';
 import {
     selectModifiedTraining,
+    selectSelectedDay,
     selectTrainingToEdit,
     setModifiedTraining,
 } from '@redux/trainings/trainings-slice';
 import { Button } from 'antd';
 import { setShouldRefetch } from '@redux/auth/auth-slice';
-import { ModalTypes, toggleModal } from '@redux/modals/modals-slice';
+import {
+    ModalTypes,
+    selectModalByType,
+    setAllModalsToFalse,
+    setCloseModal,
+    setOpenModal,
+    toggleModal,
+} from '@redux/modals/modals-slice';
+import dayjs from 'dayjs';
+import { NotificationModal } from '../../notification-modal/notification-modal';
 
 interface CreateTrainingModalFooterProps {
     onAddExercisesClick: () => void;
@@ -26,9 +36,14 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
     const dispatch = useAppDispatch();
     const modifiedTraining = useAppSelector(selectModifiedTraining);
     const trainingToEdit = useAppSelector(selectTrainingToEdit);
+    const selectedDay = useAppSelector(selectSelectedDay);
+
+    const [openNotificationErrorModal, setOpenNotificationErrorModal] = useState(false);
 
     const [createTraining, { isLoading: isCreateLoading }] = useCreateTrainingMutation();
     const [updateTraining, { isLoading: isUpdateLoading }] = useUpdateTrainingMutation();
+
+    const isFuture = dayjs(selectedDay, 'DD-MM-YYYY').isAfter(dayjs());
 
     const handleSaveSuccess = () => {
         dispatch(setShouldRefetch(true));
@@ -41,12 +56,28 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
             if (trainingToEdit) {
                 updateTraining({ ...modifiedTraining, _id: trainingToEdit._id })
                     .unwrap()
-                    .then(handleSaveSuccess);
+                    .then(handleSaveSuccess)
+                    .catch(() => setOpenNotificationErrorModal(true));
             } else {
-                createTraining(modifiedTraining).unwrap().then(handleSaveSuccess);
+                createTraining(modifiedTraining)
+                    .unwrap()
+                    .then(handleSaveSuccess)
+                    .catch(() => setOpenNotificationErrorModal(true));
             }
         }
     };
+
+    const handleCloseNotificationErrorModal = () => {
+        setOpenNotificationErrorModal(false);
+        dispatch(setAllModalsToFalse());
+    };
+
+    // useEffect(() => {
+    //     if (isCreateError || isUpdateError) {
+    //         setOpenNotificationErrorModal(true);
+    //     }
+    // }, [isCreateError, isUpdateError]);
+
     return (
         <>
             <div className='create-training-modal-footer'>
@@ -62,13 +93,26 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
                     type='text'
                     onClick={handleSaveModifiedTraining}
                     className='create-training-footer-save-btn'
-                    disabled={modifiedTraining === null ? true : false}
+                    disabled={
+                        modifiedTraining === null ||
+                        (isFuture && modifiedTraining.exercises.length === 0)
+                            ? true
+                            : false
+                    }
                 >
                     {trainingButtonTitles.saveExercises}
                 </Button>
             </div>
             {(isCreateLoading || isUpdateLoading) && <Loader />}
-            {/* <Loader /> */}
+            <NotificationModal
+                textButton='Закрыть'
+                onClickButton={handleCloseNotificationErrorModal}
+                type='error'
+                isCloseIcon={false}
+                title='При сохранении данных произошла ошибка'
+                subtitle='Придётся попробовать ещё раз'
+                open={openNotificationErrorModal}
+            />
         </>
     );
 };

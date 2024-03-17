@@ -11,6 +11,8 @@ export enum ModalTypes {
     calendarCreateTrainingModal = 'calendarCreateTrainingModal',
     calendarGetDefaultTrainingsModal = 'calendarGetDefaultTrainingsModal',
     somethingWrongModal = 'somethingWrongModal',
+    notificationErrorModal = 'notificationErrorModal',
+    notificationWarnModal = 'notificationWarnModal',
 }
 
 const initialState: ModalStore = {

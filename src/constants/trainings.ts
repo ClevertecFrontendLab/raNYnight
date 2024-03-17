@@ -7,7 +7,7 @@ export const trainingDrawerTitles = {
 
 export const trainingButtonTitles = {
     selectTraining: 'Выбор тренировки',
-    addTraining: 'Добавить тренировку',
+    addTraining: 'Создать тренировку',
     addExercises: 'Добавить упражнения',
     saveExercises: 'Сохранить',
     addMoreExercises: 'Добавить ещё',

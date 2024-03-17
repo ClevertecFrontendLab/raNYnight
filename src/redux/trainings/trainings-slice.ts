@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ModifiedTraining } from 'src/types/trainings';
 
 interface TrainingStore {
+    allUserTrainings: ModifiedTraining[] | [];
     defaultTrainings: string[];
     todaysTrainings: ModifiedTraining[] | [];
     trainingToEdit: ModifiedTraining | null;
@@ -12,6 +13,7 @@ interface TrainingStore {
 }
 
 const initialState: TrainingStore = {
+    allUserTrainings: [],
     defaultTrainings: [],
     todaysTrainings: [],
     trainingToEdit: null,
@@ -25,6 +27,10 @@ const trainingsSlice = createSlice({
     name: 'trainings',
     initialState: initialState,
     reducers: {
+        setAllUserTrainings: (state, action: PayloadAction<ModifiedTraining[]>) => {
+            state.allUserTrainings = action.payload;
+        },
+
         setDefaultTrainings: (state, action: PayloadAction<string[]>) => {
             state.defaultTrainings = action.payload;
         },
@@ -52,6 +58,7 @@ const trainingsSlice = createSlice({
 });
 
 export const {
+    setAllUserTrainings,
     setDefaultTrainings,
     setTodaysTrainings,
     setTrainingToEdit,
@@ -61,6 +68,9 @@ export const {
     resetTrainigState,
     setCalendarBlocked,
 } = trainingsSlice.actions;
+
+export const selectAllUserTrainings = (state: { trainings: TrainingStore }) =>
+    state.trainings.allUserTrainings;
 
 export const selectTodaysTrainings = (state: { trainings: TrainingStore }) =>
     state.trainings.todaysTrainings;

@@ -6,7 +6,7 @@ import { ResultImages } from '@constants/results';
 import { Paths } from '@router/paths';
 
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { ModalTypes, selectModalByType, toggleModal } from '@redux/modals/modals-slice';
+import { ModalTypes, selectModalByType, setCloseModal } from '@redux/modals/modals-slice';
 import './error-modal.less';
 
 export const SomethingWrongModal = () => {
@@ -16,7 +16,7 @@ export const SomethingWrongModal = () => {
 
     const handleCancel = () => {
         navigate(Paths.MAIN);
-        dispatch(toggleModal(ModalTypes.somethingWrongModal));
+        dispatch(setCloseModal(ModalTypes.somethingWrongModal));
     };
 
     return (
