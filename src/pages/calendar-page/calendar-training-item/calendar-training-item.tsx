@@ -6,7 +6,6 @@ import { FC } from 'react';
 import { ModifiedTraining } from 'src/types/trainings';
 
 import { DATA_TEST_ID } from '@constants/data-test-id';
-import { Button } from 'antd';
 import './calendar-training-item.less';
 
 export interface CalendarTrainingItemProps {

@@ -23,17 +23,17 @@ const CalendarExercisesList = ({ exercises }: CalendarExercisesListProps) => {
             {exercises.map((exercise: Exercise, i) => (
                 <li className={`calendar-exercises-list-item`} key={i}>
                     {exercise.name}
-                    <Button
+                    {/* <Button
                         onClick={handleClick}
                         className={`training-edit-icon-button `}
                         data-test-id={`${DATA_TEST_ID.modalUpdateTrainingEditButton}${i}`}
-                    >
-                        <EditOutlined
-                            // onClick={handleClick}
-                            className='training-edit-icon'
-                            // data-test-id={`${DATA_TEST_ID.modalUpdateTrainingEditButton}${i}`}
-                        />
-                    </Button>
+                    > */}
+                    <EditOutlined
+                        onClick={handleClick}
+                        className='training-edit-icon'
+                        data-test-id={`${DATA_TEST_ID.modalUpdateTrainingEditButton}${i}`}
+                    />
+                    {/* </Button> */}
                 </li>
             ))}
         </ul>

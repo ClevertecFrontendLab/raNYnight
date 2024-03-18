@@ -10,6 +10,7 @@ export const trainingButtonTitles = {
     addTraining: 'Создать тренировку',
     addExercises: 'Добавить упражнения',
     saveExercises: 'Сохранить',
+    savePastExercises: 'Сохранить изменения',
     addMoreExercises: 'Добавить ещё',
     deleteExercises: 'Удалить',
 };

@@ -115,7 +115,7 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
 
     useEffect(() => {
         setTrainingToUpdate(trainingToEdit ? { ...trainingToEdit } : { ...newTrainingObj });
-    }, [selectedTraining, trainingToEdit, dispatch, isDrawerOpen]);
+    }, [selectedTraining, trainingToEdit]);
 
     useEffect(() => {
         if (modifiedTraining && modifiedTraining.exercises.length === 0) {

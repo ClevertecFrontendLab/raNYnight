@@ -78,12 +78,14 @@ export const NotificationModal: FC<NotificationModalProps> = ({
         }
         notification.close('open');
         setOpenModal(false);
+        console.log('setOpenModal', openModal);
+        console.log('open', open);
     }, [open, openModal]);
 
     return (
         <Modal
             open={open}
-            maskClosable={true}
+            maskClosable={false}
             centered={true}
             onCancel={onClose}
             footer={null}

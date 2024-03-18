@@ -2,13 +2,7 @@ import Loader from '@components/loader/loader';
 import { trainingButtonTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { setShouldRefetch } from '@redux/auth/auth-slice';
-import {
-    ModalTypes,
-    setAllModalsToFalse,
-    setCloseModal,
-    setOpenModal,
-    toggleModal,
-} from '@redux/modals/modals-slice';
+import { ModalTypes, setCloseModal, setOpenModal } from '@redux/modals/modals-slice';
 import {
     useCreateTrainingMutation,
     useUpdateTrainingMutation,
@@ -74,7 +68,7 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
 
     const handleCloseNotificationErrorModal = () => {
         setOpenNotificationErrorModal(false);
-        dispatch(setAllModalsToFalse());
+        dispatch(setCloseModal(ModalTypes.calendarCreateTrainingModal));
     };
 
     return (
@@ -99,7 +93,9 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
                             : false
                     }
                 >
-                    {trainingButtonTitles.saveExercises}
+                    {isFuture
+                        ? trainingButtonTitles.saveExercises
+                        : trainingButtonTitles.savePastExercises}
                 </Button>
             </div>
             {(isCreateLoading || isUpdateLoading) && <Loader />}
