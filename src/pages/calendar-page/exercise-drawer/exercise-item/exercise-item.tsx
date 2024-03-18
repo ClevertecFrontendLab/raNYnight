@@ -61,7 +61,7 @@ const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index
                         name='replays'
                         addonBefore='+'
                         value={exerciseState.replays}
-                        onBlur={(e) => handleInputChange(e.target.name, e.target.value)}
+                        onChange={(e) => handleInputChange(e.target.name, e.target.value)}
                         data-test-id={`${DATA_TEST_ID.modalDrawerRightInputApproach}${index}`}
                     />
                 </div>
@@ -70,9 +70,9 @@ const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index
                         type='number'
                         name='weight'
                         value={exerciseState.weight}
-                        // onBlur={(e) => handleInputChange(e.target.name, e.target.value)}
+                        // onChange={(e) => handleInputChange(e.target.name, e.target.value)}
                         data-test-id={`${DATA_TEST_ID.modalDrawerRightInputWeight}${index}`}
-                        onBlur={(e) => handleInputChange(e.target.name, e.target.value)}
+                        onChange={(e) => handleInputChange(e.target.name, e.target.value)}
                     />
                 </div>
                 x
@@ -81,7 +81,7 @@ const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index
                         type='number'
                         name='approaches'
                         value={exerciseState.approaches}
-                        onBlur={(e) => handleInputChange(e.target.name, e.target.value)}
+                        onChange={(e) => handleInputChange(e.target.name, e.target.value)}
                         data-test-id={`${DATA_TEST_ID.modalDrawerRightInputQuantity}${index}`}
                     />
                 </div>
