@@ -1,4 +1,4 @@
-import { PlusOutlined } from '@ant-design/icons';
+import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { trainingButtonTitles, trainingDrawerTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import CalendarExercisesList from '@pages/calendar-page/calendar-exercises-list/calendar-exercises-list';
@@ -54,6 +54,7 @@ const CreateTrainingModal = ({ position, width }: CreateTrainingModalProps) => {
     return (
         <>
             <Modal
+                closeIcon={<CloseOutlined />}
                 data-test-id={DATA_TEST_ID.modalCreateExercise}
                 title={
                     <CreateTrainingModalTitle

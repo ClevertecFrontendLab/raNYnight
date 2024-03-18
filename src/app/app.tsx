@@ -26,17 +26,17 @@ export const App = () => {
         };
     }, []);
 
-    useEffect(() => {
-        const handleResize = () => {
-            dispatch(setAllModalsToFalse());
-        };
+    // useEffect(() => {
+    //     const handleResize = () => {
+    //         dispatch(setAllModalsToFalse());
+    //     };
 
-        window.addEventListener('resize', handleResize);
+    //     window.addEventListener('resize', handleResize);
 
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+    //     return () => {
+    //         window.removeEventListener('resize', handleResize);
+    //     };
+    // }, []);
 
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');

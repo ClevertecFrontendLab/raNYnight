@@ -62,7 +62,7 @@ const TrainingListModal = ({ date, trainings, position, width }: TrainingListMod
         <>
             <Modal
                 data-test-id={DATA_TEST_ID.modalCreateTraining}
-                destroyOnClose
+                destroyOnClose={true}
                 title={`Тренировки на ${date.format('DD.MM.YYYY')}`}
                 okText={trainingButtonTitles.addTraining}
                 onOk={handleToggleCreateTrainingModal}
