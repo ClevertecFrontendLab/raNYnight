@@ -79,6 +79,7 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
             return exercise;
         });
         setTrainingToUpdate((prevTraining) => ({ ...prevTraining, exercises: updatedExercises }));
+        // setTrainingToUpdate({ ...trainingToUpdate, exercises: updatedExercises });
     };
 
     const handleAddExercise = () => {
@@ -114,8 +115,14 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
     };
 
     useEffect(() => {
-        setTrainingToUpdate(trainingToEdit ? { ...trainingToEdit } : { ...newTrainingObj });
-    }, [selectedTraining, trainingToEdit]);
+        setTrainingToUpdate(
+            modifiedTraining
+                ? { ...modifiedTraining }
+                : trainingToEdit
+                ? { ...trainingToEdit }
+                : { ...newTrainingObj },
+        );
+    }, [trainingToEdit, isDrawerOpen]);
 
     useEffect(() => {
         if (modifiedTraining && modifiedTraining.exercises.length === 0) {
@@ -125,7 +132,7 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
 
     return (
         <Drawer
-            mask={false}
+            mask={true}
             title={title}
             destroyOnClose
             placement='right'

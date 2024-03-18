@@ -8,10 +8,12 @@ import {
     useUpdateTrainingMutation,
 } from '@redux/trainings/trainings-api';
 import {
+    resetTrainigState,
     selectModifiedTraining,
     selectSelectedDay,
     selectTrainingToEdit,
     setModifiedTraining,
+    setTrainingToEdit,
 } from '@redux/trainings/trainings-slice';
 import { Button } from 'antd';
 import dayjs from 'dayjs';

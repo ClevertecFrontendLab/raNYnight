@@ -7,6 +7,7 @@ import { ModifiedTraining } from 'src/types/trainings';
 
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import './calendar-training-item.less';
+import { Button } from 'antd';
 
 export interface CalendarTrainingItemProps {
     index: number;
@@ -35,7 +36,7 @@ const CalendarTrainingItem: FC<CalendarTrainingItemProps> = ({ training, isEdita
 
         setTimeout(() => {
             dispatch(setOpenModal(ModalTypes.calendarCreateTrainingModal));
-        }, 100);
+        }, 20);
     };
 
     if (training) {
@@ -49,19 +50,20 @@ const CalendarTrainingItem: FC<CalendarTrainingItemProps> = ({ training, isEdita
             >
                 {training.name}
                 {isEditable && (
-                    // <Button
-                    //     className={`training-edit-icon-button  ${
-                    //         training.isImplementation ? 'implemented' : ''
-                    //     }`}
-                    // >
-                    <EditOutlined
-                        data-test-id={`${DATA_TEST_ID.modalUpdateTrainingEditButton}${index}`}
-                        onClick={handleClick}
-                        className={`training-edit-icon ${
+                    <Button
+                        className={`training-edit-icon-button  ${
                             training.isImplementation ? 'implemented' : ''
                         }`}
-                    />
-                    // </Button>
+                        disabled={training.isImplementation}
+                        onClick={handleClick}
+                        data-test-id={`${DATA_TEST_ID.modalUpdateTrainingEditButton}${index}`}
+                    >
+                        <EditOutlined
+                            className={`training-edit-icon ${
+                                training.isImplementation ? 'implemented' : ''
+                            }`}
+                        />
+                    </Button>
                 )}
             </li>
         );
