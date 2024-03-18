@@ -32,7 +32,7 @@ const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index
     return (
         <section className='exercise-item'>
             <Input
-                autoFocus
+                autoFocus={true}
                 name='name'
                 placeholder={exerciseName}
                 value={exerciseState.name}

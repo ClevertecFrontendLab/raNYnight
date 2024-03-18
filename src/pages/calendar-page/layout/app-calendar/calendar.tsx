@@ -61,6 +61,10 @@ const AppCalendar = () => {
         selectModalByType(ModalTypes.calendarGetDefaultTrainingsModal),
     );
 
+    const isCreaterTrainingModalOpen = useAppSelector(
+        selectModalByType(ModalTypes.calendarCreateTrainingModal),
+    );
+
     const [getUserTrainings, { data: trainingList, isError: isTrainingListError }] =
         useLazyGetTrainingsQuery();
 
@@ -212,14 +216,16 @@ const AppCalendar = () => {
                 trainings={trainingList || []}
                 position={cellPosition}
             />
-            <CreateTrainingModal
-                position={cellPosition}
-                width={
-                    isFullscreen
-                        ? CALENDAR_TRAINING_MODAL_WIDTH
-                        : CALENDAR_TRAINING_MODAL_WIDTH_MOBILE
-                }
-            />
+            {isCreaterTrainingModalOpen && (
+                <CreateTrainingModal
+                    position={cellPosition}
+                    width={
+                        isFullscreen
+                            ? CALENDAR_TRAINING_MODAL_WIDTH
+                            : CALENDAR_TRAINING_MODAL_WIDTH_MOBILE
+                    }
+                />
+            )}
 
             <NotificationModal
                 textButton='Обновить'

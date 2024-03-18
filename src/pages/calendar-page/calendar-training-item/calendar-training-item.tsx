@@ -33,7 +33,10 @@ const CalendarTrainingItem: FC<CalendarTrainingItemProps> = ({ training, isEdita
         }
         dispatch(setTrainingToEdit(training));
         dispatch(setCloseModal(ModalTypes.calendarTrainingListModal));
-        dispatch(setOpenModal(ModalTypes.calendarCreateTrainingModal));
+
+        setTimeout(() => {
+            dispatch(setOpenModal(ModalTypes.calendarCreateTrainingModal));
+        }, 100);
     };
 
     if (training) {
