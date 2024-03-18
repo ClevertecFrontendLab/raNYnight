@@ -4,13 +4,14 @@ import { setIsDrawerOpen } from '@redux/trainings/trainings-slice';
 import { Exercise } from 'src/types/trainings';
 
 import './calendar-exercises-list.less';
+import { DATA_TEST_ID } from '@constants/data-test-id';
+import { Button } from 'antd';
 
 interface CalendarExercisesListProps {
     exercises: Exercise[];
-    isEditable: boolean;
 }
 
-const CalendarExercisesList = ({ exercises, isEditable }: CalendarExercisesListProps) => {
+const CalendarExercisesList = ({ exercises }: CalendarExercisesListProps) => {
     const dispatch = useAppDispatch();
 
     const handleClick = () => {
@@ -22,9 +23,17 @@ const CalendarExercisesList = ({ exercises, isEditable }: CalendarExercisesListP
             {exercises.map((exercise: Exercise, i) => (
                 <li className={`calendar-exercises-list-item`} key={i}>
                     {exercise.name}
-                    {isEditable && (
-                        <EditOutlined onClick={handleClick} className='exercises-edit-icon' />
-                    )}
+                    <Button
+                        onClick={handleClick}
+                        className={`training-edit-icon-button `}
+                        data-test-id={`${DATA_TEST_ID.modalUpdateTrainingEditButton}${i}`}
+                    >
+                        <EditOutlined
+                            // onClick={handleClick}
+                            className='training-edit-icon'
+                            // data-test-id={`${DATA_TEST_ID.modalUpdateTrainingEditButton}${i}`}
+                        />
+                    </Button>
                 </li>
             ))}
         </ul>

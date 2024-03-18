@@ -17,6 +17,7 @@ import {
     selectDefaultTrainings,
     selectIsCalendarBlocked,
     setCalendarBlocked,
+    setIsDrawerOpen,
     setModifiedTraining,
     setSelectedDay,
     setTodaysTrainings,
@@ -32,10 +33,20 @@ import { Paths } from '@router/paths';
 import { filterTrainingsByDate } from '@utils/filter-trainings-by-date';
 import { useNavigate } from 'react-router-dom';
 import './calendar.less';
+import { useWindowSize } from 'usehooks-ts';
+import { BREAKPOINT_768 } from '@constants/breakpoints';
+import {
+    CALENDAR_TRAINING_MODAL_WIDTH,
+    CALENDAR_TRAINING_MODAL_WIDTH_MOBILE,
+} from '@constants/sizes';
+import CreateTrainingModal from '@pages/calendar-page/calendar-modals/create-training-modal/create-training-modal';
 
 const AppCalendar = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const { width: windowWidth } = useWindowSize();
+
+    const isFullscreen = windowWidth > BREAKPOINT_768;
 
     const [selectedDate, setSelectedDate] = useState(dayjs());
     const [cellPosition, setCellPosition] = useState({
@@ -55,25 +66,50 @@ const AppCalendar = () => {
 
     const [getTrainingList, { isError: isRequestError }] = useLazyGetTrainingListQuery();
 
-    const handleCellClick = (event: React.MouseEvent<HTMLDivElement>) => {
-        if (isCalendarBlocked) {
-            return;
-        }
-        event.stopPropagation();
-        const target = event.target as HTMLElement;
-        const cellNode = target.closest('.calendar-date-cell');
-        const dateAttribute = cellNode?.getAttribute('data-date');
-        const date = dayjs(dateAttribute);
-
+    const handleCellClick = (date: dayjs.Dayjs) => {
         const filteredTrainings = filterTrainingsByDate(trainingList || [], date);
-        const cellPosition = getSelectedCellPosition(date);
+
         setSelectedDate(date);
-        setCellPosition(cellPosition);
         dispatch(setSelectedDay(date.format('DD-MM-YYYY').toString()));
         dispatch(setTodaysTrainings(filteredTrainings));
         dispatch(setModifiedTraining(null));
         dispatch(setCloseModal(ModalTypes.calendarCreateTrainingModal));
         dispatch(setOpenModal(ModalTypes.calendarTrainingListModal));
+        dispatch(setIsDrawerOpen(false));
+    };
+
+    const handleDesktopCellClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        if (isCalendarBlocked) {
+            return;
+        }
+
+        event.stopPropagation();
+
+        const target = event.target as HTMLElement;
+        const cellNode = target.closest('.calendar-date-cell');
+        const dateAttribute = cellNode?.getAttribute('data-date');
+        const date = dayjs(dateAttribute);
+        const cellPosition = getSelectedCellPosition(date);
+
+        setCellPosition(cellPosition);
+
+        handleCellClick(date);
+    };
+
+    const handleMobileCellClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        if (isCalendarBlocked) {
+            return;
+        }
+
+        event.stopPropagation();
+
+        const target = event.target as HTMLElement;
+        const dateAttribute = target?.getAttribute('data-date');
+        const date = dayjs(dateAttribute);
+        const cellPosition = getSelectedCellPositionMobile(date);
+        setCellPosition(cellPosition);
+        handleCellClick(date);
+        console.log('e target', target, 'dateAttribute', dateAttribute);
     };
 
     const handleGetTrainingList = () => {
@@ -127,31 +163,64 @@ const AppCalendar = () => {
     return (
         <main className='calendar-wrapper'>
             <Calendar
-                fullscreen={true}
+                fullscreen={isFullscreen}
                 className='app-calendar'
-                dateCellRender={(date) => (
-                    <>
-                        <div
-                            data-date={date.format('YYYY-MM-DD')}
-                            className='calendar-date-cell'
-                            onClick={handleCellClick}
-                        >
-                            <div className='date-cell-content'>
-                                <CalendarTrainingList
-                                    trainings={trainingList || []}
-                                    isEditable={false}
-                                    date={date}
-                                />
-                            </div>
-                        </div>
-                    </>
-                )}
+                dateCellRender={(date) => {
+                    if (isFullscreen) {
+                        return (
+                            <>
+                                <div
+                                    data-date={date.format('YYYY-MM-DD')}
+                                    className='calendar-date-cell'
+                                    onClick={handleDesktopCellClick}
+                                >
+                                    <div className='date-cell-content'>
+                                        <CalendarTrainingList
+                                            trainings={trainingList || []}
+                                            isEditable={false}
+                                            date={date}
+                                        />
+                                    </div>
+                                </div>
+                            </>
+                        );
+                    }
+                    const hasTrainingsToday = trainingList?.some(
+                        (training) =>
+                            dayjs(training.date).format('YYYY-MM-DD') === date.format('YYYY-MM-DD'),
+                    );
+                    if (!isFullscreen) {
+                        return (
+                            <div
+                                data-date={date.format('YYYY-MM-DD')}
+                                className={`calendar-date-cell-mobile ${
+                                    hasTrainingsToday ? 'has-trainings' : ''
+                                }`}
+                                onClick={handleMobileCellClick}
+                            />
+                        );
+                    }
+                }}
             />
             <TrainingListModal
+                width={
+                    isFullscreen
+                        ? CALENDAR_TRAINING_MODAL_WIDTH
+                        : CALENDAR_TRAINING_MODAL_WIDTH_MOBILE
+                }
                 date={selectedDate}
                 trainings={trainingList || []}
                 position={cellPosition}
             />
+            <CreateTrainingModal
+                position={cellPosition}
+                width={
+                    isFullscreen
+                        ? CALENDAR_TRAINING_MODAL_WIDTH
+                        : CALENDAR_TRAINING_MODAL_WIDTH_MOBILE
+                }
+            />
+
             <NotificationModal
                 textButton='Обновить'
                 onClickButton={handleGetTrainingList}
@@ -177,7 +246,7 @@ function getSelectedCellPosition(date: dayjs.Dayjs) {
         const { top, left: cellLeft, width: cellWidth } = cell.getBoundingClientRect();
         const { left: bodyLeft } = document.body.getBoundingClientRect();
 
-        const modalWidth = 264;
+        const modalWidth = CALENDAR_TRAINING_MODAL_WIDTH;
         const bodyWidth = document.body.offsetWidth;
         const leftRelativeToBody = cellLeft - bodyLeft;
 
@@ -190,6 +259,28 @@ function getSelectedCellPosition(date: dayjs.Dayjs) {
 
         return {
             top: top + window.scrollY,
+            left: adjustedLeft,
+        };
+    }
+
+    return { top: 0, left: 0 };
+}
+
+function getSelectedCellPositionMobile(date: dayjs.Dayjs) {
+    const cell = document
+        .querySelector(`[data-date="${date.format('YYYY-MM-DD')}"]`)
+        ?.closest('.ant-picker-cell');
+
+    if (cell) {
+        const { top, height: cellHeight } = cell.getBoundingClientRect();
+
+        const modalWidth = CALENDAR_TRAINING_MODAL_WIDTH_MOBILE;
+        const screenWidth = window.innerWidth;
+
+        const adjustedLeft = (screenWidth - modalWidth) / 2;
+
+        return {
+            top: top + cellHeight,
             left: adjustedLeft,
         };
     }

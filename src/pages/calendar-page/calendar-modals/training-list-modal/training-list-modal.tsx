@@ -1,7 +1,12 @@
 import { trainingButtonTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import CalendarTrainingList from '@pages/calendar-page/calendar-training-list/calendar-training-list';
-import { ModalTypes, selectModalByType, toggleModal } from '@redux/modals/modals-slice';
+import {
+    ModalTypes,
+    selectModalByType,
+    setCloseModal,
+    setOpenModal,
+} from '@redux/modals/modals-slice';
 import {
     selectDefaultTrainings,
     selectTodaysTrainings,
@@ -11,11 +16,9 @@ import { Modal } from 'antd';
 import dayjs from 'dayjs';
 import { ModifiedTraining } from 'src/types/trainings';
 
-import CreateTrainingModal from '../create-training-modal/create-training-modal';
-
-import './training-list-modal.less';
-import { DATA_TEST_ID } from '@constants/data-test-id';
 import { CloseOutlined } from '@ant-design/icons';
+import { DATA_TEST_ID } from '@constants/data-test-id';
+import './training-list-modal.less';
 
 interface TrainingListModalProps {
     date: dayjs.Dayjs;
@@ -24,17 +27,18 @@ interface TrainingListModalProps {
         top: number;
         left: number;
     };
+    width: number;
 }
 
-const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps) => {
+const TrainingListModal = ({ date, trainings, position, width }: TrainingListModalProps) => {
     const dispatch = useAppDispatch();
 
     const isTrainingListModalOpen = useAppSelector(
         selectModalByType(ModalTypes.calendarTrainingListModal),
     );
-    const isCreateTrainingModalOpen = useAppSelector(
-        selectModalByType(ModalTypes.calendarCreateTrainingModal),
-    );
+    // const isCreateTrainingModalOpen = useAppSelector(
+    //     selectModalByType(ModalTypes.calendarCreateTrainingModal),
+    // );
     const defaultTrainings = useAppSelector(selectDefaultTrainings);
     const todayTrainings = useAppSelector(selectTodaysTrainings);
 
@@ -45,18 +49,20 @@ const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps
         isPastDay || isToday || todayTrainings.length === defaultTrainings.length;
 
     const handleToggleCreateTrainingModal = () => {
-        dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));
+        dispatch(setOpenModal(ModalTypes.calendarCreateTrainingModal));
+        dispatch(setCloseModal(ModalTypes.calendarTrainingListModal));
         dispatch(setTrainingToEdit(null));
     };
 
     const handleTogleTrainingListModal = () => {
-        dispatch(toggleModal(ModalTypes.calendarTrainingListModal));
+        dispatch(setCloseModal(ModalTypes.calendarTrainingListModal));
     };
 
     return (
         <>
             <Modal
                 data-test-id={DATA_TEST_ID.modalCreateTraining}
+                destroyOnClose
                 title={`Тренировки на ${date.format('DD.MM.YYYY')}`}
                 okText={trainingButtonTitles.addTraining}
                 onOk={handleToggleCreateTrainingModal}
@@ -66,9 +72,10 @@ const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps
                     style: { width: '100%', margin: 0 },
                     disabled: isOkButtonDisasbled,
                 }}
-                open={isTrainingListModalOpen && !isCreateTrainingModalOpen}
+                open={isTrainingListModalOpen}
+                bodyStyle={{ padding: '5px 25px' }}
                 className='training-list-modal'
-                width={264}
+                width={width}
                 mask={false}
                 style={{ top: position.top, left: position.left }}
                 closeIcon={
@@ -77,7 +84,6 @@ const TrainingListModal = ({ date, trainings, position }: TrainingListModalProps
             >
                 <CalendarTrainingList trainings={trainings} isEditable={true} date={date} />
             </Modal>
-            <CreateTrainingModal position={position} />
         </>
     );
 };

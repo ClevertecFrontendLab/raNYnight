@@ -1,7 +1,14 @@
-import { FC, useEffect, useState } from 'react';
 import Loader from '@components/loader/loader';
 import { trainingButtonTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { setShouldRefetch } from '@redux/auth/auth-slice';
+import {
+    ModalTypes,
+    setAllModalsToFalse,
+    setCloseModal,
+    setOpenModal,
+    toggleModal,
+} from '@redux/modals/modals-slice';
 import {
     useCreateTrainingMutation,
     useUpdateTrainingMutation,
@@ -13,16 +20,8 @@ import {
     setModifiedTraining,
 } from '@redux/trainings/trainings-slice';
 import { Button } from 'antd';
-import { setShouldRefetch } from '@redux/auth/auth-slice';
-import {
-    ModalTypes,
-    selectModalByType,
-    setAllModalsToFalse,
-    setCloseModal,
-    setOpenModal,
-    toggleModal,
-} from '@redux/modals/modals-slice';
 import dayjs from 'dayjs';
+import { FC, useState } from 'react';
 import { NotificationModal } from '../../notification-modal/notification-modal';
 
 interface CreateTrainingModalFooterProps {
@@ -47,7 +46,13 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
 
     const handleSaveSuccess = () => {
         dispatch(setShouldRefetch(true));
-        dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));
+        dispatch(setCloseModal(ModalTypes.calendarCreateTrainingModal));
+        dispatch(setOpenModal(ModalTypes.calendarTrainingListModal));
+        dispatch(setModifiedTraining(null));
+    };
+
+    const handleSaveError = () => {
+        setOpenNotificationErrorModal(true);
         dispatch(setModifiedTraining(null));
     };
 
@@ -57,12 +62,12 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
                 updateTraining({ ...modifiedTraining, _id: trainingToEdit._id })
                     .unwrap()
                     .then(handleSaveSuccess)
-                    .catch(() => setOpenNotificationErrorModal(true));
+                    .catch(() => handleSaveError());
             } else {
                 createTraining(modifiedTraining)
                     .unwrap()
                     .then(handleSaveSuccess)
-                    .catch(() => setOpenNotificationErrorModal(true));
+                    .catch(() => handleSaveError());
             }
         }
     };
@@ -71,12 +76,6 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
         setOpenNotificationErrorModal(false);
         dispatch(setAllModalsToFalse());
     };
-
-    // useEffect(() => {
-    //     if (isCreateError || isUpdateError) {
-    //         setOpenNotificationErrorModal(true);
-    //     }
-    // }, [isCreateError, isUpdateError]);
 
     return (
         <>

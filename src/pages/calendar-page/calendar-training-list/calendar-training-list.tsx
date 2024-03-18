@@ -16,11 +16,12 @@ const CalendarTrainingList = ({ trainings, isEditable, date }: CalendarTrainingL
     });
     return (
         <ul className='calendar-training-list'>
-            {filteredTrainings.map((training: ModifiedTraining) => (
+            {filteredTrainings.map((training: ModifiedTraining, index) => (
                 <CalendarTrainingItem
                     training={training}
                     key={training._id}
                     isEditable={isEditable}
+                    index={index}
                 />
             ))}
         </ul>

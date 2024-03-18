@@ -66,6 +66,8 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
         trainingToEdit ? { ...trainingToEdit } : { ...newTrainingObj },
     );
 
+    const deleteButtonDisabled = !trainingToUpdate.exercises.some((exercise) => exercise.selected);
+
     const trainingKey: Trainings | undefined =
         Trainings[trainingToUpdate.name as keyof typeof Trainings];
 
@@ -106,14 +108,14 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
                 .map(({ index, selected, _id, ...rest }) => rest)
                 .filter((exercise) => exercise.name !== ''),
         };
-        setTrainingToUpdate(modifiedTraining);
         dispatch(setModifiedTraining(modifiedTraining));
+        setTrainingToUpdate(modifiedTraining);
         dispatch(setIsDrawerOpen(false));
     };
 
     useEffect(() => {
         setTrainingToUpdate(trainingToEdit ? { ...trainingToEdit } : { ...newTrainingObj });
-    }, [selectedTraining, trainingToEdit]);
+    }, [selectedTraining, trainingToEdit, dispatch, isDrawerOpen]);
 
     useEffect(() => {
         if (modifiedTraining && modifiedTraining.exercises.length === 0) {
@@ -123,6 +125,7 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
 
     return (
         <Drawer
+            mask={false}
             title={title}
             destroyOnClose
             placement='right'
@@ -167,7 +170,7 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
                 <Button
                     icon={<MinusOutlined />}
                     onClick={handleRemoveExercises}
-                    disabled={trainingToUpdate.exercises.length === 0}
+                    disabled={deleteButtonDisabled}
                 >
                     {trainingButtonTitles.deleteExercises}
                 </Button>

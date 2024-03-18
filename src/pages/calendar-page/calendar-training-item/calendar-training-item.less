@@ -27,9 +27,36 @@
     color: @primary-light-6;
     position: absolute;
     right: 0;
+    top: 0;
+    background: none;
+    padding: 0;
+    margin: 0;
 }
+
+.training-edit-icon-button {
+    position: absolute;
+    width: 20px;
+    right: 0;
+    background: none;
+    padding: 0;
+    margin: 0;
+    border: none;
+    height: 20px;
+}
+
+.calendar-exercises-list-item {
+    position: relative;
+    // .anticon.training-edit-icon {
+    //     right: 15px;
+    // }
+    .training-edit-icon-button {
+        right: 15px;
+    }
+}
+
 .anticon.training-edit-icon.implemented,
 .calendar-training-item.implemented {
+    cursor: not-allowed;
     color: @character-light-secondary-45;
 }
 

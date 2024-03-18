@@ -41,7 +41,7 @@ const SidePanel = () => {
             <div
                 className='side-panel-logo'
                 style={{ backgroundImage: `url(${isCollapsed ? headerLogoCollaped : headerLogo})` }}
-            ></div>
+            />
             <NavPanel isCollapsed={isCollapsed} />
             <ExitButton isCollapsed={isCollapsed} />
             <CollapseButton onClick={onCollapse} isCollapsed={isCollapsed} />

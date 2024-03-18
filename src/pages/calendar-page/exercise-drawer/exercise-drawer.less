@@ -30,3 +30,18 @@
         color: @primary-light-6;
     }
 }
+
+@media (max-width: 768px) {
+    .exercise-drawer {
+        top: unset;
+        height: 85%;
+        .ant-drawer-content-wrapper {
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            .ant-drawer-content {
+                border-top-left-radius: 25px;
+                border-top-right-radius: 25px;
+            }
+        }
+    }
+}

@@ -1,14 +1,16 @@
-import { FC } from 'react';
 import { EditOutlined } from '@ant-design/icons';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { ModalTypes, toggleModal } from '@redux/modals/modals-slice';
+import { ModalTypes, setCloseModal, setOpenModal } from '@redux/modals/modals-slice';
 import { setTrainingToEdit } from '@redux/trainings/trainings-slice';
+import { FC } from 'react';
 import { ModifiedTraining } from 'src/types/trainings';
 
-import './calendar-training-item.less';
 import { DATA_TEST_ID } from '@constants/data-test-id';
+import { Button } from 'antd';
+import './calendar-training-item.less';
 
 export interface CalendarTrainingItemProps {
+    index: number;
     training: ModifiedTraining | null;
     isEditable: boolean;
 }
@@ -22,7 +24,7 @@ export enum Trainings {
     Кардио = 'cardio',
 }
 
-const CalendarTrainingItem: FC<CalendarTrainingItemProps> = ({ training, isEditable }) => {
+const CalendarTrainingItem: FC<CalendarTrainingItemProps> = ({ training, isEditable, index }) => {
     const dispatch = useAppDispatch();
 
     const handleClick = () => {
@@ -30,7 +32,8 @@ const CalendarTrainingItem: FC<CalendarTrainingItemProps> = ({ training, isEdita
             return;
         }
         dispatch(setTrainingToEdit(training));
-        dispatch(toggleModal(ModalTypes.calendarCreateTrainingModal));
+        dispatch(setCloseModal(ModalTypes.calendarTrainingListModal));
+        dispatch(setOpenModal(ModalTypes.calendarCreateTrainingModal));
     };
 
     if (training) {
@@ -44,13 +47,19 @@ const CalendarTrainingItem: FC<CalendarTrainingItemProps> = ({ training, isEdita
             >
                 {training.name}
                 {isEditable && (
+                    // <Button
+                    //     className={`training-edit-icon-button  ${
+                    //         training.isImplementation ? 'implemented' : ''
+                    //     }`}
+                    // >
                     <EditOutlined
-                        data-test-id={DATA_TEST_ID.modalUpdateTrainingEditButton}
+                        data-test-id={`${DATA_TEST_ID.modalUpdateTrainingEditButton}${index}`}
                         onClick={handleClick}
                         className={`training-edit-icon ${
                             training.isImplementation ? 'implemented' : ''
                         }`}
                     />
+                    // </Button>
                 )}
             </li>
         );

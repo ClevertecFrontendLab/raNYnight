@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { trainingButtonTitles, trainingDrawerTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import CalendarExercisesList from '@pages/calendar-page/calendar-exercises-list/calendar-exercises-list';
 import ExerciseDrawer from '@pages/calendar-page/exercise-drawer/exercise-drawer';
-import { ModalTypes, selectModalByType } from '@redux/modals/modals-slice';
+import { ModalTypes, selectModalByType, setCloseModal } from '@redux/modals/modals-slice';
 import {
     selectModifiedTraining,
     selectTrainingToEdit,
@@ -23,9 +23,10 @@ interface CreateTrainingModalProps {
         top: number;
         left: number;
     };
+    width: number;
 }
 
-const CreateTrainingModal = ({ position }: CreateTrainingModalProps) => {
+const CreateTrainingModal = ({ position, width }: CreateTrainingModalProps) => {
     const dispatch = useAppDispatch();
 
     const trainingToEdit = useAppSelector(selectTrainingToEdit);
@@ -38,8 +39,6 @@ const CreateTrainingModal = ({ position }: CreateTrainingModalProps) => {
         trainingToEdit !== null ? trainingToEdit.name : trainingButtonTitles.selectTraining,
     );
 
-    console.log('selectedOption', selectedOption);
-
     const isCreateTrainingModalOpen = useAppSelector(
         selectModalByType(ModalTypes.calendarCreateTrainingModal),
     );
@@ -49,7 +48,6 @@ const CreateTrainingModal = ({ position }: CreateTrainingModalProps) => {
     };
 
     const handleDropdownChange = (selectedOption: string) => {
-        console.log('handleDropdownChange', selectedOption);
         setSelectedOption(selectedOption);
     };
 
@@ -71,12 +69,12 @@ const CreateTrainingModal = ({ position }: CreateTrainingModalProps) => {
                 okButtonProps={{ style: { width: '100%', margin: 0 } }}
                 open={isCreateTrainingModalOpen}
                 className='training-list-modal'
-                width={264}
+                width={width}
                 mask={false}
                 closable={false}
                 style={{ top: position.top, left: position.left }}
                 maskClosable={false}
-                destroyOnClose
+                destroyOnClose={true}
                 footer={
                     <CreateTrainingModalFooter
                         onAddExercisesClick={handleOpenDrawer}
@@ -85,10 +83,7 @@ const CreateTrainingModal = ({ position }: CreateTrainingModalProps) => {
                 }
                 key={`create-training-modal ${trainingToEdit?._id}`}
             >
-                <CalendarExercisesList
-                    exercises={modifiedExercises ?? exercisecToEdit ?? []}
-                    isEditable={true}
-                />
+                <CalendarExercisesList exercises={modifiedExercises ?? exercisecToEdit ?? []} />
             </Modal>
 
             <ExerciseDrawer
