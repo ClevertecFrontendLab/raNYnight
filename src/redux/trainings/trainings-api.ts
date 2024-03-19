@@ -28,9 +28,7 @@ export const trainingsApi = createApi({
                 try {
                     const { data } = await queryFulfilled;
                     dispatch(setDefaultTrainings(data));
-                } catch (error) {
-                    console.log(error);
-                }
+                } catch (error) {}
             },
             transformResponse: (response: Training[]) => response.map(({ name }) => name),
         }),
@@ -44,9 +42,7 @@ export const trainingsApi = createApi({
                 try {
                     const { data } = await queryFulfilled;
                     dispatch(setAllUserTrainings(data));
-                } catch (error) {
-                    console.log(error);
-                }
+                } catch (error) {}
             },
         }),
 

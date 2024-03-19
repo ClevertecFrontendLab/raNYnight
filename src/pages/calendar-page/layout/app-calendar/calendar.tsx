@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Calendar from '@components/calendar/calendar';
 import { BREAKPOINT_768 } from '@constants/breakpoints';
 import {
@@ -10,7 +8,6 @@ import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import CreateTrainingModal from '@pages/calendar-page/calendar-modals/create-training-modal/create-training-modal';
 import { NotificationModal } from '@pages/calendar-page/calendar-modals/notification-modal/notification-modal';
 import TrainingListModal from '@pages/calendar-page/calendar-modals/training-list-modal/training-list-modal';
-import CalendarTrainingList from '@pages/calendar-page/calendar-training-list/calendar-training-list';
 import { selectShouldRefetch, setShouldRefetch } from '@redux/auth/auth-slice';
 import {
     ModalTypes,
@@ -37,11 +34,14 @@ import { Paths } from '@router/paths';
 import { filterTrainingsByDate } from '@utils/filter-trainings-by-date';
 import { getSelectedCellPosition, getSelectedCellPositionMobile } from '@utils/get-cell-positions';
 import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useWindowSize } from 'usehooks-ts';
 
 import 'dayjs/locale/ru';
 
 import './calendar.less';
+import DateCell from './date-cell/date-cell';
 
 const AppCalendar = () => {
     const navigate = useNavigate();
@@ -167,42 +167,15 @@ const AppCalendar = () => {
             <Calendar
                 fullscreen={isFullscreen}
                 className='app-calendar'
-                dateCellRender={(date) => {
-                    if (isFullscreen) {
-                        return (
-                            <>
-                                <div
-                                    data-date={date.format('YYYY-MM-DD')}
-                                    className='calendar-date-cell'
-                                    onClick={handleDesktopCellClick}
-                                >
-                                    <div className='date-cell-content'>
-                                        <CalendarTrainingList
-                                            trainings={trainingList || []}
-                                            isEditable={false}
-                                            date={date}
-                                        />
-                                    </div>
-                                </div>
-                            </>
-                        );
-                    }
-                    const hasTrainingsToday = trainingList?.some(
-                        (training) =>
-                            dayjs(training.date).format('YYYY-MM-DD') === date.format('YYYY-MM-DD'),
-                    );
-                    if (!isFullscreen) {
-                        return (
-                            <div
-                                data-date={date.format('YYYY-MM-DD')}
-                                className={`calendar-date-cell-mobile ${
-                                    hasTrainingsToday ? 'has-trainings' : ''
-                                }`}
-                                onClick={handleMobileCellClick}
-                            />
-                        );
-                    }
-                }}
+                dateCellRender={(date) => (
+                    <DateCell
+                        date={date}
+                        isFullscreen={isFullscreen}
+                        trainingList={trainingList || []}
+                        handleDesktopCellClick={handleDesktopCellClick}
+                        handleMobileCellClick={handleMobileCellClick}
+                    />
+                )}
             />
             <TrainingListModal
                 width={

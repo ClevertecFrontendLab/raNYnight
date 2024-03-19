@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { CloseCircleOutlined, CloseOutlined } from '@ant-design/icons';
 import { DATA_TEST_ID } from '@constants/data-test-id';
-import { Button, Modal, notification,Typography } from 'antd';
+import { Button, Modal, notification, Typography } from 'antd';
 
 import './notification-modal.less';
 
@@ -11,8 +11,8 @@ type NotificationModalProps = {
     isCloseIcon: boolean;
     type: 'warning' | 'error';
     open: boolean;
-    onClose?: () => void;
     onClickButton: () => void;
+    onClose?: () => void;
     subtitle?: string;
 };
 
