@@ -1,4 +1,5 @@
 import { CloseOutlined } from '@ant-design/icons';
+import { ModifiedTraining } from '@common-types/trainings';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { trainingButtonTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
@@ -16,7 +17,6 @@ import {
 } from '@redux/trainings/trainings-slice';
 import { Modal } from 'antd';
 import dayjs from 'dayjs';
-import { ModifiedTraining } from 'src/types/trainings';
 
 import './training-list-modal.less';
 
@@ -36,9 +36,7 @@ const TrainingListModal = ({ date, trainings, position, width }: TrainingListMod
     const isTrainingListModalOpen = useAppSelector(
         selectModalByType(ModalTypes.calendarTrainingListModal),
     );
-    // const isCreateTrainingModalOpen = useAppSelector(
-    //     selectModalByType(ModalTypes.calendarCreateTrainingModal),
-    // );
+
     const defaultTrainings = useAppSelector(selectDefaultTrainings);
     const todayTrainings = useAppSelector(selectTodaysTrainings);
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { ChangePasswordRequest } from '@common-types/auth';
 import Loader from '@components/loader/loader';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
@@ -13,7 +14,6 @@ import {
 import { Paths } from '@router/paths';
 import { Button, Form, Input, Typography } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
-import { ChangePasswordRequest } from 'src/types/auth';
 
 import { validatePassword, validateRepeatPassword } from '../registration/validators';
 

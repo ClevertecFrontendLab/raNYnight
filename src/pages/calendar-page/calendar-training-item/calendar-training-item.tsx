@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { EditOutlined } from '@ant-design/icons';
+import { ModifiedTraining, Trainings } from '@common-types/trainings';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { ModalTypes, setCloseModal, setOpenModal } from '@redux/modals/modals-slice';
 import { setTrainingToEdit } from '@redux/trainings/trainings-slice';
 import { Button } from 'antd';
-import { ModifiedTraining, Trainings } from 'src/types/trainings';
 
 import './calendar-training-item.less';
 

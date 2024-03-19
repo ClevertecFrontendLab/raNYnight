@@ -1,5 +1,6 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
+import { Exercise, ModifiedTraining, Trainings } from '@common-types/trainings';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { EXERCISE_DRAWER_WIDTH } from '@constants/sizes';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
@@ -15,7 +16,6 @@ import {
 import { Button, Drawer, Typography } from 'antd';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-import { Exercise, ModifiedTraining, Trainings } from 'src/types/trainings';
 
 import ExerciseList from './exercise-list/exercise-list';
 

@@ -1,5 +1,5 @@
+import { ModifiedTraining } from '@common-types/trainings';
 import dayjs from 'dayjs';
-import { ModifiedTraining } from 'src/types/trainings';
 
 import CalendarTrainingItem from '../calendar-training-item/calendar-training-item';
 

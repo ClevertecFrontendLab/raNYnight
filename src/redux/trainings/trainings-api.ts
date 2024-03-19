@@ -1,6 +1,6 @@
+import { ModifiedTraining, Training } from '@common-types/trainings';
 import { baseQuery } from '@constants/api';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ModifiedTraining, Training } from 'src/types/trainings';
 
 import { setAllUserTrainings, setDefaultTrainings } from './trainings-slice';
 

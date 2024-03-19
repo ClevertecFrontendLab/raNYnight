@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { GooglePlusOutlined } from '@ant-design/icons';
+import { LoginRequest } from '@common-types/auth';
 import Loader from '@components/loader/loader';
 import { authGoogleQuery } from '@constants/api';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
@@ -18,7 +19,6 @@ import {
 import { Paths } from '@router/paths';
 import { Button, Checkbox, Form, Input } from 'antd';
 import useForm from 'antd/lib/form/hooks/useForm';
-import { LoginRequest } from 'src/types/auth';
 import { useWindowSize } from 'usehooks-ts';
 
 import AuthSwitcher from '../auth-switcher/auth-switcher';

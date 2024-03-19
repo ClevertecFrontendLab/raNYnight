@@ -1,8 +1,8 @@
 import { FC, useState } from 'react';
+import { Exercise } from '@common-types/trainings';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { exercisesTitles } from '@constants/trainings';
 import { Checkbox, Input } from 'antd';
-import { Exercise } from 'src/types/trainings';
 
 import './exercise-item.less';
 

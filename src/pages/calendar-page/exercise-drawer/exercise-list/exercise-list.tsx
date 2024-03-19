@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { Exercise } from '@common-types/trainings';
 import { trainingButtonTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import {
@@ -9,7 +10,6 @@ import {
     setModifiedExercises,
 } from '@redux/trainings/trainings-slice';
 import { Button } from 'antd';
-import { Exercise } from 'src/types/trainings';
 
 import ExerciseItem from '../exercise-item/exercise-item';
 

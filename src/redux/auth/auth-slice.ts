@@ -1,5 +1,5 @@
+import { AuthStore, RegisterInput } from '@common-types/auth';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AuthStore, RegisterInput } from 'src/types/auth';
 
 const initialState: AuthStore = {
     authToken: null,

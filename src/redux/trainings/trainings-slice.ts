@@ -1,5 +1,5 @@
+import { Exercise, ModifiedTraining } from '@common-types/trainings';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Exercise, ModifiedTraining } from 'src/types/trainings';
 
 interface TrainingStore {
     allUserTrainings: ModifiedTraining[] | [];

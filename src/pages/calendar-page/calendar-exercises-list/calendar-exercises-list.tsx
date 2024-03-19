@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { EditOutlined } from '@ant-design/icons';
+import { Exercise } from '@common-types/trainings';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import {
@@ -8,7 +9,6 @@ import {
     setIsDrawerOpen,
 } from '@redux/trainings/trainings-slice';
 import { Button } from 'antd';
-import { Exercise } from 'src/types/trainings';
 
 import './calendar-exercises-list.less';
 

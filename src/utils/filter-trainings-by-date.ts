@@ -1,5 +1,5 @@
+import { ModifiedTraining } from '@common-types/trainings';
 import dayjs from 'dayjs';
-import { ModifiedTraining } from 'src/types/trainings';
 
 export const filterTrainingsByDate = (trainings: ModifiedTraining[], selectedDate: dayjs.Dayjs) => {
     const formattedSelectedDate = selectedDate.format('YYYY-MM-DD').toString();

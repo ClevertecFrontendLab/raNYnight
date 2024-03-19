@@ -1,6 +1,6 @@
+import { Feedback, FeedbackRequest } from '@common-types/feedbacks';
 import { baseQuery } from '@constants/api';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Feedback, FeedbackRequest } from 'src/types/feedbacks';
 
 export const feedbacksApi = createApi({
     reducerPath: 'feedbacksApi',
