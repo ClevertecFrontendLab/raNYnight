@@ -72,7 +72,10 @@ const WriteFeedbackButton = () => {
                 centered
                 onCancel={handleCancel}
                 cancelButtonProps={{ style: { display: 'none' } }}
-                okButtonProps={createOkButtonProps('new-review-submit-button')}
+                okButtonProps={createOkButtonProps(
+                    'new-review-submit-button',
+                    feedbackRating === 0,
+                )}
                 width={FEEDBACK_MODAL_WIDTH}
             >
                 <CustomRate
