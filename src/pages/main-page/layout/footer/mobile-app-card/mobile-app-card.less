@@ -6,8 +6,8 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 42.5px;
-    padding-top: 12px;
+    margin-bottom: calc(@space-6xl +2.5px);
+    padding-top: @space-s;
     border-radius: 2px;
     width: 240px;
     height: 126px;
@@ -16,28 +16,28 @@
 }
 
 .ant-typography.mobile-app-card-title {
-    margin-left: 24px;
+    margin-left: @space-xl;
     font-family: @font-family;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 130%;
+    font-weight: @font-weight-400;
+    font-size: @font-size-16;
+    line-height: @line-height-130;
     color: @primary-light-6;
     letter-spacing: 0.4px;
 }
 
 .mobile-app-card-description {
-    margin-left: 24px;
+    margin-left: @space-xl;
     font-family: @font-family;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 130%;
+    font-weight: @font-weight-400;
+    font-size: @font-size-14;
+    line-height: @line-height-130;
     color: @character-light-secondary-45;
     letter-spacing: 0.3px;
 }
 
 .mobile-app-card-links {
     width: 100%;
-    padding: 19px 11px;
+    padding: @space-2l @space-2s;
     display: flex;
     align-items: center;
     box-shadow: inset 0 1px 0 0 @character-light-dividers;
@@ -45,22 +45,22 @@
 
 .mobile-app-card-link {
     font-family: @font-family;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 130%;
+    font-weight: @font-weight-400;
+    font-size: @font-size-14;
+    line-height: @line-height-130;
     text-align: center;
     color: @character-light-title-85;
     letter-spacing: 0.5px;
 }
 
 .apple {
-    margin-left: 27.5px;
+    margin-left: @space-xl2;
 }
 .mobile-app-card-link:nth-child(2) {
-    margin-left: 7px;
+    margin-left: @space-2xs;
 }
 .mobile-app-card-link:last-child {
-    margin-left: 7px;
+    margin-left: @space-2xs;
 }
 
 @media (max-width: 768px) {
@@ -71,23 +71,23 @@
 
 @media (max-width: 520px) {
     .mobile-app-card-wrapper {
-        margin: 0 auto;
+        margin: @space-0 auto;
         width: 328px;
         align-items: center;
     }
     .mobile-app-card-title {
-        margin-left: 0;
+        margin-left: @space-0;
     }
     .mobile-app-card-description {
-        margin-left: 0;
+        margin-left: @space-0;
     }
     .mobile-app-card-links {
         justify-content: unset;
     }
     .android {
-        margin-left: 22px;
+        margin-left: calc(@space-2l+2px);
     }
     .apple {
-        margin-left: 71px;
+        margin-left: @space-9xl;
     }
 }

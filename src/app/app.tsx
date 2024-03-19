@@ -24,6 +24,7 @@ export const App = () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
     }, []);
+
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
         if (googleAccessToken) {

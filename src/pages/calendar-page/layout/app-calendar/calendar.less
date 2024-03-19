@@ -1,0 +1,53 @@
+@import '/src/style-variables.less';
+
+.ant-picker-calendar.app-calendar {
+    background: @primary-light-1;
+}
+
+.ant-picker-calendar.ant-picker-panel.ant-picker-body {
+    padding: @space-0;
+}
+
+.calendar-date-cell {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    padding-top: @space-2l;
+}
+
+.calendar-date-cell-mobile {
+    position: absolute;
+    width: 250%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
+.has-trainings {
+    background-color: rgba(240, 245, 255, 0.4);
+}
+
+.calendar-date-cell .date-cell-content {
+    overflow: scroll;
+    width: 100%;
+    height: 100%;
+}
+
+.calendar-date-cell .date-cell-content::-webkit-scrollbar {
+    display: none;
+}
+
+.ant-modal-mask {
+    background: transparent;
+    pointer-events: none;
+}
+.ant-modal-wrap {
+    pointer-events: none;
+}
+.ant-modal {
+    pointer-events: all;
+}

@@ -3,10 +3,10 @@
 .side-panel-collapse-button {
     cursor: pointer;
     position: absolute;
-    right: -26px;
+    right: @space-xl2;
     top: 46.8%;
     height: 66px;
-    width: 26px;
+    width: @space-xl2;
     clip-path: polygon(0 0, 75% 14%, 75% 85%, 0% 100%);
     background-color: @character-light-primary-inverse;
     z-index: 1;
@@ -14,28 +14,28 @@
 
 .side-panel-collapse-icon {
     z-index: 2;
-    margin-top: 26px;
+    margin-top: @space-xl2;
 }
 
 .anticon.side-panel-collapse-icon {
     color: @character-light-secondary-45;
 }
 
-@media (max-width: 835px) {
+@media (max-width: @width-xl) {
     .side-panel-collapse-button {
         top: 47.3%;
     }
 }
 
-@media (max-width: 520px) {
+@media (max-width: @width-sm) {
     .side-panel-collapse-button {
         top: 2.5%;
-        right: -40px;
-        width: 40px;
-        height: 48px;
+        right: -@space-6xl;
+        width: @space-6xl;
+        height: @space-7xl;
     }
     .side-panel-collapse-icon {
-        margin-top: 17px;
-        margin-left: 8px;
+        margin-top: @space-m;
+        margin-left: @space-xs;
     }
 }

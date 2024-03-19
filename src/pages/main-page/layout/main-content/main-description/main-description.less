@@ -1,7 +1,7 @@
 @import '/src/style-variables.less';
 
 .ant-typography.main-content-description {
-    padding: 24px;
+    padding: @space-xl;
     border-radius: 2px;
     max-width: 752px;
     width: 100%;
@@ -9,20 +9,20 @@
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
     background: @character-light-primary-inverse;
     font-family: @font-family;
-    font-weight: 400;
-    font-size: 16px;
+    font-weight: @font-weight-400;
+    font-size: @font-size-16;
     line-height: 132%;
     color: @primary-light-9;
     letter-spacing: 0.55px;
 }
 
-@media (max-width: 835px) {
+@media (max-width: @width-xl) {
     .ant-typography.main-content-description {
-        padding-right: 30px;
+        padding-right: @space-3xl;
     }
 }
-@media (max-width: 768px) {
+@media (max-width: @width-md) {
     .ant-typography.main-content-description {
-        padding: 16px;
+        padding: @space-m;
     }
 }

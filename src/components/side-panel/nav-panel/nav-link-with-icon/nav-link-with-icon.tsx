@@ -1,5 +1,5 @@
+import { Link } from 'react-router-dom';
 import { Typography } from 'antd';
-import Link from 'antd/lib/typography/Link';
 
 import './nav-link-with-icon.less';
 
@@ -13,7 +13,7 @@ interface NavLinkWithIconProps {
 }
 
 const NavLinkWithIcon = ({ linkTo, icon, text, isCollapsed }: NavLinkWithIconProps) => (
-    <Link href={linkTo} className='nav-link'>
+    <Link to={linkTo} className='nav-link'>
         {icon}
         {isCollapsed ? null : <Text>{text}</Text>}
     </Link>

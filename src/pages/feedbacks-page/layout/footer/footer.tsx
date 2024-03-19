@@ -1,3 +1,4 @@
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import WriteFeedbackButton from '@pages/feedbacks-page/write-feedback-button/write-feedback-button';
 import {
@@ -21,7 +22,7 @@ const FeedbacksFooter = () => {
             <Text
                 className='feedbacks-footer-link'
                 onClick={() => dispatch(toggleFeedbacksList())}
-                data-test-id='all-reviews-button'
+                data-test-id={DATA_TEST_ID.allReviewsButton}
             >
                 {isFeedbackListCollapsed ? 'Развернуть все отзывы' : 'Свернуть все отзывы'}
             </Text>

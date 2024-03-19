@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import VerificationInput from 'react-verification-input';
 import Loader from '@components/loader/loader';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { ResultImages, ResultMessages, ResultTitles } from '@constants/results';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useConfirmEmailMutation } from '@redux/auth/auth-api';
@@ -78,7 +79,7 @@ const AuthConfirmEmail = () => {
                     }}
                     onComplete={onComplete}
                     onChange={setInputValue}
-                    inputProps={{ 'data-test-id': 'verification-input' }}
+                    inputProps={{ 'data-test-id': DATA_TEST_ID.verificationInput }}
                 />
                 <Text className='auth-forgot-message'>{ResultMessages.RESET_CODE_SPAM}</Text>
             </div>

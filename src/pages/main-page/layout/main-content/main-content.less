@@ -1,14 +1,14 @@
 @import '/src/style-variables.less';
 
 .main-content-wrapper {
-    padding: 24px;
+    padding: @space-xl;
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: @space-2s;
 }
 
-@media (max-width: 520px) {
+@media (max-width: @width-sm) {
     .main-content-wrapper {
-        padding: 24px 16px 0;
+        padding: @space-xl @space-m @space-0;
     }
 }

@@ -2,7 +2,7 @@
 
 .login-container {
     border-radius: 2px;
-    padding: 64px 32px;
+    padding: @space-8xl2 @space-4xl;
     margin: auto;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
     background: @character-light-primary-inverse;
@@ -30,31 +30,31 @@
 }
 
 .ant-form-item.auth-input-wrapper {
-    margin-bottom: 31px;
+    margin-bottom: @space-4xl;
 }
 
 .ant-form-item.auth-input-password {
-    margin-bottom: 51px;
+    margin-bottom: calc(@space-8xl - 5px);
 }
 
 .ant-input-prefix {
     border: 1px solid @character-light-border;
     border-radius: 2px 0 0 2px;
     background: @character-light-table-header;
-    padding: 0 12px;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 130%;
+    padding: @space-0 @space-s;
+    font-weight: @font-weight-400;
+    font-size: @font-size-14;
+    line-height: @line-height-130;
     text-align: center;
     color: @character-light-title-85;
 }
 
 .ant-input-affix-wrapper.auth-input {
     height: 40px;
-    padding: 0;
+    padding: @space-0;
 
     .ant-input {
-        padding-left: 10px;
+        padding-left: @space-2s;
     }
 }
 
@@ -65,9 +65,9 @@
 }
 
 input {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 130%;
+    font-weight: @font-weight-400;
+    font-size: @font-size-14;
+    line-height: @line-height-130;
     color: @character-light-title-85;
 }
 
@@ -81,7 +81,7 @@ input {
 }
 
 .ant-form.login-form {
-    margin: 0 auto;
+    margin: @space-0 auto;
     max-width: 368px;
 }
 
@@ -92,9 +92,9 @@ input {
     border-radius: 2px;
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
     background: @primary-light-6;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 130%;
+    font-weight: @font-weight-400;
+    font-size: @font-size-16;
+    line-height: @line-height-130;
     text-align: center;
     color: @character-light-primary-inverse;
 }
@@ -104,9 +104,9 @@ input {
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.02);
     border: 1px solid @character-light-border;
     border-radius: 2px;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 130%;
+    font-weight: @font-weight-400;
+    font-size: @font-size-16;
+    line-height: @line-height-130;
     text-align: center;
     color: @character-light-title-85;
     letter-spacing: 0.6px;
@@ -114,14 +114,14 @@ input {
 
 .ant-btn.login-form-forgot-button,
 .ant-btn[disabled].login-form-forgot-button {
-    padding: 0;
+    padding: @space-0;
     display: inline;
     background-color: transparent;
     border: none;
     color: @primary-light-6;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 130%;
+    font-weight: @font-weight-400;
+    font-size: @font-size-16;
+    line-height: @line-height-130;
     text-align: center;
     margin-left: auto;
 }
@@ -138,10 +138,10 @@ input {
 }
 
 .ant-form-item.login-form-utils {
-    margin-bottom: 20px;
+    margin-bottom: @space-2l;
 }
 .ant-form-item.login-form-button-wrapper {
-    margin-bottom: 16px;
+    margin-bottom: @space-m;
 }
 
 .loading {
@@ -153,7 +153,7 @@ input {
 
 @media (max-width: 520px) {
     .login-container {
-        padding: 30px 16px;
+        padding: @space-3xl @space-m;
         width: 328px;
         height: 612px;
     }
@@ -169,16 +169,16 @@ input {
     .ant-btn.login-form-button,
     .ant-btn.google-auth,
     .ant-btn.login-form-forgot-button {
-        font-weight: 400;
-        font-size: 14px;
+        font-weight: @font-weight-400;
+        font-size: @font-size-14;
     }
 
     .ant-form-item.login-form-utils {
-        margin-bottom: 13px;
+        margin-bottom: @space-s;
     }
 
     .ant-btn.login-form-forgot-button {
-        padding-bottom: 10px;
-        padding-right: 10px;
+        padding-bottom: @space-2s;
+        padding-right: @space-2s;
     }
 }

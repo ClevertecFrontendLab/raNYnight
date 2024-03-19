@@ -2,11 +2,11 @@ import { StarFilled, StarOutlined } from '@ant-design/icons';
 import { Rate } from 'antd';
 
 interface CustomRateProps {
-    rate?: number;
     disabled: boolean;
     size: number;
-    onChange?: (value: number) => void;
+    rate?: number;
     value?: number;
+    onChange?: (value: number) => void;
 }
 
 const CustomRate = ({ rate, disabled, onChange, size, value }: CustomRateProps) => {

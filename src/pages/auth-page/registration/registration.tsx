@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { GooglePlusOutlined } from '@ant-design/icons';
+import { RegisterInput } from '@common-types/auth';
 import Loader from '@components/loader/loader';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useRegisterUserMutation } from '@redux/auth/auth-api';
 import {
@@ -14,7 +16,6 @@ import {
 import { Paths } from '@router/paths';
 import { Button, Form, Input } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
-import { RegisterInput } from 'src/types/auth';
 import { useWindowSize } from 'usehooks-ts';
 
 import AuthSwitcher from '../auth-switcher/auth-switcher';
@@ -115,7 +116,7 @@ const Registration: React.FC = () => {
                         <Input
                             prefix={'e-mail:'}
                             className='auth-input'
-                            data-test-id='registration-email'
+                            data-test-id={DATA_TEST_ID.registrationEmail}
                         />
                     </Form.Item>
                     <Form.Item
@@ -132,7 +133,7 @@ const Registration: React.FC = () => {
                     >
                         <Input.Password
                             placeholder='Пароль'
-                            data-test-id='registration-password'
+                            data-test-id={DATA_TEST_ID.registrationPassword}
                             autoComplete='on'
                         />
                     </Form.Item>
@@ -149,7 +150,7 @@ const Registration: React.FC = () => {
                     >
                         <Input.Password
                             placeholder='Повторите пароль'
-                            data-test-id='registration-confirm-password'
+                            data-test-id={DATA_TEST_ID.registrationConfirmPassword}
                             autoComplete='on'
                         />
                     </Form.Item>
@@ -160,7 +161,7 @@ const Registration: React.FC = () => {
                             htmlType='submit'
                             className='login-form-button'
                             disabled={!isFormValid || isLoading}
-                            data-test-id='registration-submit-button'
+                            data-test-id={DATA_TEST_ID.registrationSubmitButton}
                         >
                             Войти
                         </Button>

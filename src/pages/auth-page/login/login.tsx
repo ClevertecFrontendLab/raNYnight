@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { GooglePlusOutlined } from '@ant-design/icons';
+import { LoginRequest } from '@common-types/auth';
 import Loader from '@components/loader/loader';
 import { authGoogleQuery } from '@constants/api';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useCheckEmailMutation, useLoginUserMutation } from '@redux/auth/auth-api';
 import {
@@ -17,7 +19,6 @@ import {
 import { Paths } from '@router/paths';
 import { Button, Checkbox, Form, Input } from 'antd';
 import useForm from 'antd/lib/form/hooks/useForm';
-import { LoginRequest } from 'src/types/auth';
 import { useWindowSize } from 'usehooks-ts';
 
 import AuthSwitcher from '../auth-switcher/auth-switcher';
@@ -143,7 +144,7 @@ const Login: React.FC = () => {
                         <Input
                             prefix={'e-mail:'}
                             className='auth-input'
-                            data-test-id='login-email'
+                            data-test-id={DATA_TEST_ID.loginEmail}
                         />
                     </Form.Item>
                     <Form.Item
@@ -159,20 +160,22 @@ const Login: React.FC = () => {
                     >
                         <Input.Password
                             placeholder='Пароль'
-                            data-test-id='login-password'
+                            data-test-id={DATA_TEST_ID.loginPassword}
                             autoComplete='on'
                         />
                     </Form.Item>
 
                     <Form.Item className='login-form-utils'>
                         <Form.Item name='remember' noStyle valuePropName='checked'>
-                            <Checkbox data-test-id='login-remember'>Запомнить меня</Checkbox>
+                            <Checkbox data-test-id={DATA_TEST_ID.loginRemember}>
+                                Запомнить меня
+                            </Checkbox>
                         </Form.Item>
 
                         <Button
                             className='login-form-forgot-button '
                             onClick={isEmailValid ? onForgotButtonClick : undefined}
-                            data-test-id='login-forgot-button'
+                            data-test-id={DATA_TEST_ID.loginForgotButton}
                         >
                             Забыли пароль?
                         </Button>
@@ -184,7 +187,7 @@ const Login: React.FC = () => {
                             htmlType='submit'
                             className='login-form-button'
                             disabled={isLoadingLogin || isEmailCheckLoading}
-                            data-test-id='login-submit-button'
+                            data-test-id={DATA_TEST_ID.loginSubmitButton}
                         >
                             Войти
                         </Button>

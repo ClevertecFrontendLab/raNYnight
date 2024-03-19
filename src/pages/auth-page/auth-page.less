@@ -1,14 +1,8 @@
 @import '/src/style-variables.less';
 
-:root {
-    max-width: 1440px;
-    margin: 0 auto;
-    height: 100vh;
-}
-
 .ant-layout.auth-page-layout {
-    height: 100vh;
-    margin: 0 auto;
+    height: @height-100vh;
+    margin: @space-0 auto;
     background-repeat: no-repeat;
     position: relative;
     background-image: url('/enter-page-bg.png');
@@ -26,10 +20,4 @@
     height: 100%;
     top: 0;
     left: 0;
-}
-
-@media (max-width: 520px) {
-    .ant-layout.auth-page-layout {
-        height: 100vh;
-    }
 }

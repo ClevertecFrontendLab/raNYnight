@@ -5,7 +5,7 @@
     flex-direction: column;
     gap: 20px;
     width: 100%;
-    padding: 24px;
+    padding: @space-xl;
     margin: auto;
     transform: translateY(-25px);
 }
@@ -19,23 +19,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 76px;
+    padding-top: @space-9xl2;
 }
 
 .ant-typography.empty-feedback-list-title {
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 130%;
+    font-weight: @font-weight-500;
+    font-size: @font-size-24;
+    line-height: @line-height-130;
     text-align: center;
     color: @primary-light-9;
-    margin-bottom: 48px;
+    margin-bottom: @space-7xl;
     letter-spacing: 0.5px;
 }
 
 .ant-typography.empty-feedback-list-text {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 130%;
+    font-weight: @font-weight-400;
+    font-size: @font-size-14;
+    line-height: @line-height-130;
     text-align: center;
     color: @character-light-secondary-45;
     max-width: 522px;
@@ -46,22 +46,22 @@
     align-self: center;
 }
 
-@media (max-width: 520px) {
+@media (max-width: @width-sm) {
     .empty-feedback-list {
-        padding-top: 47px;
+        padding-top: @space-7xl;
         height: 314px;
     }
 
     .empty-feedback-wrapper {
         transform: translateY(-16px);
-        padding: 16px;
+        padding: @space-m;
         margin: unset;
     }
     .ant-typography.empty-feedback-list-text {
-        padding: 0 35px;
+        padding: @space-0 @space-5xl;
     }
     .ant-btn.empty-feedback-list-button {
-        width: 100%;
-        margin-top: 28px;
+        width: @height-100percent;
+        margin-top: @space-2xl;
     }
 }

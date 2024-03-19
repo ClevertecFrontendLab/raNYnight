@@ -1,0 +1,32 @@
+@import '/src/style-variables.less';
+
+.notification-wrapper {
+    min-width: 328px;
+    bottom: -50vh;
+    left: -50%;
+    transform: translate(50%, -50%);
+}
+
+.ant-notification.ant-notification-topRight {
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.warning-icon {
+    > * {
+        fill: @primary-light-6;
+    }
+}
+.error-icon {
+    > * {
+        fill: @character-light-error;
+    }
+}
+
+@media (max-width: @width-md) {
+    .notification-wrapper {
+        min-width: 312px;
+
+        transform: unset;
+    }
+}
