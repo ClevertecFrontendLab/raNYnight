@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     height: fit-content;
-    padding: 56px 34px;
+    padding: @space-8xl @space-5xl;
     border-radius: 2px;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
     background: @character-light-primary-inverse;
@@ -25,7 +25,7 @@
 }
 
 .verification-input-container {
-    margin: 24px auto;
+    margin: @space-xl auto;
     height: 40px;
 }
 .verification-input-character {
@@ -33,7 +33,7 @@
     background: @character-light-primary-inverse;
     border: 1px solid @character-light-border;
     border-radius: 2px;
-    padding: 12px;
+    padding: @space-s;
     width: 40px;
     height: 40px;
     font-family: @font-family;
@@ -59,7 +59,7 @@
 
 @media (max-width: 520px) {
     .auth-forgot-wrapper {
-        padding: 28px 20px;
+        padding: @space-2xl @space-2l;
         width: 328px;
         height: 457px;
     }
@@ -69,6 +69,6 @@
     }
 
     .ant-typography.auth-forgot-message {
-        padding: 0 14px;
+        padding: @space-0 calc(@space-2m - 1px);
     }
 }

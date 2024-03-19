@@ -2,13 +2,14 @@
 
 :root {
     max-width: 1440px;
-    margin: 0 auto;
-    height: 100vh;
+    margin: @space-0 auto;
+    height: @height-100vh;
+    background-color: @character-light-background;
 }
 
 .ant-layout.results-page-layout {
     height: 1024px;
-    margin: 0 auto;
+    margin: @space-0 auto;
     background-repeat: no-repeat;
     position: relative;
     background-image: url('/enter-page-bg.png');
@@ -16,6 +17,6 @@
 
 @media (max-width: 520px) {
     .ant-layout.results-page-layout {
-        height: 100vh;
+        height: @height-100vh;
     }
 }

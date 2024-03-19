@@ -1,7 +1,7 @@
 @import '/src/style-variables.less';
 
 .ant-typography.main-content-description {
-    padding: 24px;
+    padding: @space-xl;
     border-radius: 2px;
     max-width: 752px;
     width: 100%;
@@ -16,13 +16,13 @@
     letter-spacing: 0.55px;
 }
 
-@media (max-width: 835px) {
+@media (max-width: @width-xl) {
     .ant-typography.main-content-description {
-        padding-right: 30px;
+        padding-right: @space-3xl;
     }
 }
-@media (max-width: 768px) {
+@media (max-width: @width-md) {
     .ant-typography.main-content-description {
-        padding: 16px;
+        padding: @space-m;
     }
 }

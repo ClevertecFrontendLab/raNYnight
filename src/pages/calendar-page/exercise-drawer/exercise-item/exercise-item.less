@@ -2,9 +2,9 @@
 
 section.exercise-item {
     padding-top: 24px;
-    padding-right: 0;
-    padding-bottom: 0;
-    padding-left: 0;
+    padding-right: @space-0;
+    padding-bottom: @space-0;
+    padding-left: @space-0;
 
     :global {
         .ant-input:hover,
@@ -25,7 +25,7 @@ section.exercise-item {
     }
 
     .exercise-header {
-        margin-top: 8px;
+        margin-top: @space-xs;
         display: flex;
         justify-content: space-between;
         gap: 16px;
@@ -35,7 +35,7 @@ section.exercise-item {
         color: @character-light-title-85;
         background: @character-light-dividers;
         width: 89px;
-        padding: 8px;
+        padding: @space-xs;
     }
 
     .exercise-input-text:first-child {
@@ -43,7 +43,7 @@ section.exercise-item {
     }
 
     .exercise-inputs-wrapper {
-        margin-top: 8px;
+        margin-top: @space-xs;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -57,6 +57,6 @@ section.exercise-item {
 
     .exercise-input:first-child {
         width: 120px;
-        margin-right: 16px;
+        margin-right: @space-m;
     }
 }

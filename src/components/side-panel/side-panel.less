@@ -3,7 +3,7 @@
 .side-panel {
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
     background: @character-light-primary-inverse;
-    padding-left: 28.5px;
+    padding-left: @space-2xl;
 }
 
 .ant-layout-sider.side-panel {
@@ -12,40 +12,40 @@
 
 .side-panel-logo {
     height: 64px;
-    width: 100%;
+    width: @width-100percent;
     background-repeat: no-repeat;
     background-position: left;
-    margin: 30px 0 50px;
+    margin: @space-3xl @space-0 @space-7xl;
 }
 
 .side-panel-collapsed {
     transition: 0.6s;
-    padding-left: 18.5px;
+    padding-left: @space-l;
 }
 
-@media (max-width: 835px) {
+@media (max-width: @width-xl) {
     .side-panel {
-        max-height: 1194px;
+        max-height: @max-height-xl;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: @width-md) {
     .side-panel {
         max-height: unset;
     }
 }
 
-@media (max-width: 520px) {
+@media (max-width: @width-sm) {
     .side-panel.ant-layout-sider {
         position: fixed;
         z-index: 3;
-        height: 100%;
-        padding-left: 0;
+        height: @height-100percent;
+        padding-left: @space-0;
     }
     .side-panel-logo {
-        width: 74px;
-        height: 18px;
-        margin: 16px 17px;
+        width: calc(@space-9xl + 2px);
+        height: @space-l;
+        margin: @space-m;
         background-size: contain;
     }
 }
