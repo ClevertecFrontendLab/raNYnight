@@ -34,3 +34,12 @@ export type ModifiedTraining = BaseTraining & {
 };
 
 export type Training = { name: string };
+
+export enum Trainings {
+    Силовая = 'strength',
+    Ноги = 'legs',
+    Руки = 'hands',
+    Грудь = 'chest',
+    Спина = 'back',
+    Кардио = 'cardio',
+}

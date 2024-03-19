@@ -1,9 +1,9 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useWindowSize } from 'usehooks-ts';
 
 import './collapse-button.less';
-import { DATA_TEST_ID } from '@constants/data-test-id';
 
 interface CollapseButtonProps {
     onClick: () => void;

@@ -1,7 +1,17 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Calendar from '@components/calendar/calendar';
+import { BREAKPOINT_768 } from '@constants/breakpoints';
+import {
+    CALENDAR_TRAINING_MODAL_WIDTH,
+    CALENDAR_TRAINING_MODAL_WIDTH_MOBILE,
+} from '@constants/sizes';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import CreateTrainingModal from '@pages/calendar-page/calendar-modals/create-training-modal/create-training-modal';
+import { NotificationModal } from '@pages/calendar-page/calendar-modals/notification-modal/notification-modal';
 import TrainingListModal from '@pages/calendar-page/calendar-modals/training-list-modal/training-list-modal';
 import CalendarTrainingList from '@pages/calendar-page/calendar-training-list/calendar-training-list';
+import { selectShouldRefetch, setShouldRefetch } from '@redux/auth/auth-slice';
 import {
     ModalTypes,
     selectModalByType,
@@ -18,28 +28,20 @@ import {
     selectIsCalendarBlocked,
     setCalendarBlocked,
     setIsDrawerOpen,
+    setModifiedExercises,
     setModifiedTraining,
     setSelectedDay,
     setTodaysTrainings,
 } from '@redux/trainings/trainings-slice';
+import { Paths } from '@router/paths';
+import { filterTrainingsByDate } from '@utils/filter-trainings-by-date';
+import { getSelectedCellPosition, getSelectedCellPositionMobile } from '@utils/get-cell-positions';
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
+import { useWindowSize } from 'usehooks-ts';
 
 import 'dayjs/locale/ru';
 
-import { NotificationModal } from '@pages/calendar-page/calendar-modals/notification-modal/notification-modal';
-import { selectShouldRefetch, setShouldRefetch } from '@redux/auth/auth-slice';
-import { Paths } from '@router/paths';
-import { filterTrainingsByDate } from '@utils/filter-trainings-by-date';
-import { useNavigate } from 'react-router-dom';
 import './calendar.less';
-import { useWindowSize } from 'usehooks-ts';
-import { BREAKPOINT_768 } from '@constants/breakpoints';
-import {
-    CALENDAR_TRAINING_MODAL_WIDTH,
-    CALENDAR_TRAINING_MODAL_WIDTH_MOBILE,
-} from '@constants/sizes';
-import CreateTrainingModal from '@pages/calendar-page/calendar-modals/create-training-modal/create-training-modal';
 
 const AppCalendar = () => {
     const navigate = useNavigate();
@@ -72,6 +74,7 @@ const AppCalendar = () => {
         setSelectedDate(date);
         dispatch(setSelectedDay(date.format('DD-MM-YYYY').toString()));
         dispatch(setTodaysTrainings(filteredTrainings));
+        dispatch(setModifiedExercises([]));
         dispatch(setModifiedTraining(null));
         dispatch(setCloseModal(ModalTypes.calendarCreateTrainingModal));
         dispatch(setOpenModal(ModalTypes.calendarTrainingListModal));
@@ -109,7 +112,6 @@ const AppCalendar = () => {
         const cellPosition = getSelectedCellPositionMobile(date);
         setCellPosition(cellPosition);
         handleCellClick(date);
-        console.log('e target', target, 'dateAttribute', dateAttribute);
     };
 
     const handleGetTrainingList = () => {
@@ -237,54 +239,3 @@ const AppCalendar = () => {
 };
 
 export default AppCalendar;
-
-function getSelectedCellPosition(date: dayjs.Dayjs) {
-    const cell = document
-        .querySelector(`[data-date="${date.format('YYYY-MM-DD')}"]`)
-        ?.closest('.ant-picker-cell');
-
-    if (cell) {
-        const { top, left: cellLeft, width: cellWidth } = cell.getBoundingClientRect();
-        const { left: bodyLeft } = document.body.getBoundingClientRect();
-
-        const modalWidth = CALENDAR_TRAINING_MODAL_WIDTH;
-        const bodyWidth = document.body.offsetWidth;
-        const leftRelativeToBody = cellLeft - bodyLeft;
-
-        let adjustedLeft = cellLeft + window.scrollX;
-        const toMove = modalWidth - cellWidth;
-
-        if (leftRelativeToBody + modalWidth > bodyWidth) {
-            adjustedLeft -= toMove;
-        }
-
-        return {
-            top: top + window.scrollY,
-            left: adjustedLeft,
-        };
-    }
-
-    return { top: 0, left: 0 };
-}
-
-function getSelectedCellPositionMobile(date: dayjs.Dayjs) {
-    const cell = document
-        .querySelector(`[data-date="${date.format('YYYY-MM-DD')}"]`)
-        ?.closest('.ant-picker-cell');
-
-    if (cell) {
-        const { top, height: cellHeight } = cell.getBoundingClientRect();
-
-        const modalWidth = CALENDAR_TRAINING_MODAL_WIDTH_MOBILE;
-        const screenWidth = window.innerWidth;
-
-        const adjustedLeft = (screenWidth - modalWidth) / 2;
-
-        return {
-            top: top + cellHeight,
-            left: adjustedLeft,
-        };
-    }
-
-    return { top: 0, left: 0 };
-}

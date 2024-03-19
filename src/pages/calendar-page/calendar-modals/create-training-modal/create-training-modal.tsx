@@ -1,21 +1,17 @@
+import { useState } from 'react';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { trainingButtonTitles, trainingDrawerTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import CalendarExercisesList from '@pages/calendar-page/calendar-exercises-list/calendar-exercises-list';
 import ExerciseDrawer from '@pages/calendar-page/exercise-drawer/exercise-drawer';
 import { ModalTypes, selectModalByType } from '@redux/modals/modals-slice';
-import {
-    selectModifiedTraining,
-    selectTrainingToEdit,
-    setIsDrawerOpen,
-} from '@redux/trainings/trainings-slice';
+import { selectTrainingToEdit, setIsDrawerOpen } from '@redux/trainings/trainings-slice';
 import { Modal } from 'antd';
-import { useState } from 'react';
 
 import CreateTrainingModalFooter from './create-training-modal-footer/create-training-modal-footer';
 import CreateTrainingModalTitle from './create-training-modal-title/create-training-modal-title';
 
-import { DATA_TEST_ID } from '@constants/data-test-id';
 import './create-training-modal.less';
 
 interface CreateTrainingModalProps {
@@ -30,10 +26,6 @@ const CreateTrainingModal = ({ position, width }: CreateTrainingModalProps) => {
     const dispatch = useAppDispatch();
 
     const trainingToEdit = useAppSelector(selectTrainingToEdit);
-    const modifiedTraining = useAppSelector(selectModifiedTraining);
-
-    const modifiedExercises = modifiedTraining?.exercises;
-    const exercisecToEdit = trainingToEdit?.exercises;
 
     const [selectedOption, setSelectedOption] = useState<string>(
         trainingToEdit !== null ? trainingToEdit.name : trainingButtonTitles.selectTraining,
@@ -84,7 +76,7 @@ const CreateTrainingModal = ({ position, width }: CreateTrainingModalProps) => {
                 }
                 key={`create-training-modal ${trainingToEdit?._id}`}
             >
-                <CalendarExercisesList exercises={modifiedExercises ?? exercisecToEdit ?? []} />
+                <CalendarExercisesList />
             </Modal>
 
             <ExerciseDrawer

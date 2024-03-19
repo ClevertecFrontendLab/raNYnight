@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import VerificationInput from 'react-verification-input';
 import Loader from '@components/loader/loader';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { ResultImages, ResultMessages, ResultTitles } from '@constants/results';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useConfirmEmailMutation } from '@redux/auth/auth-api';
@@ -10,7 +11,6 @@ import { Paths } from '@router/paths';
 import { Typography } from 'antd';
 
 import './confirm-email.less';
-import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const { Text } = Typography;
 

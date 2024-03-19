@@ -1,9 +1,11 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
-import { CloseOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
-import { trainingButtonTitles } from '@constants/trainings';
+import { CloseOutlined } from '@ant-design/icons';
+import { DATA_TEST_ID } from '@constants/data-test-id';
+import { EXERCISE_DRAWER_WIDTH } from '@constants/sizes';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import {
     selectIsDrawerOpen,
+    selectModifiedExercises,
     selectModifiedTraining,
     selectSelectedDay,
     selectTrainingToEdit,
@@ -12,15 +14,12 @@ import {
 } from '@redux/trainings/trainings-slice';
 import { Button, Drawer, Typography } from 'antd';
 import dayjs from 'dayjs';
-import { Exercise, ModifiedTraining } from 'src/types/trainings';
+import utc from 'dayjs/plugin/utc';
+import { Exercise, ModifiedTraining, Trainings } from 'src/types/trainings';
 
-import { Trainings } from '../calendar-training-item/calendar-training-item';
-
-import ExerciseItem from './exercise-item/exercise-item';
+import ExerciseList from './exercise-list/exercise-list';
 
 import './exercise-drawer.less';
-import utc from 'dayjs/plugin/utc';
-import { DATA_TEST_ID } from '@constants/data-test-id';
 
 dayjs.extend(utc);
 
@@ -36,6 +35,7 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
     const trainingToEdit = useAppSelector(selectTrainingToEdit);
     const selectedDay = useAppSelector(selectSelectedDay);
     const modifiedTraining = useAppSelector(selectModifiedTraining);
+    const modifiedExercises = useAppSelector(selectModifiedExercises);
 
     const isPast = dayjs(selectedDay, 'DD-MM-YYYY').isBefore(dayjs(), 'day');
     const isToday = dayjs(selectedDay, 'DD-MM-YYYY').isSame(dayjs(), 'day');
@@ -47,11 +47,12 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
         weight: 0,
         approaches: 3,
         isImplementation: false,
+        index: 0,
     };
 
     const newTrainingObj: ModifiedTraining = {
         name: selectedTraining,
-        date: selectedDay!,
+        date: selectedDay as string,
         isImplementation: false,
         parameters: {
             repeat: false,
@@ -61,77 +62,31 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
         },
         exercises: [newExerciseObj],
     };
-
-    const [trainingToUpdate, setTrainingToUpdate] = useState(
-        trainingToEdit ? { ...trainingToEdit } : { ...newTrainingObj },
-    );
-
-    const deleteButtonDisabled = !trainingToUpdate.exercises.some((exercise) => exercise.selected);
+    const [trainingToUpdate, setTrainingToUpdate] = useState<ModifiedTraining>(newTrainingObj);
 
     const trainingKey: Trainings | undefined =
-        Trainings[trainingToUpdate.name as keyof typeof Trainings];
-
-    const handleExerciseChange = (updatedExercise: Exercise) => {
-        const updatedExercises = trainingToUpdate.exercises.map((exercise, i) => {
-            if (i === updatedExercise.index) {
-                return updatedExercise;
-            }
-            return exercise;
-        });
-        setTrainingToUpdate((prevTraining) => ({ ...prevTraining, exercises: updatedExercises }));
-        // setTrainingToUpdate({ ...trainingToUpdate, exercises: updatedExercises });
-    };
-
-    const handleAddExercise = () => {
-        setTrainingToUpdate((prevTraining) => {
-            const updatedExercises = [...prevTraining.exercises, newExerciseObj];
-            return { ...prevTraining, exercises: updatedExercises };
-        });
-    };
-
-    const handleRemoveExercises = () => {
-        const updatedExercises = trainingToUpdate.exercises.filter(
-            (exercise) => !exercise.selected,
-        );
-        setTrainingToUpdate((prevState) => ({ ...prevState, exercises: updatedExercises }));
-    };
+        Trainings[selectedTraining as keyof typeof Trainings];
 
     const handleCloseDrawer = () => {
-        const modifiedDate = `${dayjs(selectedDay, 'DD-MM-YYYY').format(
-            'YYYY-MM-DD',
-        )}T00:00:00.000Z`;
-        const modifiedTraining = {
-            ...trainingToUpdate,
-            isImplementation,
-            _id: undefined,
-            date: modifiedDate,
-            exercises: trainingToUpdate.exercises
-                .map(({ index, selected, _id, ...rest }) => rest)
-                .filter((exercise) => exercise.name !== ''),
-        };
-        dispatch(setModifiedTraining(modifiedTraining));
-        setTrainingToUpdate(modifiedTraining);
+        if (modifiedExercises) {
+            const updatedTraining: ModifiedTraining = {
+                ...trainingToUpdate,
+                exercises: modifiedExercises,
+                isImplementation,
+            };
+            dispatch(setModifiedTraining({ ...updatedTraining, exercises: modifiedExercises }));
+        }
         dispatch(setIsDrawerOpen(false));
     };
 
     useEffect(() => {
-        setTrainingToUpdate(
-            modifiedTraining
-                ? { ...modifiedTraining }
-                : trainingToEdit
-                ? { ...trainingToEdit }
-                : { ...newTrainingObj },
-        );
-    }, [trainingToEdit, isDrawerOpen]);
-
-    useEffect(() => {
-        if (
-            (modifiedTraining && modifiedTraining.exercises.length === 0) ||
-            trainingToUpdate.exercises.length === 0
-        ) {
-            handleAddExercise();
-        }
-    }, [modifiedTraining, isDrawerOpen]);
+        const newTrainingToUpdate = modifiedTraining
+            ? { ...modifiedTraining }
+            : trainingToEdit
+            ? { ...trainingToEdit }
+            : newTrainingObj;
+        setTrainingToUpdate(newTrainingToUpdate);
+    }, [modifiedTraining, trainingToEdit]);
 
     return (
         <Drawer
@@ -143,7 +98,7 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
             closeIcon={closeIcon}
             open={isDrawerOpen}
             className={'exercise-drawer'}
-            width={360}
+            width={EXERCISE_DRAWER_WIDTH}
             extra={
                 <Button
                     type='text'
@@ -156,35 +111,12 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
             data-test-id={DATA_TEST_ID.modalDrawerRight}
         >
             <div className='drawer-exercise-header'>
-                <li className={`calendar-training-item ${trainingKey}`}>{trainingToUpdate.name}</li>
+                <li className={`calendar-training-item ${trainingKey}`}>{selectedTraining}</li>
                 <Typography.Text className='drawer-exercise-header-date'>
                     {dayjs(selectedDay, 'DD-MM-YYYY').format('DD.MM.YYYY')}
                 </Typography.Text>
             </div>
-            {trainingToUpdate.exercises.map((exercise, i) => (
-                <ExerciseItem
-                    exercise={exercise}
-                    key={exercise.name + i}
-                    onExerciseChange={handleExerciseChange}
-                    index={i}
-                />
-            ))}
-            <div className='drawer-exercise-buttons'>
-                <Button
-                    icon={<PlusOutlined />}
-                    className='drawer-exercise-button-add'
-                    onClick={handleAddExercise}
-                >
-                    {trainingButtonTitles.addMoreExercises}
-                </Button>
-                <Button
-                    icon={<MinusOutlined />}
-                    onClick={handleRemoveExercises}
-                    disabled={deleteButtonDisabled}
-                >
-                    {trainingButtonTitles.deleteExercises}
-                </Button>
-            </div>
+            <ExerciseList exercises={trainingToUpdate.exercises} />
         </Drawer>
     );
 };

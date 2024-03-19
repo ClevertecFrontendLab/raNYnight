@@ -6,7 +6,6 @@ interface ModalStore {
 }
 
 export enum ModalTypes {
-    none = 'none',
     calendarTrainingListModal = 'calendarTrainingListModal',
     calendarCreateTrainingModal = 'calendarCreateTrainingModal',
     calendarGetDefaultTrainingsModal = 'calendarGetDefaultTrainingsModal',
@@ -16,7 +15,6 @@ export enum ModalTypes {
 }
 
 const initialState: ModalStore = {
-    [ModalTypes.none]: false,
     [ModalTypes.calendarTrainingListModal]: false,
     [ModalTypes.calendarCreateTrainingModal]: false,
 };

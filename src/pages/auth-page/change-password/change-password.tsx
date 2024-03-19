@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Loader from '@components/loader/loader';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useChangePasswordMutation } from '@redux/auth/auth-api';
 import {
@@ -17,7 +18,6 @@ import { ChangePasswordRequest } from 'src/types/auth';
 import { validatePassword, validateRepeatPassword } from '../registration/validators';
 
 import './change-password.less';
-import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const { Text } = Typography;
 

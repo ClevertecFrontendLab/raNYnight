@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ModifiedTraining } from 'src/types/trainings';
+import { Exercise, ModifiedTraining } from 'src/types/trainings';
 
 interface TrainingStore {
     allUserTrainings: ModifiedTraining[] | [];
@@ -9,6 +9,7 @@ interface TrainingStore {
     isDrawerOpen: boolean;
     selectedDay: string | null;
     modifiedTraining: ModifiedTraining | null;
+    modifiedExercises: Exercise[] | null;
     isCalendarBlocked: boolean;
 }
 
@@ -21,6 +22,7 @@ const initialState: TrainingStore = {
     selectedDay: null,
     modifiedTraining: null,
     isCalendarBlocked: false,
+    modifiedExercises: [],
 };
 
 const trainingsSlice = createSlice({
@@ -50,6 +52,9 @@ const trainingsSlice = createSlice({
         setModifiedTraining: (state, action: PayloadAction<ModifiedTraining | null>) => {
             state.modifiedTraining = action.payload;
         },
+        setModifiedExercises(state, action: PayloadAction<Exercise[] | null>) {
+            state.modifiedExercises = action.payload;
+        },
         setCalendarBlocked: (state, action: PayloadAction<boolean>) => {
             state.isCalendarBlocked = action.payload;
         },
@@ -67,6 +72,7 @@ export const {
     setModifiedTraining,
     resetTrainigState,
     setCalendarBlocked,
+    setModifiedExercises,
 } = trainingsSlice.actions;
 
 export const selectAllUserTrainings = (state: { trainings: TrainingStore }) =>
@@ -92,5 +98,8 @@ export const selectModifiedTraining = (state: { trainings: TrainingStore }) =>
 
 export const selectIsCalendarBlocked = (state: { trainings: TrainingStore }) =>
     state.trainings.isCalendarBlocked;
+
+export const selectModifiedExercises = (state: { trainings: TrainingStore }) =>
+    state.trainings.modifiedExercises;
 
 export default trainingsSlice.reducer;

@@ -4,6 +4,7 @@ import { GooglePlusOutlined } from '@ant-design/icons';
 import Loader from '@components/loader/loader';
 import { authGoogleQuery } from '@constants/api';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useCheckEmailMutation, useLoginUserMutation } from '@redux/auth/auth-api';
 import {
@@ -24,7 +25,6 @@ import AuthSwitcher from '../auth-switcher/auth-switcher';
 import { validatePassword } from '../registration/validators';
 
 import './login.less';
-import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const Login: React.FC = () => {
     const { width } = useWindowSize();

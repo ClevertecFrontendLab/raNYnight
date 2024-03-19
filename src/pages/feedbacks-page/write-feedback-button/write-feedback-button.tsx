@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import CustomRate from '@components/custom-rate/custom-rate';
 import Loader from '@components/loader/loader';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { FEEDBACK_MODAL_WIDTH, RATE_STAR_MODAL } from '@constants/sizes';
 import { createOkButtonProps } from '@constants/utils';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
@@ -10,7 +11,6 @@ import { setShouldRefetch } from '@redux/feedbacks/feedbacks-slice';
 import { Button, Input, Modal } from 'antd';
 
 import './write-feedback-button.less';
-import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const { TextArea } = Input;
 

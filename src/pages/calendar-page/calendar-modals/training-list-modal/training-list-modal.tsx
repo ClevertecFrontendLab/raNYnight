@@ -1,3 +1,5 @@
+import { CloseOutlined } from '@ant-design/icons';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { trainingButtonTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import CalendarTrainingList from '@pages/calendar-page/calendar-training-list/calendar-training-list';
@@ -16,8 +18,6 @@ import { Modal } from 'antd';
 import dayjs from 'dayjs';
 import { ModifiedTraining } from 'src/types/trainings';
 
-import { CloseOutlined } from '@ant-design/icons';
-import { DATA_TEST_ID } from '@constants/data-test-id';
 import './training-list-modal.less';
 
 interface TrainingListModalProps {

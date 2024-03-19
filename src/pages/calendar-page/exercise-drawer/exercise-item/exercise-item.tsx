@@ -1,15 +1,15 @@
-import { FC, useCallback, useState } from 'react';
+import { FC, useState } from 'react';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { exercisesTitles } from '@constants/trainings';
 import { Checkbox, Input } from 'antd';
 import { Exercise } from 'src/types/trainings';
 
 import './exercise-item.less';
-import { DATA_TEST_ID } from '@constants/data-test-id';
 
 interface ExerciseItemProps {
     exercise: Exercise;
     index: number;
-    onExerciseChange: (exercise: Exercise) => void;
+    onExerciseChange: (exercise: Exercise, index: number) => void;
 }
 
 const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index }) => {
@@ -17,25 +17,27 @@ const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index
 
     const [exerciseState, setExerciseState] = useState<Exercise>(exercise);
 
-    const handleInputChange = async (name: string, value: string | number | boolean) => {
-        setExerciseState((prevExercise) => {
-            onExerciseChange({
-                ...prevExercise,
-                [name!]: value,
-                index,
-            });
-            return {
-                ...prevExercise,
-                [name!]: value,
-                index,
-            };
+    const handleInputChange = (name: string, value: string | number | boolean) => {
+        setExerciseState({
+            ...exerciseState,
+            [name]: value,
+            index,
         });
+        onExerciseChange(
+            {
+                ...exerciseState,
+                [name]: value,
+                index,
+            },
+            index,
+        );
     };
 
     return (
         <section className='exercise-item'>
             <Input
                 autoFocus={true}
+                autoComplete='off'
                 name='name'
                 placeholder={exerciseName}
                 value={exerciseState.name}
@@ -45,11 +47,13 @@ const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index
                         id='selected'
                         name='selected'
                         checked={exerciseState.selected}
-                        onChange={(e) => handleInputChange(e.target.name!, e.target.checked)}
+                        onChange={(e) =>
+                            handleInputChange(e.target.name as string, e.target.checked)
+                        }
                         data-test-id={`${DATA_TEST_ID.modalDrawerRightCheckboxExercise}${index}`}
                     />
                 }
-                onChange={async (e) => await handleInputChange(e.target.name, e.target.value)}
+                onChange={(e) => handleInputChange(e.target.name, e.target.value)}
                 data-test-id={`${DATA_TEST_ID.modalDrawerRightInputExercise}${index}`}
             />
             <div className='exercise-header'>
@@ -65,9 +69,7 @@ const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index
                         name='replays'
                         addonBefore='+'
                         value={exerciseState.replays}
-                        onChange={async (e) =>
-                            await handleInputChange(e.target.name, e.target.value)
-                        }
+                        onChange={async (e) => handleInputChange(e.target.name, e.target.value)}
                         data-test-id={`${DATA_TEST_ID.modalDrawerRightInputApproach}${index}`}
                     />
                 </div>
@@ -78,9 +80,7 @@ const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index
                         name='weight'
                         value={exerciseState.weight}
                         data-test-id={`${DATA_TEST_ID.modalDrawerRightInputWeight}${index}`}
-                        onChange={async (e) =>
-                            await handleInputChange(e.target.name, e.target.value)
-                        }
+                        onChange={async (e) => handleInputChange(e.target.name, e.target.value)}
                     />
                 </div>
                 x
@@ -90,9 +90,7 @@ const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index
                         type='number'
                         name='approaches'
                         value={exerciseState.approaches}
-                        onChange={async (e) =>
-                            await handleInputChange(e.target.name, e.target.value)
-                        }
+                        onChange={(e) => handleInputChange(e.target.name, e.target.value)}
                         data-test-id={`${DATA_TEST_ID.modalDrawerRightInputQuantity}${index}`}
                     />
                 </div>

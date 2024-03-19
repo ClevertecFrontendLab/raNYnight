@@ -1,3 +1,4 @@
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import WriteFeedbackButton from '@pages/feedbacks-page/write-feedback-button/write-feedback-button';
 import {
@@ -8,7 +9,6 @@ import { Typography } from 'antd';
 import { Footer as AntdFooter } from 'antd/lib/layout/layout';
 
 import './footer.less';
-import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const { Text } = Typography;
 

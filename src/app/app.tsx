@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useAppDispatch } from '@hooks/index';
 import { setAuthToken } from '@redux/auth/auth-slice';
 import { history } from '@redux/configure-store';
-import { setAllModalsToFalse } from '@redux/modals/modals-slice';
 import { routes } from '@router/routes';
 import { HistoryRouter as Router } from 'redux-first-history/rr6';
 
@@ -25,18 +24,6 @@ export const App = () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
     }, []);
-
-    // useEffect(() => {
-    //     const handleResize = () => {
-    //         dispatch(setAllModalsToFalse());
-    //     };
-
-    //     window.addEventListener('resize', handleResize);
-
-    //     return () => {
-    //         window.removeEventListener('resize', handleResize);
-    //     };
-    // }, []);
 
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');

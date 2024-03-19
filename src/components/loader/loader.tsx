@@ -1,10 +1,10 @@
+import { createPortal } from 'react-dom';
 import Lottie, { Options } from 'react-lottie';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 import { default as animationData } from './loader.json';
 
 import './loader.less';
-import { createPortal } from 'react-dom';
-import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const defaultOptions: Options = {
     loop: true,

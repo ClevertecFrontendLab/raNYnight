@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import Loader from '@components/loader/loader';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useRegisterUserMutation } from '@redux/auth/auth-api';
 import {
@@ -22,7 +23,6 @@ import AuthSwitcher from '../auth-switcher/auth-switcher';
 import { validatePassword, validateRepeatPassword } from './validators';
 
 import './registration.less';
-import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const Registration: React.FC = () => {
     const [form] = useForm();

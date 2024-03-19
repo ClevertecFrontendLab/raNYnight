@@ -1,27 +1,18 @@
+import { FC } from 'react';
 import { EditOutlined } from '@ant-design/icons';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { ModalTypes, setCloseModal, setOpenModal } from '@redux/modals/modals-slice';
 import { setTrainingToEdit } from '@redux/trainings/trainings-slice';
-import { FC } from 'react';
-import { ModifiedTraining } from 'src/types/trainings';
-
-import { DATA_TEST_ID } from '@constants/data-test-id';
-import './calendar-training-item.less';
 import { Button } from 'antd';
+import { ModifiedTraining, Trainings } from 'src/types/trainings';
+
+import './calendar-training-item.less';
 
 export interface CalendarTrainingItemProps {
     index: number;
     training: ModifiedTraining | null;
     isEditable: boolean;
-}
-
-export enum Trainings {
-    Силовая = 'strength',
-    Ноги = 'legs',
-    Руки = 'hands',
-    Грудь = 'chest',
-    Спина = 'back',
-    Кардио = 'cardio',
 }
 
 const CalendarTrainingItem: FC<CalendarTrainingItemProps> = ({ training, isEditable, index }) => {
@@ -36,7 +27,7 @@ const CalendarTrainingItem: FC<CalendarTrainingItemProps> = ({ training, isEdita
 
         setTimeout(() => {
             dispatch(setOpenModal(ModalTypes.calendarCreateTrainingModal));
-        }, 200);
+        }, 300);
     };
 
     if (training) {

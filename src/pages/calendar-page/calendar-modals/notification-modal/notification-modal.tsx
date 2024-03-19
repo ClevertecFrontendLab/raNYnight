@@ -1,9 +1,9 @@
-import { CloseCircleOutlined, CloseOutlined } from '@ant-design/icons';
-import { Button, Modal, Typography, notification } from 'antd';
 import { FC, useEffect, useState } from 'react';
+import { CloseCircleOutlined, CloseOutlined } from '@ant-design/icons';
+import { DATA_TEST_ID } from '@constants/data-test-id';
+import { Button, Modal, notification,Typography } from 'antd';
 
 import './notification-modal.less';
-import { DATA_TEST_ID } from '@constants/data-test-id';
 
 type NotificationModalProps = {
     textButton: string;
@@ -78,8 +78,6 @@ export const NotificationModal: FC<NotificationModalProps> = ({
         }
         notification.close('open');
         setOpenModal(false);
-        console.log('setOpenModal', openModal);
-        console.log('open', open);
     }, [open, openModal]);
 
     return (

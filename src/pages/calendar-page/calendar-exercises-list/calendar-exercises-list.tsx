@@ -1,26 +1,40 @@
+import { FC, useEffect, useState } from 'react';
 import { EditOutlined } from '@ant-design/icons';
-import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { setIsDrawerOpen } from '@redux/trainings/trainings-slice';
+import { DATA_TEST_ID } from '@constants/data-test-id';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import {
+    selectModifiedTraining,
+    selectTrainingToEdit,
+    setIsDrawerOpen,
+} from '@redux/trainings/trainings-slice';
+import { Button } from 'antd';
 import { Exercise } from 'src/types/trainings';
 
 import './calendar-exercises-list.less';
-import { DATA_TEST_ID } from '@constants/data-test-id';
-import { Button } from 'antd';
 
-interface CalendarExercisesListProps {
-    exercises: Exercise[];
-}
-
-const CalendarExercisesList = ({ exercises }: CalendarExercisesListProps) => {
+const CalendarExercisesList: FC = () => {
     const dispatch = useAppDispatch();
+
+    const modifiedTraining = useAppSelector(selectModifiedTraining);
+    const trainingToEdit = useAppSelector(selectTrainingToEdit);
+    const [exercisesToList, setExercisesToList] = useState<Exercise[]>([]);
 
     const handleClick = () => {
         dispatch(setIsDrawerOpen(true));
     };
 
+    useEffect(() => {
+        const newExercises = modifiedTraining
+            ? modifiedTraining.exercises
+            : trainingToEdit
+            ? trainingToEdit.exercises
+            : [];
+        setExercisesToList(newExercises);
+    }, [modifiedTraining, trainingToEdit]);
+
     return (
         <ul className='calendar-exercises-list'>
-            {exercises.map((exercise: Exercise, i) => (
+            {exercisesToList.map((exercise: Exercise, i) => (
                 <li className={`calendar-exercises-list-item`} key={i}>
                     {exercise.name}
                     <Button

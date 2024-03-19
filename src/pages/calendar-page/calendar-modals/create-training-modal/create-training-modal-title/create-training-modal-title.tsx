@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import { ArrowLeftOutlined } from '@ant-design/icons';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { ModalTypes, setCloseModal, setOpenModal } from '@redux/modals/modals-slice';
 import {
@@ -6,14 +8,13 @@ import {
     selectSelectedDay,
     selectTodaysTrainings,
     selectTrainingToEdit,
+    setModifiedExercises,
     setModifiedTraining,
     setTrainingToEdit,
 } from '@redux/trainings/trainings-slice';
 import { Button, Select } from 'antd';
-import { useEffect, useState } from 'react';
-
-import { DATA_TEST_ID } from '@constants/data-test-id';
 import dayjs from 'dayjs';
+
 import './create-training-modal-title.less';
 
 interface CreateTrainingModalTitleProps {
@@ -56,6 +57,7 @@ const CreateTrainingModalTitle = ({ defaultSelect, onChange }: CreateTrainingMod
         dispatch(setOpenModal(ModalTypes.calendarTrainingListModal));
         dispatch(setTrainingToEdit(null));
         dispatch(setModifiedTraining(null));
+        dispatch(setModifiedExercises(null));
     };
 
     useEffect(() => {

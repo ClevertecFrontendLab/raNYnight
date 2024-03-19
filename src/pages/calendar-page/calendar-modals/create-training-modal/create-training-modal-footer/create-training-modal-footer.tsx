@@ -1,3 +1,4 @@
+import { FC, useState } from 'react';
 import Loader from '@components/loader/loader';
 import { trainingButtonTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
@@ -8,16 +9,14 @@ import {
     useUpdateTrainingMutation,
 } from '@redux/trainings/trainings-api';
 import {
-    resetTrainigState,
     selectModifiedTraining,
     selectSelectedDay,
     selectTrainingToEdit,
     setModifiedTraining,
-    setTrainingToEdit,
 } from '@redux/trainings/trainings-slice';
 import { Button } from 'antd';
 import dayjs from 'dayjs';
-import { FC, useState } from 'react';
+
 import { NotificationModal } from '../../notification-modal/notification-modal';
 
 interface CreateTrainingModalFooterProps {

@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
+import { ModifiedTraining } from 'src/types/trainings';
 
 import CalendarTrainingItem from '../calendar-training-item/calendar-training-item';
-import { ModifiedTraining } from 'src/types/trainings';
 
 interface CalendarTrainingListProps {
     trainings: ModifiedTraining[];

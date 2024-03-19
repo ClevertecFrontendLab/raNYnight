@@ -1,12 +1,11 @@
-import { Button, Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
-
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { ResultImages } from '@constants/results';
-import { Paths } from '@router/paths';
-
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { ModalTypes, selectModalByType, setCloseModal } from '@redux/modals/modals-slice';
+import { Paths } from '@router/paths';
+import { Button, Modal } from 'antd';
+
 import './error-modal.less';
 
 export const SomethingWrongModal = () => {

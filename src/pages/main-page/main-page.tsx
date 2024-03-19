@@ -1,7 +1,7 @@
+import React from 'react';
 import SidePanel from '@components/side-panel/side-panel';
 import { SomethingWrongModal } from '@pages/calendar-page/calendar-modals/error-modal/error-modal';
 import { Layout } from 'antd';
-import React from 'react';
 
 import MainFooter from './layout/footer/footer';
 import MainHeader from './layout/header/header';
