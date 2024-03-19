@@ -2,7 +2,7 @@ import { FC, ReactNode, useEffect, useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { Exercise, ModifiedTraining, Trainings } from '@common-types/trainings';
 import { DATA_TEST_ID } from '@constants/data-test-id';
-import { EXERCISE_DRAWER_WIDTH } from '@constants/sizes';
+import { EXERCISE_DRAWER_WIDTH, EXERCISE_DRAWER_WIDTH_MOBILE } from '@constants/sizes';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import {
     selectIsDrawerOpen,
@@ -21,6 +21,8 @@ import ExerciseList from './exercise-list/exercise-list';
 
 import './exercise-drawer.less';
 import { DATE_DDMMYYYY, DATE_DD_MM_YYYY } from '@constants/dates';
+import { useWindowSize } from 'usehooks-ts';
+import { BREAKPOINT_834 } from '@constants/breakpoints';
 
 dayjs.extend(utc);
 
@@ -31,6 +33,7 @@ type ExerciseDrawerProps = {
 };
 
 const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTraining }) => {
+    const { width } = useWindowSize();
     const dispatch = useAppDispatch();
     const isDrawerOpen = useAppSelector(selectIsDrawerOpen);
     const trainingToEdit = useAppSelector(selectTrainingToEdit);
@@ -92,6 +95,7 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
     return (
         <Drawer
             mask={true}
+            maskStyle={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
             title={title}
             destroyOnClose
             placement='right'
@@ -99,7 +103,7 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
             closeIcon={closeIcon}
             open={isDrawerOpen}
             className={'exercise-drawer'}
-            width={EXERCISE_DRAWER_WIDTH}
+            width={width > BREAKPOINT_834 ? EXERCISE_DRAWER_WIDTH : EXERCISE_DRAWER_WIDTH_MOBILE}
             extra={
                 <Button
                     type='text'

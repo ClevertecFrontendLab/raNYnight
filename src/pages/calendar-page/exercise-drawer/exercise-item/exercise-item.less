@@ -1,27 +1,25 @@
 @import '/src/style-variables.less';
 
 section.exercise-item {
-    padding-top: 24px;
+    padding-top: @space-xl;
     padding-right: @space-0;
     padding-bottom: @space-0;
     padding-left: @space-0;
 
-    :global {
-        .ant-input:hover,
-        .ant-input-number:hover {
-            border-color: @primary-light-5;
-        }
+    .ant-input:hover,
+    .ant-input-number:hover {
+        border-color: @primary-light-5;
+    }
 
-        .ant-input-number {
-            color: @character-light-disable-25;
-        }
+    .ant-input-number {
+        color: @character-light-disable-25;
+    }
 
-        .ant-input:focus,
-        .ant-input-number-focused {
-            border-color: @primary-light-5;
-            box-shadow: none;
-            color: @character-light-title-85;
-        }
+    .ant-input:focus,
+    .ant-input-number-focused {
+        border-color: @primary-light-5;
+        box-shadow: none;
+        color: @character-light-title-85;
     }
 
     .exercise-header {
@@ -57,6 +55,19 @@ section.exercise-item {
 
     .exercise-input:first-child {
         width: 120px;
-        margin-right: @space-m;
+        margin-right: @space-2l;
+    }
+}
+
+@media (max-width: @width-xl) {
+    section.exercise-item {
+        .exercise-input:first-child {
+            width: 110px;
+            margin-right: @space-2m;
+        }
+        .exercise-input:nth-child(2) {
+            margin-left: -@space-3xs;
+            width: 82px;
+        }
     }
 }

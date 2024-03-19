@@ -88,7 +88,6 @@ const ExerciseList: React.FC<ExerciseListProps> = ({ exercises }) => {
                     {trainingButtonTitles.deleteExercises}
                 </Button>
             </div>
-            ;
         </>
     );
 };
