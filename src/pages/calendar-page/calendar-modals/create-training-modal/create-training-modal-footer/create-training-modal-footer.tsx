@@ -18,6 +18,7 @@ import { Button } from 'antd';
 import dayjs from 'dayjs';
 
 import { NotificationModal } from '../../notification-modal/notification-modal';
+import { DATE_DD_MM_YYYY } from '@constants/dates';
 
 interface CreateTrainingModalFooterProps {
     onAddExercisesClick: () => void;
@@ -37,7 +38,7 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
     const [createTraining, { isLoading: isCreateLoading }] = useCreateTrainingMutation();
     const [updateTraining, { isLoading: isUpdateLoading }] = useUpdateTrainingMutation();
 
-    const isFuture = dayjs(selectedDay, 'DD-MM-YYYY').isAfter(dayjs());
+    const isFuture = dayjs(selectedDay, DATE_DD_MM_YYYY).isAfter(dayjs());
 
     const handleSaveSuccess = () => {
         dispatch(setShouldRefetch(true));

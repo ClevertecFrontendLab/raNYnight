@@ -16,6 +16,7 @@ import { Button, Select } from 'antd';
 import dayjs from 'dayjs';
 
 import './create-training-modal-title.less';
+import { DATE_DD_MM_YYYY } from '@constants/dates';
 
 interface CreateTrainingModalTitleProps {
     defaultSelect: string;
@@ -32,8 +33,8 @@ const CreateTrainingModalTitle = ({ defaultSelect, onChange }: CreateTrainingMod
 
     const [selectedOption, setSelectedOption] = useState<string>(defaultSelect);
 
-    const isToday = dayjs(selectedDay, 'DD-MM-YYYY').isSame(dayjs(), 'day');
-    const isPast = dayjs(selectedDay, 'DD-MM-YYYY').isBefore(dayjs(), 'day') || isToday;
+    const isToday = dayjs(selectedDay, DATE_DD_MM_YYYY).isSame(dayjs(), 'day');
+    const isPast = dayjs(selectedDay, DATE_DD_MM_YYYY).isBefore(dayjs(), 'day') || isToday;
 
     const trainingsToSelect = isPast
         ? todaysTrainings.map((training) => training.name)

@@ -20,6 +20,7 @@ import utc from 'dayjs/plugin/utc';
 import ExerciseList from './exercise-list/exercise-list';
 
 import './exercise-drawer.less';
+import { DATE_DDMMYYYY, DATE_DD_MM_YYYY } from '@constants/dates';
 
 dayjs.extend(utc);
 
@@ -37,8 +38,8 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
     const modifiedTraining = useAppSelector(selectModifiedTraining);
     const modifiedExercises = useAppSelector(selectModifiedExercises);
 
-    const isPast = dayjs(selectedDay, 'DD-MM-YYYY').isBefore(dayjs(), 'day');
-    const isToday = dayjs(selectedDay, 'DD-MM-YYYY').isSame(dayjs(), 'day');
+    const isPast = dayjs(selectedDay, DATE_DD_MM_YYYY).isBefore(dayjs(), 'day');
+    const isToday = dayjs(selectedDay, DATE_DD_MM_YYYY).isSame(dayjs(), 'day');
     const isImplementation = isPast || isToday;
 
     const newExerciseObj: Exercise = {
@@ -113,7 +114,7 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
             <div className='drawer-exercise-header'>
                 <li className={`calendar-training-item ${trainingKey}`}>{selectedTraining}</li>
                 <Typography.Text className='drawer-exercise-header-date'>
-                    {dayjs(selectedDay, 'DD-MM-YYYY').format('DD.MM.YYYY')}
+                    {dayjs(selectedDay, DATE_DD_MM_YYYY).format(DATE_DDMMYYYY)}
                 </Typography.Text>
             </div>
             <ExerciseList exercises={trainingToUpdate.exercises} />

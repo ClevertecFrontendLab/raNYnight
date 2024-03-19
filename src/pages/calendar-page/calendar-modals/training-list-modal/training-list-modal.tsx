@@ -19,6 +19,7 @@ import { Modal } from 'antd';
 import dayjs from 'dayjs';
 
 import './training-list-modal.less';
+import { DATE_DDMMYYYY } from '@constants/dates';
 
 interface TrainingListModalProps {
     date: dayjs.Dayjs;
@@ -61,7 +62,7 @@ const TrainingListModal = ({ date, trainings, position, width }: TrainingListMod
             <Modal
                 data-test-id={DATA_TEST_ID.modalCreateTraining}
                 destroyOnClose={true}
-                title={`Тренировки на ${date.format('DD.MM.YYYY')}`}
+                title={`Тренировки на ${date.format(DATE_DDMMYYYY)}`}
                 okText={trainingButtonTitles.addTraining}
                 onOk={handleToggleCreateTrainingModal}
                 onCancel={handleTogleTrainingListModal}

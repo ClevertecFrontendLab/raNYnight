@@ -42,6 +42,7 @@ import 'dayjs/locale/ru';
 
 import './calendar.less';
 import DateCell from './date-cell/date-cell';
+import { DATE_DD_MM_YYYY } from '@constants/dates';
 
 const AppCalendar = () => {
     const navigate = useNavigate();
@@ -72,7 +73,7 @@ const AppCalendar = () => {
         const filteredTrainings = filterTrainingsByDate(trainingList || [], date);
 
         setSelectedDate(date);
-        dispatch(setSelectedDay(date.format('DD-MM-YYYY').toString()));
+        dispatch(setSelectedDay(date.format(DATE_DD_MM_YYYY).toString()));
         dispatch(setTodaysTrainings(filteredTrainings));
         dispatch(setModifiedExercises([]));
         dispatch(setModifiedTraining(null));

@@ -2,6 +2,7 @@ import React from 'react';
 import CalendarTrainingList from '@pages/calendar-page/calendar-training-list/calendar-training-list';
 import dayjs from 'dayjs';
 import { ModifiedTraining } from '@common-types/trainings';
+import { DATE_YYYY_MM_DD } from '@constants/dates';
 
 interface DateCellProps {
     date: dayjs.Dayjs;
@@ -18,7 +19,7 @@ const DateCell: React.FC<DateCellProps> = ({
     handleDesktopCellClick,
     handleMobileCellClick,
 }) => {
-    const formattedDate = date.format('YYYY-MM-DD');
+    const formattedDate = date.format(DATE_YYYY_MM_DD);
 
     if (isFullscreen) {
         return (
@@ -35,7 +36,7 @@ const DateCell: React.FC<DateCellProps> = ({
     }
 
     const hasTrainingsToday = trainingList?.some(
-        (training) => dayjs(training.date).format('YYYY-MM-DD') === formattedDate,
+        (training) => dayjs(training.date).format(DATE_YYYY_MM_DD) === formattedDate,
     );
 
     return (
