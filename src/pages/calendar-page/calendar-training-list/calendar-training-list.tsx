@@ -1,23 +1,31 @@
 import { ModifiedTraining } from '@common-types/trainings';
+import { DATE_YYYY_MM_DD } from '@constants/dates';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { selectAllUserTrainings, selectTodaysTrainings } from '@redux/trainings/trainings-slice';
 import dayjs from 'dayjs';
 
 import CalendarTrainingItem from '../calendar-training-item/calendar-training-item';
-import { DATE_YYYY_MM_DD } from '@constants/dates';
 
 interface CalendarTrainingListProps {
-    trainings: ModifiedTraining[];
     isEditable: boolean;
     date: dayjs.Dayjs;
+    shouldFilter: boolean;
 }
 
-const CalendarTrainingList = ({ trainings, isEditable, date }: CalendarTrainingListProps) => {
-    const filteredTrainings = trainings.filter((training) => {
+const CalendarTrainingList = ({ isEditable, date, shouldFilter }: CalendarTrainingListProps) => {
+    const allUserTrainings = useAppSelector(selectAllUserTrainings);
+    const todaysTrainings = useAppSelector(selectTodaysTrainings);
+
+    const filteredTrainings = allUserTrainings.filter((training) => {
         const trainingDate = dayjs(training.date).format(DATE_YYYY_MM_DD);
         return trainingDate === date.format(DATE_YYYY_MM_DD).toString();
     });
+
+    const trainingsToRender = shouldFilter ? filteredTrainings : todaysTrainings;
+
     return (
         <ul className='calendar-training-list'>
-            {filteredTrainings.map((training: ModifiedTraining, index) => (
+            {trainingsToRender.map((training: ModifiedTraining, index) => (
                 <CalendarTrainingItem
                     training={training}
                     key={training._id}

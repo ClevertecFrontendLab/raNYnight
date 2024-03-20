@@ -1,28 +1,25 @@
-import { useNavigate } from 'react-router-dom';
+import { ModalTypes } from '@components/modal-manager/modal-manager';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { ResultImages } from '@constants/results';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { ModalTypes, selectModalByType, setCloseModal } from '@redux/modals/modals-slice';
-import { Paths } from '@router/paths';
+import { selectActiveModal, setActiveModal } from '@redux/modals/modal-manager';
 import { Button, Modal } from 'antd';
 
-import './error-modal.less';
+import './something-wrong-modal.less';
 
 export const SomethingWrongModal = () => {
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-    const isOpenModal = useAppSelector(selectModalByType(ModalTypes.somethingWrongModal));
+    const isOpen = useAppSelector(selectActiveModal) === ModalTypes.somethingWrongModal;
 
     const handleCancel = () => {
-        navigate(Paths.MAIN);
-        dispatch(setCloseModal(ModalTypes.somethingWrongModal));
+        dispatch(setActiveModal(ModalTypes.none));
     };
 
     return (
         <Modal
             data-test-id={DATA_TEST_ID.modalNoReview}
             className='something-wrong-modal'
-            open={isOpenModal}
+            open={isOpen}
             centered={true}
             onCancel={handleCancel}
             footer={null}

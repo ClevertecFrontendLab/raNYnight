@@ -1,7 +1,9 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { Exercise, ModifiedTraining, Trainings } from '@common-types/trainings';
+import { BREAKPOINT_834 } from '@constants/breakpoints';
 import { DATA_TEST_ID } from '@constants/data-test-id';
+import { DATE_DD_MM_YYYY,DATE_DDMMYYYY } from '@constants/dates';
 import { EXERCISE_DRAWER_WIDTH, EXERCISE_DRAWER_WIDTH_MOBILE } from '@constants/sizes';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import {
@@ -16,13 +18,11 @@ import {
 import { Button, Drawer, Typography } from 'antd';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import { useWindowSize } from 'usehooks-ts';
 
 import ExerciseList from './exercise-list/exercise-list';
 
 import './exercise-drawer.less';
-import { DATE_DDMMYYYY, DATE_DD_MM_YYYY } from '@constants/dates';
-import { useWindowSize } from 'usehooks-ts';
-import { BREAKPOINT_834 } from '@constants/breakpoints';
 
 dayjs.extend(utc);
 
@@ -72,11 +72,16 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
         Trainings[selectedTraining as keyof typeof Trainings];
 
     const handleCloseDrawer = () => {
+        const modifiedDate = `${dayjs(selectedDay, 'DD-MM-YYYY').format(
+            'YYYY-MM-DD',
+        )}T00:00:00.000Z`;
+
         if (modifiedExercises) {
             const updatedTraining: ModifiedTraining = {
                 ...trainingToUpdate,
                 exercises: modifiedExercises,
                 isImplementation,
+                date: modifiedDate,
             };
             dispatch(setModifiedTraining({ ...updatedTraining, exercises: modifiedExercises }));
         }

@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import { EditOutlined } from '@ant-design/icons';
 import { ModifiedTraining, Trainings } from '@common-types/trainings';
+import { ModalTypes } from '@components/modal-manager/modal-manager';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { ModalTypes, setCloseModal, setOpenModal } from '@redux/modals/modals-slice';
+import { setActiveModal } from '@redux/modals/modal-manager';
 import { setTrainingToEdit } from '@redux/trainings/trainings-slice';
 import { Button } from 'antd';
 
@@ -23,11 +24,7 @@ const CalendarTrainingItem: FC<CalendarTrainingItemProps> = ({ training, isEdita
             return;
         }
         dispatch(setTrainingToEdit(training));
-        dispatch(setCloseModal(ModalTypes.calendarTrainingListModal));
-
-        setTimeout(() => {
-            dispatch(setOpenModal(ModalTypes.calendarCreateTrainingModal));
-        }, 300);
+        dispatch(setActiveModal(ModalTypes.calendarCreateTrainingModal));
     };
 
     if (training) {

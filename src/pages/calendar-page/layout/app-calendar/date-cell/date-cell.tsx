@@ -1,8 +1,8 @@
 import React from 'react';
-import CalendarTrainingList from '@pages/calendar-page/calendar-training-list/calendar-training-list';
-import dayjs from 'dayjs';
 import { ModifiedTraining } from '@common-types/trainings';
 import { DATE_YYYY_MM_DD } from '@constants/dates';
+import CalendarTrainingList from '@pages/calendar-page/calendar-training-list/calendar-training-list';
+import dayjs from 'dayjs';
 
 interface DateCellProps {
     date: dayjs.Dayjs;
@@ -29,7 +29,7 @@ const DateCell: React.FC<DateCellProps> = ({
                 onClick={handleDesktopCellClick}
             >
                 <div className='date-cell-content'>
-                    <CalendarTrainingList trainings={trainingList} isEditable={false} date={date} />
+                    <CalendarTrainingList isEditable={false} date={date} shouldFilter={true} />
                 </div>
             </div>
         );

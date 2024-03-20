@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import ModalManager from '@components/modal-manager/modal-manager';
 import { useAppDispatch } from '@hooks/index';
 import { setAuthToken } from '@redux/auth/auth-slice';
 import { history } from '@redux/configure-store';
@@ -35,5 +36,10 @@ export const App = () => {
         }
     }, []);
 
-    return <Router history={history}>{routes}</Router>;
+    return (
+        <Router history={history}>
+            <ModalManager />
+            {routes}
+        </Router>
+    );
 };

@@ -1,9 +1,10 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import Loader from '@components/loader/loader';
+import { ModalTypes } from '@components/modal-manager/modal-manager';
+import { DATE_DD_MM_YYYY } from '@constants/dates';
 import { trainingButtonTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { setShouldRefetch } from '@redux/auth/auth-slice';
-import { ModalTypes, setCloseModal, setOpenModal } from '@redux/modals/modals-slice';
+import { setActiveModal } from '@redux/modals/modal-manager';
 import {
     useCreateTrainingMutation,
     useUpdateTrainingMutation,
@@ -13,12 +14,10 @@ import {
     selectSelectedDay,
     selectTrainingToEdit,
     setModifiedTraining,
+    setShouldRefetchUserTrainings,
 } from '@redux/trainings/trainings-slice';
 import { Button } from 'antd';
 import dayjs from 'dayjs';
-
-import { NotificationModal } from '../../notification-modal/notification-modal';
-import { DATE_DD_MM_YYYY } from '@constants/dates';
 
 interface CreateTrainingModalFooterProps {
     onAddExercisesClick: () => void;
@@ -33,23 +32,20 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
     const trainingToEdit = useAppSelector(selectTrainingToEdit);
     const selectedDay = useAppSelector(selectSelectedDay);
 
-    const [openNotificationErrorModal, setOpenNotificationErrorModal] = useState(false);
-
     const [createTraining, { isLoading: isCreateLoading }] = useCreateTrainingMutation();
     const [updateTraining, { isLoading: isUpdateLoading }] = useUpdateTrainingMutation();
 
     const isFuture = dayjs(selectedDay, DATE_DD_MM_YYYY).isAfter(dayjs());
 
     const handleSaveSuccess = () => {
-        dispatch(setShouldRefetch(true));
-        dispatch(setCloseModal(ModalTypes.calendarCreateTrainingModal));
-        dispatch(setOpenModal(ModalTypes.calendarTrainingListModal));
+        dispatch(setShouldRefetchUserTrainings(true));
+        dispatch(setActiveModal(ModalTypes.calendarTrainingListModal));
         dispatch(setModifiedTraining(null));
     };
 
     const handleSaveError = () => {
-        setOpenNotificationErrorModal(true);
         dispatch(setModifiedTraining(null));
+        dispatch(setActiveModal(ModalTypes.notificationErrorModal));
     };
 
     const handleSaveModifiedTraining = () => {
@@ -66,11 +62,6 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
                     .catch(() => handleSaveError());
             }
         }
-    };
-
-    const handleCloseNotificationErrorModal = () => {
-        setOpenNotificationErrorModal(false);
-        dispatch(setCloseModal(ModalTypes.calendarCreateTrainingModal));
     };
 
     return (
@@ -101,15 +92,6 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
                 </Button>
             </div>
             {(isCreateLoading || isUpdateLoading) && <Loader />}
-            <NotificationModal
-                textButton='Закрыть'
-                onClickButton={handleCloseNotificationErrorModal}
-                type='error'
-                isCloseIcon={false}
-                title='При сохранении данных произошла ошибка'
-                subtitle='Придётся попробовать ещё раз'
-                open={openNotificationErrorModal}
-            />
         </>
     );
 };

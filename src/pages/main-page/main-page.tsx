@@ -1,6 +1,5 @@
 import React from 'react';
 import SidePanel from '@components/side-panel/side-panel';
-import { SomethingWrongModal } from '@pages/calendar-page/calendar-modals/error-modal/error-modal';
 import { Layout } from 'antd';
 
 import MainFooter from './layout/footer/footer';
@@ -20,7 +19,6 @@ export const MainPage: React.FC = () => {
                     <MainFooter />
                 </Layout>
             </Layout>
-            <SomethingWrongModal />
         </>
     );
 };

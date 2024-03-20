@@ -1,6 +1,5 @@
 import authReducer from '@redux/auth/auth-slice';
 import feedbacksReducer from '@redux/feedbacks/feedbacks-slice';
-import modalsReducer from '@redux/modals/modals-slice';
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { createBrowserHistory } from 'history';
@@ -9,6 +8,7 @@ import { createReduxHistoryContext } from 'redux-first-history';
 
 import { authApi } from './auth/auth-api';
 import { feedbacksApi } from './feedbacks/feedback-api';
+import modalManagerReducer from './modals/modal-manager';
 import { trainingsApi } from './trainings/trainings-api';
 import trainingsReducer from './trainings/trainings-slice';
 
@@ -19,7 +19,7 @@ const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHisto
 export const store = configureStore({
     reducer: combineReducers({
         auth: authReducer,
-        modals: modalsReducer,
+        modalManager: modalManagerReducer,
         feedbacks: feedbacksReducer,
         trainings: trainingsReducer,
         router: routerReducer,
