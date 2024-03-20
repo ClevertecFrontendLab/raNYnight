@@ -31,7 +31,8 @@ const MainCards = () => {
             <div className='card-wrapper'>
                 <Text className='card-title'>Заполнить профиль</Text>
                 <div className='card-link'>
-                    <IdcardOutlined className='card-link-icon' /> <Link to={''}>Профиль</Link>
+                    <IdcardOutlined className='card-link-icon' />{' '}
+                    <Link to={Paths.PROFILE}>Профиль</Link>
                 </div>
             </div>
         </div>

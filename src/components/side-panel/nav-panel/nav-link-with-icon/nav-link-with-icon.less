@@ -7,6 +7,17 @@
     align-items: center;
     gap: @space-2s;
     color: @primary-light-9;
+    padding-left: @space-m;
+    width: 100%;
+}
+
+.nav-link.active {
+    box-shadow: inset -3px 0 0 0 @character-light-link;
+    background: @primary-light-1;
+    border: none;
+    span {
+        color: @character-light-link;
+    }
 }
 
 @media (max-width: @width-sm) {
