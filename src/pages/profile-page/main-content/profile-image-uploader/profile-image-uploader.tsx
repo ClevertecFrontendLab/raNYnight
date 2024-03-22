@@ -16,7 +16,10 @@ const ProfileImageUploader = () => {
     const { width } = useWindowSize();
     const form = useProfileFormContext();
 
-    const imageUrl = form?.getFieldValue('profile-image');
+    const imageUrl = form?.getFieldValue('imgSrc');
+
+    console.log('imageUrl', imageUrl);
+    console.log('form', form);
 
     const defaultFile = {
         uid: '1',
@@ -70,8 +73,9 @@ const ProfileImageUploader = () => {
 
     return (
         <div className='photo-uploader'>
-            <Form.Item name='profile-image'>
+            <Form.Item name='imgSrc'>
                 <Upload
+                    name='imgSrc'
                     maxCount={1}
                     action={`${baseQuery}upload-image`}
                     listType={listType}

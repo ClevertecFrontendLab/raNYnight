@@ -44,3 +44,19 @@ export interface AuthStore {
     lastRegisterRequest: RegisterInput;
     forgotEmail: string;
 }
+
+export interface Tariff {
+    tariffId: string;
+    expired: string;
+}
+
+export interface UserData {
+    email: string;
+    firstName: string;
+    lastName: string;
+    birthday: string;
+    imgSrc: string;
+    readyForJointTraining: boolean;
+    sendNotification: boolean;
+    tariff: Tariff;
+}

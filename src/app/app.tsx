@@ -5,10 +5,14 @@ import { setAuthToken } from '@redux/auth/auth-slice';
 import { history } from '@redux/configure-store';
 import { routes } from '@router/routes';
 import { HistoryRouter as Router } from 'redux-first-history/rr6';
+import { useLazyGetUserInfoQuery } from '@redux/profile/profile-api';
+import Loader from '@components/loader/loader';
 
 export const App = () => {
     const dispatch = useAppDispatch();
     const googleAccessToken = history.location.search.split('=')[1];
+    const token = localStorage.getItem('jwtToken');
+    const [getuserInfo, { isLoading }] = useLazyGetUserInfoQuery();
 
     useEffect(() => {
         const clearSessionStorage = () => {
@@ -27,17 +31,20 @@ export const App = () => {
     }, []);
 
     useEffect(() => {
-        const token = localStorage.getItem('jwtToken');
         if (googleAccessToken) {
             dispatch(setAuthToken(googleAccessToken));
         }
         if (token) {
             dispatch(setAuthToken(token));
         }
+        if (token || googleAccessToken) {
+            getuserInfo();
+        }
     }, []);
 
     return (
         <Router history={history}>
+            {isLoading && <Loader />}
             <ModalManager />
             {routes}
         </Router>

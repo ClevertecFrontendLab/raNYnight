@@ -1,5 +1,5 @@
 import { Feedback, FeedbackRequest } from '@common-types/feedbacks';
-import { baseQuery } from '@constants/api';
+import { ApiEndpoints, baseQuery } from '@constants/api';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const feedbacksApi = createApi({
@@ -18,7 +18,7 @@ export const feedbacksApi = createApi({
     endpoints: (builder) => ({
         sendFeedback: builder.mutation<Feedback[], FeedbackRequest>({
             query: (body) => ({
-                url: 'feedback',
+                url: ApiEndpoints.Feedback,
                 method: 'POST',
                 body,
                 credentials: 'include',
@@ -27,7 +27,7 @@ export const feedbacksApi = createApi({
 
         getFeedbacks: builder.query<Feedback[], void>({
             query: () => ({
-                url: 'feedback',
+                url: ApiEndpoints.Feedback,
                 method: 'GET',
                 credentials: 'include',
             }),

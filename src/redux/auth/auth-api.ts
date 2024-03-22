@@ -6,13 +6,13 @@ import {
     LoginResponse,
     RegisterInput,
 } from '@common-types/auth';
-import { authBaseQuery } from '@constants/api';
+import { ApiEndpoints, baseQuery } from '@constants/api';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const authApi = createApi({
     reducerPath: 'authApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: authBaseQuery,
+        baseUrl: baseQuery,
         prepareHeaders: (headers) => {
             const token = sessionStorage.getItem('jwtToken') || localStorage.getItem('jwtToken');
             if (token) {
@@ -25,7 +25,7 @@ export const authApi = createApi({
         loginUser: builder.mutation<LoginResponse, LoginRequest>({
             query: (body: { email: string; password: string }) => {
                 return {
-                    url: 'login',
+                    url: ApiEndpoints.Login,
                     method: 'POST',
                     body,
                     credentials: 'include',
@@ -36,7 +36,7 @@ export const authApi = createApi({
         registerUser: builder.mutation<object, RegisterInput>({
             query(body) {
                 return {
-                    url: 'registration',
+                    url: ApiEndpoints.Register,
                     method: 'POST',
                     body,
                 };
@@ -44,14 +44,14 @@ export const authApi = createApi({
         }),
         checkEmail: builder.mutation<EmailResponse, { email: string }>({
             query: (body) => ({
-                url: 'check-email',
+                url: ApiEndpoints.CheckEmail,
                 method: 'POST',
                 body,
             }),
         }),
         confirmEmail: builder.mutation<EmailResponse, ConfirmEmailRequest>({
             query: (body) => ({
-                url: 'confirm-email',
+                url: ApiEndpoints.ConfirmEmail,
                 method: 'POST',
                 body,
                 credentials: 'include',
@@ -59,7 +59,7 @@ export const authApi = createApi({
         }),
         changePassword: builder.mutation<{ email: string }, ChangePasswordRequest>({
             query: (body) => ({
-                url: 'change-password',
+                url: ApiEndpoints.ChangePassword,
                 method: 'POST',
                 body,
                 credentials: 'include',

@@ -1,5 +1,5 @@
 import { ModifiedTraining, Training } from '@common-types/trainings';
-import { baseQuery } from '@constants/api';
+import { ApiEndpoints, baseQuery } from '@constants/api';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { setAllUserTrainings, setDefaultTrainings } from './trainings-slice';
@@ -20,7 +20,7 @@ export const trainingsApi = createApi({
     endpoints: (builder) => ({
         getTrainingList: builder.query<string[], void>({
             query: () => ({
-                url: 'catalogs/training-list',
+                url: ApiEndpoints.TrainingList,
                 method: 'GET',
                 credentials: 'include',
             }),
@@ -36,7 +36,7 @@ export const trainingsApi = createApi({
         }),
         getTrainings: builder.query<ModifiedTraining[], void>({
             query: () => ({
-                url: 'training',
+                url: ApiEndpoints.Training,
                 method: 'GET',
                 credentials: 'include',
             }),
@@ -52,7 +52,7 @@ export const trainingsApi = createApi({
 
         createTraining: builder.mutation<void, ModifiedTraining>({
             query: (body) => ({
-                url: 'training',
+                url: ApiEndpoints.Training,
                 method: 'POST',
                 body,
                 credentials: 'include',
@@ -60,7 +60,7 @@ export const trainingsApi = createApi({
         }),
         updateTraining: builder.mutation<void, ModifiedTraining>({
             query: (body) => ({
-                url: `training/${body._id}`,
+                url: `${ApiEndpoints.Training}/${body._id}`,
                 method: 'PUT',
                 body,
             }),

@@ -6,9 +6,13 @@ import { useForm } from 'antd/lib/form/Form';
 import Title from 'antd/lib/typography/Title';
 import ProfileImageUploader from './profile-image-uploader/profile-image-uploader';
 import './profile-main-content.less';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { selectUserInfo } from '@redux/profile/profile-slice';
 
 const ProfileMainContent = () => {
     const [form] = useForm();
+
+    const inititalValues = useAppSelector(selectUserInfo);
 
     const handleSaveChanges = () => {
         console.log('handleSaveChanges');
@@ -28,7 +32,7 @@ const ProfileMainContent = () => {
                     onFieldsChange={handleFormChange}
                     autoComplete='nope'
                     form={form}
-                    initialValues={{ remember: false }}
+                    initialValues={inititalValues || {}}
                     // disabled={isLoading}
                 >
                     <Title level={5} className='profile-info-title'>
@@ -37,16 +41,17 @@ const ProfileMainContent = () => {
                     <div className='personal-info-inputs-wrapper'>
                         <ProfileImageUploader />
                         <div className='personal-inputs'>
-                            <Form.Item name='user-name'>
+                            <Form.Item name='firstName'>
                                 <Input placeholder='Имя' className='profile-input personal' />
                             </Form.Item>
 
-                            <Form.Item name='user-surname'>
+                            <Form.Item name='lastName'>
                                 <Input placeholder='Фамилия' className='profile-input personal' />
                             </Form.Item>
 
-                            <Form.Item name='user-birthday'>
+                            <Form.Item name='birthday'>
                                 <DatePicker
+                                    format={'DD.MM.YYYY'}
                                     placeholder='Дата рождения'
                                     className='profile-input personal'
                                 />
