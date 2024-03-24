@@ -12,6 +12,7 @@ import { ResultsPage } from '@pages/results-page/results-page';
 import { Paths } from './paths';
 import PrivateRoutes from './private-routes';
 import { ProfilePage } from '@pages/profile-page';
+import { SettingsPage } from '@pages/settings-page';
 
 export const routes = (
     <Routes>
@@ -21,6 +22,7 @@ export const routes = (
             <Route path={Paths.FEEDBACKS} element={<FeedbacksPage />} />
             <Route path={Paths.CALENDAR} element={<CalendarPage />} />
             <Route path={Paths.PROFILE} element={<ProfilePage />} />
+            <Route path={Paths.SETTINGS} element={<SettingsPage />} />
         </Route>
 
         <Route path={Paths.AUTH} element={<AuthPage />}>

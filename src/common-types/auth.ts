@@ -58,5 +58,5 @@ export interface UserData {
     imgSrc: string;
     readyForJointTraining: boolean;
     sendNotification: boolean;
-    tariff: Tariff;
+    tariff: Tariff | undefined;
 }

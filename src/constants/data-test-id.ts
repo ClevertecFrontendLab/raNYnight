@@ -37,4 +37,12 @@ export const DATA_TEST_ID = {
     modalCreateTrainingButtonClose: 'modal-create-training-button-close',
     modalUpdateTrainingEditButton: 'modal-update-training-edit-button',
     menuButtonCalendar: 'menu-button-calendar',
+    freeTariffCard: 'free-tariff-card',
+    proTariffCard: 'pro-tariff-card',
+    tariffTrainings: 'tariff-trainings',
+    tariffNotifications: 'tariff-notifications',
+    tariffTheme: 'tariff-theme',
+    tariffTrainingsIcon: 'tariff-trainings-icon',
+    tariffNotificationsIcon: 'tariff-notifications-icon',
+    tariffThemeIcon: 'tariff-theme-icon',
 };

@@ -1,0 +1,77 @@
+@import '/src/style-variables.less';
+
+.tarif-cards-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.tarif-card-cover {
+    position: relative;
+    max-width: 240px;
+}
+
+.tarif-card-cover {
+    img {
+        max-width: 100%;
+        aspect-ratio: 16/10;
+        object-fit: cover;
+    }
+}
+
+.inactive-cover {
+    img {
+        filter: grayscale(0.9);
+        opacity: 0.4;
+    }
+}
+
+.ant-typography.tarif-card-status {
+    margin: @space-0 auto;
+    margin-top: @space-xs;
+    font-family: var(--font-family);
+    font-weight: @font-weight-500;
+    font-size: @font-size-16;
+    line-height: @line-height-130;
+    color: @primary-light-10;
+}
+
+.ant-btn-link.tarif-card-link {
+    padding: @space-0;
+    margin: @space-0;
+    font-family: @font-family;
+    font-weight: @font-weight-400;
+    font-size: @font-size-14;
+    line-height: @line-height-130;
+    color: @primary-light-6;
+}
+
+.inactive-cover-background {
+    position: absolute;
+    background-color: rgba(255, 251, 251, 0);
+    filter: grayscale(1);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+}
+
+.ant-card-body {
+    display: flex;
+}
+
+.ant-btn.activate-tarif-button {
+    width: 129px;
+    margin: @space-0 auto;
+    height: 40px;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+    background: @primary-light-6;
+    border-radius: 2px;
+    height: 40px;
+    font-family: @font-family;
+    font-weight: @font-weight-400;
+    font-size: @font-size-14;
+    line-height: @line-height-130;
+    text-align: center;
+    color: @character-light-primary-inverse;
+}

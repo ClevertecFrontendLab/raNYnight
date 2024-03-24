@@ -33,7 +33,7 @@ export const profileApi = createApi({
             },
         }),
 
-        updateUser: builder.mutation<void, UserData>({
+        updateUser: builder.mutation<UserData, Partial<UserData>>({
             query: (body) => ({
                 url: ApiEndpoints.User,
                 method: 'PUT',
@@ -44,4 +44,4 @@ export const profileApi = createApi({
     }),
 });
 
-export const { useLazyGetUserInfoQuery } = profileApi;
+export const { useLazyGetUserInfoQuery, useUpdateUserMutation } = profileApi;

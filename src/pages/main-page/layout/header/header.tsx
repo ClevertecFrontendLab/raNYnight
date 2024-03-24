@@ -4,8 +4,10 @@ import { Layout, Typography } from 'antd';
 import { useWindowSize } from 'usehooks-ts';
 
 import './header.less';
+import { Link } from 'react-router-dom';
+import { Paths } from '@router/paths';
 
-const { Text, Title } = Typography;
+const { Title } = Typography;
 const { Header: AntdHeader } = Layout;
 
 const MainHeader = () => {
@@ -21,12 +23,20 @@ const MainHeader = () => {
                 </Title>
             </div>
             <div className='header-right-col'>
-                {width <= BREAKPOINT_834 ? null : <SettingOutlined className='settings-icon' />}
-                {width <= BREAKPOINT_768 ? null : <Text className='settings-text'>Настройки</Text>}
+                {width <= BREAKPOINT_834 ? null : (
+                    <Link to={Paths.SETTINGS}>
+                        <SettingOutlined className='settings-icon' />
+                    </Link>
+                )}
+                {width <= BREAKPOINT_768 ? null : (
+                    <Link to={Paths.SETTINGS} className='settings-text '>
+                        Настройки
+                    </Link>
+                )}
                 {width < BREAKPOINT_520 ? (
-                    <div className='circle'>
+                    <Link to={Paths.SETTINGS} className='circle'>
                         <SettingOutlined />
-                    </div>
+                    </Link>
                 ) : null}
             </div>
         </AntdHeader>
