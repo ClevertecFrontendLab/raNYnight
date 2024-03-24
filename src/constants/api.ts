@@ -9,9 +9,12 @@ export enum ApiEndpoints {
     Google = 'auth/google',
     Feedback = 'feedback',
     TrainingList = 'catalogs/training-list',
+    TariffList = 'catalogs/tariff-list',
     Training = 'training',
     User = 'user',
     UserMe = 'user/me',
+    Tariff = 'tariff',
+    TariffCheckout = 'tariff/checkout',
 }
 
 export const authGoogleQuery = `${baseQuery}${ApiEndpoints.Google}`;

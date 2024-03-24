@@ -1,0 +1,74 @@
+@import '/src/style-variables.less';
+
+.drawer-pro-tariff-active {
+    margin: @space-xl @space-0;
+    padding: @space-3m @space-0;
+    text-align: center;
+    background-color: @primary-light-1;
+}
+.tariff-drawer {
+    .ant-drawer-footer {
+        display: flex;
+    }
+}
+
+.ant-btn.drawer-submit-button {
+    border-radius: 2px;
+    padding: @space-3xs @space-2m;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+    background: @primary-light-6;
+    width: 344px;
+    height: 40px;
+    margin: @space-0 auto;
+}
+
+.drawer-tariff-compare-head {
+    padding-top: @space-xl;
+    display: flex;
+    gap: 14px;
+    justify-content: end;
+    margin-bottom: @space-xl;
+}
+
+.tariff-title {
+    padding: @space-3xs @space-3m;
+    font-size: @font-size-12;
+}
+
+.drawer-tariff-compare-head :first-child {
+    background-color: @character-light-dividers;
+}
+
+.drawer-tariff-compare-head :last-child {
+    background-color: @primary-light-1;
+    color: @primary-light-6;
+}
+
+.tariff-title-checked {
+    color: @character-light-success;
+}
+
+.drawer-tariff-features {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: @space-7xl;
+}
+
+.tariff-feature {
+    display: flex;
+    justify-content: end;
+}
+
+.tariff-feature-title {
+    margin-right: auto;
+}
+
+.tariff-feature-disabled {
+    color: @character-light-disable-25;
+}
+
+.tariff-feature-second {
+    margin-left: @space-8xl;
+    margin-right: @space-3l;
+}

@@ -3,8 +3,8 @@ import { CloseOutlined } from '@ant-design/icons';
 import { Exercise, ModifiedTraining, Trainings } from '@common-types/trainings';
 import { BREAKPOINT_834 } from '@constants/breakpoints';
 import { DATA_TEST_ID } from '@constants/data-test-id';
-import { DATE_DD_MM_YYYY,DATE_DDMMYYYY } from '@constants/dates';
-import { EXERCISE_DRAWER_WIDTH, EXERCISE_DRAWER_WIDTH_MOBILE } from '@constants/sizes';
+import { DATE_DD_MM_YYYY, DATE_DDMMYYYY } from '@constants/dates';
+import { DRAWER_WIDTH, DRAWER_WIDTH_MOBILE } from '@constants/sizes';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import {
     selectIsDrawerOpen,
@@ -100,15 +100,15 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
     return (
         <Drawer
             mask={true}
-            maskStyle={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
+            maskStyle={{ backgroundColor: 'none' }}
             title={title}
             destroyOnClose
             placement='right'
             closable={true}
             closeIcon={closeIcon}
             open={isDrawerOpen}
-            className={'exercise-drawer'}
-            width={width > BREAKPOINT_834 ? EXERCISE_DRAWER_WIDTH : EXERCISE_DRAWER_WIDTH_MOBILE}
+            className='exercise-drawer'
+            width={width > BREAKPOINT_834 ? DRAWER_WIDTH : DRAWER_WIDTH_MOBILE}
             extra={
                 <Button
                     type='text'

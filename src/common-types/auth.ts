@@ -45,9 +45,16 @@ export interface AuthStore {
     forgotEmail: string;
 }
 
+export interface Period {
+    text: string;
+    cost: number;
+    days: number;
+}
+
 export interface Tariff {
-    tariffId: string;
-    expired: string;
+    _id: string;
+    name: string;
+    periods: Period[];
 }
 
 export interface UserData {
@@ -58,5 +65,10 @@ export interface UserData {
     imgSrc: string;
     readyForJointTraining: boolean;
     sendNotification: boolean;
-    tariff: Tariff | undefined;
+    tariff:
+        | {
+              tariffId: string;
+              expired: string;
+          }
+        | undefined;
 }

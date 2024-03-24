@@ -37,7 +37,7 @@ const settingOptionsData = [
     },
 ];
 
-export const TarifOptions = () => {
+export const TariffOptions = () => {
     const { width } = useWindowSize();
 
     const userInfo = useAppSelector(selectUserInfo);
