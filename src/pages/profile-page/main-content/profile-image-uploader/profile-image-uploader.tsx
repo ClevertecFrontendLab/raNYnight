@@ -18,8 +18,8 @@ const ProfileImageUploader = () => {
 
     const imageUrl = form?.getFieldValue('imgSrc');
 
-    console.log('imageUrl', imageUrl);
-    console.log('form', form);
+    // console.log('imageUrl', imageUrl);
+    // console.log('form', form);
 
     const defaultFile = {
         uid: '1',
@@ -42,19 +42,21 @@ const ProfileImageUploader = () => {
 
         const uploadedFile = fileList[0];
 
-        if (uploadedFile.error?.status === 'error') {
-            const errorFile = {
-                ...defaultFile,
-                name: uploadedFile.name,
-                url: '',
-                status: 'error' as UploadFileStatus,
-            };
+        if (uploadedFile) {
+            if (uploadedFile.status === 'error') {
+                const errorFile = {
+                    ...defaultFile,
+                    name: uploadedFile.name,
+                    url: '',
+                    status: 'error' as UploadFileStatus,
+                };
 
-            setUploadFileList([errorFile]);
-        }
+                setUploadFileList([errorFile]);
+            }
 
-        if (uploadedFile.error?.status === 409) {
-            console.log('open notify modal file is BIG');
+            if (uploadedFile.error?.status === 409) {
+                console.log('open notify modal file is BIG');
+            }
         }
     };
 
@@ -75,7 +77,6 @@ const ProfileImageUploader = () => {
         <div className='photo-uploader'>
             <Form.Item name='imgSrc'>
                 <Upload
-                    name='imgSrc'
                     maxCount={1}
                     action={`${baseQuery}upload-image`}
                     listType={listType}

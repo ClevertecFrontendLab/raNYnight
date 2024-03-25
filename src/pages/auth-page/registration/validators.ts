@@ -1,6 +1,10 @@
 import { RuleObject } from 'antd/lib/form';
 
-export const validatePassword = async (_: RuleObject, value: string) => {
+export const validatePassword = async (_: RuleObject, value: string, required = true) => {
+    if (!required && !value) {
+        return Promise.resolve();
+    }
+
     const passRegExp = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
     return RegExp(passRegExp).test(value)
         ? Promise.resolve()

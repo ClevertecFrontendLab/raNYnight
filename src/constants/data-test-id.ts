@@ -47,4 +47,5 @@ export const DATA_TEST_ID = {
     tariffThemeIcon: 'tariff-theme-icon',
     tariffSider: 'tariff-sider',
     tariffSubmit: 'tariff-submit',
+    alert: 'alert',
 };
