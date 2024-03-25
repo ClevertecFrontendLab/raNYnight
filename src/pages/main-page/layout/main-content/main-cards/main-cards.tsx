@@ -32,7 +32,9 @@ const MainCards = () => {
                 <Text className='card-title'>Заполнить профиль</Text>
                 <div className='card-link'>
                     <IdcardOutlined className='card-link-icon' />{' '}
-                    <Link to={Paths.PROFILE}>Профиль</Link>
+                    <Link to={Paths.PROFILE} data-test-id={DATA_TEST_ID.menuButtonProfile}>
+                        Профиль
+                    </Link>
                 </div>
             </div>
         </div>

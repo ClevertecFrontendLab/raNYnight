@@ -6,6 +6,7 @@ import { useWindowSize } from 'usehooks-ts';
 
 import './header.less';
 import { Paths } from '@router/paths';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const { Text } = Typography;
 const { Header: AntdHeader } = Layout;
@@ -27,7 +28,11 @@ const CalendarHeader = () => {
                     </Link>
                 )}
                 {width <= BREAKPOINT_768 ? null : (
-                    <Link to={Paths.SETTINGS} className='settings-text '>
+                    <Link
+                        to={Paths.SETTINGS}
+                        className='settings-text'
+                        data-test-id={DATA_TEST_ID.headerSettings}
+                    >
                         Настройки
                     </Link>
                 )}

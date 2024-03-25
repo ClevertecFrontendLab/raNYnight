@@ -9,6 +9,7 @@ import { UploadFileStatus, UploadProps } from 'antd/lib/upload/interface';
 import { useState } from 'react';
 import { useWindowSize } from 'usehooks-ts';
 import './profile-image-uploader.less';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const ProfileImageUploader = () => {
     const token = useAppSelector(selectAuthToken);
@@ -85,6 +86,7 @@ const ProfileImageUploader = () => {
                     onChange={handleChange}
                     headers={{ Authorization: `Bearer ${token}` }}
                     progress={{ strokeWidth: 4, showInfo: false, size: 'default' }}
+                    data-test-id={DATA_TEST_ID.profileAvatar}
                 >
                     {!shouldShowPreview && <UploadButton isDesktop={isDesktop} />}
                 </Upload>

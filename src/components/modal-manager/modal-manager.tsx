@@ -1,11 +1,12 @@
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import CreateTrainingModal from '@pages/calendar-page/calendar-modals/create-training-modal/create-training-modal';
-import NotificationErrorModal from '@pages/calendar-page/calendar-modals/notification-error-modal/notification-error-modal';
-import NotificationWarnModal from '@pages/calendar-page/calendar-modals/notification-warn-modal/notification-warn-modal';
-import { SomethingWrongModal } from '@pages/calendar-page/calendar-modals/somthing-wrong-modal/something-wrong-modal';
-import TrainingListModal from '@pages/calendar-page/calendar-modals/training-list-modal/training-list-modal';
-import TariffNotificationModal from '@pages/settings-page/settings-main-content/tariff-notification-modal/tariff-notification-modal';
+import CreateTrainingModal from '@components/modals/calendar-modals/create-training-modal/create-training-modal';
+import NotificationErrorModal from '@components/modals/notification-error-modal/notification-error-modal';
+import NotificationWarnModal from '@components/modals/notification-warn-modal/notification-warn-modal';
+import { SomethingWrongModal } from '@components/modals/somthing-wrong-modal/something-wrong-modal';
+import TrainingListModal from '@components/modals/calendar-modals/training-list-modal/training-list-modal';
+import TariffNotificationModal from '@components/modals/tariff-notification-modal/tariff-notification-modal';
 import { selectActiveModal } from '@redux/modals/modal-manager';
+import WriteFeedbackModal from '@components/modals/write-feedback-modal/write-feedback-modal';
 
 export enum ModalTypes {
     none = 'none',
@@ -16,6 +17,7 @@ export enum ModalTypes {
     notificationErrorModal = 'notificationErrorModal',
     notificationWarnModal = 'notificationWarnModal',
     tariffNotificationModal = 'tariffNotificationModal',
+    writeFeedbackModal = 'writeFeedbackModal',
 }
 
 const ModalManager = () => {
@@ -38,6 +40,9 @@ const ModalManager = () => {
 
         case ModalTypes.tariffNotificationModal:
             return <TariffNotificationModal />;
+
+        case ModalTypes.writeFeedbackModal:
+            return <WriteFeedbackModal />;
 
         default:
             return null;

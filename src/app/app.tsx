@@ -16,7 +16,7 @@ export const App = () => {
     const googleAccessToken = history.location.search.split('=')[1];
     const token = localStorage.getItem('jwtToken');
 
-    const [getuserInfo, { isLoading }] = useLazyGetUserInfoQuery();
+    const [getUserInfo, { isLoading }] = useLazyGetUserInfoQuery();
 
     useEffect(() => {
         const clearSessionStorage = () => {
@@ -39,7 +39,7 @@ export const App = () => {
             dispatch(setAuthToken(token));
         }
         if (token || googleAccessToken) {
-            getuserInfo();
+            getUserInfo();
         }
     }, []);
 
@@ -49,7 +49,7 @@ export const App = () => {
         }
 
         if (shouldRefetch) {
-            getuserInfo()
+            getUserInfo()
                 .unwrap()
                 .then(() => dispatch(setShouldRefetch(false)));
         }

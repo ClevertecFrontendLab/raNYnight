@@ -13,6 +13,9 @@ import { useState } from 'react';
 import { useUpdateUserMutation } from '@redux/profile/profile-api';
 import { DATE_DDMMYYYY } from '@constants/dates';
 import moment from 'moment';
+import Loader from '@components/loader/loader';
+import { setActiveModal } from '@redux/modals/modal-manager';
+import { ModalTypes } from '@components/modal-manager/modal-manager';
 
 const ProfileMainContent = () => {
     const dispatch = useAppDispatch();
@@ -51,20 +54,19 @@ const ProfileMainContent = () => {
             }
         }
 
-        console.log('updatedValues', updatedValues);
         updateUser(updatedValues)
             .unwrap()
             .then(() => {
                 dispatch(setShouldRefetch(true));
                 form.setFieldValue('password', '');
                 form.setFieldValue('password-repeat', '');
+            })
+            .catch(() => {
+                dispatch(setActiveModal(ModalTypes.notificationErrorModal));
             });
     };
 
-    const handleFormChange: FormProps['onFieldsChange'] = (values) => {
-        setIsSaveDisabled(false);
-        console.log('form err', form.getFieldsError());
-    };
+    const handleFormChange: FormProps['onFieldsChange'] = () => setIsSaveDisabled(false);
 
     return (
         <div className='profile-main-content-wrapper'>
@@ -86,11 +88,19 @@ const ProfileMainContent = () => {
                         <ProfileImageUploader />
                         <div className='personal-inputs'>
                             <Form.Item name='firstName'>
-                                <Input placeholder='Имя' className='profile-input personal' />
+                                <Input
+                                    placeholder='Имя'
+                                    className='profile-input personal'
+                                    data-test-id={DATA_TEST_ID.profileName}
+                                />
                             </Form.Item>
 
                             <Form.Item name='lastName'>
-                                <Input placeholder='Фамилия' className='profile-input personal' />
+                                <Input
+                                    placeholder='Фамилия'
+                                    className='profile-input personal'
+                                    data-test-id={DATA_TEST_ID.profileSurname}
+                                />
                             </Form.Item>
 
                             <Form.Item name='birthday'>
@@ -98,6 +108,7 @@ const ProfileMainContent = () => {
                                     format={DATE_DDMMYYYY}
                                     placeholder='Дата рождения'
                                     className='profile-input personal'
+                                    data-test-id={DATA_TEST_ID.profileBirthday}
                                 />
                             </Form.Item>
                         </div>
@@ -121,7 +132,7 @@ const ProfileMainContent = () => {
                         <Input
                             prefix={'e-mail:'}
                             className=''
-                            data-test-id={DATA_TEST_ID.registrationEmail}
+                            data-test-id={DATA_TEST_ID.profileEmail}
                         />
                     </Form.Item>
                     <Form.Item
@@ -138,9 +149,9 @@ const ProfileMainContent = () => {
                     >
                         <Input.Password
                             placeholder='Пароль'
-                            data-test-id={DATA_TEST_ID.registrationPassword}
                             autoComplete='on'
                             className='profile-input security'
+                            data-test-id={DATA_TEST_ID.profilePassword}
                         />
                     </Form.Item>
                     <Form.Item
@@ -156,9 +167,9 @@ const ProfileMainContent = () => {
                     >
                         <Input.Password
                             placeholder='Повторите пароль'
-                            data-test-id={DATA_TEST_ID.registrationConfirmPassword}
                             autoComplete='on'
                             className='profile-input security'
+                            data-test-id={DATA_TEST_ID.profileRepeatPassword}
                         />
                     </Form.Item>
 
@@ -168,7 +179,7 @@ const ProfileMainContent = () => {
                             htmlType='submit'
                             className=''
                             disabled={isSaveDisabled}
-                            data-test-id={DATA_TEST_ID.registrationSubmitButton}
+                            data-test-id={DATA_TEST_ID.profileSubmit}
                         >
                             Сохранить изменения
                         </Button>
@@ -186,6 +197,7 @@ const ProfileMainContent = () => {
                     style={{ width: '395px', position: 'fixed', bottom: '72px', margin: '0 auto' }}
                 />
             )}
+            {isLoading && <Loader />}
         </div>
     );
 };

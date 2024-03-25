@@ -4,6 +4,7 @@ import { useLazyGetTariffListQuery } from '@redux/tariffs/tariffs-api';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { selectTariffList, setSelectedTariffToBuy } from '@redux/tariffs/tariffs-slice';
 import './tariff-select.less';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 interface TariffSelectProps {
     isProActive: boolean;
@@ -37,7 +38,7 @@ const TariffSelect: FC<TariffSelectProps> = ({ isProActive }) => {
                     id='form'
                     className='tariff-select-wrapper'
                     onFieldsChange={onFieldsChange}
-                    data-test-id='tariff-cost'
+                    data-test-id={DATA_TEST_ID.tariffCost}
                 >
                     <div className='tariff-select-title'>Стоимость тарифа</div>
                     <Form.Item name='days'>

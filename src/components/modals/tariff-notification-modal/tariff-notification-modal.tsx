@@ -14,6 +14,7 @@ import { ModalTypes } from '@components/modal-manager/modal-manager';
 import { useNavigate } from 'react-router-dom';
 import { setAuthToken, setRememberMe } from '@redux/auth/auth-slice';
 import { Paths } from '@router/paths';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const TariffNotificationModal = () => {
     const dispatch = useAppDispatch();
@@ -43,7 +44,7 @@ const TariffNotificationModal = () => {
             footer={null}
             centered
             onCancel={handleCloseModal}
-            closeIcon={<CloseOutlined />}
+            closeIcon={<CloseOutlined data-test-id={DATA_TEST_ID.tariffModalSuccess} />}
             className='tariff-notification-modal'
             width={
                 width > BREAKPOINT_520
