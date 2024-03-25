@@ -4,6 +4,7 @@ import NotificationErrorModal from '@pages/calendar-page/calendar-modals/notific
 import NotificationWarnModal from '@pages/calendar-page/calendar-modals/notification-warn-modal/notification-warn-modal';
 import { SomethingWrongModal } from '@pages/calendar-page/calendar-modals/somthing-wrong-modal/something-wrong-modal';
 import TrainingListModal from '@pages/calendar-page/calendar-modals/training-list-modal/training-list-modal';
+import TariffNotificationModal from '@pages/settings-page/settings-main-content/tariff-notification-modal/tariff-notification-modal';
 import { selectActiveModal } from '@redux/modals/modal-manager';
 
 export enum ModalTypes {
@@ -14,6 +15,7 @@ export enum ModalTypes {
     somethingWrongModal = 'somethingWrongModal',
     notificationErrorModal = 'notificationErrorModal',
     notificationWarnModal = 'notificationWarnModal',
+    tariffNotificationModal = 'tariffNotificationModal',
 }
 
 const ModalManager = () => {
@@ -33,6 +35,9 @@ const ModalManager = () => {
 
         case ModalTypes.calendarCreateTrainingModal:
             return <CreateTrainingModal />;
+
+        case ModalTypes.tariffNotificationModal:
+            return <TariffNotificationModal />;
 
         default:
             return null;

@@ -79,10 +79,12 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
         if (modifiedExercises) {
             const updatedTraining: ModifiedTraining = {
                 ...trainingToUpdate,
+                name: selectedTraining,
                 exercises: modifiedExercises,
                 isImplementation,
                 date: modifiedDate,
             };
+            console.log('updatedTraining', updatedTraining);
             dispatch(setModifiedTraining({ ...updatedTraining, exercises: modifiedExercises }));
         }
         dispatch(setIsDrawerOpen(false));

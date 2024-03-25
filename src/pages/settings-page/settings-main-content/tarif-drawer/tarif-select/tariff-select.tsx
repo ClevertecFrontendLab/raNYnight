@@ -2,7 +2,7 @@ import { Form, FormProps, Radio, Typography } from 'antd';
 import { FC, useEffect } from 'react';
 import { useLazyGetTariffListQuery } from '@redux/tariffs/tariffs-api';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { selectTariffList } from '@redux/tariffs/tariffs-slice';
+import { selectTariffList, setSelectedTariffToBuy } from '@redux/tariffs/tariffs-slice';
 import './tariff-select.less';
 
 interface TariffSelectProps {
@@ -16,10 +16,13 @@ const TariffSelect: FC<TariffSelectProps> = ({ isProActive }) => {
 
     const tariffList = useAppSelector(selectTariffList);
 
-    const onFieldsChange: FormProps['onFieldsChange'] = (changedFields) => {
-        const changedField = changedFields[0];
-        const fieldname = changedField.name[0];
-    };
+    const onFieldsChange: FormProps['onFieldsChange'] = ([changedField]) =>
+        dispatch(
+            setSelectedTariffToBuy({
+                tariffId: tariffList[0]?._id,
+                days: changedField.value,
+            }),
+        );
 
     useEffect(() => {
         if (!tariffList.length) {

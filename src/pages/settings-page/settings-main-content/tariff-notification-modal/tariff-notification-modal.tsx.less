@@ -1,0 +1,33 @@
+@import '/src/style-variables.less';
+
+.tariff-notification-modal {
+    .ant-modal-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .tariff-notification-modal-title {
+            font-family: @font-family;
+            font-weight: @font-weight-500;
+            font-size: @font-size-24;
+            line-height: @line-height-130;
+            text-align: center;
+            color: @character-light-title-85;
+            margin-bottom: @space-0;
+        }
+        .tariff-notification-modal-subtitle {
+            font-family: @font-family;
+            font-weight: @font-weight-400;
+            font-size: @font-size-14;
+            line-height: @line-height-130;
+            text-align: center;
+            color: @character-light-secondary-45;
+            margin-bottom: @space-xl;
+        }
+
+        svg {
+            margin-top: @space-6xl;
+            margin-bottom: @space-xl;
+        }
+    }
+}

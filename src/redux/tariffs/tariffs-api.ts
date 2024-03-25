@@ -1,7 +1,7 @@
-import { Tariff } from '@common-types/auth';
 import { ApiEndpoints, baseQuery } from '@constants/api';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setTariffList } from './tariffs-slice';
+import { CreateTariffRequest, Tariff } from '@common-types/profile';
 
 export const tariffsApi = createApi({
     reducerPath: 'tariffsApi',
@@ -32,7 +32,15 @@ export const tariffsApi = createApi({
                 }
             },
         }),
+
+        createTariff: builder.mutation<void, CreateTariffRequest>({
+            query: (body) => ({
+                url: ApiEndpoints.Tariff,
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 });
 
-export const { useLazyGetTariffListQuery } = tariffsApi;
+export const { useLazyGetTariffListQuery, useCreateTariffMutation } = tariffsApi;

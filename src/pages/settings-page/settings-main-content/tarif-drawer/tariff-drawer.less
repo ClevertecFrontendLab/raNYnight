@@ -22,6 +22,15 @@
     margin: @space-0 auto;
 }
 
+.ant-typography.drawer-pro-tariff-active-title {
+    margin-bottom: @space-0;
+    color: @primary-light-10;
+}
+
+.ant-btn.drawer-submit-button:disabled {
+    background: @character-light-disable-25;
+}
+
 .drawer-tariff-compare-head {
     padding-top: @space-xl;
     display: flex;
@@ -33,6 +42,9 @@
 .tariff-title {
     padding: @space-3xs @space-3m;
     font-size: @font-size-12;
+    width: 56px;
+    padding: @space-3xs @space-xs;
+    text-align: center;
 }
 
 .drawer-tariff-compare-head :first-child {
@@ -41,10 +53,13 @@
 
 .drawer-tariff-compare-head :last-child {
     background-color: @primary-light-1;
+}
+
+.ant-typography.tariff-title-pro {
     color: @primary-light-6;
 }
 
-.tariff-title-checked {
+.tariff-title .anticon.tariff-title-checked {
     color: @character-light-success;
 }
 
