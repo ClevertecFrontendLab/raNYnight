@@ -1,14 +1,13 @@
-import './setting-options.less';
-
-import { Form, FormProps, Switch, Tooltip } from 'antd';
-
 import { InfoCircleOutlined } from '@ant-design/icons';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { useWindowSize } from 'usehooks-ts';
-import { selectUserInfo } from '@redux/profile/profile-slice';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
-import { useUpdateUserMutation } from '@redux/profile/profile-api';
 import { DATA_TEST_ID } from '@constants/data-test-id';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useUpdateUserMutation } from '@redux/profile/profile-api';
+import { selectUserInfo } from '@redux/profile/profile-slice';
+import { Form, FormProps, Switch, Tooltip } from 'antd';
+import { useWindowSize } from 'usehooks-ts';
+
+import './setting-options.less';
 
 const settingOptionsData = [
     {

@@ -1,25 +1,32 @@
+import { useState } from 'react';
+import { ModalTypes } from '@common-types/modal';
+import Loader from '@components/loader/loader';
+import { ProfileFormContext } from '@components/profile-form-context/profile-form-context';
+import { BREAKPOINT_520 } from '@constants/breakpoints';
 import { DATA_TEST_ID } from '@constants/data-test-id';
+import { DATE_DDMMYYYY } from '@constants/dates';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { ProfileFormContext } from '@hooks/useProfileFormContext';
 import { validatePassword, validateRepeatPassword } from '@pages/auth-page/registration/validators';
+import { setActiveModal } from '@redux/modals/modal-manager';
+import { useUpdateUserMutation } from '@redux/profile/profile-api';
 import { selectUserInfo } from '@redux/profile/profile-slice';
 import { Alert, Button, DatePicker, Form, Input } from 'antd';
 import { FormProps, useForm } from 'antd/lib/form/Form';
 import Title from 'antd/lib/typography/Title';
-import { useState } from 'react';
-import ProfileImageUploader from './profile-image-uploader/profile-image-uploader';
-import './profile-main-content.less';
-
-import Loader from '@components/loader/loader';
-import { ModalTypes } from '@components/modal-manager/modal-manager';
-import { DATE_DDMMYYYY } from '@constants/dates';
-import { setActiveModal } from '@redux/modals/modal-manager';
-import { useUpdateUserMutation } from '@redux/profile/profile-api';
 import moment from 'moment';
+import { useWindowSize } from 'usehooks-ts';
+
+import ProfileImageUploader from './profile-image-uploader/profile-image-uploader';
+
+import './profile-main-content.less';
 
 const ProfileMainContent = () => {
     const dispatch = useAppDispatch();
     const [form] = useForm();
+
+    const { width } = useWindowSize();
+
+    const isDesktop = width > BREAKPOINT_520;
 
     const [isSaveDisabled, setIsSaveDisabled] = useState(true);
 
@@ -81,7 +88,7 @@ const ProfileMainContent = () => {
     };
 
     return (
-        <div className='profile-main-content-wrapper'>
+        <div className={`profile-main-content-wrapper ${isDesktop ? '' : 'mobile'}`}>
             <ProfileFormContext.Provider value={form}>
                 <Form
                     name='profile-info'
@@ -96,9 +103,9 @@ const ProfileMainContent = () => {
                     <Title level={5} className='profile-info-title'>
                         Личная информация
                     </Title>
-                    <div className='personal-info-inputs-wrapper'>
+                    <div className={`personal-info-inputs-wrapper ${isDesktop ? '' : 'mobile'}`}>
                         <ProfileImageUploader />
-                        <div className='personal-inputs'>
+                        <div className={`personal-inputs ${isDesktop ? '' : 'mobile'}`}>
                             <Form.Item name='firstName'>
                                 <Input
                                     placeholder='Имя'
@@ -189,7 +196,7 @@ const ProfileMainContent = () => {
                         <Button
                             type='primary'
                             htmlType='submit'
-                            className=''
+                            className={`profile-save-button ${isDesktop ? '' : 'mobile'}`}
                             disabled={isSaveDisabled}
                             data-test-id={DATA_TEST_ID.profileSubmit}
                         >
@@ -201,12 +208,11 @@ const ProfileMainContent = () => {
             {isUserUpdated && (
                 <Alert
                     data-test-id={DATA_TEST_ID.alert}
-                    className='update-alert'
+                    className={`profile-alert ${isDesktop ? '' : 'mobile'}`}
                     message='Данные профиля успешно обновлены'
                     type='success'
                     showIcon={true}
                     closable={true}
-                    style={{ width: '395px', position: 'fixed', bottom: '72px', margin: '0 auto' }}
                 />
             )}
             {isLoading && <Loader />}

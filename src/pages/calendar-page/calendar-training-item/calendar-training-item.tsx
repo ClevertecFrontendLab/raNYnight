@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { EditOutlined } from '@ant-design/icons';
+import { ModalTypes } from '@common-types/modal';
 import { ModifiedTraining, Trainings } from '@common-types/trainings';
-import { ModalTypes } from '@components/modal-manager/modal-manager';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { setActiveModal } from '@redux/modals/modal-manager';

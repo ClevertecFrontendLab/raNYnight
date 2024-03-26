@@ -1,16 +1,17 @@
-import { Button, Card, Typography } from 'antd';
-import './tarif-cards.less';
-
+import { CheckOutlined } from '@ant-design/icons';
 import { DATA_TEST_ID } from '@constants/data-test-id';
+import { DATE_DDMM } from '@constants/dates';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import freeTarifPlan from '@public/free-tarif.jpg';
 import proTarifPlan from '@public/pro-tarif.jpg';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { selectUserInfo } from '@redux/profile/profile-slice';
-import { CheckOutlined } from '@ant-design/icons';
-import dayjs from 'dayjs';
-import TariffDrawer from '../tarif-drawer/tariff-drawer';
 import { setIsTarifDrawerOpen } from '@redux/tariffs/tariffs-slice';
-import { DATE_DDMM } from '@constants/dates';
+import { Button, Card, Typography } from 'antd';
+import dayjs from 'dayjs';
+
+import TariffDrawer from '../tarif-drawer/tariff-drawer';
+
+import './tarif-cards.less';
 
 const tariffsData = {
     free: { title: 'FREE tariff', img: freeTarifPlan, dataTestId: DATA_TEST_ID.freeTariffCard },

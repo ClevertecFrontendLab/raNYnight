@@ -4,21 +4,16 @@ import {
     CloseCircleOutlined,
     CloseOutlined,
 } from '@ant-design/icons';
+import { ModalTypes } from '@common-types/modal';
+import Loader from '@components/loader/loader';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { DATE_DDMM } from '@constants/dates';
 import { DRAWER_WIDTH, DRAWER_WIDTH_MOBILE } from '@constants/sizes';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { selectUserInfo } from '@redux/profile/profile-slice';
-import { Button, Drawer, Typography } from 'antd';
-import Title from 'antd/lib/typography/Title';
-import dayjs from 'dayjs';
-import { useWindowSize } from 'usehooks-ts';
-
-import Loader from '@components/loader/loader';
-import { ModalTypes } from '@components/modal-manager/modal-manager';
 import { tariffAdvantagesTitles } from '@constants/tariffs';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { setActiveModal } from '@redux/modals/modal-manager';
+import { selectUserInfo } from '@redux/profile/profile-slice';
 import { useCreateTariffMutation } from '@redux/tariffs/tariffs-api';
 import {
     selectIsTariffDrawerOpen,
@@ -26,7 +21,13 @@ import {
     setIsTarifDrawerOpen,
     setSelectedTariffToBuy,
 } from '@redux/tariffs/tariffs-slice';
+import { Button, Drawer, Typography } from 'antd';
+import Title from 'antd/lib/typography/Title';
+import dayjs from 'dayjs';
+import { useWindowSize } from 'usehooks-ts';
+
 import TariffSelect from './tarif-select/tariff-select';
+
 import './tariff-drawer.less';
 
 const { monthStat, allTimeStat, partytrainings, maraphons, iosApp, androidApp, chatGPT } =
@@ -81,12 +82,14 @@ const TariffDrawer = () => {
     };
 
     const handleChooseTariff = () => {
-        createTariff(selectedTariff!)
-            .unwrap()
-            .then(() => {
-                dispatch(setActiveModal(ModalTypes.tariffNotificationModal));
-                handleCloseDrawer();
-            });
+        if (selectedTariff) {
+            createTariff(selectedTariff)
+                .unwrap()
+                .then(() => {
+                    dispatch(setActiveModal(ModalTypes.tariffNotificationModal));
+                    handleCloseDrawer();
+                });
+        }
     };
 
     return (

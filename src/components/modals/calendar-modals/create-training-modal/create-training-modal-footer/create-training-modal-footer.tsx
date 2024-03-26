@@ -1,6 +1,6 @@
 import { FC } from 'react';
+import { ModalTypes } from '@common-types/modal';
 import Loader from '@components/loader/loader';
-import { ModalTypes } from '@components/modal-manager/modal-manager';
 import { DATE_DD_MM_YYYY } from '@constants/dates';
 import { trainingButtonTitles } from '@constants/trainings';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';

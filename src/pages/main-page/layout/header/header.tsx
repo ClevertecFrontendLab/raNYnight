@@ -1,12 +1,12 @@
+import { Link, useLocation } from 'react-router-dom';
 import { SettingOutlined } from '@ant-design/icons';
 import { BREAKPOINT_520, BREAKPOINT_768, BREAKPOINT_834 } from '@constants/breakpoints';
+import { DATA_TEST_ID } from '@constants/data-test-id';
+import { Paths } from '@router/paths';
 import { Layout, Typography } from 'antd';
 import { useWindowSize } from 'usehooks-ts';
 
 import './header.less';
-import { Link, useLocation } from 'react-router-dom';
-import { Paths } from '@router/paths';
-import { DATA_TEST_ID } from '@constants/data-test-id';
 
 const { Title } = Typography;
 const { Header: AntdHeader } = Layout;

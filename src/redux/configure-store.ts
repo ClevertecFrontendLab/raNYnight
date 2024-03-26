@@ -7,11 +7,12 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import { createBrowserHistory } from 'history';
 import { combineReducers } from 'redux';
 import { createReduxHistoryContext } from 'redux-first-history';
-import { profileApi } from './profile/profile-api';
+
 import { authApi } from './auth/auth-api';
 import { feedbacksApi } from './feedbacks/feedback-api';
-import { tariffsApi } from './tariffs/tariffs-api';
 import modalManagerReducer from './modals/modal-manager';
+import { profileApi } from './profile/profile-api';
+import { tariffsApi } from './tariffs/tariffs-api';
 import { trainingsApi } from './trainings/trainings-api';
 import trainingsReducer from './trainings/trainings-slice';
 

@@ -1,7 +1,8 @@
+import { UserData } from '@common-types/profile';
 import { ApiEndpoints, baseQuery } from '@constants/api';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
 import { setUserInfo } from './profile-slice';
-import { UserData } from '@common-types/profile';
 
 export const profileApi = createApi({
     reducerPath: 'profileApi',

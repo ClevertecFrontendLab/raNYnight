@@ -1,4 +1,4 @@
-import { ModalTypes } from '@components/modal-manager/modal-manager';
+import { ModalTypes } from '@common-types/modal';
 import { RootState } from '@redux/configure-store';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 

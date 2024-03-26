@@ -1,17 +1,18 @@
+import { useState } from 'react';
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import { ModalTypes } from '@common-types/modal';
 import { baseQuery } from '@constants/api';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useProfileFormContext } from '@hooks/useProfileFormContext';
 import { selectAuthToken } from '@redux/auth/auth-slice';
+import { setActiveModal } from '@redux/modals/modal-manager';
 import { Button, Form, Upload, UploadFile } from 'antd';
 import { UploadFileStatus, UploadProps } from 'antd/lib/upload/interface';
-import { useState } from 'react';
 import { useWindowSize } from 'usehooks-ts';
+
 import './profile-image-uploader.less';
-import { DATA_TEST_ID } from '@constants/data-test-id';
-import { setActiveModal } from '@redux/modals/modal-manager';
-import { ModalTypes } from '@components/modal-manager/modal-manager';
 
 const ProfileImageUploader = () => {
     const dispatch = useAppDispatch();
@@ -75,7 +76,7 @@ const ProfileImageUploader = () => {
         );
 
     return (
-        <div className='photo-uploader'>
+        <div className={`photo-uploader ${isDesktop ? '' : 'mobile'}`}>
             <Form.Item name='imgSrc' data-test-id={DATA_TEST_ID.profileAvatar}>
                 <Upload
                     maxCount={1}

@@ -1,8 +1,9 @@
+import { FC } from 'react';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { selectTariffList, setSelectedTariffToBuy } from '@redux/tariffs/tariffs-slice';
 import { Form, FormProps, Radio, Typography } from 'antd';
-import { FC } from 'react';
+
 import './tariff-select.less';
 
 interface TariffSelectProps {

@@ -1,15 +1,17 @@
-import Title from 'antd/lib/typography/Title';
-import './settings-main-content.less';
-import TariffCards from './tarif-cards/tarif-cards';
-import { TariffOptions } from './setting-options/setting-options';
-import WriteFeedbackButton from '@pages/feedbacks-page/write-feedback-button/write-feedback-button';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Paths } from '@router/paths';
-import { Button } from 'antd';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import WriteFeedbackButton from '@pages/feedbacks-page/write-feedback-button/write-feedback-button';
 import { useLazyGetTariffListQuery } from '@redux/tariffs/tariffs-api';
 import { selectTariffList } from '@redux/tariffs/tariffs-slice';
-import { useEffect } from 'react';
+import { Paths } from '@router/paths';
+import { Button } from 'antd';
+import Title from 'antd/lib/typography/Title';
+
+import { TariffOptions } from './setting-options/setting-options';
+import TariffCards from './tarif-cards/tarif-cards';
+
+import './settings-main-content.less';
 
 const SettingsMainContent = () => {
     const [getTariffList] = useLazyGetTariffListQuery();
@@ -30,7 +32,7 @@ const SettingsMainContent = () => {
             <TariffOptions />
             <div className='write-feedback-wrapper'>
                 <WriteFeedbackButton />
-                <Link to={Paths.FEEDBACKS}>
+                <Link to={Paths.FEEDBACKS} className='settings-feedback-link'>
                     <Button type='link'>Смотреть все отзывы</Button>
                 </Link>
             </div>

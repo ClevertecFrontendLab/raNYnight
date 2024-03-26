@@ -1,7 +1,8 @@
+import { CreateTariffRequest, Tariff } from '@common-types/profile';
 import { ApiEndpoints, baseQuery } from '@constants/api';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
 import { setTariffList } from './tariffs-slice';
-import { CreateTariffRequest, Tariff } from '@common-types/profile';
 
 export const tariffsApi = createApi({
     reducerPath: 'tariffsApi',

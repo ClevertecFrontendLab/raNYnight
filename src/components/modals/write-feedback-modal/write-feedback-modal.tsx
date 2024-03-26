@@ -1,16 +1,16 @@
+import { useState } from 'react';
+import { ModalTypes } from '@common-types/modal';
 import CustomRate from '@components/custom-rate/custom-rate';
 import Loader from '@components/loader/loader';
-import { ModalTypes } from '@components/modal-manager/modal-manager';
+import FeedbackModalResult from '@components/modals/feedback-modal-results/feedback-modal-results';
 import { FEEDBACK_MODAL_WIDTH, RATE_STAR_MODAL } from '@constants/sizes';
 import { createOkButtonProps } from '@constants/utils';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import FeedbackModalResult from '@components/modals/feedback-modal-results/feedback-modal-results';
 import { setShouldRefetch } from '@redux/auth/auth-slice';
 import { useSendFeedbackMutation } from '@redux/feedbacks/feedback-api';
 import { selectActiveModal, setActiveModal } from '@redux/modals/modal-manager';
 import { Modal } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import { useState } from 'react';
 
 import './write-feedback-modal.less';
 

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ModalTypes } from '@common-types/modal';
 import Calendar from '@components/calendar/calendar';
 import Loader from '@components/loader/loader';
-import { ModalTypes } from '@components/modal-manager/modal-manager';
 import { BREAKPOINT_768 } from '@constants/breakpoints';
 import { DATE_DD_MM_YYYY } from '@constants/dates';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';

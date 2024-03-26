@@ -1,6 +1,6 @@
 import { CreateTariffRequest, Tariff } from '@common-types/profile';
 import { RootState } from '@redux/configure-store';
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice,PayloadAction } from '@reduxjs/toolkit';
 
 interface TariffStore {
     tariffList: Tariff[] | [];

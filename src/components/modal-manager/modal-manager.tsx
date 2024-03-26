@@ -1,26 +1,14 @@
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { ModalTypes } from '@common-types/modal';
+import BigFileErrorModal from '@components/modals/big-file-error-modal/big-file-error';
 import CreateTrainingModal from '@components/modals/calendar-modals/create-training-modal/create-training-modal';
+import TrainingListModal from '@components/modals/calendar-modals/training-list-modal/training-list-modal';
 import NotificationErrorModal from '@components/modals/notification-error-modal/notification-error-modal';
 import NotificationWarnModal from '@components/modals/notification-warn-modal/notification-warn-modal';
 import { SomethingWrongModal } from '@components/modals/something-wrong-modal/something-wrong-modal';
-import TrainingListModal from '@components/modals/calendar-modals/training-list-modal/training-list-modal';
 import TariffNotificationModal from '@components/modals/tariff-notification-modal/tariff-notification-modal';
-import { selectActiveModal } from '@redux/modals/modal-manager';
 import WriteFeedbackModal from '@components/modals/write-feedback-modal/write-feedback-modal';
-import BigFileErrorModal from '@components/modals/big-file-error-modal/big-file-error';
-
-export enum ModalTypes {
-    none = 'none',
-    calendarTrainingListModal = 'calendarTrainingListModal',
-    calendarCreateTrainingModal = 'calendarCreateTrainingModal',
-    calendarGetDefaultTrainingsErrorModal = 'calendarGetDefaultTrainingsErrorModal',
-    somethingWrongModal = 'somethingWrongModal',
-    notificationErrorModal = 'notificationErrorModal',
-    notificationWarnModal = 'notificationWarnModal',
-    tariffNotificationModal = 'tariffNotificationModal',
-    writeFeedbackModal = 'writeFeedbackModal',
-    bigFileErrorModal = 'bigFileErrorModal',
-}
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { selectActiveModal } from '@redux/modals/modal-manager';
 
 const ModalManager = () => {
     const activeModal = useAppSelector(selectActiveModal);

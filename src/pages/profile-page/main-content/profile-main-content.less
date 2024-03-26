@@ -8,8 +8,18 @@
     border-radius: 8px;
 }
 
+.profile-main-content-wrapper.mobile {
+    margin: @space-xl @space-0;
+    border-radius: 0;
+}
+
 .personal-info-inputs-wrapper {
     display: flex;
+}
+
+.personal-info-inputs-wrapper.mobile {
+    flex-direction: column-reverse;
+    align-items: center;
 }
 
 .photo-uploader {
@@ -17,10 +27,18 @@
     width: 104px;
 }
 
+.photo-uploader.mobile {
+    width: 100%;
+}
+
 .personal-inputs {
     margin-left: @space-xl;
     max-width: 352px;
     width: 100%;
+}
+
+.personal-inputs.mobile {
+    margin-left: @space-0;
 }
 
 .profile-input.personal {
@@ -33,11 +51,24 @@
     max-width: 480px;
 }
 
-.update-alert {
+.profile-alert {
     width: 395px;
     position: fixed;
     bottom: 72px;
-    margin: 0px auto;
+    margin: 0 auto;
     transform: translateX(50%);
     right: 50%;
+}
+
+.profile-alert.mobile {
+    width: 350px;
+}
+
+.ant-btn.profile-save-button {
+    height: 40px;
+    background-color: @primary-light-6;
+}
+
+.ant-btn.profile-save-button.mobile {
+    width: 312px;
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { ModalTypes } from '@components/modal-manager/modal-manager';
+import { ModalTypes } from '@common-types/modal';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { DATE_DD_MM_YYYY } from '@constants/dates';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';

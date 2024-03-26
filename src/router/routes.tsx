@@ -6,13 +6,13 @@ import Login from '@pages/auth-page/login/login';
 import Registration from '@pages/auth-page/registration/registration';
 import { FeedbacksPage } from '@pages/feedbacks-page';
 import { AuthPage, CalendarPage, MainPage } from '@pages/index';
+import { ProfilePage } from '@pages/profile-page';
 import AuthResult from '@pages/results-page/auth-result/auth-result';
 import { ResultsPage } from '@pages/results-page/results-page';
+import { SettingsPage } from '@pages/settings-page';
 
 import { Paths } from './paths';
 import PrivateRoutes from './private-routes';
-import { ProfilePage } from '@pages/profile-page';
-import { SettingsPage } from '@pages/settings-page';
 
 export const routes = (
     <Routes>

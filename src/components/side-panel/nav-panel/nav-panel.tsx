@@ -1,12 +1,11 @@
 import { CalendarOutlined, HeartFilled, IdcardOutlined, TrophyFilled } from '@ant-design/icons';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
+import { Paths } from '@router/paths';
 import { useWindowSize } from 'usehooks-ts';
 
 import NavLinkWithIcon from './nav-link-with-icon/nav-link-with-icon';
 
 import './nav-panel.less';
-
-import { Paths } from '@router/paths';
 
 interface NavPanelProps {
     isCollapsed: boolean;

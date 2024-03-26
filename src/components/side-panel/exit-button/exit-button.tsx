@@ -1,14 +1,14 @@
+import { useNavigate } from 'react-router-dom';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { setAuthToken, setRememberMe } from '@redux/auth/auth-slice';
+import { setUserInfo } from '@redux/profile/profile-slice';
 import { Paths } from '@router/paths';
 import { Typography } from 'antd';
-import { useNavigate } from 'react-router-dom';
 import { useWindowSize } from 'usehooks-ts';
 
 import './exit-button.less';
 
-import { setUserInfo } from '@redux/profile/profile-slice';
 import exitIcon from '/exit-icon.svg';
 
 const { Text } = Typography;

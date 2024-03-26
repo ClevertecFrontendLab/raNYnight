@@ -1,9 +1,9 @@
+import { useEffect } from 'react';
 import ModalManager from '@components/modal-manager/modal-manager';
 import { useAppDispatch } from '@hooks/index';
 import { setAuthToken } from '@redux/auth/auth-slice';
 import { history } from '@redux/configure-store';
 import { routes } from '@router/routes';
-import { useEffect } from 'react';
 import { HistoryRouter as Router } from 'redux-first-history/rr6';
 
 export const App = () => {

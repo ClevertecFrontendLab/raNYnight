@@ -1,8 +1,8 @@
 import { CloseOutlined } from '@ant-design/icons';
-import { ModalTypes } from '@components/modal-manager/modal-manager';
+import { ModalTypes } from '@common-types/modal';
 import { BREAKPOINT_768 } from '@constants/breakpoints';
 import { DATA_TEST_ID } from '@constants/data-test-id';
-import { DATE_DD_MM_YYYY,DATE_DDMMYYYY } from '@constants/dates';
+import { DATE_DD_MM_YYYY, DATE_DDMMYYYY } from '@constants/dates';
 import {
     CALENDAR_TRAINING_MODAL_WIDTH,
     CALENDAR_TRAINING_MODAL_WIDTH_MOBILE,

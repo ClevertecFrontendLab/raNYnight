@@ -1,5 +1,5 @@
-import { Typography } from 'antd';
 import { NavLink, useLocation } from 'react-router-dom';
+import { Typography } from 'antd';
 
 import './nav-link-with-icon.less';
 

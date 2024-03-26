@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { CloseCircleOutlined, CloseOutlined } from '@ant-design/icons';
-import { ModalTypes } from '@components/modal-manager/modal-manager';
+import { ModalTypes } from '@common-types/modal';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { selectActiveModal, setActiveModal } from '@redux/modals/modal-manager';

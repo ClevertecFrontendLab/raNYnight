@@ -1,9 +1,9 @@
+import { ModalTypes } from '@common-types/modal';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { setActiveModal } from '@redux/modals/modal-manager';
 import { Button } from 'antd';
 
-import { ModalTypes } from '@components/modal-manager/modal-manager';
-import { setActiveModal } from '@redux/modals/modal-manager';
 import './write-feedback-button.less';
 
 const WriteFeedbackButton = () => {
