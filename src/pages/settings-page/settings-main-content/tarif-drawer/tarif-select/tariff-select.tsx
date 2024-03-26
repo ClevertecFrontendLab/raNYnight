@@ -1,10 +1,9 @@
-import { Form, FormProps, Radio, Typography } from 'antd';
-import { FC, useEffect } from 'react';
-import { useLazyGetTariffListQuery } from '@redux/tariffs/tariffs-api';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { selectTariffList, setSelectedTariffToBuy } from '@redux/tariffs/tariffs-slice';
+import { Form, FormProps, Radio, Typography } from 'antd';
+import { FC } from 'react';
 import './tariff-select.less';
-import { DATA_TEST_ID } from '@constants/data-test-id';
 
 interface TariffSelectProps {
     isProActive: boolean;
@@ -12,8 +11,6 @@ interface TariffSelectProps {
 
 const TariffSelect: FC<TariffSelectProps> = ({ isProActive }) => {
     const dispatch = useAppDispatch();
-
-    const [getTariffList] = useLazyGetTariffListQuery();
 
     const tariffList = useAppSelector(selectTariffList);
 
@@ -24,12 +21,6 @@ const TariffSelect: FC<TariffSelectProps> = ({ isProActive }) => {
                 days: changedField.value,
             }),
         );
-
-    useEffect(() => {
-        if (!tariffList.length) {
-            getTariffList();
-        }
-    }, [getTariffList, tariffList.length]);
 
     return (
         <>
@@ -46,12 +37,12 @@ const TariffSelect: FC<TariffSelectProps> = ({ isProActive }) => {
                             {tariffList[0]?.periods.map(({ text, cost, days }) => (
                                 <Radio value={days} key={text} data-test-id={`tariff-${cost}`}>
                                     <div className='tariff-select-option'>
-                                        <Typography.Text> {text}</Typography.Text>
+                                        <Typography.Text>{text}</Typography.Text>
                                         <Typography.Title
                                             level={5}
                                             className='tariff-select-option-price'
                                         >
-                                            {cost} $
+                                            {cost.toString().replace('.', ',')} $
                                         </Typography.Title>
                                     </div>
                                 </Radio>

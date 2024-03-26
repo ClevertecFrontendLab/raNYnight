@@ -2,7 +2,7 @@ import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import CreateTrainingModal from '@components/modals/calendar-modals/create-training-modal/create-training-modal';
 import NotificationErrorModal from '@components/modals/notification-error-modal/notification-error-modal';
 import NotificationWarnModal from '@components/modals/notification-warn-modal/notification-warn-modal';
-import { SomethingWrongModal } from '@components/modals/somthing-wrong-modal/something-wrong-modal';
+import { SomethingWrongModal } from '@components/modals/something-wrong-modal/something-wrong-modal';
 import TrainingListModal from '@components/modals/calendar-modals/training-list-modal/training-list-modal';
 import TariffNotificationModal from '@components/modals/tariff-notification-modal/tariff-notification-modal';
 import { selectActiveModal } from '@redux/modals/modal-manager';

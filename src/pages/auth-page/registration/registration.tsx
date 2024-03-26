@@ -126,7 +126,7 @@ const Registration: React.FC = () => {
                             {
                                 required: true,
                                 message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой',
-                                validator: validatePassword,
+                                validator: (_, value) => validatePassword(_, value, true),
                             },
                         ]}
                         className='auth-input-wrapper auth-input-password'

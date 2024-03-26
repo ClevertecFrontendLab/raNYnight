@@ -4,7 +4,7 @@ import { Layout, Typography } from 'antd';
 import { useWindowSize } from 'usehooks-ts';
 
 import './header.less';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Paths } from '@router/paths';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 
@@ -13,6 +13,7 @@ const { Header: AntdHeader } = Layout;
 
 const MainHeader = () => {
     const { width } = useWindowSize();
+    const location = useLocation();
     return (
         <AntdHeader className='header'>
             <div className='header-left-col'>
@@ -25,7 +26,7 @@ const MainHeader = () => {
             </div>
             <div className='header-right-col'>
                 {width <= BREAKPOINT_834 ? null : (
-                    <Link to={Paths.SETTINGS}>
+                    <Link to={Paths.SETTINGS} state={{ prevPath: location.pathname }}>
                         <SettingOutlined className='settings-icon' />
                     </Link>
                 )}
@@ -34,12 +35,17 @@ const MainHeader = () => {
                         to={Paths.SETTINGS}
                         className='settings-text'
                         data-test-id={DATA_TEST_ID.headerSettings}
+                        state={{ prevPath: location.pathname }}
                     >
                         Настройки
                     </Link>
                 )}
                 {width < BREAKPOINT_520 ? (
-                    <Link to={Paths.SETTINGS} className='circle'>
+                    <Link
+                        to={Paths.SETTINGS}
+                        className='circle'
+                        state={{ prevPath: location.pathname }}
+                    >
                         <SettingOutlined />
                     </Link>
                 ) : null}

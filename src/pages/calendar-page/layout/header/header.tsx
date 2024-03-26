@@ -23,13 +23,14 @@ const CalendarHeader = () => {
             </div>
             <div className='header-right-col'>
                 {width <= BREAKPOINT_834 ? null : (
-                    <Link to={Paths.SETTINGS}>
+                    <Link to={Paths.SETTINGS} state={{ prevPath: location.pathname }}>
                         <SettingOutlined className='settings-icon' />
                     </Link>
                 )}
                 {width <= BREAKPOINT_768 ? null : (
                     <Link
                         to={Paths.SETTINGS}
+                        state={{ prevPath: location.pathname }}
                         className='settings-text'
                         data-test-id={DATA_TEST_ID.headerSettings}
                     >
@@ -37,7 +38,11 @@ const CalendarHeader = () => {
                     </Link>
                 )}
                 {width < BREAKPOINT_520 ? (
-                    <Link to={Paths.SETTINGS} className='circle'>
+                    <Link
+                        to={Paths.SETTINGS}
+                        className='circle'
+                        state={{ prevPath: location.pathname }}
+                    >
                         <SettingOutlined />
                     </Link>
                 ) : null}

@@ -17,10 +17,10 @@ export const MainPage: React.FC = () => {
     const [getUserInfo, { isLoading }] = useLazyGetUserInfoQuery();
 
     useEffect(() => {
-        if (userInfo === null) {
+        if (!userInfo?.email) {
             getUserInfo();
         }
-    }, [userInfo]);
+    }, [userInfo, userInfo?.email]);
 
     return (
         <>

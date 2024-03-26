@@ -12,7 +12,7 @@ import { TARIFF_NOTIFICATION_WIDTH, TARIFF_NOTIFICATION_WIDTH_MOBILE } from '@co
 import { setAuthToken, setRememberMe } from '@redux/auth/auth-slice';
 import { selectActiveModal, setActiveModal } from '@redux/modals/modal-manager';
 import { useWindowSize } from 'usehooks-ts';
-import './tariff-notification-modal.tsx.less';
+import './tariff-notification-modal.less';
 
 const TariffNotificationModal = () => {
     const dispatch = useAppDispatch();
@@ -39,9 +39,11 @@ const TariffNotificationModal = () => {
             open={isOpen}
             footer={null}
             centered
+            zIndex={10000}
             onCancel={handleCloseModal}
-            closeIcon={<CloseOutlined data-test-id={DATA_TEST_ID.tariffModalSuccess} />}
+            closeIcon={<CloseOutlined />}
             className='tariff-notification-modal'
+            data-test-id={DATA_TEST_ID.tariffModalSuccess}
             width={
                 width > BREAKPOINT_520
                     ? TARIFF_NOTIFICATION_WIDTH

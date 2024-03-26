@@ -6,8 +6,21 @@ import WriteFeedbackButton from '@pages/feedbacks-page/write-feedback-button/wri
 import { Link } from 'react-router-dom';
 import { Paths } from '@router/paths';
 import { Button } from 'antd';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useLazyGetTariffListQuery } from '@redux/tariffs/tariffs-api';
+import { selectTariffList } from '@redux/tariffs/tariffs-slice';
+import { useEffect } from 'react';
 
 const SettingsMainContent = () => {
+    const [getTariffList] = useLazyGetTariffListQuery();
+
+    const tariffList = useAppSelector(selectTariffList);
+    useEffect(() => {
+        if (!tariffList.length) {
+            getTariffList();
+        }
+    }, [getTariffList, tariffList.length]);
+
     return (
         <div className='settings-main-content-wrapper'>
             <Title level={5} className='settings-info-title'>

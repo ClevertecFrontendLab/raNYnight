@@ -2,7 +2,7 @@ import { Layout, Typography } from 'antd';
 
 import './header.less';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Paths } from '@router/paths';
 
 import './header.less';
@@ -11,10 +11,11 @@ import { DATA_TEST_ID } from '@constants/data-test-id';
 const { Title } = Typography;
 const { Header: AntdHeader } = Layout;
 const SettingsHeader = () => {
+    const location = useLocation();
     return (
         <AntdHeader className='settings-header'>
             <Link
-                to={Paths.PROFILE}
+                to={location.state.prevPath ?? Paths.MAIN}
                 className='setting-back-button'
                 data-test-id={DATA_TEST_ID.settingsBack}
             >

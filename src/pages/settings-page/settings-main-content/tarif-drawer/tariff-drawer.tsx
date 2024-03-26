@@ -84,8 +84,8 @@ const TariffDrawer = () => {
         createTariff(selectedTariff!)
             .unwrap()
             .then(() => {
-                handleCloseDrawer();
                 dispatch(setActiveModal(ModalTypes.tariffNotificationModal));
+                handleCloseDrawer();
             });
     };
 

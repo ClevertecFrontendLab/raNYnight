@@ -20,7 +20,7 @@ const ProfileHeader = () => {
             </Title>
             <div className='header-right-col profile-right-col'>
                 {width <= BREAKPOINT_834 ? null : (
-                    <Link to={Paths.SETTINGS}>
+                    <Link to={Paths.SETTINGS} state={{ prevPath: location.pathname }}>
                         <SettingOutlined className='settings-icon' />
                     </Link>
                 )}
@@ -29,12 +29,17 @@ const ProfileHeader = () => {
                         to={Paths.SETTINGS}
                         className='settings-text'
                         data-test-id={DATA_TEST_ID.headerSettings}
+                        state={{ prevPath: location.pathname }}
                     >
                         Настройки
                     </Link>
                 )}
                 {width < BREAKPOINT_520 ? (
-                    <Link to={Paths.SETTINGS} className='circle'>
+                    <Link
+                        to={Paths.SETTINGS}
+                        className='circle'
+                        state={{ prevPath: location.pathname }}
+                    >
                         <SettingOutlined />
                     </Link>
                 ) : null}

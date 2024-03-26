@@ -154,7 +154,7 @@ const Login: React.FC = () => {
                             {
                                 required: true,
                                 message: '',
-                                validator: validatePassword,
+                                validator: (_, value) => validatePassword(_, value, true),
                             },
                         ]}
                     >
