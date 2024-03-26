@@ -20,7 +20,7 @@ export const trainingsApi = createApi({
                     const { data } = await queryFulfilled;
                     dispatch(setDefaultTrainings(data));
                 } catch (error) {
-                    console.error(error);
+                    dispatch(setDefaultTrainings([]));
                 }
             },
             transformResponse: (response: Training[]) => response.map(({ name }) => name),
@@ -36,7 +36,7 @@ export const trainingsApi = createApi({
                     const { data } = await queryFulfilled;
                     dispatch(setAllUserTrainings(data));
                 } catch (error) {
-                    console.error(error);
+                    dispatch(setAllUserTrainings([]));
                 }
             },
         }),

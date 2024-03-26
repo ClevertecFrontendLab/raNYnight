@@ -36,7 +36,7 @@ const AuthConfirmEmail = () => {
                     state: { prevPath: location.pathname },
                 });
             })
-            .catch((err) => console.log('err', err));
+            .catch();
         setInputValue('');
     };
 

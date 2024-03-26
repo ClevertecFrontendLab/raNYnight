@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 
 interface TrainingStore {
     allUserTrainings: ModifiedTraining[] | [];
-    defaultTrainings: string[];
+    defaultTrainings: string[] | [];
     todaysTrainings: ModifiedTraining[] | [];
     trainingToEdit: ModifiedTraining | null;
     isDrawerOpen: boolean;
@@ -41,11 +41,11 @@ const trainingsSlice = createSlice({
     name: 'trainings',
     initialState: initialState,
     reducers: {
-        setAllUserTrainings: (state, action: PayloadAction<ModifiedTraining[]>) => {
+        setAllUserTrainings: (state, action: PayloadAction<ModifiedTraining[] | []>) => {
             state.allUserTrainings = action.payload;
         },
 
-        setDefaultTrainings: (state, action: PayloadAction<string[]>) => {
+        setDefaultTrainings: (state, action: PayloadAction<string[] | []>) => {
             state.defaultTrainings = action.payload;
         },
         setSelectedDay: (state, action: PayloadAction<string>) => {
