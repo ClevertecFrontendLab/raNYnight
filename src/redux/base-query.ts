@@ -1,7 +1,8 @@
+import { baseQuery } from '@constants/api';
 import { fetchBaseQuery } from '@reduxjs/toolkit/query';
+
 import { selectAuthToken } from './auth/auth-slice';
 import { RootState } from './configure-store';
-import { baseQuery } from '@constants/api';
 
 export const appBaseQuery = fetchBaseQuery({
     baseUrl: baseQuery,

@@ -1,8 +1,8 @@
 import { CreateTariffRequest, Tariff } from '@common-types/profile';
 import { ApiEndpoints } from '@constants/api';
+import { appBaseQuery } from '@redux/base-query';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { appBaseQuery } from '@redux/base-query';
 import { setTariffList } from './tariffs-slice';
 
 export const tariffsApi = createApi({

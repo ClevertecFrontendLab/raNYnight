@@ -1,8 +1,8 @@
 import { ModifiedTraining, Training } from '@common-types/trainings';
 import { ApiEndpoints } from '@constants/api';
+import { appBaseQuery } from '@redux/base-query';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { appBaseQuery } from '@redux/base-query';
 import { setAllUserTrainings, setDefaultTrainings } from './trainings-slice';
 
 export const trainingsApi = createApi({
