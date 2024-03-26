@@ -1,7 +1,7 @@
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { baseQuery } from '@constants/api';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useProfileFormContext } from '@hooks/useProfileFormContext';
 import { selectAuthToken } from '@redux/auth/auth-slice';
 import { Button, Form, Upload, UploadFile } from 'antd';
@@ -10,17 +10,17 @@ import { useState } from 'react';
 import { useWindowSize } from 'usehooks-ts';
 import './profile-image-uploader.less';
 import { DATA_TEST_ID } from '@constants/data-test-id';
+import { setActiveModal } from '@redux/modals/modal-manager';
+import { ModalTypes } from '@components/modal-manager/modal-manager';
 
 const ProfileImageUploader = () => {
+    const dispatch = useAppDispatch();
     const token = useAppSelector(selectAuthToken);
 
     const { width } = useWindowSize();
     const form = useProfileFormContext();
 
     const imageUrl = form?.getFieldValue('imgSrc');
-
-    // console.log('imageUrl', imageUrl);
-    // console.log('form', form);
 
     const defaultFile = {
         uid: '1',
@@ -56,7 +56,7 @@ const ProfileImageUploader = () => {
             }
 
             if (uploadedFile.error?.status === 409) {
-                console.log('open notify modal file is BIG');
+                dispatch(setActiveModal(ModalTypes.bigFileErrorModal));
             }
         }
     };
@@ -76,7 +76,7 @@ const ProfileImageUploader = () => {
 
     return (
         <div className='photo-uploader'>
-            <Form.Item name='imgSrc'>
+            <Form.Item name='imgSrc' data-test-id={DATA_TEST_ID.profileAvatar}>
                 <Upload
                     maxCount={1}
                     action={`${baseQuery}upload-image`}
@@ -86,7 +86,6 @@ const ProfileImageUploader = () => {
                     onChange={handleChange}
                     headers={{ Authorization: `Bearer ${token}` }}
                     progress={{ strokeWidth: 4, showInfo: false, size: 'default' }}
-                    data-test-id={DATA_TEST_ID.profileAvatar}
                 >
                     {!shouldShowPreview && <UploadButton isDesktop={isDesktop} />}
                 </Upload>

@@ -7,6 +7,7 @@ import TrainingListModal from '@components/modals/calendar-modals/training-list-
 import TariffNotificationModal from '@components/modals/tariff-notification-modal/tariff-notification-modal';
 import { selectActiveModal } from '@redux/modals/modal-manager';
 import WriteFeedbackModal from '@components/modals/write-feedback-modal/write-feedback-modal';
+import BigFileErrorModal from '@components/modals/big-file-error-modal/big-file-error';
 
 export enum ModalTypes {
     none = 'none',
@@ -18,6 +19,7 @@ export enum ModalTypes {
     notificationWarnModal = 'notificationWarnModal',
     tariffNotificationModal = 'tariffNotificationModal',
     writeFeedbackModal = 'writeFeedbackModal',
+    bigFileErrorModal = 'bigFileErrorModal',
 }
 
 const ModalManager = () => {
@@ -43,6 +45,9 @@ const ModalManager = () => {
 
         case ModalTypes.writeFeedbackModal:
             return <WriteFeedbackModal />;
+
+        case ModalTypes.bigFileErrorModal:
+            return <BigFileErrorModal />;
 
         default:
             return null;

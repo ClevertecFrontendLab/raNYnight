@@ -1,13 +1,14 @@
-import { useNavigate } from 'react-router-dom';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { setAuthToken, setRememberMe, setShouldRefetch } from '@redux/auth/auth-slice';
+import { setAuthToken, setRememberMe } from '@redux/auth/auth-slice';
 import { Paths } from '@router/paths';
 import { Typography } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import { useWindowSize } from 'usehooks-ts';
 
 import './exit-button.less';
 
+import { setUserInfo } from '@redux/profile/profile-slice';
 import exitIcon from '/exit-icon.svg';
 
 const { Text } = Typography;
@@ -23,10 +24,10 @@ const ExitButton = ({ isCollapsed }: ExitButtonProps) => {
     const handleExit = () => {
         localStorage.getItem('jwtToken') && localStorage.removeItem('jwtToken');
         sessionStorage.getItem('jwtToken') && sessionStorage.removeItem('jwtToken');
-        dispatch(setShouldRefetch(true));
         dispatch(setAuthToken(null));
         dispatch(setRememberMe(false));
-        navigate(Paths.AUTH, { state: { prevPath: Paths.MAIN } });
+        dispatch(setUserInfo(null));
+        navigate(Paths.AUTH);
     };
 
     return (

@@ -2,8 +2,8 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig } from 'vite';
 
-export default defineConfig({
-    // base: 'raNYnight',
+export default defineConfig(({ command }) => ({
+    base: command === 'build' ? 'raNYnight' : '',
     plugins: [react()],
     server: {
         host: true,
@@ -22,4 +22,4 @@ export default defineConfig({
             '@router': path.resolve(__dirname, 'src/router'),
         },
     },
-});
+}));

@@ -38,7 +38,16 @@ export const profileApi = createApi({
                 url: ApiEndpoints.User,
                 method: 'PUT',
                 body,
+                credentials: 'include',
             }),
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(setUserInfo(data));
+                } catch (error) {
+                    console.error(error);
+                }
+            },
         }),
     }),
 });

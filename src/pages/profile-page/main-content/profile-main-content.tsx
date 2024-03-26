@@ -1,21 +1,21 @@
 import { DATA_TEST_ID } from '@constants/data-test-id';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { ProfileFormContext } from '@hooks/useProfileFormContext';
 import { validatePassword, validateRepeatPassword } from '@pages/auth-page/registration/validators';
+import { selectUserInfo } from '@redux/profile/profile-slice';
 import { Alert, Button, DatePicker, Form, Input } from 'antd';
 import { FormProps, useForm } from 'antd/lib/form/Form';
 import Title from 'antd/lib/typography/Title';
+import { useState } from 'react';
 import ProfileImageUploader from './profile-image-uploader/profile-image-uploader';
 import './profile-main-content.less';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { selectUserInfo, setShouldRefetch } from '@redux/profile/profile-slice';
-import { useState } from 'react';
 
-import { useUpdateUserMutation } from '@redux/profile/profile-api';
-import { DATE_DDMMYYYY } from '@constants/dates';
-import moment from 'moment';
 import Loader from '@components/loader/loader';
-import { setActiveModal } from '@redux/modals/modal-manager';
 import { ModalTypes } from '@components/modal-manager/modal-manager';
+import { DATE_DDMMYYYY } from '@constants/dates';
+import { setActiveModal } from '@redux/modals/modal-manager';
+import { useUpdateUserMutation } from '@redux/profile/profile-api';
+import moment from 'moment';
 
 const ProfileMainContent = () => {
     const dispatch = useAppDispatch();
@@ -26,7 +26,7 @@ const ProfileMainContent = () => {
     const userInfo = useAppSelector(selectUserInfo);
     const initialValues = {
         ...userInfo,
-        birthday: moment(userInfo?.birthday),
+        birthday: userInfo?.birthday && moment(userInfo?.birthday),
     };
 
     const [updateUser, { isLoading, isSuccess: isUserUpdated }] = useUpdateUserMutation();
@@ -57,16 +57,28 @@ const ProfileMainContent = () => {
         updateUser(updatedValues)
             .unwrap()
             .then(() => {
-                dispatch(setShouldRefetch(true));
                 form.setFieldValue('password', '');
                 form.setFieldValue('password-repeat', '');
+                setIsSaveDisabled(true);
             })
             .catch(() => {
                 dispatch(setActiveModal(ModalTypes.notificationErrorModal));
             });
     };
 
-    const handleFormChange: FormProps['onFieldsChange'] = () => setIsSaveDisabled(false);
+    const handleFormChange: FormProps['onFieldsChange'] = (values) => {
+        if (values[0].name[0] === 'imgSrc') {
+            const avatarValueStatus = values[0].value?.file?.status;
+            if (avatarValueStatus === 'uploading' || avatarValueStatus === 'error') {
+                setIsSaveDisabled(true);
+            }
+            if (avatarValueStatus === 'done') {
+                setIsSaveDisabled(false);
+            }
+        } else {
+            setIsSaveDisabled(false);
+        }
+    };
 
     return (
         <div className='profile-main-content-wrapper'>
@@ -79,7 +91,7 @@ const ProfileMainContent = () => {
                     autoComplete='nope'
                     form={form}
                     initialValues={initialValues || {}}
-                    // disabled={isLoading}
+                    disabled={isLoading}
                 >
                     <Title level={5} className='profile-info-title'>
                         Личная информация

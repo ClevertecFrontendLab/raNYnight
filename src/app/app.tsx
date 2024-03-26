@@ -1,22 +1,16 @@
-import { useEffect } from 'react';
 import ModalManager from '@components/modal-manager/modal-manager';
-import { useAppDispatch, useAppSelector } from '@hooks/index';
+import { useAppDispatch } from '@hooks/index';
 import { setAuthToken } from '@redux/auth/auth-slice';
 import { history } from '@redux/configure-store';
 import { routes } from '@router/routes';
+import { useEffect } from 'react';
 import { HistoryRouter as Router } from 'redux-first-history/rr6';
-import { useLazyGetUserInfoQuery } from '@redux/profile/profile-api';
-import Loader from '@components/loader/loader';
-import { selectShouldRefetch, setShouldRefetch } from '@redux/profile/profile-slice';
 
 export const App = () => {
     const dispatch = useAppDispatch();
-    const shouldRefetch = useAppSelector(selectShouldRefetch);
 
     const googleAccessToken = history.location.search.split('=')[1];
     const token = localStorage.getItem('jwtToken');
-
-    const [getUserInfo, { isLoading }] = useLazyGetUserInfoQuery();
 
     useEffect(() => {
         const clearSessionStorage = () => {
@@ -38,26 +32,10 @@ export const App = () => {
         if (token) {
             dispatch(setAuthToken(token));
         }
-        if (token || googleAccessToken) {
-            getUserInfo();
-        }
     }, []);
-
-    useEffect(() => {
-        if (!token && !googleAccessToken) {
-            return;
-        }
-
-        if (shouldRefetch) {
-            getUserInfo()
-                .unwrap()
-                .then(() => dispatch(setShouldRefetch(false)));
-        }
-    }, [token, googleAccessToken, shouldRefetch]);
 
     return (
         <Router history={history}>
-            {isLoading && <Loader />}
             <ModalManager />
             {routes}
         </Router>
