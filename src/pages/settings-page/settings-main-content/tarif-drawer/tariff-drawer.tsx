@@ -1,3 +1,4 @@
+import React from 'react';
 import {
     CheckCircleFilled,
     CheckCircleOutlined,
@@ -93,14 +94,14 @@ const TariffDrawer = () => {
     };
 
     return (
-        <>
+        <React.Fragment>
             <Drawer
                 open={isTariffDrawerOpen}
                 placement='right'
                 width={width > BREAKPOINT_520 ? DRAWER_WIDTH : DRAWER_WIDTH_MOBILE}
                 mask={true}
                 maskStyle={{ backgroundColor: 'none' }}
-                destroyOnClose
+                destroyOnClose={true}
                 className='tariff-drawer'
                 closeIcon={false}
                 title='Сравнить тарифы'
@@ -110,7 +111,7 @@ const TariffDrawer = () => {
                         size='middle'
                         icon={<CloseOutlined />}
                         onClick={handleCloseDrawer}
-                        data-test-id={''}
+                        data-test-id=''
                     />
                 }
                 footer={
@@ -164,7 +165,7 @@ const TariffDrawer = () => {
                 <TariffSelect isProActive={!!isProActive} />
             </Drawer>
             {isLoading && <Loader />}
-        </>
+        </React.Fragment>
     );
 };
 

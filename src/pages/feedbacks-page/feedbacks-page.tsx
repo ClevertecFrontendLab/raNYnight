@@ -26,6 +26,10 @@ export const FeedbacksPage = () => {
 
     const { data, isLoading, refetch, error } = useGetFeedbacksQuery();
 
+    const handleCancel = () => {
+        navigate(Paths.MAIN);
+    };
+
     useEffect(() => {
         if (shouldRefetch) {
             refetch();
@@ -42,28 +46,18 @@ export const FeedbacksPage = () => {
         }
     }, [shouldRefetch, refetch, error, dispatch, navigate, errorModalShown]);
 
-    const handleCancel = () => {
-        navigate(Paths.MAIN);
-    };
-
     if (isLoading) {
         return <Loader />;
     }
 
     return (
-        <>
-            <Layout className='page-layout'>
-                <SidePanel />
-                <Layout className='feedbacks-page-layout'>
-                    <FeedbacksHeader />
-                    {data && data.length > 0 ? (
-                        <FeedbacksList data={data} />
-                    ) : (
-                        <EmptyFeedbackList />
-                    )}
-                    {data && data.length > 0 && <FeedbacksFooter />}
-                </Layout>
+        <Layout className='page-layout'>
+            <SidePanel />
+            <Layout className='feedbacks-page-layout'>
+                <FeedbacksHeader />
+                {data && data.length > 0 ? <FeedbacksList data={data} /> : <EmptyFeedbackList />}
+                {data && data.length > 0 && <FeedbacksFooter />}
             </Layout>
-        </>
+        </Layout>
     );
 };

@@ -39,7 +39,7 @@ const initialState: TrainingStore = {
 
 const trainingsSlice = createSlice({
     name: 'trainings',
-    initialState: initialState,
+    initialState,
     reducers: {
         setAllUserTrainings: (state, action: PayloadAction<ModifiedTraining[] | []>) => {
             state.allUserTrainings = action.payload;

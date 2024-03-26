@@ -100,6 +100,7 @@ const AppCalendar = () => {
         const dateAttribute = target?.getAttribute('data-date');
         const date = dayjs(dateAttribute);
         const cellPosition = getSelectedCellPositionMobile(date);
+
         dispatch(setCellPosition(cellPosition));
         handleCellClick(date);
     };
@@ -113,6 +114,7 @@ const AppCalendar = () => {
                         trainingList || [],
                         selectedDate,
                     );
+
                     dispatch(setTodaysTrainings(filteredTrainings));
                     dispatch(setShouldRefetchUserTrainings(false));
                 });
@@ -139,6 +141,7 @@ const AppCalendar = () => {
         if (isTrainingListError) {
             navigate(Paths.MAIN);
             dispatch(setActiveModal(ModalTypes.somethingWrongModal));
+
             return;
         }
         if (isRequestError) {
@@ -151,6 +154,7 @@ const AppCalendar = () => {
             <Calendar
                 fullscreen={isFullscreen}
                 className='app-calendar'
+                // eslint-disable-next-line react/no-unstable-nested-components
                 dateCellRender={(date) => (
                     <DateCell
                         date={date}

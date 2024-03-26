@@ -39,9 +39,9 @@ const NavPanel = ({ isCollapsed }: NavPanelProps) => {
 
     return (
         <nav className={`side-panel-nav  ${isCollapsed ? 'side-panel-nav-collapsed' : ''}`}>
-            {navLinks.map((navLink, index) => (
+            {navLinks.map((navLink) => (
                 <NavLinkWithIcon
-                    key={index}
+                    key={navLink.linkTo}
                     linkTo={navLink.linkTo}
                     icon={navLink.icon}
                     text={navLink.text}

@@ -49,8 +49,7 @@ const TrainingListModal = () => {
     const handleTogleTrainingListModal = () => dispatch(setActiveModal(ModalTypes.none));
 
     return (
-        <>
-            <Modal
+        <Modal
                 data-test-id={DATA_TEST_ID.modalCreateTraining}
                 destroyOnClose={true}
                 title={`Тренировки на ${dayjs(selectedDate, DATE_DD_MM_YYYY).format(
@@ -84,7 +83,6 @@ const TrainingListModal = () => {
                     shouldFilter={false}
                 />
             </Modal>
-        </>
     );
 };
 

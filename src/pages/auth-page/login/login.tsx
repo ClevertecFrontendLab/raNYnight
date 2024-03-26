@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { LoginRequest } from '@common-types/auth';
@@ -49,12 +49,14 @@ const Login: React.FC = () => {
 
     const onFinish = async (values: LoginRequest) => {
         const { email, password } = values;
+
         await loginUser({ email, password });
     };
 
     const handleFormChange = () => {
         const email = form.getFieldValue('email');
         const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
         if (email && emailRegex.test(email)) {
             setIsEmailValid(true);
         } else {
@@ -86,6 +88,7 @@ const Login: React.FC = () => {
 
     const onForgotButtonClick = async () => {
         const email = form.getFieldValue('email');
+
         handleCheckEmail(email);
     };
 
@@ -117,7 +120,7 @@ const Login: React.FC = () => {
     }
 
     return (
-        <>
+        <React.Fragment>
             <div
                 className={`login-container ${
                     isLoadingLogin || isEmailCheckLoading ? 'background-filter' : ''
@@ -138,11 +141,11 @@ const Login: React.FC = () => {
                     <Form.Item
                         name='email'
                         className='auth-input-wrapper'
-                        required
+                        required={true}
                         rules={[{ type: 'email', message: '' }]}
                     >
                         <Input
-                            prefix={'e-mail:'}
+                            prefix='e-mail:'
                             className='auth-input'
                             data-test-id={DATA_TEST_ID.loginEmail}
                         />
@@ -166,7 +169,7 @@ const Login: React.FC = () => {
                     </Form.Item>
 
                     <Form.Item className='login-form-utils'>
-                        <Form.Item name='remember' noStyle valuePropName='checked'>
+                        <Form.Item name='remember' noStyle={true} valuePropName='checked'>
                             <Checkbox data-test-id={DATA_TEST_ID.loginRemember}>
                                 Запомнить меня
                             </Checkbox>
@@ -207,7 +210,7 @@ const Login: React.FC = () => {
                 </Form>
             </div>
             {isLoadingLogin || isEmailCheckLoading ? <Loader /> : null}
-        </>
+        </React.Fragment>
     );
 };
 

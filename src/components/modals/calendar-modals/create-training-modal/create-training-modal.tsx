@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { ModalTypes } from '@common-types/modal';
 import { BREAKPOINT_768 } from '@constants/breakpoints';
@@ -34,26 +34,23 @@ const CreateTrainingModal = () => {
         useAppSelector(selectActiveModal) === ModalTypes.calendarCreateTrainingModal;
     const cellPosition = useAppSelector(selectCellPosition);
 
-    const [selectedOption, setSelectedOption] = useState<string>(
-        trainingToEdit !== null ? trainingToEdit.name : trainingButtonTitles.selectTraining,
-    );
+    const defaultSelect =
+        trainingToEdit == null ? trainingButtonTitles.selectTraining : trainingToEdit.name;
+
+    const [selectedOption, setSelectedOption] = useState<string>(defaultSelect);
 
     const handleOpenDrawer = () => dispatch(setIsDrawerOpen(true));
 
-    const handleDropdownChange = (selectedOption: string) => setSelectedOption(selectedOption);
+    const handleDropdownChange = (option: string) => setSelectedOption(option);
 
     return (
-        <>
+        <React.Fragment>
             <Modal
                 closeIcon={<CloseOutlined />}
                 data-test-id={DATA_TEST_ID.modalCreateExercise}
                 title={
                     <CreateTrainingModalTitle
-                        defaultSelect={
-                            trainingToEdit !== null
-                                ? trainingToEdit.name
-                                : trainingButtonTitles.selectTraining
-                        }
+                        defaultSelect={defaultSelect}
                         onChange={handleDropdownChange}
                     />
                 }
@@ -77,6 +74,7 @@ const CreateTrainingModal = () => {
                         isAddButtonDisabled={selectedOption === trainingButtonTitles.selectTraining}
                     />
                 }
+                // eslint-disable-next-line no-underscore-dangle
                 key={`create-training-modal ${trainingToEdit?._id}`}
             >
                 <CalendarExercisesList />
@@ -87,7 +85,7 @@ const CreateTrainingModal = () => {
                 title={trainingToEdit ? trainingDrawerTitles.edit : trainingDrawerTitles.addNew}
                 closeIcon={<PlusOutlined />}
             />
-        </>
+        </React.Fragment>
     );
 };
 

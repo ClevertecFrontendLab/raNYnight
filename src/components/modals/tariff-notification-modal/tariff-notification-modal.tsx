@@ -23,8 +23,12 @@ const TariffNotificationModal = () => {
     const isOpen = useAppSelector(selectActiveModal) === ModalTypes.tariffNotificationModal;
 
     const handleExit = () => {
-        localStorage.getItem('jwtToken') && localStorage.removeItem('jwtToken');
-        sessionStorage.getItem('jwtToken') && sessionStorage.removeItem('jwtToken');
+        if (localStorage.getItem('jwtToken')) {
+            localStorage.removeItem('jwtToken');
+        }
+        if (sessionStorage.getItem('jwtToken')) {
+            sessionStorage.removeItem('jwtToken');
+        }
         dispatch(setAuthToken(null));
         dispatch(setRememberMe(false));
         dispatch(setUserInfo(null));
@@ -34,11 +38,12 @@ const TariffNotificationModal = () => {
         dispatch(setActiveModal(ModalTypes.none));
         handleExit();
     };
+
     return (
         <Modal
             open={isOpen}
             footer={null}
-            centered
+            centered={true}
             zIndex={10000}
             onCancel={handleCloseModal}
             closeIcon={<CloseOutlined />}

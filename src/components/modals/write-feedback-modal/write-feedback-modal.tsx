@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { ModalTypes } from '@common-types/modal';
 import CustomRate from '@components/custom-rate/custom-rate';
 import Loader from '@components/loader/loader';
@@ -28,6 +28,10 @@ const WriteFeedbackModal = () => {
         setFeedbackRating(newValue);
     };
 
+    const handleCancel = () => dispatch(setActiveModal(ModalTypes.none));
+
+    const showModal = () => dispatch(setActiveModal(ModalTypes.writeFeedbackModal));
+
     const handleOk = () => {
         sendFeedback({
             rating: feedbackRating,
@@ -47,19 +51,15 @@ const WriteFeedbackModal = () => {
             });
     };
 
-    const showModal = () => dispatch(setActiveModal(ModalTypes.writeFeedbackModal));
-
-    const handleCancel = () => dispatch(setActiveModal(ModalTypes.none));
-
     return (
-        <>
+        <React.Fragment>
             <Modal
                 title='Ваш отзыв'
                 open={isModalOpen}
                 onOk={handleOk}
                 okText='Опубликовать'
                 cancelText=''
-                centered
+                centered={true}
                 onCancel={handleCancel}
                 cancelButtonProps={{ style: { display: 'none' } }}
                 okButtonProps={createOkButtonProps(
@@ -75,13 +75,13 @@ const WriteFeedbackModal = () => {
                     value={feedbackRating}
                 />
                 <TextArea
-                    autoSize
+                    autoSize={true}
                     value={feedbackText}
                     onChange={(e) => setFeedbackText(e.target.value)}
                 />
             </Modal>
             {isLoading && <Loader />}
-        </>
+        </React.Fragment>
     );
 };
 

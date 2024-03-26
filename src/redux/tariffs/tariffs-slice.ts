@@ -16,7 +16,7 @@ const initialState: TariffStore = {
 
 const tariffSlice = createSlice({
     name: 'tariff',
-    initialState: initialState,
+    initialState,
     reducers: {
         setTariffList: (state, action: PayloadAction<Tariff[] | []>) => {
             state.tariffList = action.payload;

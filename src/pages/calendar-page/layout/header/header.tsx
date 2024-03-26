@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { SettingOutlined } from '@ant-design/icons';
 import { BREAKPOINT_520, BREAKPOINT_768, BREAKPOINT_834 } from '@constants/breakpoints';
 import { DATA_TEST_ID } from '@constants/data-test-id';
@@ -13,6 +13,8 @@ const { Header: AntdHeader } = Layout;
 
 const CalendarHeader = () => {
     const { width } = useWindowSize();
+    const location = useLocation();
+
     return (
         <AntdHeader className='calendar-header'>
             <div className='calendar-header-link-wrapper'>

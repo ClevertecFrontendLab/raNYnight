@@ -6,8 +6,7 @@ import './header.less';
 const { Text } = Typography;
 const { Header: AntdHeader } = Layout;
 
-const FeedbacksHeader = () => {
-    return (
+const FeedbacksHeader = () => (
         <AntdHeader className='feedbacks-header'>
             <Link to='/' className='feedbacks-header-link'>
                 Главная &nbsp; / &nbsp;
@@ -15,6 +14,5 @@ const FeedbacksHeader = () => {
             <Text className='feedbacks-header-link-current'>Отзывы пользователей</Text>
         </AntdHeader>
     );
-};
 
 export default FeedbacksHeader;

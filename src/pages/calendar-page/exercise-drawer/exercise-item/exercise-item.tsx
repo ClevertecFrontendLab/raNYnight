@@ -61,7 +61,7 @@ const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, onExerciseChange, index
                 <div className='exercise-input-text'>{exerciseWeigth}, кг</div>
                 <div className='exercise-input-text'>{exerciseApproaches}</div>
             </div>
-            <div className={'exercise-inputs-wrapper'}>
+            <div className="exercise-inputs-wrapper">
                 <div className='exercise-input'>
                     <Input
                         autoFocus={false}

@@ -12,7 +12,7 @@ const initialState: ModalManager = {
 
 const modalManager = createSlice({
     name: 'modalManager',
-    initialState: initialState,
+    initialState,
     reducers: {
         setActiveModal: (state, action: PayloadAction<ModalTypes>) => {
             state.activeModal = action.payload;

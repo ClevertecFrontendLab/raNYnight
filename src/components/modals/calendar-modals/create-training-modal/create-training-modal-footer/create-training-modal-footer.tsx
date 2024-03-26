@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { ModalTypes } from '@common-types/modal';
 import Loader from '@components/loader/loader';
 import { DATE_DD_MM_YYYY } from '@constants/dates';
@@ -51,6 +51,7 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
     const handleSaveModifiedTraining = () => {
         if (modifiedTraining) {
             if (trainingToEdit) {
+                // eslint-disable-next-line no-underscore-dangle
                 updateTraining({ ...modifiedTraining, _id: trainingToEdit._id })
                     .unwrap()
                     .then(handleSaveSuccess)
@@ -65,7 +66,7 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
     };
 
     return (
-        <>
+        <React.Fragment>
             <div className='create-training-modal-footer'>
                 <Button
                     type='text'
@@ -80,10 +81,10 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
                     onClick={handleSaveModifiedTraining}
                     className='create-training-footer-save-btn'
                     disabled={
-                        modifiedTraining === null ||
-                        (isFuture && modifiedTraining.exercises.length === 0)
-                            ? true
-                            : false
+                        !!(
+                            modifiedTraining === null ||
+                            (isFuture && modifiedTraining.exercises.length === 0)
+                        )
                     }
                 >
                     {isFuture
@@ -92,7 +93,7 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
                 </Button>
             </div>
             {(isCreateLoading || isUpdateLoading) && <Loader />}
-        </>
+        </React.Fragment>
     );
 };
 

@@ -22,8 +22,12 @@ const ExitButton = ({ isCollapsed }: ExitButtonProps) => {
     const dispatch = useAppDispatch();
     const { width } = useWindowSize();
     const handleExit = () => {
-        localStorage.getItem('jwtToken') && localStorage.removeItem('jwtToken');
-        sessionStorage.getItem('jwtToken') && sessionStorage.removeItem('jwtToken');
+        if (localStorage.getItem('jwtToken')) {
+            localStorage.removeItem('jwtToken');
+        }
+        if (sessionStorage.getItem('jwtToken')) {
+            sessionStorage.removeItem('jwtToken');
+        }
         dispatch(setAuthToken(null));
         dispatch(setRememberMe(false));
         dispatch(setUserInfo(null));
@@ -33,6 +37,9 @@ const ExitButton = ({ isCollapsed }: ExitButtonProps) => {
     return (
         <div
             onClick={handleExit}
+            onKeyDown={handleExit}
+            role='button'
+            tabIndex={0}
             className={`side-panel-exit-button ${
                 isCollapsed ? 'side-panel-exit-button-collapsed' : ''
             }`}

@@ -2,6 +2,7 @@ import { createPortal } from 'react-dom';
 import Lottie, { Options } from 'react-lottie';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 
+// eslint-disable-next-line import/no-named-default
 import { default as animationData } from './loader.json';
 
 import './loader.less';
@@ -9,7 +10,7 @@ import './loader.less';
 const defaultOptions: Options = {
     loop: true,
     autoplay: true,
-    animationData: animationData,
+    animationData,
     rendererSettings: {
         preserveAspectRatio: 'xMidYMid slice',
     },
@@ -26,13 +27,14 @@ const Loader = ({ size }: LoaderProps) => {
             <div className='loader-wrapper' data-test-id={DATA_TEST_ID.loader}>
                 <Lottie
                     options={defaultOptions}
-                    height={size ? size : 200}
-                    width={size ? size : 200}
+                    height={size || 200}
+                    width={size || 200}
                     data-test-id={DATA_TEST_ID.loader}
                 />
             </div>
         </div>
     );
+
     return createPortal(loader, loaderRoot);
 };
 

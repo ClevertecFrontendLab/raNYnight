@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import Loader from '@components/loader/loader';
 import SidePanel from '@components/side-panel/side-panel';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
@@ -16,14 +16,14 @@ export const MainPage: React.FC = () => {
     const userInfo = useAppSelector(selectUserInfo);
     const [getUserInfo, { isLoading }] = useLazyGetUserInfoQuery();
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!userInfo?.email) {
             getUserInfo();
         }
     }, [userInfo, userInfo?.email]);
 
     return (
-        <>
+        <React.Fragment>
             <Layout className='page-layout'>
                 <SidePanel />
                 <Layout>
@@ -33,6 +33,6 @@ export const MainPage: React.FC = () => {
                 </Layout>
             </Layout>
             {isLoading && <Loader />}
-        </>
+        </React.Fragment>
     );
 };

@@ -18,41 +18,40 @@ const TariffSelect: FC<TariffSelectProps> = ({ isProActive }) => {
     const onFieldsChange: FormProps['onFieldsChange'] = ([changedField]) =>
         dispatch(
             setSelectedTariffToBuy({
+                // eslint-disable-next-line no-underscore-dangle
                 tariffId: tariffList[0]?._id,
                 days: changedField.value,
             }),
         );
 
     return (
-        <>
-            {!isProActive && (
-                <Form
-                    id='form'
-                    className='tariff-select-wrapper'
-                    onFieldsChange={onFieldsChange}
-                    data-test-id={DATA_TEST_ID.tariffCost}
-                >
-                    <div className='tariff-select-title'>Стоимость тарифа</div>
-                    <Form.Item name='days'>
-                        <Radio.Group className='tariff-select-options'>
-                            {tariffList[0]?.periods.map(({ text, cost, days }) => (
-                                <Radio value={days} key={text} data-test-id={`tariff-${cost}`}>
-                                    <div className='tariff-select-option'>
-                                        <Typography.Text>{text}</Typography.Text>
-                                        <Typography.Title
-                                            level={5}
-                                            className='tariff-select-option-price'
-                                        >
-                                            {cost.toString().replace('.', ',')} $
-                                        </Typography.Title>
-                                    </div>
-                                </Radio>
-                            ))}
-                        </Radio.Group>
-                    </Form.Item>
-                </Form>
-            )}
-        </>
+        !isProActive && (
+            <Form
+                id='form'
+                className='tariff-select-wrapper'
+                onFieldsChange={onFieldsChange}
+                data-test-id={DATA_TEST_ID.tariffCost}
+            >
+                <div className='tariff-select-title'>Стоимость тарифа</div>
+                <Form.Item name='days'>
+                    <Radio.Group className='tariff-select-options'>
+                        {tariffList[0]?.periods.map(({ text, cost, days }) => (
+                            <Radio value={days} key={text} data-test-id={`tariff-${cost}`}>
+                                <div className='tariff-select-option'>
+                                    <Typography.Text>{text}</Typography.Text>
+                                    <Typography.Title
+                                        level={5}
+                                        className='tariff-select-option-price'
+                                    >
+                                        {cost.toString().replace('.', ',')} $
+                                    </Typography.Title>
+                                </div>
+                            </Radio>
+                        ))}
+                    </Radio.Group>
+                </Form.Item>
+            </Form>
+        )
     );
 };
 

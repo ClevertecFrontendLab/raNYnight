@@ -13,7 +13,7 @@ const initialState: UserStore = {
 
 const profileSlice = createSlice({
     name: 'profile',
-    initialState: initialState,
+    initialState,
     reducers: {
         setUserInfo: (state, action: PayloadAction<UserData | null>) => {
             state.userInfo = action.payload;

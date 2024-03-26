@@ -5,7 +5,7 @@ import { baseQuery } from '@constants/api';
 import { BREAKPOINT_520 } from '@constants/breakpoints';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { useProfileFormContext } from '@hooks/useProfileFormContext';
+import { useProfileFormContext } from '@hooks/use-profile-form-context';
 import { selectAuthToken } from '@redux/auth/auth-slice';
 import { setActiveModal } from '@redux/modals/modal-manager';
 import { Button, Form, Upload, UploadFile } from 'antd';
@@ -13,6 +13,19 @@ import { UploadFileStatus, UploadProps } from 'antd/lib/upload/interface';
 import { useWindowSize } from 'usehooks-ts';
 
 import './profile-image-uploader.less';
+
+const UploadButton = ({ isDesktop }: { isDesktop: boolean }) =>
+    isDesktop ? (
+        <button className='avatar-uploader' type='button'>
+            <PlusOutlined />
+            <div className=''>Загрузить фото профиля</div>
+        </button>
+    ) : (
+        <div className='avatar-uploader-mobile'>
+            <span>Загрузить фото профиля:</span>
+            <Button icon={<UploadOutlined />}>Загрузить</Button>
+        </div>
+    );
 
 const ProfileImageUploader = () => {
     const dispatch = useAppDispatch();
@@ -37,7 +50,7 @@ const ProfileImageUploader = () => {
 
     const listType = isDesktop ? 'picture-card' : 'picture';
 
-    const shouldShowPreview = uploadFileList[0] ? true : false;
+    const shouldShowPreview = !!uploadFileList[0];
 
     const handleChange: UploadProps['onChange'] = ({ fileList }: { fileList: UploadFile[] }) => {
         setUploadFileList(fileList);
@@ -62,19 +75,6 @@ const ProfileImageUploader = () => {
         }
     };
 
-    const UploadButton = ({ isDesktop }: { isDesktop: boolean }) =>
-        isDesktop ? (
-            <button className='avatar-uploader' type='button'>
-                <PlusOutlined />
-                <div className=''>Загрузить фото профиля</div>
-            </button>
-        ) : (
-            <div className='avatar-uploader-mobile'>
-                <span>Загрузить фото профиля:</span>
-                <Button icon={<UploadOutlined />}>Загрузить</Button>
-            </div>
-        );
-
     return (
         <div className={`photo-uploader ${isDesktop ? '' : 'mobile'}`}>
             <Form.Item name='imgSrc' data-test-id={DATA_TEST_ID.profileAvatar}>
@@ -94,4 +94,5 @@ const ProfileImageUploader = () => {
         </div>
     );
 };
+
 export default ProfileImageUploader;

@@ -4,8 +4,7 @@ import { Layout } from 'antd';
 import SettingsHeader from './header/header';
 import SettingsMainContent from './settings-main-content/settings-main-content';
 
-export const SettingsPage: React.FC = () => {
-    return (
+export const SettingsPage: React.FC = () => (
         <Layout className='page-layout'>
             <SidePanel />
             <Layout className='settings-layout'>
@@ -14,4 +13,3 @@ export const SettingsPage: React.FC = () => {
             </Layout>
         </Layout>
     );
-};

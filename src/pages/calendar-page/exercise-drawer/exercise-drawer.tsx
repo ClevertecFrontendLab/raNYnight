@@ -84,17 +84,23 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
                 isImplementation,
                 date: modifiedDate,
             };
+
             dispatch(setModifiedTraining({ ...updatedTraining, exercises: modifiedExercises }));
         }
         dispatch(setIsDrawerOpen(false));
     };
 
     useEffect(() => {
-        const newTrainingToUpdate = modifiedTraining
-            ? { ...modifiedTraining }
-            : trainingToEdit
-            ? { ...trainingToEdit }
-            : newTrainingObj;
+        let newTrainingToUpdate;
+
+        if (modifiedTraining) {
+            newTrainingToUpdate = { ...modifiedTraining };
+        } else if (trainingToEdit) {
+            newTrainingToUpdate = { ...trainingToEdit };
+        } else {
+            newTrainingToUpdate = newTrainingObj;
+        }
+
         setTrainingToUpdate(newTrainingToUpdate);
     }, [modifiedTraining, trainingToEdit]);
 
@@ -103,7 +109,7 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ title, closeIcon, selectedTra
             mask={true}
             maskStyle={{ backgroundColor: 'none' }}
             title={title}
-            destroyOnClose
+            destroyOnClose={true}
             placement='right'
             closable={true}
             closeIcon={closeIcon}

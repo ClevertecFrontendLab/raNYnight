@@ -4,8 +4,7 @@ import { Layout } from 'antd';
 import ProfileHeader from './header/header';
 import ProfileMainContent from './main-content/profile-main-content';
 
-export const ProfilePage: React.FC = () => {
-    return (
+export const ProfilePage: React.FC = () => (
         <Layout className='page-layout'>
             <SidePanel />
             <Layout className='profile-layout'>
@@ -14,4 +13,3 @@ export const ProfilePage: React.FC = () => {
             </Layout>
         </Layout>
     );
-};

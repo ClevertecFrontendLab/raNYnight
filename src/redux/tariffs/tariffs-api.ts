@@ -18,6 +18,7 @@ export const tariffsApi = createApi({
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled;
+
                     dispatch(setTariffList(data));
                 } catch (error) {
                     dispatch(setTariffList([]));

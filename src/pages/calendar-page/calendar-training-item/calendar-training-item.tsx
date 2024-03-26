@@ -30,6 +30,7 @@ const CalendarTrainingItem: FC<CalendarTrainingItemProps> = ({ training, isEdita
     if (training) {
         const trainingKey: Trainings | undefined =
             Trainings[training.name as keyof typeof Trainings];
+
         return (
             <li
                 className={`calendar-training-item ${trainingKey} ${
@@ -56,7 +57,8 @@ const CalendarTrainingItem: FC<CalendarTrainingItemProps> = ({ training, isEdita
             </li>
         );
     }
-    return <></>;
+
+    return null;
 };
 
 export default CalendarTrainingItem;

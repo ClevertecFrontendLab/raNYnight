@@ -8,7 +8,7 @@ import { Paths } from '@router/paths';
 import { Button } from 'antd';
 import Title from 'antd/lib/typography/Title';
 
-import { TariffOptions } from './setting-options/setting-options';
+import SettingsOptions from './settings-options/setting-options';
 import TariffCards from './tarif-cards/tarif-cards';
 
 import './settings-main-content.less';
@@ -17,6 +17,7 @@ const SettingsMainContent = () => {
     const [getTariffList] = useLazyGetTariffListQuery();
 
     const tariffList = useAppSelector(selectTariffList);
+
     useEffect(() => {
         if (!tariffList.length) {
             getTariffList();
@@ -29,7 +30,7 @@ const SettingsMainContent = () => {
                 Мой тариф
             </Title>
             <TariffCards />
-            <TariffOptions />
+            <SettingsOptions />
             <div className='write-feedback-wrapper'>
                 <WriteFeedbackButton />
                 <Link to={Paths.FEEDBACKS} className='settings-feedback-link'>

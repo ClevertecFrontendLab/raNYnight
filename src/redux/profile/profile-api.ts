@@ -18,6 +18,7 @@ export const profileApi = createApi({
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled;
+
                     dispatch(setUserInfo(data));
                 } catch (error) {
                     dispatch(setUserInfo(null));
@@ -35,6 +36,7 @@ export const profileApi = createApi({
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled;
+
                     dispatch(setUserInfo(data));
                 } catch (error) {
                     dispatch(setUserInfo(null));

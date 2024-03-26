@@ -1,3 +1,4 @@
+import React from 'react';
 import { ResultImages, ResultMessages, ResultTitles } from '@constants/results';
 import { FEEDBACK_MODAL_WIDTH } from '@constants/sizes';
 import { createOkButtonProps } from '@constants/utils';
@@ -25,10 +26,10 @@ const showSendErrorModal = (showModal: () => void, handleCancel: () => void) => 
         className: 'write-feedback-modal-result feedback-error-modal',
         icon: ResultImages.ERROR,
         content: (
-            <>
+            <React.Fragment>
                 <Text className='auth-result-title'>{ResultTitles.ERROR_DATA_NOT_SAVED}</Text>
                 <Text className='auth-result-message'>{ResultMessages.ERROR_SOMETHING_WRONG}</Text>
-            </>
+            </React.Fragment>
         ),
         okText: 'Написать отзыв',
         cancelText: 'Закрыть',
@@ -47,10 +48,10 @@ const showGetErrorModal = (handleCancel?: () => void) => {
         className: 'write-feedback-modal-result feedback-error-modal',
         icon: ResultImages.SOMETHING_WRONG,
         content: (
-            <>
+            <React.Fragment>
                 <Text className='auth-result-title'>{ResultTitles.ERROR_SOMETHING_WRONG}</Text>
                 <Text className='auth-result-message'>{ResultMessages.ERROR_SOMETHING_WRONG}</Text>
-            </>
+            </React.Fragment>
         ),
         okText: 'Назад',
         centered: true,

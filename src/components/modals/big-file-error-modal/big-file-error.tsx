@@ -48,11 +48,12 @@ const BigFileErrorModal: FC = () => {
     useEffect(() => {
         if (isOpen && !openModal) {
             openNotification();
+
             return;
         }
         notification.close('open');
         setOpenModal(false);
-    }, [open, openModal]);
+    }, [openModal]);
 
     return (
         <Modal

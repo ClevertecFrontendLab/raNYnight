@@ -12,6 +12,7 @@ import { selectActiveModal } from '@redux/modals/modal-manager';
 
 const ModalManager = () => {
     const activeModal = useAppSelector(selectActiveModal);
+
     switch (activeModal) {
         case ModalTypes.somethingWrongModal:
             return <SomethingWrongModal />;

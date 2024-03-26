@@ -5,8 +5,7 @@ import './empty-feedback-list.less';
 
 const { Text } = Typography;
 
-const EmptyFeedbackList = () => {
-    return (
+const EmptyFeedbackList = () => (
         <div className='empty-feedback-wrapper'>
             <div className='empty-feedback-list'>
                 <Text className='empty-feedback-list-title'>Оставьте свой отзыв первым</Text>
@@ -19,6 +18,5 @@ const EmptyFeedbackList = () => {
             <WriteFeedbackButton />
         </div>
     );
-};
 
 export default EmptyFeedbackList;

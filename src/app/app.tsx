@@ -19,7 +19,9 @@ export const App = () => {
         const handleBeforeUnload = () => {
             clearSessionStorage();
         };
+
         window.addEventListener('beforeunload', handleBeforeUnload);
+
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };

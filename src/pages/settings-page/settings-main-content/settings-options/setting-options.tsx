@@ -36,7 +36,7 @@ const settingOptionsData = [
     },
 ];
 
-export const TariffOptions = () => {
+const SettingsOptions = () => {
     const { width } = useWindowSize();
 
     const userInfo = useAppSelector(selectUserInfo);
@@ -49,6 +49,10 @@ export const TariffOptions = () => {
     const onFieldsChange: FormProps['onFieldsChange'] = (changedFields) => {
         const changedField = changedFields[0];
         const fieldname = changedField.name[0];
+
+        if (fieldname === 'theme') {
+            return;
+        }
         updateUser({ [fieldname]: changedField.value });
     };
 
@@ -95,3 +99,5 @@ export const TariffOptions = () => {
         </Form>
     );
 };
+
+export default SettingsOptions;

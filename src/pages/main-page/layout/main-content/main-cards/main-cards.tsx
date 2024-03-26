@@ -12,12 +12,13 @@ const { Text } = Typography;
 
 const MainCards = () => {
     const location = useLocation();
+
     return (
         <div className='main-content-cards'>
             <div className='card-wrapper'>
                 <Text className='card-title'>Расписать тренировки</Text>
                 <div className='card-link'>
-                    <HeartFilled className='card-link-icon' /> <Link to={''}>Тренировки</Link>
+                    <HeartFilled className='card-link-icon' /> <Link to="">Тренировки</Link>
                 </div>
             </div>
             <div className='card-wrapper'>
@@ -45,4 +46,5 @@ const MainCards = () => {
         </div>
     );
 };
+
 export default MainCards;

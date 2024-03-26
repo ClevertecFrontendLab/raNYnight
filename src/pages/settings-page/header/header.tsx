@@ -5,12 +5,12 @@ import { Paths } from '@router/paths';
 import { Layout, Typography } from 'antd';
 
 import './header.less';
-import './header.less';
 
 const { Title } = Typography;
 const { Header: AntdHeader } = Layout;
 const SettingsHeader = () => {
     const location = useLocation();
+
     return (
         <AntdHeader className='settings-header'>
             <Link

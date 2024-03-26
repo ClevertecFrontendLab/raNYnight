@@ -18,6 +18,7 @@ const CalendarTrainingList = ({ isEditable, date, shouldFilter }: CalendarTraini
 
     const filteredTrainings = allUserTrainings.filter((training) => {
         const trainingDate = dayjs(training.date).format(DATE_YYYY_MM_DD);
+
         return trainingDate === date.format(DATE_YYYY_MM_DD).toString();
     });
 
@@ -28,6 +29,7 @@ const CalendarTrainingList = ({ isEditable, date, shouldFilter }: CalendarTraini
             {trainingsToRender.map((training: ModifiedTraining, index) => (
                 <CalendarTrainingItem
                     training={training}
+                    // eslint-disable-next-line no-underscore-dangle
                     key={training._id}
                     isEditable={isEditable}
                     index={index}

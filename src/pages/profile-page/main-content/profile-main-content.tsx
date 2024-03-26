@@ -43,7 +43,7 @@ const ProfileMainContent = () => {
             ...values,
         };
 
-        const password = values.password;
+        const { password } = values;
         const passwordRepeat = values['password-repeat'];
 
         if (!password) {
@@ -76,6 +76,7 @@ const ProfileMainContent = () => {
     const handleFormChange: FormProps['onFieldsChange'] = (values) => {
         if (values[0].name[0] === 'imgSrc') {
             const avatarValueStatus = values[0].value?.file?.status;
+
             if (avatarValueStatus === 'uploading' || avatarValueStatus === 'error') {
                 setIsSaveDisabled(true);
             }
@@ -149,8 +150,8 @@ const ProfileMainContent = () => {
                         className='profile-input security'
                     >
                         <Input
-                            prefix={'e-mail:'}
-                            className=''
+                            prefix='e-mail:'
+                            className='profile-email-input'
                             data-test-id={DATA_TEST_ID.profileEmail}
                         />
                     </Form.Item>
@@ -177,7 +178,7 @@ const ProfileMainContent = () => {
                         name='password-repeat'
                         rules={[
                             {
-                                required: form.getFieldValue('password') ? true : false,
+                                required: !!form.getFieldValue('password'),
                                 message: '',
                             },
                             validateRepeatPassword,

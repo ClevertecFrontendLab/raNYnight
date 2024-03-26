@@ -46,8 +46,8 @@ const CreateTrainingModalTitle = ({ defaultSelect, onChange }: CreateTrainingMod
     const selectItems = trainingsToSelect.map((element) => ({ label: element, value: element }));
 
     const handleSelectChange = (selectedValue: string) => {
-        const training =
-            todaysTrainings.find((training) => training.name === selectedValue) || null;
+        const training = todaysTrainings.find((element) => element.name === selectedValue) || null;
+
         onChange(selectedValue);
         setSelectedOption(selectedValue);
         dispatch(setTrainingToEdit(training));

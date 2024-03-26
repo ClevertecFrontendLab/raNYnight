@@ -14,6 +14,7 @@ const { Header: AntdHeader } = Layout;
 const MainHeader = () => {
     const { width } = useWindowSize();
     const location = useLocation();
+
     return (
         <AntdHeader className='header'>
             <div className='header-left-col'>

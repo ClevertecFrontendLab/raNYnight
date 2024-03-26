@@ -39,6 +39,6 @@
             }
         ]
     },
-    "include": ["src"],
+    "include": ["src", "tsconfig.eslint.json"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

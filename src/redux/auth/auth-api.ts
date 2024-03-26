@@ -15,14 +15,12 @@ export const authApi = createApi({
     baseQuery: appBaseQuery,
     endpoints: (builder) => ({
         loginUser: builder.mutation<LoginResponse, LoginRequest>({
-            query: (body: { email: string; password: string }) => {
-                return {
+            query: (body: { email: string; password: string }) => ({
                     url: ApiEndpoints.Login,
                     method: 'POST',
                     body,
                     credentials: 'include',
-                };
-            },
+                }),
         }),
 
         registerUser: builder.mutation<object, RegisterInput>({

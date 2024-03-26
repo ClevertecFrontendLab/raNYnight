@@ -1,3 +1,4 @@
+import React from 'react';
 import { CheckOutlined } from '@ant-design/icons';
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { DATE_DDMM } from '@constants/dates';
@@ -30,7 +31,7 @@ const TariffCards = () => {
     };
 
     return (
-        <>
+        <React.Fragment>
             <div className='tariff-cards-wrapper'>
                 <Card
                     title={free.title}
@@ -71,7 +72,7 @@ const TariffCards = () => {
                     cover={
                         <div className={`tariff-card-cover ${isProActive ? '' : 'inactive-cover'}`}>
                             <img alt={pro.title} src={pro.img} />
-                            <div className='inactive-cover-background'></div>
+                            <div className='inactive-cover-background' />
                         </div>
                     }
                 >
@@ -92,7 +93,7 @@ const TariffCards = () => {
                 </Card>
             </div>
             <TariffDrawer />
-        </>
+        </React.Fragment>
     );
 };
 
