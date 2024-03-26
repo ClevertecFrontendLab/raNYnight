@@ -1,22 +1,13 @@
 import { ModifiedTraining, Training } from '@common-types/trainings';
-import { ApiEndpoints, baseQuery } from '@constants/api';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { ApiEndpoints } from '@constants/api';
+import { createApi } from '@reduxjs/toolkit/query/react';
 
+import { appBaseQuery } from '@redux/base-query';
 import { setAllUserTrainings, setDefaultTrainings } from './trainings-slice';
 
 export const trainingsApi = createApi({
     reducerPath: 'trainingsApi',
-    baseQuery: fetchBaseQuery({
-        baseUrl: baseQuery,
-        prepareHeaders: (headers) => {
-            const token = sessionStorage.getItem('jwtToken') || localStorage.getItem('jwtToken');
-            if (token) {
-                headers.set('authentication', `Bearer ${token}`);
-                headers.set('authorization', `Bearer ${token}`);
-            }
-            return headers;
-        },
-    }),
+    baseQuery: appBaseQuery,
     endpoints: (builder) => ({
         getTrainingList: builder.query<string[], void>({
             query: () => ({

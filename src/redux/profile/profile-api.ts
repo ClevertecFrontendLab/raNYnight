@@ -1,22 +1,13 @@
 import { UserData } from '@common-types/profile';
-import { ApiEndpoints, baseQuery } from '@constants/api';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { ApiEndpoints } from '@constants/api';
+import { createApi } from '@reduxjs/toolkit/query/react';
 
+import { appBaseQuery } from '@redux/base-query';
 import { setUserInfo } from './profile-slice';
 
 export const profileApi = createApi({
     reducerPath: 'profileApi',
-    baseQuery: fetchBaseQuery({
-        baseUrl: baseQuery,
-        prepareHeaders: (headers) => {
-            const token = sessionStorage.getItem('jwtToken') || localStorage.getItem('jwtToken');
-            if (token) {
-                headers.set('authentication', `Bearer ${token}`);
-                headers.set('authorization', `Bearer ${token}`);
-            }
-            return headers;
-        },
-    }),
+    baseQuery: appBaseQuery,
     endpoints: (builder) => ({
         getUserInfo: builder.query<UserData, void>({
             query: () => ({
