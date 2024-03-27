@@ -8,6 +8,7 @@ import { setUserInfo } from './profile-slice';
 export const profileApi = createApi({
     reducerPath: 'profileApi',
     baseQuery: appBaseQuery,
+    tagTypes: ['profile'],
     endpoints: (builder) => ({
         getUserInfo: builder.query<UserData, void>({
             query: () => ({
@@ -23,6 +24,7 @@ export const profileApi = createApi({
                     dispatch(setUserInfo(null));
                 }
             },
+            providesTags: ['profile'],
         }),
 
         updateUser: builder.mutation<UserData, Partial<UserData>>({
@@ -40,6 +42,7 @@ export const profileApi = createApi({
                     dispatch(setUserInfo(null));
                 }
             },
+            invalidatesTags: ['profile'],
         }),
     }),
 });
