@@ -16,11 +16,13 @@ export const authApi = createApi({
     endpoints: (builder) => ({
         loginUser: builder.mutation<LoginResponse, LoginRequest>({
             query: (body: { email: string; password: string }) => ({
-                    url: ApiEndpoints.Login,
-                    method: 'POST',
-                    body,
-                    credentials: 'include',
-                }),
+                url: ApiEndpoints.Login,
+                method: 'POST',
+                body,
+            }),
+            extraOptions: {
+                auth: true,
+            },
         }),
 
         registerUser: builder.mutation<object, RegisterInput>({

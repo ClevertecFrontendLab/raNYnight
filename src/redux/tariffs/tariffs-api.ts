@@ -13,7 +13,6 @@ export const tariffsApi = createApi({
             query: () => ({
                 url: ApiEndpoints.TariffList,
                 method: 'GET',
-                credentials: 'include',
             }),
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 try {

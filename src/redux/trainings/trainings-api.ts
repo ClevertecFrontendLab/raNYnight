@@ -13,7 +13,6 @@ export const trainingsApi = createApi({
             query: () => ({
                 url: ApiEndpoints.TrainingList,
                 method: 'GET',
-                credentials: 'include',
             }),
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 try {
@@ -30,7 +29,6 @@ export const trainingsApi = createApi({
             query: () => ({
                 url: ApiEndpoints.Training,
                 method: 'GET',
-                credentials: 'include',
             }),
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 try {
@@ -48,7 +46,6 @@ export const trainingsApi = createApi({
                 url: ApiEndpoints.Training,
                 method: 'POST',
                 body,
-                credentials: 'include',
             }),
         }),
         updateTraining: builder.mutation<void, ModifiedTraining>({

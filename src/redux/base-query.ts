@@ -11,7 +11,7 @@ export const appBaseQuery = fetchBaseQuery({
         const token = selectAuthToken(state);
 
         if (token) {
-            headers.set('Authorization', `Bearer ${token}`);
+            headers.set('authorization', `Bearer ${token}`);
         }
 
         return headers;

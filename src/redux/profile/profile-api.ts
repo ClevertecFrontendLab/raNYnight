@@ -13,7 +13,6 @@ export const profileApi = createApi({
             query: () => ({
                 url: ApiEndpoints.UserMe,
                 method: 'GET',
-                credentials: 'include',
             }),
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 try {
@@ -31,7 +30,6 @@ export const profileApi = createApi({
                 url: ApiEndpoints.User,
                 method: 'PUT',
                 body,
-                credentials: 'include',
             }),
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 try {

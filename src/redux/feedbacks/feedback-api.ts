@@ -12,7 +12,6 @@ export const feedbacksApi = createApi({
                 url: ApiEndpoints.Feedback,
                 method: 'POST',
                 body,
-                credentials: 'include',
             }),
         }),
 
@@ -20,7 +19,6 @@ export const feedbacksApi = createApi({
             query: () => ({
                 url: ApiEndpoints.Feedback,
                 method: 'GET',
-                credentials: 'include',
             }),
         }),
     }),

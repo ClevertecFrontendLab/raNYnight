@@ -23,17 +23,17 @@ const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHisto
 export const store = configureStore({
     reducer: combineReducers({
         auth: authReducer,
-        profile: profileReducer,
-        tariffs: tariffReducer,
-        modalManager: modalManagerReducer,
-        feedbacks: feedbacksReducer,
-        trainings: trainingsReducer,
-        router: routerReducer,
         [authApi.reducerPath]: authApi.reducer,
+        profile: profileReducer,
         [profileApi.reducerPath]: profileApi.reducer,
+        tariffs: tariffReducer,
         [tariffsApi.reducerPath]: tariffsApi.reducer,
+        feedbacks: feedbacksReducer,
         [feedbacksApi.reducerPath]: feedbacksApi.reducer,
+        trainings: trainingsReducer,
         [trainingsApi.reducerPath]: trainingsApi.reducer,
+        modalManager: modalManagerReducer,
+        router: routerReducer,
     }),
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()

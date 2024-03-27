@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import Loader from '@components/loader/loader';
 import SidePanel from '@components/side-panel/side-panel';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
@@ -16,7 +16,7 @@ export const MainPage: React.FC = () => {
     const userInfo = useAppSelector(selectUserInfo);
     const [getUserInfo, { isLoading }] = useLazyGetUserInfoQuery();
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (!userInfo?.email) {
             getUserInfo();
         }
