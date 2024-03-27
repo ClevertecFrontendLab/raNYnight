@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
+import { UserData } from '@common-types/profile';
 import SidePanel from '@components/side-panel/side-panel';
 import { ApiEndpoints, baseQuery } from '@constants/api';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
@@ -14,6 +15,7 @@ import './main-page.less';
 
 export const MainPage: React.FC = () => {
     const dispatch = useAppDispatch();
+    const userInfo = useAppSelector(selectUserInfo);
     const authToken = useAppSelector(selectAuthToken);
 
     const getUserInfo = async () => {
@@ -26,7 +28,7 @@ export const MainPage: React.FC = () => {
             });
 
             if (response.ok) {
-                const data = await response.json();
+                const data: UserData = await response.json();
 
                 dispatch(setUserInfo(data));
             } else {
@@ -37,11 +39,10 @@ export const MainPage: React.FC = () => {
         }
     };
 
-    const userInfo = useAppSelector(selectUserInfo);
     // const [getUserInfo, { isLoading }] = useLazyGetUserInfoQuery(); //w8 for solution
 
-    useEffect(() => {
-        if (!userInfo?.email) {
+    useLayoutEffect(() => {
+        if (!userInfo?.email && authToken) {
             getUserInfo();
         }
     }, [userInfo, userInfo?.email]);
