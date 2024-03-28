@@ -11,7 +11,7 @@ interface CustomRateProps {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CustomRateCharacter = ({ value: rateValue, index }: any) => {
-    if (index !== undefined && index >= 0) {
+    if (index >= 0) {
         return rateValue && index < rateValue ? <StarFilled /> : <StarOutlined />;
     }
 
@@ -20,9 +20,7 @@ const CustomRateCharacter = ({ value: rateValue, index }: any) => {
 
 const CustomRate = ({ rate, disabled, onChange, size, value }: CustomRateProps) => {
     const handleRateChange = (newValue: number) => {
-        if (onChange) {
-            onChange(newValue);
-        }
+        onChange?.(newValue);
     };
 
     return (

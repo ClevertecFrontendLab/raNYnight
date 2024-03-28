@@ -23,10 +23,8 @@ export interface UserData {
     imgSrc: string;
     readyForJointTraining: boolean;
     sendNotification: boolean;
-    tariff:
-        | {
-              tariffId: string;
-              expired: string;
-          }
-        | undefined;
+    tariff?: {
+        tariffId: string;
+        expired: string;
+    };
 }

@@ -55,7 +55,7 @@ const ProfileMainContent = () => {
 
         if (values.imgSrc) {
             if (typeof values.imgSrc === 'string') updatedValues.imgSrc = values.imgSrc;
-            if (values.imgSrc.file?.status === 'removed') updatedValues.imgSrc = '';
+            else if (values.imgSrc.file?.status === 'removed') updatedValues.imgSrc = '';
             else {
                 updatedValues.imgSrc = `https://training-api.clevertec.ru${values.imgSrc.file?.response?.url}`;
             }

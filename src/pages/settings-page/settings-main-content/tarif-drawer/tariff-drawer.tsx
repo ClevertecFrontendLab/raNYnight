@@ -69,6 +69,8 @@ const TariffDrawer = () => {
     const dispatch = useAppDispatch();
     const { width } = useWindowSize();
 
+    const isDesktop = width > BREAKPOINT_520;
+
     const userInfo = useAppSelector(selectUserInfo);
     const selectedTariff = useAppSelector(selectSelectedTariffToBuy);
     const isTariffDrawerOpen = useAppSelector(selectIsTariffDrawerOpen);
@@ -98,7 +100,7 @@ const TariffDrawer = () => {
             <Drawer
                 open={isTariffDrawerOpen}
                 placement='right'
-                width={width > BREAKPOINT_520 ? DRAWER_WIDTH : DRAWER_WIDTH_MOBILE}
+                width={isDesktop ? DRAWER_WIDTH : DRAWER_WIDTH_MOBILE}
                 mask={true}
                 maskStyle={{ backgroundColor: 'none' }}
                 destroyOnClose={true}

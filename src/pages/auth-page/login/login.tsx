@@ -45,7 +45,10 @@ const Login: React.FC = () => {
             isSuccess: isLoginSuccess,
         },
     ] = useLoginUserMutation();
+
     const [checkEmail, { isLoading: isEmailCheckLoading }] = useCheckEmailMutation();
+
+    const isLoading = isLoadingLogin || isEmailCheckLoading;
 
     const onFinish = async (values: LoginRequest) => {
         const { email, password } = values;
@@ -121,11 +124,7 @@ const Login: React.FC = () => {
 
     return (
         <React.Fragment>
-            <div
-                className={`login-container ${
-                    isLoadingLogin || isEmailCheckLoading ? 'background-filter' : ''
-                }`}
-            >
+            <div className={`login-container ${isLoading ? 'background-filter' : ''}`}>
                 <div className='auth-logo' />
                 <AuthSwitcher activeLink='login' />
                 <Form
@@ -136,7 +135,7 @@ const Login: React.FC = () => {
                     onFieldsChange={handleFormChange}
                     onFinish={onFinish}
                     autoComplete='nope'
-                    disabled={isLoadingLogin || isEmailCheckLoading}
+                    disabled={isLoading}
                 >
                     <Form.Item
                         name='email'
@@ -189,7 +188,7 @@ const Login: React.FC = () => {
                             type='primary'
                             htmlType='submit'
                             className='login-form-button'
-                            disabled={isLoadingLogin || isEmailCheckLoading}
+                            disabled={isLoading}
                             data-test-id={DATA_TEST_ID.loginSubmitButton}
                         >
                             Войти
@@ -200,7 +199,7 @@ const Login: React.FC = () => {
                             type='primary'
                             htmlType='submit'
                             className='login-form-button google-auth'
-                            disabled={isLoadingLogin || isEmailCheckLoading}
+                            disabled={isLoading}
                             onClick={handleGoogleLogin}
                         >
                             {width <= BREAKPOINT_520 ? null : <GooglePlusOutlined />}
@@ -209,7 +208,7 @@ const Login: React.FC = () => {
                     </Form.Item>
                 </Form>
             </div>
-            {isLoadingLogin || isEmailCheckLoading ? <Loader /> : null}
+            {isLoading ? <Loader /> : null}
         </React.Fragment>
     );
 };

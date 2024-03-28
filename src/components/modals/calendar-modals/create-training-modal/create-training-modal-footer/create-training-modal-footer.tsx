@@ -37,6 +37,11 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
 
     const isFuture = dayjs(selectedDay, DATE_DD_MM_YYYY).isAfter(dayjs());
 
+    const isSaveDisabled = !!(
+        modifiedTraining === null ||
+        (isFuture && modifiedTraining.exercises.length === 0)
+    );
+
     const handleSaveSuccess = () => {
         dispatch(setShouldRefetchUserTrainings(true));
         dispatch(setActiveModal(ModalTypes.calendarTrainingListModal));
@@ -80,12 +85,7 @@ const CreateTrainingModalFooter: FC<CreateTrainingModalFooterProps> = ({
                     type='text'
                     onClick={handleSaveModifiedTraining}
                     className='create-training-footer-save-btn'
-                    disabled={
-                        !!(
-                            modifiedTraining === null ||
-                            (isFuture && modifiedTraining.exercises.length === 0)
-                        )
-                    }
+                    disabled={isSaveDisabled}
                 >
                     {isFuture
                         ? trainingButtonTitles.saveExercises

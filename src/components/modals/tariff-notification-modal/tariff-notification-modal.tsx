@@ -20,6 +20,8 @@ const TariffNotificationModal = () => {
 
     const userInfo = useAppSelector(selectUserInfo);
 
+    const isDesktop = width > BREAKPOINT_520;
+
     const isOpen = useAppSelector(selectActiveModal) === ModalTypes.tariffNotificationModal;
 
     const handleExit = () => {
@@ -49,11 +51,7 @@ const TariffNotificationModal = () => {
             closeIcon={<CloseOutlined />}
             className='tariff-notification-modal'
             data-test-id={DATA_TEST_ID.tariffModalSuccess}
-            width={
-                width > BREAKPOINT_520
-                    ? TARIFF_NOTIFICATION_WIDTH
-                    : TARIFF_NOTIFICATION_WIDTH_MOBILE
-            }
+            width={isDesktop ? TARIFF_NOTIFICATION_WIDTH : TARIFF_NOTIFICATION_WIDTH_MOBILE}
         >
             {ResultImages.SUCCESS_CHECK}
             <Title className='tariff-notification-modal-title' level={4}>
