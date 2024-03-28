@@ -1,6 +1,6 @@
 export interface Feedback {
     id: string;
-    fullname: string | null;
+    fullName: string | null;
     imageSrc: string | null;
     message: string | null;
     rating: number;

@@ -6,8 +6,8 @@ import FeedbackModalResult from '@components/modals/feedback-modal-results/feedb
 import { FEEDBACK_MODAL_WIDTH, RATE_STAR_MODAL } from '@constants/sizes';
 import { createOkButtonProps } from '@constants/utils';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { setShouldRefetch } from '@redux/auth/auth-slice';
 import { useSendFeedbackMutation } from '@redux/feedbacks/feedback-api';
+import { setShouldRefetch } from '@redux/feedbacks/feedbacks-slice';
 import { selectActiveModal, setActiveModal } from '@redux/modals/modal-manager';
 import { Modal } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
