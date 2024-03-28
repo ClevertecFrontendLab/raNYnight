@@ -1,48 +1,41 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ModalTypes } from '@common-types/modal';
 import Calendar from '@components/calendar/calendar';
+import Loader from '@components/loader/loader';
 import { BREAKPOINT_768 } from '@constants/breakpoints';
-import {
-    CALENDAR_TRAINING_MODAL_WIDTH,
-    CALENDAR_TRAINING_MODAL_WIDTH_MOBILE,
-} from '@constants/sizes';
+import { DATE_DD_MM_YYYY } from '@constants/dates';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import CreateTrainingModal from '@pages/calendar-page/calendar-modals/create-training-modal/create-training-modal';
-import { NotificationModal } from '@pages/calendar-page/calendar-modals/notification-modal/notification-modal';
-import TrainingListModal from '@pages/calendar-page/calendar-modals/training-list-modal/training-list-modal';
-import { selectShouldRefetch, setShouldRefetch } from '@redux/auth/auth-slice';
-import {
-    ModalTypes,
-    selectModalByType,
-    setCloseModal,
-    setOpenModal,
-} from '@redux/modals/modals-slice';
+import { setActiveModal } from '@redux/modals/modal-manager';
 import {
     useLazyGetTrainingListQuery,
     useLazyGetTrainingsQuery,
 } from '@redux/trainings/trainings-api';
 import {
-    resetTrainigState,
     selectDefaultTrainings,
     selectIsCalendarBlocked,
-    setCalendarBlocked,
+    selectShouldRefetchDefaultTrainings,
+    selectShouldRefetchUserTrainings,
+    setCellPosition,
     setIsDrawerOpen,
     setModifiedExercises,
     setModifiedTraining,
     setSelectedDay,
+    setShouldRefetchDefaultTrainings,
+    setShouldRefetchUserTrainings,
     setTodaysTrainings,
 } from '@redux/trainings/trainings-slice';
 import { Paths } from '@router/paths';
 import { filterTrainingsByDate } from '@utils/filter-trainings-by-date';
 import { getSelectedCellPosition, getSelectedCellPositionMobile } from '@utils/get-cell-positions';
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useWindowSize } from 'usehooks-ts';
 
 import 'dayjs/locale/ru';
 
-import './calendar.less';
 import DateCell from './date-cell/date-cell';
-import { DATE_DD_MM_YYYY } from '@constants/dates';
+
+import './calendar.less';
 
 const AppCalendar = () => {
     const navigate = useNavigate();
@@ -52,22 +45,19 @@ const AppCalendar = () => {
     const isFullscreen = windowWidth > BREAKPOINT_768;
 
     const [selectedDate, setSelectedDate] = useState(dayjs());
-    const [cellPosition, setCellPosition] = useState({
-        top: 0,
-        left: 0,
-    });
 
-    const shouldRefetch = useAppSelector(selectShouldRefetch);
     const defaultTrainings = useAppSelector(selectDefaultTrainings);
     const isCalendarBlocked = useAppSelector(selectIsCalendarBlocked);
-    const isGetDefaultTrainingsModalOpen = useAppSelector(
-        selectModalByType(ModalTypes.calendarGetDefaultTrainingsModal),
-    );
+    const shouldRefetchUserTrainings = useAppSelector(selectShouldRefetchUserTrainings);
+    const shouldRefetchDefaultTrainings = useAppSelector(selectShouldRefetchDefaultTrainings);
 
-    const [getUserTrainings, { data: trainingList, isError: isTrainingListError }] =
-        useLazyGetTrainingsQuery();
+    const [
+        getUserTrainings,
+        { data: trainingList, isError: isTrainingListError, isLoading: isGetTrainingsLoading },
+    ] = useLazyGetTrainingsQuery();
 
-    const [getTrainingList, { isError: isRequestError }] = useLazyGetTrainingListQuery();
+    const [getTrainingList, { isError: isRequestError, isLoading: isGetTrainingListLoading }] =
+        useLazyGetTrainingListQuery();
 
     const handleCellClick = (date: dayjs.Dayjs) => {
         const filteredTrainings = filterTrainingsByDate(trainingList || [], date);
@@ -77,8 +67,7 @@ const AppCalendar = () => {
         dispatch(setTodaysTrainings(filteredTrainings));
         dispatch(setModifiedExercises([]));
         dispatch(setModifiedTraining(null));
-        dispatch(setCloseModal(ModalTypes.calendarCreateTrainingModal));
-        dispatch(setOpenModal(ModalTypes.calendarTrainingListModal));
+        dispatch(setActiveModal(ModalTypes.calendarTrainingListModal));
         dispatch(setIsDrawerOpen(false));
     };
 
@@ -95,7 +84,7 @@ const AppCalendar = () => {
         const date = dayjs(dateAttribute);
         const cellPosition = getSelectedCellPosition(date);
 
-        setCellPosition(cellPosition);
+        dispatch(setCellPosition(cellPosition));
 
         handleCellClick(date);
     };
@@ -111,27 +100,13 @@ const AppCalendar = () => {
         const dateAttribute = target?.getAttribute('data-date');
         const date = dayjs(dateAttribute);
         const cellPosition = getSelectedCellPositionMobile(date);
-        setCellPosition(cellPosition);
+
+        dispatch(setCellPosition(cellPosition));
         handleCellClick(date);
     };
 
-    const handleGetTrainingList = () => {
-        getTrainingList()
-            .unwrap()
-            .catch(() => {
-                dispatch(setOpenModal(ModalTypes.calendarGetDefaultTrainingsModal));
-            });
-        dispatch(setCloseModal(ModalTypes.calendarGetDefaultTrainingsModal));
-    };
-
-    const handleCloseNotificationModal = () => {
-        dispatch(setCloseModal(ModalTypes.calendarGetDefaultTrainingsModal));
-        dispatch(resetTrainigState());
-        dispatch(setCalendarBlocked(true));
-    };
-
     useEffect(() => {
-        if (shouldRefetch) {
+        if (shouldRefetchUserTrainings) {
             getUserTrainings()
                 .unwrap()
                 .then(() => {
@@ -139,11 +114,12 @@ const AppCalendar = () => {
                         trainingList || [],
                         selectedDate,
                     );
+
                     dispatch(setTodaysTrainings(filteredTrainings));
-                    dispatch(setShouldRefetch(false));
+                    dispatch(setShouldRefetchUserTrainings(false));
                 });
         }
-    }, [shouldRefetch, dispatch, trainingList, navigate]);
+    }, [shouldRefetchUserTrainings, dispatch, trainingList, navigate]);
 
     useEffect(() => {
         getUserTrainings();
@@ -153,13 +129,23 @@ const AppCalendar = () => {
     }, []);
 
     useEffect(() => {
+        if (shouldRefetchDefaultTrainings) {
+            dispatch(setShouldRefetchDefaultTrainings(false));
+            getTrainingList()
+                .unwrap()
+                .catch(() => dispatch(setActiveModal(ModalTypes.notificationWarnModal)));
+        }
+    }, [shouldRefetchDefaultTrainings, dispatch]);
+
+    useEffect(() => {
         if (isTrainingListError) {
             navigate(Paths.MAIN);
-            dispatch(setOpenModal(ModalTypes.somethingWrongModal));
+            dispatch(setActiveModal(ModalTypes.somethingWrongModal));
+
             return;
         }
         if (isRequestError) {
-            dispatch(setOpenModal(ModalTypes.calendarGetDefaultTrainingsModal));
+            dispatch(setActiveModal(ModalTypes.notificationWarnModal));
         }
     }, [isTrainingListError, isRequestError, dispatch]);
 
@@ -168,6 +154,7 @@ const AppCalendar = () => {
             <Calendar
                 fullscreen={isFullscreen}
                 className='app-calendar'
+                // eslint-disable-next-line react/no-unstable-nested-components
                 dateCellRender={(date) => (
                     <DateCell
                         date={date}
@@ -178,36 +165,7 @@ const AppCalendar = () => {
                     />
                 )}
             />
-            <TrainingListModal
-                width={
-                    isFullscreen
-                        ? CALENDAR_TRAINING_MODAL_WIDTH
-                        : CALENDAR_TRAINING_MODAL_WIDTH_MOBILE
-                }
-                date={selectedDate}
-                trainings={trainingList || []}
-                position={cellPosition}
-            />
-
-            <CreateTrainingModal
-                position={cellPosition}
-                width={
-                    isFullscreen
-                        ? CALENDAR_TRAINING_MODAL_WIDTH
-                        : CALENDAR_TRAINING_MODAL_WIDTH_MOBILE
-                }
-            />
-
-            <NotificationModal
-                textButton='Обновить'
-                onClickButton={handleGetTrainingList}
-                type='warning'
-                isCloseIcon={true}
-                title='При открытии данных произошла ошибка'
-                subtitle='Попробуйте ещё раз.'
-                open={isGetDefaultTrainingsModalOpen}
-                onClose={handleCloseNotificationModal}
-            />
+            {(isGetTrainingListLoading || isGetTrainingsLoading) && <Loader />}
         </main>
     );
 };

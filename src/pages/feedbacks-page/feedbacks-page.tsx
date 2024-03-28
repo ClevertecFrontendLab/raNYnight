@@ -9,7 +9,8 @@ import { selectShouldRefetch } from '@redux/feedbacks/feedbacks-slice';
 import { Paths } from '@router/paths';
 import { Layout } from 'antd';
 
-import FeedbackModalResult from './feedback-modal-results/feedback-modal-results';
+import FeedbackModalResult from '../../components/modals/feedback-modal-results/feedback-modal-results';
+
 import EmptyFeedbackList from './layout/feedbacks/empty-feedback-list/empty-feedback-list';
 import FeedbacksList from './layout/feedbacks/feedbacks';
 import FeedbacksFooter from './layout/footer/footer';
@@ -24,6 +25,10 @@ export const FeedbacksPage = () => {
     const shouldRefetch = useAppSelector(selectShouldRefetch);
 
     const { data, isLoading, refetch, error } = useGetFeedbacksQuery();
+
+    const handleCancel = () => {
+        navigate(Paths.MAIN);
+    };
 
     useEffect(() => {
         if (shouldRefetch) {
@@ -41,28 +46,18 @@ export const FeedbacksPage = () => {
         }
     }, [shouldRefetch, refetch, error, dispatch, navigate, errorModalShown]);
 
-    const handleCancel = () => {
-        navigate(Paths.MAIN);
-    };
-
     if (isLoading) {
         return <Loader />;
     }
 
     return (
-        <>
-            <Layout className='page-layout'>
-                <SidePanel />
-                <Layout className='feedbacks-page-layout'>
-                    <FeedbacksHeader />
-                    {data && data.length > 0 ? (
-                        <FeedbacksList data={data} />
-                    ) : (
-                        <EmptyFeedbackList />
-                    )}
-                    {data && data.length > 0 && <FeedbacksFooter />}
-                </Layout>
+        <Layout className='page-layout'>
+            <SidePanel />
+            <Layout className='feedbacks-page-layout'>
+                <FeedbacksHeader />
+                {data && data.length > 0 ? <FeedbacksList data={data} /> : <EmptyFeedbackList />}
+                {data && data.length > 0 && <FeedbacksFooter />}
             </Layout>
-        </>
+        </Layout>
     );
 };

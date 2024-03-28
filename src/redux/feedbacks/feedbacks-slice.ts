@@ -12,7 +12,7 @@ const initialState: FeedbackStore = {
 
 const feedbacksSlice = createSlice({
     name: 'feedbacks',
-    initialState: initialState,
+    initialState,
     reducers: {
         toggleFeedbacksList: (state) => {
             state.isCollapsed = !state.isCollapsed;

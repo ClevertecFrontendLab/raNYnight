@@ -6,8 +6,10 @@ import Login from '@pages/auth-page/login/login';
 import Registration from '@pages/auth-page/registration/registration';
 import { FeedbacksPage } from '@pages/feedbacks-page';
 import { AuthPage, CalendarPage, MainPage } from '@pages/index';
+import { ProfilePage } from '@pages/profile-page';
 import AuthResult from '@pages/results-page/auth-result/auth-result';
 import { ResultsPage } from '@pages/results-page/results-page';
+import { SettingsPage } from '@pages/settings-page';
 
 import { Paths } from './paths';
 import PrivateRoutes from './private-routes';
@@ -19,6 +21,8 @@ export const routes = (
             <Route path={Paths.MAIN} element={<MainPage />} />
             <Route path={Paths.FEEDBACKS} element={<FeedbacksPage />} />
             <Route path={Paths.CALENDAR} element={<CalendarPage />} />
+            <Route path={Paths.PROFILE} element={<ProfilePage />} />
+            <Route path={Paths.SETTINGS} element={<SettingsPage />} />
         </Route>
 
         <Route path={Paths.AUTH} element={<AuthPage />}>

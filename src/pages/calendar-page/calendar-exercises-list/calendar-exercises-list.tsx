@@ -24,22 +24,27 @@ const CalendarExercisesList: FC = () => {
     };
 
     useEffect(() => {
-        const newExercises = modifiedTraining
-            ? modifiedTraining.exercises
-            : trainingToEdit
-            ? trainingToEdit.exercises
-            : [];
+        let newExercises: Exercise[] = [];
+
+        if (modifiedTraining) {
+            newExercises = modifiedTraining.exercises;
+        } else if (trainingToEdit) {
+            newExercises = trainingToEdit.exercises;
+        } else {
+            newExercises = [];
+        }
+
         setExercisesToList(newExercises);
     }, [modifiedTraining, trainingToEdit]);
 
     return (
         <ul className='calendar-exercises-list'>
             {exercisesToList.map((exercise: Exercise, i) => (
-                <li className={`calendar-exercises-list-item`} key={i}>
+                <li className='calendar-exercises-list-item' key={exercise.name}>
                     {exercise.name}
                     <Button
                         onClick={handleClick}
-                        className={`training-edit-icon-button `}
+                        className='training-edit-icon-button '
                         data-test-id={`${DATA_TEST_ID.modalUpdateTrainingEditButton}${i}`}
                     >
                         <EditOutlined className='training-edit-icon' />

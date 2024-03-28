@@ -1,0 +1,47 @@
+@import '/src/style-variables.less';
+
+.tariff-select-wrapper {
+    padding-top: @space-s;
+    padding-right: @space-s;
+}
+
+.tariff-select-wrapper {
+    label.ant-radio-wrapper {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+}
+
+.tariff-select-title {
+    font-weight: @font-weight-700;
+    margin: @space-0;
+    margin-bottom: @space-xl;
+}
+
+.tariff-select-options {
+    display: flex;
+    flex-direction: column;
+    gap: @space-m;
+}
+
+.tariff-select-option {
+    display: flex;
+    align-items: center;
+    width: 270px;
+    justify-content: space-between;
+
+    .ant-typography.tariff-select-option-price {
+        margin-top: @space-0;
+        margin-bottom: @space-0;
+        margin-left: auto;
+    }
+}
+
+.ant-radio-wrapper:after {
+    display: none;
+}
+
+span.ant-radio + * {
+    padding: @space-0;
+}

@@ -1,16 +1,23 @@
 import { Exercise, ModifiedTraining } from '@common-types/trainings';
+import { DATE_DD_MM_YYYY } from '@constants/dates';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import dayjs from 'dayjs';
 
 interface TrainingStore {
     allUserTrainings: ModifiedTraining[] | [];
-    defaultTrainings: string[];
+    defaultTrainings: string[] | [];
     todaysTrainings: ModifiedTraining[] | [];
     trainingToEdit: ModifiedTraining | null;
     isDrawerOpen: boolean;
-    selectedDay: string | null;
+    selectedDay: string;
     modifiedTraining: ModifiedTraining | null;
     modifiedExercises: Exercise[] | null;
     isCalendarBlocked: boolean;
+
+    shouldRefetchDefaultTrainings: boolean;
+    shouldRefetchUserTrainings: boolean;
+
+    cellPosition: { top: number; left: number };
 }
 
 const initialState: TrainingStore = {
@@ -19,24 +26,29 @@ const initialState: TrainingStore = {
     todaysTrainings: [],
     trainingToEdit: null,
     isDrawerOpen: false,
-    selectedDay: null,
+    selectedDay: dayjs().format(DATE_DD_MM_YYYY),
     modifiedTraining: null,
     isCalendarBlocked: false,
     modifiedExercises: [],
+
+    shouldRefetchDefaultTrainings: false,
+    shouldRefetchUserTrainings: false,
+
+    cellPosition: { top: 0, left: 0 },
 };
 
 const trainingsSlice = createSlice({
     name: 'trainings',
-    initialState: initialState,
+    initialState,
     reducers: {
-        setAllUserTrainings: (state, action: PayloadAction<ModifiedTraining[]>) => {
+        setAllUserTrainings: (state, action: PayloadAction<ModifiedTraining[] | []>) => {
             state.allUserTrainings = action.payload;
         },
 
-        setDefaultTrainings: (state, action: PayloadAction<string[]>) => {
+        setDefaultTrainings: (state, action: PayloadAction<string[] | []>) => {
             state.defaultTrainings = action.payload;
         },
-        setSelectedDay: (state, action: PayloadAction<string | null>) => {
+        setSelectedDay: (state, action: PayloadAction<string>) => {
             state.selectedDay = action.payload;
         },
 
@@ -58,6 +70,18 @@ const trainingsSlice = createSlice({
         setCalendarBlocked: (state, action: PayloadAction<boolean>) => {
             state.isCalendarBlocked = action.payload;
         },
+
+        setShouldRefetchDefaultTrainings: (state, action: PayloadAction<boolean>) => {
+            state.shouldRefetchDefaultTrainings = action.payload;
+        },
+
+        setShouldRefetchUserTrainings: (state, action: PayloadAction<boolean>) => {
+            state.shouldRefetchUserTrainings = action.payload;
+        },
+
+        setCellPosition: (state, action: PayloadAction<{ top: number; left: number }>) => {
+            state.cellPosition = action.payload;
+        },
         resetTrainigState: () => initialState,
     },
 });
@@ -73,6 +97,9 @@ export const {
     resetTrainigState,
     setCalendarBlocked,
     setModifiedExercises,
+    setShouldRefetchDefaultTrainings,
+    setCellPosition,
+    setShouldRefetchUserTrainings,
 } = trainingsSlice.actions;
 
 export const selectAllUserTrainings = (state: { trainings: TrainingStore }) =>
@@ -101,5 +128,14 @@ export const selectIsCalendarBlocked = (state: { trainings: TrainingStore }) =>
 
 export const selectModifiedExercises = (state: { trainings: TrainingStore }) =>
     state.trainings.modifiedExercises;
+
+export const selectShouldRefetchDefaultTrainings = (state: { trainings: TrainingStore }) =>
+    state.trainings.shouldRefetchDefaultTrainings;
+
+export const selectShouldRefetchUserTrainings = (state: { trainings: TrainingStore }) =>
+    state.trainings.shouldRefetchUserTrainings;
+
+export const selectCellPosition = (state: { trainings: TrainingStore }) =>
+    state.trainings.cellPosition;
 
 export default trainingsSlice.reducer;

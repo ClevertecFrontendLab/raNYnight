@@ -20,7 +20,8 @@ import headerLogoCollaped from '/cleverfit-logo-collapsed.svg';
 
 const SidePanel = () => {
     const { width } = useWindowSize();
-    const [isCollapsed, setIsCollapsed] = useState(width < BREAKPOINT_520 ? true : false);
+    const [isCollapsed, setIsCollapsed] = useState(width < BREAKPOINT_520);
+
     const onCollapse = () => {
         setIsCollapsed(!isCollapsed);
     };
@@ -34,14 +35,14 @@ const SidePanel = () => {
                     ? SIDER_WIDTH_COLLAPSED_MOBILE
                     : SIDER_WIDTH_COLLAPSED_DEFAULT
             }
-            collapsible
+            collapsible={true}
             trigger={null}
-            breakpoint='xs'
-            onBreakpoint={() => setIsCollapsed(true)}
+            // breakpoint='xs'
+            // onBreakpoint={() => setIsCollapsed(true)}
             className={`side-panel ${isCollapsed ? 'side-panel-collapsed' : ''}`}
         >
             <div
-                className='side-panel-logo'
+                className={`side-panel-logo ${isCollapsed ? 'logo-collapsed' : ''}`}
                 style={{ backgroundImage: `url(${isCollapsed ? headerLogoCollaped : headerLogo})` }}
             />
             <NavPanel isCollapsed={isCollapsed} />

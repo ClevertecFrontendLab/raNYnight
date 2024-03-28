@@ -7,8 +7,7 @@ interface AuthSwitcherProps {
     activeLink: string;
 }
 
-const AuthSwitcher = ({ activeLink }: AuthSwitcherProps) => {
-    return (
+const AuthSwitcher = ({ activeLink }: AuthSwitcherProps) => (
         <div className='auth-switcher'>
             <Link
                 to={Paths.AUTH}
@@ -24,6 +23,5 @@ const AuthSwitcher = ({ activeLink }: AuthSwitcherProps) => {
             </Link>
         </div>
     );
-};
 
 export default AuthSwitcher;

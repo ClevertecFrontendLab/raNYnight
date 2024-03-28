@@ -7,14 +7,14 @@ import FeedbackCard from './feedback-card/feedback-card';
 import './feedbacks.less';
 
 interface FeedbacksListProps {
-    data: {
+    data: Array<{
         id: string;
-        fullname: string | null;
+        fullName: string | null;
         imageSrc: string | null;
         message: string | null;
         rating: number;
         createdAt: string;
-    }[];
+    }>;
 }
 
 const FeedbacksList = ({ data }: FeedbacksListProps) => {
@@ -30,7 +30,7 @@ const FeedbacksList = ({ data }: FeedbacksListProps) => {
                 {displayedData.map((card) => (
                     <FeedbackCard
                         avatar={card.imageSrc}
-                        name={card.fullname || 'Анонимный пользователь'}
+                        name={card.fullName || 'Анонимный пользователь'}
                         rate={card.rating}
                         date={card.createdAt}
                         feedback={card.message || ''}

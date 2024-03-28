@@ -7,8 +7,7 @@ import CalendarHeader from './layout/header/header';
 
 import './calendar-page.less';
 
-export const CalendarPage: React.FC = () => {
-    return (
+export const CalendarPage: React.FC = () => (
         <Layout className='page-layout'>
             <SidePanel />
             <Layout className='calendar-layout'>
@@ -18,4 +17,3 @@ export const CalendarPage: React.FC = () => {
             </Layout>
         </Layout>
     );
-};

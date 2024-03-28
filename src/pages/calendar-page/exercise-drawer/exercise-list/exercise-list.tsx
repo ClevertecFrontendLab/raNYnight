@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Exercise } from '@common-types/trainings';
 import { trainingButtonTitles } from '@constants/trainings';
@@ -48,11 +48,13 @@ const ExerciseList: React.FC<ExerciseListProps> = ({ exercises }) => {
 
     const handleDeleteExercise = () => {
         const updatedExercises = exercisesList.filter((exercise) => !exercise.selected);
+
         setExercisesList(updatedExercises);
     };
 
     useEffect(() => {
         const exercisesFiltered = exercisesList.filter((exercise) => exercise.name);
+
         dispatch(setModifiedExercises(exercisesFiltered));
     }, [exercisesList, trainingToEdit, isDrawerOpen]);
 
@@ -63,9 +65,10 @@ const ExerciseList: React.FC<ExerciseListProps> = ({ exercises }) => {
     }, [modifiedTraining, isDrawerOpen]);
 
     return (
-        <>
+        <React.Fragment>
             {exercisesList.map((exercise, i) => (
                 <ExerciseItem
+                    // eslint-disable-next-line react/no-array-index-key
                     key={exercise.name + i}
                     exercise={exercise}
                     index={i}
@@ -88,7 +91,7 @@ const ExerciseList: React.FC<ExerciseListProps> = ({ exercises }) => {
                     {trainingButtonTitles.deleteExercises}
                 </Button>
             </div>
-        </>
+        </React.Fragment>
     );
 };
 

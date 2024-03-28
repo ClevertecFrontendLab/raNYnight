@@ -9,12 +9,20 @@ interface CustomRateProps {
     onChange?: (value: number) => void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const CustomRateCharacter = ({ value: rateValue, index }: any) => {
+    if (index >= 0) {
+        return rateValue && index < rateValue ? <StarFilled /> : <StarOutlined />;
+    }
+
+    return null;
+};
+
 const CustomRate = ({ rate, disabled, onChange, size, value }: CustomRateProps) => {
     const handleRateChange = (newValue: number) => {
-        if (onChange) {
-            onChange(newValue);
-        }
+        onChange?.(newValue);
     };
+
     return (
         <Rate
             disabled={disabled}
@@ -22,11 +30,7 @@ const CustomRate = ({ rate, disabled, onChange, size, value }: CustomRateProps) 
             value={value}
             onChange={handleRateChange}
             className='feedback-rate'
-            character={({ value, index }) => {
-                if (index !== undefined && index >= 0) {
-                    return value && index < value ? <StarFilled /> : <StarOutlined />;
-                }
-            }}
+            character={CustomRateCharacter}
             style={{ fontSize: `${size}px` }}
         />
     );

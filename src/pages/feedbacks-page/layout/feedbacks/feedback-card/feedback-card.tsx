@@ -28,7 +28,7 @@ const FeedbackCard = ({ avatar, name, rate, date, feedback }: FeedbackCardProps)
         <div className='feedback-card'>
             <div className='feedback-user'>
                 {avatar ? (
-                    <img src={avatar} className='user-avatar' />
+                    <img src={avatar} alt='avatar' className='user-avatar' />
                 ) : (
                     <UserOutlined className='user-avatar' />
                 )}

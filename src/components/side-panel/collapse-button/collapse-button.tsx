@@ -18,6 +18,9 @@ const CollapseButton = ({ onClick, isCollapsed }: CollapseButtonProps) => {
         <div
             className='side-panel-collapse-button'
             onClick={onClick}
+            onKeyDown={onClick}
+            role='button'
+            tabIndex={0}
             data-test-id={width < BREAKPOINT_520 ? siderSwitchMobile : siderSwitch}
         >
             {isCollapsed ? (

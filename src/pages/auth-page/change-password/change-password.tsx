@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { ChangePasswordRequest } from '@common-types/auth';
 import Loader from '@components/loader/loader';
@@ -57,14 +57,17 @@ const AuthChangePassword = () => {
     const handleFormChange = () => {
         const password = form.getFieldValue('password');
         const passwordRepeat = form.getFieldValue('password-repeat');
+
         if (password && passwordRepeat) {
             const hasErrors = form.getFieldsError().some(({ errors }) => errors.length);
+
             setFormValid(!hasErrors);
         }
     };
 
     const onFinish = async (values: ChangePasswordRequest) => {
         const { password } = values;
+
         await handleChangePassword(password, password);
         form.resetFields();
         setFormValid(false);
@@ -73,6 +76,7 @@ const AuthChangePassword = () => {
     useEffect(() => {
         if (shouldRefetch) {
             const { password } = lastRegisterRequest;
+
             handleChangePassword(password, password);
             dispatch(setShouldRefetch(false));
         }
@@ -92,7 +96,7 @@ const AuthChangePassword = () => {
     }
 
     return (
-        <>
+        <React.Fragment>
             <div className={`auth-change-password-wrapper ${isLoading ? 'background-filter' : ''}`}>
                 <Text className='auth-change-title'>Восстановление аккаунта</Text>
                 <Form
@@ -111,7 +115,7 @@ const AuthChangePassword = () => {
                             {
                                 required: true,
                                 message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой',
-                                validator: validatePassword,
+                                validator: (_, value) => validatePassword(_, value, true),
                             },
                         ]}
                         className='auth-input-wrapper auth-input-password'
@@ -153,7 +157,7 @@ const AuthChangePassword = () => {
                 </Form>
             </div>
             {isLoading && <Loader />}
-        </>
+        </React.Fragment>
     );
 };
 

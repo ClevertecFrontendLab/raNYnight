@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import VerificationInput from 'react-verification-input';
 import Loader from '@components/loader/loader';
@@ -36,7 +36,7 @@ const AuthConfirmEmail = () => {
                     state: { prevPath: location.pathname },
                 });
             })
-            .catch((err) => console.log('err', err));
+            .catch();
         setInputValue('');
     };
 
@@ -45,7 +45,7 @@ const AuthConfirmEmail = () => {
     }
 
     return (
-        <>
+        <React.Fragment>
             <div className={`auth-forgot-wrapper ${isLoading ? 'background-filter' : ''}`}>
                 <div className='auth-result-image'>
                     {isError ? ResultImages.ERROR : ResultImages.NOTICE}
@@ -54,9 +54,9 @@ const AuthConfirmEmail = () => {
                     {isError ? (
                         ResultTitles.ERROR_BAD_CODE
                     ) : (
-                        <>
+                        <React.Fragment>
                             Введите код <br /> для восстановления аккауанта
-                        </>
+                        </React.Fragment>
                     )}
                 </Text>
                 <Text className='auth-forgot-message'>
@@ -65,7 +65,7 @@ const AuthConfirmEmail = () => {
                 </Text>
                 <VerificationInput
                     value={inputvalue}
-                    autoFocus
+                    autoFocus={true}
                     validChars='0-9'
                     placeholder=''
                     classNames={{
@@ -84,7 +84,7 @@ const AuthConfirmEmail = () => {
                 <Text className='auth-forgot-message'>{ResultMessages.RESET_CODE_SPAM}</Text>
             </div>
             {isLoading && <Loader />}
-        </>
+        </React.Fragment>
     );
 };
 

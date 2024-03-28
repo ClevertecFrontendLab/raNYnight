@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { RegisterInput } from '@common-types/auth';
@@ -37,6 +37,7 @@ const Registration: React.FC = () => {
 
     const handleRegisterUser = async (values: RegisterInput) => {
         const { email, password } = values;
+
         await registerUser({ email, password })
             .unwrap()
             .catch((error) => {
@@ -56,6 +57,7 @@ const Registration: React.FC = () => {
 
     const onFinish = async (values: RegisterInput) => {
         const { email, password } = values;
+
         await handleRegisterUser({ email, password });
         form.resetFields();
     };
@@ -64,8 +66,10 @@ const Registration: React.FC = () => {
         const email = form.getFieldValue('email');
         const password = form.getFieldValue('password');
         const passwordRepeat = form.getFieldValue('password-repeat');
+
         if (password && passwordRepeat && email) {
             const hasErrors = form.getFieldsError().some(({ errors }) => errors.length);
+
             setFormValid(!hasErrors);
         }
     };
@@ -73,6 +77,7 @@ const Registration: React.FC = () => {
     useEffect(() => {
         if (shouldRefetch) {
             const { email, password } = lastRegisterRequest;
+
             handleRegisterUser({ email, password });
             dispatch(setShouldRefetch(false));
         }
@@ -88,7 +93,7 @@ const Registration: React.FC = () => {
     }
 
     return (
-        <>
+        <React.Fragment>
             <div className={`register-container ${isLoading ? 'background-filter' : ''}`}>
                 <div className='auth-logo' />
                 <AuthSwitcher activeLink='registration' />
@@ -114,7 +119,7 @@ const Registration: React.FC = () => {
                         className='auth-input-wrapper auth-input-email'
                     >
                         <Input
-                            prefix={'e-mail:'}
+                            prefix='e-mail:'
                             className='auth-input'
                             data-test-id={DATA_TEST_ID.registrationEmail}
                         />
@@ -126,7 +131,7 @@ const Registration: React.FC = () => {
                             {
                                 required: true,
                                 message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой',
-                                validator: validatePassword,
+                                validator: (_, value) => validatePassword(_, value, true),
                             },
                         ]}
                         className='auth-input-wrapper auth-input-password'
@@ -179,7 +184,7 @@ const Registration: React.FC = () => {
                 </Form>
             </div>
             {isLoading && <Loader />}
-        </>
+        </React.Fragment>
     );
 };
 
